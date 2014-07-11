@@ -1,0 +1,19 @@
+---
+
+- name: Copy atom feed omod
+  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root mode=777
+  with_fileglob:
+    - "{{omod}}"
+
+- name: Copy terminology feed omod
+  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root mode=777
+  with_fileglob:
+    - "{{atomfeedomod}}"
+
+- name: Stop tr
+  command:
+    service bdshr-terminology-server stop
+
+- name: Start tr
+  command:
+    service bdshr-terminology-server start
