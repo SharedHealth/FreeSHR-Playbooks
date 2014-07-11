@@ -1,0 +1,8 @@
+[shr]
+localhost ansible_ssh_user=vagrant ansible_conneciton=local
+
+[mci-server]
+localhost ansible_ssh_user=vagrant ansible_connection=local
+
+[terminolgyserver]
+localhost ansible_ssh_user=vagrant ansible_connection=local

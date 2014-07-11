@@ -1,0 +1,5 @@
+---
+- hosts: terminolgyserver
+  sudo: True
+  roles:
+   - role: tr-feed-server

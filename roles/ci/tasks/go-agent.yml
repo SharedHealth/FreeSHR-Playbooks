@@ -1,0 +1,10 @@
+---
+
+- name: Check if go agent is already Installed
+  command: rpm -q go-agent
+  register: rpm_check_go_agent
+  ignore_errors: True
+
+- name: Install the go agent
+  action: command rpm -Uvh --replacepkgs http://download01.thoughtworks.com/go/13.4.1/ga/go-agent-13.4.1-18342.noarch.rpm
+  when: rpm_check_go_agent.rc == 1

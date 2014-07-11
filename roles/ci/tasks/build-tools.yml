@@ -1,0 +1,7 @@
+---
+
+- name: Install open jdk
+  yum: name=java-1.7.0-openjdk-devel state=latest
+
+- name: Install git
+  yum: name=git state=latest

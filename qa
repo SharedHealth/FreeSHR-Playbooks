@@ -1,0 +1,8 @@
+[shr]
+172.18.46.54 ansible_ssh_user=bdshr
+
+[mci-server]
+172.18.46.53 ansible_ssh_user=bdshr
+
+[terminolgyserver]
+172.18.46.53 ansible_ssh_user=bdshr

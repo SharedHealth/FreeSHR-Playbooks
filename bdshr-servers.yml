@@ -1,0 +1,7 @@
+---
+# Needs to be passed all_rpms as extra-vars from the command used to invoke this script
+- hosts: shr
+  sudo: True
+  roles:
+    - { role: cassandra, tags: ['infrastructure'] }
+    - { role: bdshr-server, tags: ['application'] }
