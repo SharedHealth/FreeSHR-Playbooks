@@ -11,20 +11,20 @@
   file: dest=/tmp state=directory
 
 - name: Copy RPM
-  copy: src='{{ item }}' dest=/tmp/bdshr-mci-server.rpm mode=755 owner=root mode=777
+  copy: src='{{ item }}' dest=/tmp/mci.rpm mode=755 owner=root mode=777
   with_fileglob:
     - "{{rpm}}"
 
 - name: Uninstall previous MCI server
   sudo: True
-  yum: name=bdshr-mci-server state=removed
+  yum: name=mci state=removed
 
 - name: Install RPM
   sudo: True
-  yum: name=/tmp/bdshr-mci-server.rpm state=present
+  yum: name=/tmp/mci.rpm state=present
 
 - name: Start MCI
-  shell: service bdshr-mci-server start
+  shell: service mci start
   sudo: true
 
 - name: Get IpTable rules
