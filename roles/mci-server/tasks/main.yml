@@ -25,9 +25,10 @@
 
 - name: Start cassandra
   service: name=cassandra state=started
+  sudo: true
 
 - name: Start mci
-  shell: service mci Start
+  service: name=mci state=started
   sudo: true
 
 - name: Get IpTable rules
