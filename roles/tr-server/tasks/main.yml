@@ -7,7 +7,7 @@
   file: dest=/tmp state=directory
 
 - name: Copy RPM
-  copy: src='{{ item }}' dest=/tmp/bdshr-terminology-server.rpm mode=755 owner=root mode=777
+  copy: src='{{ item }}' dest=/tmp/bdshr-terminology-server.rpm owner=root mode=777
   with_fileglob:
     - "{{rpm}}"
 
