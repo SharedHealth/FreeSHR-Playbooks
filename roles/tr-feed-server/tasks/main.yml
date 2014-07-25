@@ -1,17 +1,17 @@
 ---
 
 - name: Copy atom feed omod
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root mode=777
+  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
   with_fileglob:
     - "{{omod}}"
 
 - name: Copy Rest services
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root mode=777
+  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
   with_fileglob:
     - "{{restomod}}"
 
 - name: Copy terminology feed omod
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root mode=777
+  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
   with_fileglob:
     - "{{atomfeedomod}}"
 
