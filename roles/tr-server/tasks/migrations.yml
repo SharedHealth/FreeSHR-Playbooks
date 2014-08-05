@@ -18,5 +18,8 @@
     yum install -y http://dl.fedoraproject.org/pub/epel/6/x86_64/liquibase-3.1.0-1.el6.noarch.rpm
   when: rpm_check_liquibase.rc == 1
 
+- name: Clear checksums
+  shell: liquibase --url="jdbc:mysql://localhost/terminologies" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar clearCheckSums
+
 - name: Apply migrations
   shell: liquibase --url="jdbc:mysql://localhost/terminologies" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar update
