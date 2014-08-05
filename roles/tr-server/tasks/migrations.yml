@@ -1,0 +1,22 @@
+---
+- name: Copy mysql driver
+  copy: src='mysql-connector-java-5.0.8-bin.jar' dest=/tmp mode=755
+
+- name: Copy migrations
+  template: src={{deployment_environment}}-migrations.j2 dest=/tmp/{{deployment_environment}}-migrations.xml mode=755
+
+- name: wait for tr server to start
+  uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
+
+- name: Check whether liquibase is installed already
+  command: rpm -q liquibase
+  register: rpm_check_liquibase
+  ignore_errors: True
+
+- name: Install epel repo
+  command:
+    yum install -y http://dl.fedoraproject.org/pub/epel/6/x86_64/liquibase-3.1.0-1.el6.noarch.rpm
+  when: rpm_check_liquibase.rc == 1
+
+- name: Apply migrations
+  shell: liquibase --url="jdbc:mysql://localhost/openmrs" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar update

@@ -32,3 +32,5 @@
 - name: save iptables
   command: service iptables save
   sudo: true
+
+- include: migrations.yml
