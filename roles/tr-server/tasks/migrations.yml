@@ -19,4 +19,4 @@
   when: rpm_check_liquibase.rc == 1
 
 - name: Apply migrations
-  shell: liquibase --url="jdbc:mysql://localhost/openmrs" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar update
+  shell: liquibase --url="jdbc:mysql://localhost/terminologies" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar update
