@@ -2,6 +2,7 @@
 - hosts: terminolgyserver
   sudo: True
   vars:
+    local_home: "{{ lookup('env','HOME') }}"
     local_mysql_username: "{{ mysql_username }}"
     local_mysql_password: "{{ mysql_password }}"
   roles:

@@ -6,6 +6,9 @@
 - name: Ensure tmp directory exists
   file: dest=/tmp state=directory
 
+- name: Copy tr-server properties file
+  copy: src=/{{deployment_environment}}-tr-server.properties dest={{local_home}}/.OpenMRS/tr-server.properties mode=755 owner=root
+
 - name: Copy RPM
   copy: src='{{ item }}' dest=/tmp/bdshr-terminology-server.rpm owner=root mode=777
   with_fileglob:
