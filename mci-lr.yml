@@ -1,0 +1,9 @@
+---
+
+- hosts: mci-server
+  sudo: true
+  roles:
+    - { role: php-packages, tags: ['infrastructure'] }
+    - { role: mci-lr, tags: ['application'] }
+  vars:
+    mci_lr_home: "{{lookup('env', 'HOME')}}/projects/mci_lr"
