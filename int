@@ -1,8 +1,8 @@
 [shr]
 172.18.46.57 ansible_ssh_user=bdshr
 
-[mci]
+[mci-server]
 172.18.46.56 ansible_ssh_user=bdshr
 
-[tr]
-172.18.46.56 ansible_ssh_user=bdshr deployment_environment=int rest_uri_prefix=https://172.18.46.56:9080/openmrs/
+[tr-server]
+172.18.46.56 ansible_ssh_user=bdshr deployment_environment=int rest_uri_prefix=https://172.18.46.56:90/openmrs/

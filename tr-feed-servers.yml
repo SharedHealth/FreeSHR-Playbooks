@@ -1,5 +1,5 @@
 ---
-- hosts: terminolgyserver
+- hosts: tr-server
   sudo: True
   vars:
     config_home: /var/lib/bdshr-terminology-server/etc

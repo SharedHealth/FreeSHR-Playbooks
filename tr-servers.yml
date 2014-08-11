@@ -1,5 +1,5 @@
 ---
-- hosts: terminolgyserver
+- hosts: tr-server
   sudo: True
   vars:
     local_mysql_username: "{{ mysql_username }}"
