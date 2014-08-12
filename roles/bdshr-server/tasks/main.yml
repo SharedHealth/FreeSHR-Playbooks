@@ -23,7 +23,7 @@
   shell: yum install -y /tmp/bdshr.rpm
   sudo: true
 
-- name: Start bdshr
+- name: Restart bdshr
   service: name=bdshr state=restarted
   sudo: true
 

@@ -23,11 +23,11 @@
   shell: yum install -y /tmp/mci.rpm
   sudo: true
 
-- name: Start cassandra
+- name: Restart cassandra
   service: name=cassandra state=restarted
   sudo: true
 
-- name: Start mci
+- name: Restart mci
   service: name=mci state=restarted
   sudo: true
 

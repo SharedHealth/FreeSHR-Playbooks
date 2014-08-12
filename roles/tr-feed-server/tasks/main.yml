@@ -16,17 +16,12 @@
     - "{{atomfeedomod}}"
 
 - name: Ensure terminology server config directory exists
-  file: dest={{config_home}} state=directory    
+  file: dest={{config_home}} state=directory
 
 - name: Copy terminology server properties file
-  copy: src={{deployment_environment}}-tr-server.properties 
-    dest={{config_home}}/tr-server.properties 
-    mode=755 owner=root    
+  copy: src={{deployment_environment}}-tr-server.properties
+    dest={{config_home}}/tr-server.properties
+    mode=755 owner=root
 
-- name: Stop tr
-  command:
-    service bdshr-terminology-server stop
-
-- name: Start tr
-  command:
-    service bdshr-terminology-server start
+- name: Restart terminology-server
+  service: name=bdshr-terminology-server state=restarted

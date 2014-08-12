@@ -19,7 +19,7 @@
   sudo: True
   yum: name=/tmp/bdshr-terminology-server.rpm state=present
 
-- name: Start terminology-server
+- name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted
 
 - name: Get IpTable rules
