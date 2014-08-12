@@ -10,8 +10,8 @@
   register: rpm_check_httplib2
   ignore_errors: True
 
-- name: Download httplib2
-  get_url: url=https://httplib2.googlecode.com/files/httplib2-0.8.tar.gz dest=/tmp/httplib2-0.8
+- name: Copy httplib2
+  copy: src=httplib2-0.8 dest=/tmp
   when: rpm_check_httplib2.stdout.find('is not installed') != -1
 
 - name: Install httplib2
