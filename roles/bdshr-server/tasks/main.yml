@@ -26,7 +26,7 @@
   register: iptablesrules
   sudo: true
 - name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8081 -j ACCEPT -m comment --comment "BDSHR"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT -m comment --comment "BDSHR"
   sudo: true
   when: iptablesrules.stdout.find("BDSHR") == -1
 - name: save iptables
