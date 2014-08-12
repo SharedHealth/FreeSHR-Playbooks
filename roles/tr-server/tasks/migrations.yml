@@ -10,8 +10,8 @@
   register: rpm_check_httplib2
   ignore_errors: True
 
-- name: Copy httplib2
-  copy: src=httplib2-0.8 dest=/tmp
+- name: Unarchive httplib2
+  unarchive: src=httplib2-0.8.tar.gz dest=/tmp
   when: rpm_check_httplib2.stdout.find('is not installed') != -1
 
 - name: Install httplib2
