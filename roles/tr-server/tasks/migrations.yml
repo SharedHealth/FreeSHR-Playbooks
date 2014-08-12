@@ -7,15 +7,16 @@
 
 - name: Check if httplib2 is installed
   command: rpm -q httplib2
-  register: httplib2_installed
+  register: rpm_check_httplib2
+  ignore_errors: True
 
 - name: Download httplib2
   get_url: url=https://httplib2.googlecode.com/files/httplib2-0.8.tar.gz dest=/tmp/httplib2-0.8
-  when: httplib2_installed.stdout.find('is not installed') != -1
+  when: rpm_check_httplib2.stdout.find('is not installed') != -1
 
 - name: Install httplib2
   command: python setup.py install chdir=/tmp/httplib2-0.8
-  when: httplib2_installed.stdout.find('is not installed') != -1
+  when: rpm_check_httplib2.stdout.find('is not installed') != -1
 
 - name: Wait for tr server to start
   uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
