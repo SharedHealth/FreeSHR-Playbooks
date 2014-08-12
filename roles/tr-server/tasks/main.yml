@@ -19,6 +19,9 @@
   sudo: True
   yum: name=/tmp/bdshr-terminology-server.rpm state=present
 
+- name: Start service bdshr-terminology-server, if not running
+  service: name=bdshr-terminology-server state=started
+
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules

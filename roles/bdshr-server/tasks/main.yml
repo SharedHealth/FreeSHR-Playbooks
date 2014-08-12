@@ -2,33 +2,41 @@
 - name: Clean existing
   shell: rm -f /tmp/bdshr.rpm
   sudo: true
+
 - name: Copy rpm
   copy: src='{{item}}' dest=/tmp/bdshr.rpm mode=755
   with_fileglob:
     - "{{all_rpms}}"
+
 - name: Check for existing installations
   shell: rpm -q shr-0.1-1
   register: bdshr_installed
   ignore_errors: yes
   sudo: true
+
 - name: Remove existing installation if any
   shell: yum remove -y shr-0.1-1
   when: bdshr_installed.rc == 0
   sudo: true
+
 - name: Install bdshr
   shell: yum install -y /tmp/bdshr.rpm
   sudo: true
-- name: Start bdshr
-  shell: service bdshr Start
+
+- name: Start service bdshr, if not running
+  service: name=bdshr state=started
   sudo: true
+
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
+
   sudo: true
 - name: Allow bdshr port through firewall
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT -m comment --comment "BDSHR"
   sudo: true
   when: iptablesrules.stdout.find("BDSHR") == -1
+
 - name: save iptables
   command: service iptables save
   sudo: true
