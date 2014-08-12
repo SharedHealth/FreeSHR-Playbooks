@@ -23,8 +23,8 @@
   shell: yum install -y /tmp/bdshr.rpm
   sudo: true
 
-- name: Start service bdshr, if not running
-  service: name=bdshr state=started
+- name: Start bdshr
+  service: name=bdshr state=restarted
   sudo: true
 
 - name: Get IpTable rules
