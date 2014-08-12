@@ -1,14 +1,15 @@
 ---
 - name: Check for remi repository
-  stat: path=/etc/yum.repos.d/remi.repo
-  register: repo_file
+  command: rpm -q remi-release
+  register: rpm_check_remi_release
+  ignore_errors: True
 
 - name: Add repository
   command: rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-  when: repo_file.stat.isdir is not defined
+  when: rpm_check_remi_release.rc == 1
 
 - name: Ensure PHP packages are installed
-  yum: name={{ item }} state=present enablerepo=remi
+  yum: name={{ item }} state=present enablerepo=remi-php55
   with_items:
     - php
     - php-cli
