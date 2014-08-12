@@ -5,18 +5,11 @@
 - name: Copy migrations
   template: src={{deployment_environment}}-migrations.j2 dest=/tmp/{{deployment_environment}}-migrations.xml mode=755
 
-- name: Check if httplib2 is installed
-  command: rpm -q httplib2
-  register: rpm_check_httplib2
-  ignore_errors: True
-
 - name: Unarchive httplib2
-  unarchive: src=httplib2-0.8.tar.gz dest=/tmp
-  when: rpm_check_httplib2.stdout.find('is not installed') != -1
+  command: tar -xvf httplib2-0.8.tar.gz chdir=/tmp
 
 - name: Install httplib2
   command: python setup.py install chdir=/tmp/httplib2-0.8
-  when: rpm_check_httplib2.stdout.find('is not installed') != -1
 
 - name: Wait for tr server to start
   uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
