@@ -6,7 +6,6 @@
   template: src={{deployment_environment}}-migrations.j2 dest=/tmp/{{deployment_environment}}-migrations.xml mode=755
 
 - name: wait for tr server to start
-  command: pip install httplib2
   uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
 
 - name: Check whether liquibase is installed already
