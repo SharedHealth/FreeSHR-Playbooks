@@ -14,8 +14,7 @@
   when: httplib2_installed.stdout.find('is not installed') != -1
 
 - name: Install httplib2
-  command: python setup.py install
-  chdir: /tmp/httplib2-0.8
+  command: python setup.py install chdir=/tmp/httplib2-0.8
   when: httplib2_installed.stdout.find('is not installed') != -1
 
 - name: Wait for tr server to start
