@@ -5,9 +5,6 @@
 - name: Copy migrations
   template: src={{deployment_environment}}-migrations.j2 dest=/tmp/{{deployment_environment}}-migrations.xml mode=755
 
-- name: Install httplib2
-  command: yum install -y python-httplib2
-
 - name: wait for tr server to start
   uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
 
