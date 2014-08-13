@@ -1,6 +1,4 @@
 
 - name: Start mci
-  shell: service mci start
+  service: name=mci state=restarted
   sudo: true
-  async: 500
-  poll: 0
