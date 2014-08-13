@@ -1,0 +1,6 @@
+
+- name: Start mci
+  shell: service mci start
+  sudo: true
+  async: 500
+  poll: 0

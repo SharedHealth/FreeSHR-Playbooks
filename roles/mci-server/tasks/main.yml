@@ -22,13 +22,10 @@
 - name: Install mci
   shell: yum install -y /tmp/mci.rpm
   sudo: true
+  notify: Start mci
 
-- name: Restart cassandra
-  service: name=cassandra state=restarted
-  sudo: true
-
-- name: Restart mci
-  service: name=mci state=restarted
+- name: Start cassandra
+  service: name=cassandra state=started
   sudo: true
 
 - name: Get IpTable rules
