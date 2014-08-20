@@ -23,6 +23,11 @@
   shell: yum install -y /tmp/bdshr.rpm
   sudo: true
 
+- name: Copy SHR properties
+  copy: src={{deployment_environment}}-bdshr
+    dest=/etc/default/bdshr
+    mode=755
+
 - name: Restart bdshr
   service: name=bdshr state=restarted
   sudo: true
