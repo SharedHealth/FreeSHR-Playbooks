@@ -22,11 +22,6 @@
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted
 
-- name: Copy TR properties
-  copy: src={{deployment_environment}}-tr-server.properties
-    dest=/var/lib/bdshr-terminology-server/etc/tr-server.properties
-    mode=755
-
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
