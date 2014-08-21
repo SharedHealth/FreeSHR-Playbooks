@@ -19,10 +19,10 @@
   sudo: True
   yum: name=/tmp/bdshr-terminology-server.rpm state=present
 
-- name: Copy SHR properties
+- name: Copy TR properties
   copy: src={{deployment_environment}}-tr-server.properties
-  dest=/var/lib/bdshr-terminology-server/etc/tr-server.properties
-  mode=755
+    dest=/var/lib/bdshr-terminology-server/etc/tr-server.properties
+    mode=755
 
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted
