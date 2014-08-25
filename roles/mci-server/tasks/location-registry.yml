@@ -5,5 +5,5 @@
     - "locations.*"
 
 - name: Import location registry
-  shell: cqlsh -k mci -f /tmp/locations.query
+  shell: cqlsh -f /tmp/locations.query
   sudo: true
