@@ -41,3 +41,5 @@
 - name: save iptables
   command: service iptables save
   sudo: true
+
+- include: location-registry.yml tags=locaiton-registry
