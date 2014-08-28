@@ -15,3 +15,4 @@ export MUTAGEN_SEEDS=localhost:9160
 export CASSANDRA_MIGRATIONS_PATH=org/freeshr/cassandra/migrations
 export REST_POOL_SIZE=20
 export BDSHR_PORT=8081
+export VALIDATION_ZIP_PATH=/opt/bdshr/etc/validation.zip
