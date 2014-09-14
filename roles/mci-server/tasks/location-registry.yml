@@ -1,9 +1,0 @@
----
-- name: Copy files
-  copy: src='{{item}}' dest=/tmp/
-  with_fileglob:
-    - "locations.*"
-
-- name: Import location registry
-  shell: cqlsh -f /tmp/locations.query
-  sudo: true
