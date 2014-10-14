@@ -16,3 +16,5 @@ export CASSANDRA_MIGRATIONS_PATH=org/freeshr/cassandra/migrations
 export REST_POOL_SIZE=20
 export BDSHR_PORT=8081
 export VALIDATION_ZIP_PATH=/opt/bdshr/etc/validation.zip
+export FACILITY_REGISTRY_URL=http://pagani.websitewelcome.com/~stagedgh/dghshrml4/public/api/1.0/facilities/
+export FACILITY_REGISTRY_AUTH_TOKEN=9c83d71d41161cbc860380202e43d868ea2b8cc229ed84a2af2ac0818a14cfb4
