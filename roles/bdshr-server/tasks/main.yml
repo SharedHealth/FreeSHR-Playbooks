@@ -4,9 +4,7 @@
   sudo: true
 
 - name: Copy rpm
-  copy: src='{{item}}' dest=/tmp/bdshr.rpm mode=755
-  with_fileglob:
-    - "{{all_rpms}}"
+  copy: src=/tmp/shr-0.1-1.noarch.rpm dest=/tmp/bdshr.rpm mode=755
 
 - name: Check for existing installations
   shell: rpm -q shr-0.1-1
