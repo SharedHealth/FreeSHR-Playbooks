@@ -1,0 +1,6 @@
+---
+# Needs to be passed all_rpms as extra-vars from the command used to invoke this script
+- hosts: datasense
+  sudo: True
+  roles:
+    - role: datasense-server

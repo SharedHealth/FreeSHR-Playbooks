@@ -1,0 +1,45 @@
+---
+- name: Clean existing
+  shell: rm -f /tmp/datasense.rpm
+  sudo: true
+
+- name: Copy rpm
+  copy: src=/tmp/datasense-0.1-1.noarch.rpm dest=/tmp/datasense.rpm mode=755
+
+- name: Check for existing installations
+  shell: rpm -q datasense-0.1-1
+  register: datasense_installed
+  ignore_errors: yes
+  sudo: true
+
+- name: Remove existing installation if any
+  shell: yum remove -y datasense-0.1-1
+  when: datasense_installed.rc == 0
+  sudo: true
+
+- name: Install datasense
+  shell: yum install -y /tmp/datasense.rpm
+  sudo: true
+
+- name: Copy Datasense properties
+  copy: src={{deployment_environment}}-datasense
+    dest=/etc/default/datasense
+    mode=755
+
+- name: Restart datasense
+  service: name=datasense state=restarted
+  sudo: true
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+  sudo: true
+- name: Allow datasense port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8082 -j ACCEPT -m comment --comment "datasense"
+  sudo: true
+  when: iptablesrules.stdout.find("datasense") == -1
+
+- name: save iptables
+  command: service iptables save
+  sudo: true
