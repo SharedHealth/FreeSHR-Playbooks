@@ -4,7 +4,20 @@
   sudo: true
 
 - name: Copy rpm
+  sudo: true
   copy: src=/tmp/datasense-0.1-1.noarch.rpm dest=/tmp/datasense.rpm mode=755
+
+- name: Install MySQL
+  yum: name={{ item }} state=present
+  sudo: true
+  with_items:
+    - MySQL-python
+    - mysql
+    - mysql-server
+
+- name: Create Datasense datasense
+  mysql_db: name=datasense state=present login_user=root login_password=password
+  sudo: true
 
 - name: Check for existing installations
   shell: rpm -q datasense-0.1-1
@@ -33,8 +46,8 @@
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
-
   sudo: true
+
 - name: Allow datasense port through firewall
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 8082 -j ACCEPT -m comment --comment "datasense"
   sudo: true
