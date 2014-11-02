@@ -1,0 +1,31 @@
+---
+- name: Check for remi repository
+  command: rpm -q remi-release
+  register: rpm_check_remi_release
+  ignore_errors: True
+
+- name: Add repository
+  command: rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+  when: rpm_check_remi_release.rc == 1
+
+- name: Ensure PHP packages are installed
+  yum: name={{ item }} state=present enablerepo=remi-php55
+  with_items:
+    - php
+    - php-cli
+    - php-common
+    - php-devel
+    - php-mbstring
+    - php-pdo
+    - php-pear
+    - php-xml
+    - php-xmlrpc
+
+- name:  Update Timezone
+  lineinfile: dest=/etc/php.ini
+              regexp='^date.timezone ='
+              insertafter='^;date.timezone ='
+              line='date.timezone = Asia/Dhaka'
+              state=present
+
+- include: composer.yml

@@ -1,0 +1,41 @@
+---
+
+- name: Checkout MCI-UI code
+  git: repo=https://github.com/SharedHealth/MCI-Admin.git
+    dest={{mci_ui_home}}
+    update=yes
+
+- name: Copy Configuration
+  copy:
+    src=parameters.yml
+    dest={{mci_ui_home}}/app/config/parameters.yml
+
+- name: Copy Startup script
+  copy:
+    src=mci-ui
+    dest=/etc/init.d/mci-ui
+    mode=0755
+
+- name:  Update server path
+  lineinfile: dest=/etc/init.d/mci-ui
+              regexp='^SYMFONY_DIR='
+              insertafter='^SYMFONY_DIR='
+              line='SYMFONY_DIR={{mci_ui_home}}'
+              state=present
+
+- name:  Update configuration
+  lineinfile: dest={{mci_ui_home}}/app/config/parameters.yml
+              regexp='^    api_end_point{{":"}} '
+              insertafter='^    api_end_point{{":"}} '
+              line='    api_end_point{{":"}} {{api}}'
+              state=present
+
+- name: Download all dependencies Ignorring php intl
+  shell: chdir={{mci_ui_home}} /usr/local/bin/composer require 'symfony/icu:1.0.*'
+
+- name: Create assets link to web directory
+  file: src={{mci_ui_home}}/app/Resources/assets dest={{mci_ui_home}}/web/assets state=link
+
+- name: Start Mci-Admin
+  service: name=mci-ui state=restarted
+  sudo: true

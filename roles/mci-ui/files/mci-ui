@@ -1,0 +1,97 @@
+#!/bin/sh
+
+# Source function library.
+. /etc/init.d/functions
+
+name="mci-ui"
+prog="mci-ui"
+exec="app/console"
+pidfile=/var/run/mci-ui/mci-ui.pid
+lockfile=/var/lock/subsys/mci-ui
+
+SYMFONY_DIR="/vagrant"
+SYMFONY_SERVER_USER="root"
+SYMFONY_SERVER_ARGUMENTS="server:run 0.0.0.0:80 --env=dev"
+
+start() {
+    [ -d "$SYMFONY_DIR" ] || exit 7
+    cd "$SYMFONY_DIR"
+    [ -x "$exec" ] || exit 5
+    echo -n $"Starting $name: "
+    daemon --pidfile=$pidfile --user $SYMFONY_SERVER_USER "$exec $SYMFONY_SERVER_ARGUMENTS >> /dev/null 2>&1 &"
+
+    retval=$?
+    echo
+    if [ $retval -ne 0 ]; then
+        return $retval
+    fi
+
+    touch "$lockfile"
+
+    sleep 3
+
+    pid=`pidof php`
+
+    if [ -n "$pid" ]; then
+        echo $pid > $pidfile
+        return 0
+    else
+        return 1
+    fi
+}
+
+stop() {
+    echo -n $"Stopping $name: "
+    killproc -p $pidfile $name
+
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+reload() {
+    false
+}
+
+rh_status() {
+    status -p $pidfile $name
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        start
+        ;;
+    stop)
+        rh_status_q || exit 0
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    reload)
+        rh_status_q || exit 7
+        reload
+        ;;
+    status)
+        rh_status
+        ;;
+    condrestart)
+        rh_status_q || exit 0
+        restart
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart}"
+        exit 2
+esac
+exit $?

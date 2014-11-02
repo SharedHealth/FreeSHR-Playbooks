@@ -1,0 +1,9 @@
+---
+
+- hosts: mci-ui
+  sudo: true
+  roles:
+    - { role: php-packages, tags: ['infrastructure'] }
+    - { role: mci-ui, tags: ['application'] }
+  vars:
+    mci_ui_home: "{{lookup('env', 'HOME')}}/projects/mci_ui"
