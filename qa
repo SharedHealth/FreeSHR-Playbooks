@@ -2,7 +2,7 @@
 172.18.46.57 ansible_ssh_user=bdshr deployment_environment=qa
 
 [mci-ui]
-172.18.46.56 ansible_ssh_user=bdshr deployment_environment=showcase api=http://172.18.46.56/api/v1/patients
+172.18.46.56 ansible_ssh_user=bdshr api=http://172.18.46.56/api/v1/patients
 
 [mci-server]
 172.18.46.56 ansible_ssh_user=bdshr deployment_environment=qa
