@@ -1,97 +1,95 @@
 #!/bin/sh
+#
+# mci-ui        This shell script takes care of starting and stopping
+#              the mci-ui system
+#
+# description: The mci-ui shared health record system
+# processname: mci-ui
+# pidfile: /var/run/mci-ui/mci-ui.pid
+### BEGIN INIT INFO
+# Provides: mci-ui
+# Short-Description: start and stop mci-ui system,
+# Description: mci-ui system
+### END INIT INFO
 
-# Source function library.
-. /etc/init.d/functions
+. /etc/rc.d/init.d/functions
 
-name="mci-ui"
-prog="mci-ui"
+NAME="mci-ui"
+pid_file="/var/run/$NAME/$NAME.pid"
+log_file="/var/log/$NAME/$NAME.log"
+
 exec="app/console"
-pidfile=/var/run/mci-ui/mci-ui.pid
-lockfile=/var/lock/subsys/mci-ui
-
+APP_PORT="80"
+APP_ENV="prod"
 SYMFONY_DIR="/vagrant"
-SYMFONY_SERVER_USER="root"
-SYMFONY_SERVER_ARGUMENTS="server:run 0.0.0.0:80 --env=dev"
 
-start() {
-    [ -d "$SYMFONY_DIR" ] || exit 7
-    cd "$SYMFONY_DIR"
-    [ -x "$exec" ] || exit 5
-    echo -n $"Starting $name: "
-    daemon --pidfile=$pidfile --user $SYMFONY_SERVER_USER "$exec $SYMFONY_SERVER_ARGUMENTS >> /dev/null 2>&1 &"
+CUR_USER=`/usr/bin/whoami`
+SERVER_ID="0.0.0.0:$APP_PORT"
+SYMFONY_SERVER_ARGUMENTS="server:run $SERVER_ID --env=$APP_ENV"
 
-    retval=$?
-    echo
-    if [ $retval -ne 0 ]; then
-        return $retval
-    fi
+if [ ! -e "/var/run/$NAME" ]; then
+    mkdir "/var/run/$NAME"
+fi
 
-    touch "$lockfile"
-
-    sleep 3
-
-    pid=`pidof php`
-
-    if [ -n "$pid" ]; then
-        echo $pid > $pidfile
-        return 0
-    else
-        return 1
-    fi
+show_message() {
+    echo $1
 }
 
-stop() {
-    echo -n $"Stopping $name: "
-    killproc -p $pidfile $name
-
-    retval=$?
-    echo
-    [ $retval -eq 0 ] && rm -f $lockfile
-    return $retval
-}
-
-restart() {
-    stop
-    start
-}
-
-reload() {
-    false
-}
-
-rh_status() {
-    status -p $pidfile $name
-}
-
-rh_status_q() {
-    rh_status >/dev/null 2>&1
+check_proc() {
+    /usr/bin/pgrep -u $CUR_USER -f "\-S $SERVER_ID" >/dev/null
 }
 
 case "$1" in
     start)
-        rh_status_q && exit 0
-        start
+        [ -d "$SYMFONY_DIR" ] || exit 7
+        cd "$SYMFONY_DIR"
+        [ -x "$exec" ] || exit 5
+
+
+        if [ "${CUR_USER}" != "root" ] ; then
+          show_message "MCI Server can only be started as 'root'."
+          exit 4
+        fi
+
+        check_proc
+        if [ $? -eq 0 ]; then
+            echo "$?"
+            log_success_msg "MCI-ui Server already running on port $APP_PORT"
+            exit 0
+        fi
+
+        # MCI startup
+        echo -n $"Starting $NAME :"
+        nohup $exec $SYMFONY_SERVER_ARGUMENTS > $log_file &
+        echo $! > $pid_file
+        echo "OK"
         ;;
     stop)
-        rh_status_q || exit 0
-        stop
+        # MCI shutdown
+        #Instead of dependending on pid file search for running process
+        PID=`/usr/bin/pgrep -u $CUR_USER -f "\-S $SERVER_ID"`
+
+        if [[ -z "$PID" ]]; then
+            show_message "MCI-ui Server is not running"
+            echo "" > $pid_file
+            exit 0
+        fi
+
+        echo -n "Shutdown MCI-ui: "
+        su $CUR_USER -c "kill $PID"
+        echo "OK"
+        echo "" > $pid_file
         ;;
-    restart)
-        restart
-        ;;
-    reload)
-        rh_status_q || exit 7
-        reload
+    reload|restart)
+        $0 stop
+        $0 start
         ;;
     status)
-        rh_status
-        ;;
-    condrestart)
-        rh_status_q || exit 0
-        restart
+        status -p $pid_file $NAME
+        exit $?
         ;;
     *)
-        echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart}"
-        exit 2
+        echo "Usage: `basename $0` start|stop|status|restart|reload"
+        exit 1
 esac
-exit $?
+exit 0

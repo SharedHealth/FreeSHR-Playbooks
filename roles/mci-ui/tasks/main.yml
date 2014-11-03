@@ -41,6 +41,14 @@
 - name: Create assets link to web directory
   file: src={{mci_ui_home}}/app/Resources/assets dest={{mci_ui_home}}/web/assets state=link
 
+- name: Install assets
+  shell: chdir={{mci_ui_home}} app/console  update assetic:dump --env=prod
+  sudo: true
+
+- name: Install assets
+  shell: chdir={{mci_ui_home}} app/console  assets:install --symlink --relative --env=prod
+  sudo: true
+
 - name: Start Mci-Admin
   service: name=mci-ui state=restarted
   sudo: true
