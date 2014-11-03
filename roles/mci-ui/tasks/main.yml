@@ -3,6 +3,7 @@
 - name: Checkout MCI-UI code
   git: repo=https://github.com/SharedHealth/MCI-Admin.git
     dest={{mci_ui_home}}
+    version={{version|default("HEAD")}}
     update=yes
 
 - name: Copy Configuration
