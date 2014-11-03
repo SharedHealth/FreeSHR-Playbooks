@@ -34,6 +34,10 @@
 - name: Download all dependencies Ignorring php intl
   shell: chdir={{mci_ui_home}} /usr/local/bin/composer require 'symfony/icu:1.0.*'
 
+- name: Update dependencies
+  shell: /usr/local/bin/composer update
+  sudo: true
+
 - name: Create assets link to web directory
   file: src={{mci_ui_home}}/app/Resources/assets dest={{mci_ui_home}}/web/assets state=link
 
