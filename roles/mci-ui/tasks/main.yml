@@ -49,6 +49,10 @@
   shell: chdir={{mci_ui_home}} app/console  assets:install --symlink --relative --env=prod
   sudo: true
 
+- name: Clear cache
+  shell: chdir={{mci_ui_home}} app/console  cache:clear --env=prod
+  sudo: true
+
 - name: Start Mci-Admin
   service: name=mci-ui state=restarted
   sudo: true
