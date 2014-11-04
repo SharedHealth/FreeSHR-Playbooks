@@ -42,7 +42,7 @@
   file: src={{mci_ui_home}}/app/Resources/assets dest={{mci_ui_home}}/web/assets state=link
 
 - name: Install assets
-  shell: chdir={{mci_ui_home}} app/console  update assetic:dump --env=prod
+  shell: chdir={{mci_ui_home}} app/console  assetic:dump --env=prod
   sudo: true
 
 - name: Install assets
