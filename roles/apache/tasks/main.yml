@@ -1,0 +1,68 @@
+---
+
+- name: Define apache_packages.
+  set_fact:
+    apache_packages: "{{ __apache_packages | list }}"
+  when: apache_packages is not defined
+
+- name: Ensure Apache is installed.
+  yum:
+    name: "{{ item }}"
+    state: installed
+    enablerepo: "{{ apache_enablerepo }}"
+  with_items: apache_packages
+
+# Figure out what version of Apache is installed.
+- name: Get installed version of Apache.
+  command: "{{ apache_daemon }} -v"
+  changed_when: false
+  register: _apache_version
+
+- name: Create apache_version variable.
+  set_fact:
+    apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
+
+- include_vars: apache-22.yml
+  when: "apache_version.split('.')[1] == '2'"
+
+- include_vars: apache-24.yml
+  when: "apache_version.split('.')[1] == '4'"
+
+- name: Add apache vhosts configuration.
+  template:
+    src: "vhosts-{{ apache_vhosts_version }}.conf.j2"
+    dest: "{{ apache_conf_path }}/vhosts.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+  when: apache_create_vhosts
+
+- name: Configure Apache.
+  lineinfile:
+    dest: "{{ apache_server_root }}/conf/{{ apache_daemon }}.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items: apache_ports_configuration_items
+  notify: restart apache
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+  sudo: true
+
+- name: Allow apache port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT -m comment --comment "APACHE2"
+  sudo: true
+  when: iptablesrules.stdout.find("APACHE2") == -1
+
+- name: save iptables
+  command: service iptables save
+  sudo: true
+
+- name: Ensure Apache is started and enabled on boot.
+  service:
+    name: "{{ apache_daemon }}"
+    state: started
+    enabled: yes
