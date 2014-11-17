@@ -8,7 +8,7 @@
 172.18.46.53 ansible_ssh_user=bdshr deployment_environment=showcase
 
 [tr-server]
-172.18.46.53 ansible_ssh_user=bdshr deployment_environment=showcase rest_uri_prefix=https://bdshr-tr.twhosted.com/openmrs/
+172.18.46.53 ansible_ssh_user=bdshr deployment_environment=showcase rest_uri_prefix=https://172.18.46.53:9080/openmrs/
 
 [datasense]
 172.18.46.52 ansible_ssh_user=bdshr deployment_environment=showcase
