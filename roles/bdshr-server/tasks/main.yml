@@ -6,19 +6,12 @@
 - name: Copy rpm
   copy: src=/tmp/shr-0.1-1.noarch.rpm dest=/tmp/bdshr.rpm mode=755
 
-- name: Check for existing installations
-  shell: rpm -q shr-0.1-1
-  register: bdshr_installed
-  ignore_errors: yes
-  sudo: true
-
-- name: Remove existing installation if any
-  shell: rpm -e shr-0.1-1
-  when: bdshr_installed.rc == 0
+- name: Remove bdshr
+  yum: name=/tmp/shr-0.1-1.noarch.rpm state=absent
   sudo: true
 
 - name: Install bdshr
-  shell: rpm -Uvh /tmp/bdshr.rpm
+  yum: name=/tmp/bdshr.rpm state=present
   sudo: true
 
 - name: Copy SHR properties
