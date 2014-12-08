@@ -13,12 +13,12 @@
   sudo: true
 
 - name: Remove existing installation if any
-  shell: yum remove -y shr-0.1-1
+  shell: rpm -e shr-0.1-1
   when: bdshr_installed.rc == 0
   sudo: true
 
 - name: Install bdshr
-  shell: yum install -y /tmp/bdshr.rpm
+  shell: rpm -Uvh /tmp/bdshr.rpm
   sudo: true
 
 - name: Copy SHR properties
