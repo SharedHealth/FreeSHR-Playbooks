@@ -26,5 +26,5 @@
   when: iptablesrules.stdout.find("CassandraRpc") == -1
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
   sudo: true
