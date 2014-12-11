@@ -1,4 +1,7 @@
 ---
+- name: Install MySQL Community YUM Repo.
+  yum: name=http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm state=installed
+
 - name: Install MySQL
   yum: name={{ item }} state=present
   with_items:
