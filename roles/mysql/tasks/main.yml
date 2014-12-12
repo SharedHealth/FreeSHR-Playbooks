@@ -1,7 +1,4 @@
 ---
-- name: Install MySQL Community YUM Repo.
-  yum: name=http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm state=installed
-
 - name: Install MySQL
   yum: name={{ item }} state=present
   with_items:
@@ -9,10 +6,10 @@
     - mysql
     - MySQL-python
 
-- name: 'Start Mysql Service'
+- name: Start Mysql Service
   action: service name=mysqld state=started enabled=true
 
-- name: 'Update mysql root password'
+- name: Update mysql root password
   command: /usr/bin/mysqladmin -u {{ local_mysql_username }} password {{ local_mysql_password }}
   ignore_errors: yes
 
