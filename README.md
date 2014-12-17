@@ -22,5 +22,7 @@ To install opscenter server run -
 To install opscenter agents run -
 * ansible-playbook -k -i cassandra.hosts db-nodes.yml --tags "opscenter-agents"
 
-
+To create a bdshr user on VM - 
+* add VM address to scaleworks.hosts
+* ansible-playbook -k -i scaleworks.hosts db-nodes.yml --tags "create-user"
 
