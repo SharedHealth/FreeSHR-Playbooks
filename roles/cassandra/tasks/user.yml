@@ -1,0 +1,8 @@
+- name: Create user
+  user: name=bdshr generate_ssh_key=yes ssh_key_bits=2048 state=present group=admin password=$6$rounds=100000$ZISiHdg5iTWrXA1K$3O6OCSToABFMCOUtfvgOkwLbTDU5GCrhPSkKqnebOBrGRng9PgGV9LudZzOw5RHmxiPzHSiF8ryrqDPehFlpL0
+  sudo: yes
+
+- name: configure sudoers
+  lineinfile: "dest=/etc/sudoers state=present backup=yes regexp='^%bdshr' insertafter='^# %wheel' line='bdshr ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
+  sudo: yes
+  

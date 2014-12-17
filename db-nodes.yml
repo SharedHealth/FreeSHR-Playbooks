@@ -1,0 +1,12 @@
+---
+- name: "cassandra"
+  hosts: cassandra_nodes
+  roles:
+    - cassandra
+
+- name: "opscenter"
+  hosts: 
+    - cassandra_nodes
+    - opscenter_server
+  roles:
+    - opscenter

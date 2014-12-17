@@ -1,0 +1,7 @@
+---
+- include: opscenter.yml tags=opscenter-server
+
+- include: opsagents.yml tags=opscenter-agents
+
+
+

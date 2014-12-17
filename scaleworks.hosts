@@ -1,0 +1,6 @@
+[cassandra_nodes]
+#172.18.46.16 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+#172.18.46.7 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+#172.18.46.15 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+#172.18.46.8 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+#172.18.46.2 ansible_ssh_port=22 ansible_ssh_user=scaleworks

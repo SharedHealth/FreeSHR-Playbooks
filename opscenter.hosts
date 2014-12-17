@@ -1,0 +1,2 @@
+[opscenter_server]
+172.18.46.2 ansible_ssh_port=22 ansible_ssh_user=bdshr 
