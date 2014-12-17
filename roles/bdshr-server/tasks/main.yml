@@ -7,7 +7,7 @@
   copy: src=/tmp/shr-0.1-1.noarch.rpm dest=/tmp/bdshr.rpm mode=755
 
 - name: Remove bdshr
-  yum: name=/tmp/shr-0.1-1.noarch.rpm state=absent
+  yum: name=shr-0.1-1.noarch state=absent
   sudo: true
 
 - name: Install bdshr
