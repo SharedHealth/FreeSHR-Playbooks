@@ -1,10 +1,13 @@
 ---
 
-- name: Checkout MCI-UI code
-  git: repo=https://github.com/SharedHealth/MCI-Admin.git
-    dest={{mci_ui_home}}
-    version={{version|default("HEAD")}}
-    update=yes
+- name: Create {{mci_ui_home}} dir
+  file: path={{mci_ui_home}} state=directory
+
+- name: Install current version
+  unarchive: src='{{item}}' dest={{mci_ui_home}}
+  sudo: true
+  with_fileglob:
+    - "{{dist}}"
 
 - name: Copy Configuration
   copy:
@@ -18,32 +21,10 @@
               line='    api_end_point{{":"}} {{api}}'
               state=present
 
-
-- name: Install dependencies
-  shell: chdir={{mci_ui_home}} SYMFONY_ENV=prod /usr/local/bin/composer install --no-dev
-  sudo: true
-
-- name: Create assets link to web directory
-  file: src={{mci_ui_home}}/app/Resources/assets dest={{mci_ui_home}}/web/assets state=link
-
-- name: Install assets
-  shell: chdir={{mci_ui_home}} app/console  assets:install --symlink --relative --env=prod
-  sudo: true
-
-- name: Dump assets
-  shell: chdir={{mci_ui_home}} app/console  assetic:dump --env=prod
-  sudo: true
-
-- name: Clear cache
-  shell: chdir={{mci_ui_home}} app/console  cache:clear --env=prod
+- name: Re-Build Applicaiton
+  shell: chdir={{mci_ui_home}} bin/deploy.sh
   notify: restart apache
   sudo: true
-
-- name: Make cache writable
-  shell: chmod -R 0777 {{mci_ui_home}}{{item}}
-  with_items:
-    - /app/cache
-    - /app/logs
 
 - name: Change owner to apache user
   shell: chown -R apache:apache {{mci_ui_home}}{{item}}
