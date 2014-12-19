@@ -73,17 +73,17 @@
   command: rm -rf /var/lib/cassandra/data/system/*
   sudo: yes
 
-- name: copy config
-  template: src=cassandra.yaml dest=/etc/cassandra/conf/
-  sudo: yes
+# - name: copy config
+#   template: src=cassandra.yaml dest=/etc/cassandra/conf/
+#   sudo: yes
 
 - name: set hostname/ip for JMX
   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
   sudo: yes
 
-- name: ensure tmp is not mounted as noexec
-  command: mount -o remount,exec /dev/mapper/vg-tmp
-  sudo: yes
+# - name: ensure tmp is not mounted as noexec
+#   command: mount -o remount,exec /dev/mapper/vg-tmp
+#   sudo: yes
 
 - name: start cassandra
   service: name=cassandra state=started
