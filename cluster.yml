@@ -2,7 +2,7 @@
 - name: "cassandra"
   hosts: cassandra_nodes
   roles:
-    - cassandra
+    - cassandra-cluster
 
 - name: "opscenter"
   hosts: 

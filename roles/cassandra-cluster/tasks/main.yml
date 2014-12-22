@@ -1,0 +1,4 @@
+---
+- include: user.yml tags=create-user
+- include: cassandra.yml tags=setup
+

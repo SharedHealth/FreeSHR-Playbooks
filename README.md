@@ -8,21 +8,20 @@ TODO
 * Refactor scripts to use handlers instead of tasks where applicable
 
 
-
 To install cassandra nodes run -
 * update inventory - cassandra.hosts
 * update cassandra.yaml template
-* ansible-playbook -k -i cassandra.hosts db-nodes.yml --tags "setup"
+* ansible-playbook -k -i cassandra.hosts cluster.yml --tags "setup"
 
 
 To install opscenter server run -
 * update inventory - opscenter.hosts
-* ansible-playbook -k -i opscenterserver.hosts db-nodes.yml --tags "opscenter-server"
+* ansible-playbook -k -i opscenterserver.hosts cluster.yml --tags "opscenter-server"
 
 To install opscenter agents run -
-* ansible-playbook -k -i cassandra.hosts db-nodes.yml --tags "opscenter-agents"
+* ansible-playbook -k -i cassandra.hosts cluster.yml --tags "opscenter-agents"
 
 To create a bdshr user on VM - 
 * add VM address to scaleworks.hosts
-* ansible-playbook -k -i scaleworks.hosts db-nodes.yml --tags "create-user"
+* ansible-playbook -k -i scaleworks.hosts cluster.yml --tags "create-user"
 
