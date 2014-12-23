@@ -11,7 +11,7 @@
   sudo: true
 
 - name: Install identity-server
-  yum: name=/tmp/bdshr.rpm state=present
+  yum: name=/tmp/identity-server.rpm state=present
   sudo: true
 
 - name: Copy identity-server properties
