@@ -12,3 +12,6 @@
 
 [datasense]
 172.18.46.55 ansible_ssh_user=bdshr deployment_environment=qa
+
+[identity-server]
+172.18.46.56 ansible_ssh_user=bdshr deployment_environment=qa
