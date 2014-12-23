@@ -1,0 +1,48 @@
+---
+- name: Install open jdk
+  apt: pkg=openjdk-7-jdk state=latest
+
+- name: add group "tomcat"
+  group: name=tomcat
+
+- name: add user "tomcat"
+  user: name=tomcat group=tomcat home=/usr/share/tomcat
+  sudo: True
+
+- name: delete home dir for symlink of tomcat
+  shell: rm -fr /usr/share/tomcat
+  sudo: True
+
+- name: Download Tomcat
+  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v{{tomcat_ver}}/bin/apache-tomcat-{{tomcat_ver}}.tar.gz dest=/opt/apache-tomcat-{{tomcat_ver}}.tar.gz
+
+- name: Extract archive
+  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-{{tomcat_ver}}.tar.gz -C /opt/ creates=/opt/apache-tomcat-{{tomcat_ver}}
+
+- name: Symlink install directory
+  file: src=/opt/apache-tomcat-{{tomcat_ver}} path=/usr/share/tomcat state=link
+
+- name: Change ownership of Tomcat installation
+  file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+
+- name: Configure Tomcat server
+  template: src=server.xml dest=/usr/share/tomcat/conf/ owner=tomcat group=tomcat mode=644
+  notify: restart tomcat
+
+- name: Configure Tomcat users
+  template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/ owner=tomcat group=tomcat mode=644
+  notify: restart tomcat
+
+- name: Remove all webapps
+  shell: rm -fr /usr/share/tomcat/webapps/*
+  sudo: True
+  notify: restart tomcat
+
+- name: Install Tomcat init script
+  template: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+
+- name: Start Tomcat
+  service: name=tomcat state=restarted enabled=yes
+
+- name: wait for tomcat to start
+  wait_for: port={{http_port}}

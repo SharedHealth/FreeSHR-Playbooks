@@ -1,0 +1,2 @@
+[dhis]
+172.18.46.225 ansible_ssh_user=bdshr ansible_ssh_port=22 ansible_ssh_pass=p@ssw0rd678

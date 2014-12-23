@@ -1,0 +1,54 @@
+---
+
+- name: Ensure tmp directory exists
+  file: dest=/tmp state=directory
+
+- name: install postgres
+  apt: pkg=postgresql-9.3 state=latest
+
+- name: install postgres contrib
+  apt: pkg=postgresql-contrib state=latest
+
+- name: Configure shred memory
+  shell: echo 4294967295 > /proc/sys/kernel/shmmax && echo "kernel.shmmax=4294967295" >> /etc/sysctl.conf 
+
+- name: install Python PostgreSQL database adapter.
+  apt: pkg=python-psycopg2 state=latest force=yes
+
+- name: create postgres configs folder
+  file: path=/etc/postgresql/9.3/main state=directory owner=postgres
+
+- name: configure postgres
+  template: src=postgresql.conf dest=/etc/postgresql/9.3/main/postgresql.conf mode=644
+
+- name: configure pg_hba
+  template: src=pg_hba.conf dest=/etc/postgresql/9.3/main/pg_hba.conf mode=644
+
+- name: Restart PostgreSQL
+  shell: /etc/init.d/postgresql restart
+
+- name: create dhis database
+  postgresql_db: name=dhis2 
+
+- name: create dhis user
+  postgresql_user: name=dhis password=password db=dhis2
+
+- name: create hibernate home
+  file: path={{ dhis_home }} mode=0777 state=directory
+
+- name: copy hibernate properties to DHIS home
+  template: src=hibernate.properties dest={{ dhis_home }} mode=0755
+
+- name: download dhis 16 war
+  command: wget -nc https://www.dhis2.org/download/releases/2.16/dhis.war
+
+- name: move war file to tomcat webapps
+  command: mv dhis.war /usr/share/tomcat/webapps
+
+- name: give permissions to tomcat of war file
+  file: path=/usr/share/tomcat/webapps/dhis.war owner=tomcat group=tomcat mode=0751
+
+- name: restart tomcat
+  service: name=tomcat state=restarted
+
+
