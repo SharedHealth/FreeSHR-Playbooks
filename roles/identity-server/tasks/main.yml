@@ -6,7 +6,7 @@
 - name: Copy rpm
   copy: src=/tmp/identity-server-0.1-1.noarch.rpm dest=/tmp/identity-server.rpm mode=755
 
-- name: Remove identity-sever
+- name: Remove identity-server
   yum: name=identity-server-0.1-1.noarch state=absent
   sudo: true
 
