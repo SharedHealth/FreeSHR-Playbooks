@@ -46,6 +46,6 @@
   when: keylist.stdout.find("fingerprint") == -1
 
 - name: install identity server certificate to java keystore
-  command: keytool -import -keystore $JAVA_HOME/jre/lib/security/cacerts -alias shrid -file /tmp/shrid.cer
+  command: keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -file /tmp/shrid.cer
   sudo: yes
   when: keylist.stdout.find("fingerprint") == -1
