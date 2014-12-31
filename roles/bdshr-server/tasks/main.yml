@@ -38,7 +38,7 @@
   sudo: true
 
 - name: list java keystore for identity server key
-  command: keytool -list -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -storepass changeit
+  shell: keytool -list -keystore {{ ansible_env.JAVA_HOME | '/usr/java/default' }}/lib/security/cacerts -alias shrid -storepass changeit
   register: keylist
   sudo: true
 
@@ -48,6 +48,6 @@
   sudo: true
   
 - name: install identity server certificate to java keystore
-  command: keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -file /tmp/shrid.cer -storepass changeit
+  shell: keytool -import -keystore {{ ansible_env.JAVA_HOME | '/usr/java/default' }}/lib/security/cacerts -alias shrid -file /tmp/shrid.cer -storepass changeit
   sudo: yes
   when: keylist.stdout.find("fingerprint") == -1
