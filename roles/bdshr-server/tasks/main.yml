@@ -38,7 +38,7 @@
   sudo: true
 
 - name: list java keystore for identity server key
-  command: keytool -list -keystore $JAVA_HOME/jre/lib/security/cacerts -alias shrid
+  command: keytool -list -keystore $JAVA_HOME/lib/security/cacerts -alias shrid
   register: keylist
 
 - name: copy keystore
