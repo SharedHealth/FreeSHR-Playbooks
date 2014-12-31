@@ -36,3 +36,16 @@
 - name: save iptables
   command: service iptables save
   sudo: true
+
+- name: list java keystore for identity server key
+  command: keytool -list -keystore $JAVA_HOME/jre/lib/security/cacerts -alias shrid
+  register: keylist
+
+- name: copy keystore
+  copy: src=shrid.cer dest=/tmp/shrid.cer
+  when: keylist.stdout.find("fingerprint") == -1
+
+- name: install identity server certificate to java keystore
+  command: keytool -import -keystore $JAVA_HOME/jre/lib/security/cacerts -alias shrid -file /tmp/shrid.cer
+  sudo: yes
+  when: keylist.stdout.find("fingerprint") == -1
