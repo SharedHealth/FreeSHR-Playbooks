@@ -38,7 +38,7 @@
   sudo: true
 
 - name: list java keystore for identity server key
-  command: keytool -list -keystore $JAVA_HOME/lib/security/cacerts -alias shrid
+  command: keytool -list -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -storepass changeit
   register: keylist
 
 - name: copy keystore
@@ -46,6 +46,6 @@
   when: keylist.stdout.find("fingerprint") == -1
 
 - name: install identity server certificate to java keystore
-  command: keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -file /tmp/shrid.cer
+  command: keytool -import -keystore $JAVA_HOME/lib/security/cacerts -alias shrid -file /tmp/shrid.cer -storepass changeit
   sudo: yes
   when: keylist.stdout.find("fingerprint") == -1
