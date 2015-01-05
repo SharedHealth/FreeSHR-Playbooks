@@ -18,7 +18,7 @@
   lineinfile: dest={{mci_ui_home}}/app/config/parameters.yml
               regexp='^    api_end_point{{":"}} '
               insertafter='^    api_end_point{{":"}} '
-              line='    api_end_point{{":"}} {{api}}'
+              line='    api_end_point{{":"}} {{rest_uri_prefix}}'
               state=present
 
 - name: Re-Build Applicaiton
