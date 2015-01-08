@@ -23,8 +23,8 @@ export DHIS_POST_URL=http://192.168.33.20:8080/dhis/api/dataValueSets
 export DHIS_USER_NAME=datasense
 export DHIS_PASSWORD=Password678
 # Properties for identity server
-export identity.scheme=http
-export identity.host=172.18.46.56
-export identity.port=8080
-export identity.user=shr
-export identity.password=P@ssw0rd
+export IDENTITY_SCHEME=http
+export IDENTITY_HOST=172.18.46.56
+export IDENTITY_PORT=8080
+export IDENTITY_USER=shr
+export IDENTITY_PASSWORD=P@ssw0rd
