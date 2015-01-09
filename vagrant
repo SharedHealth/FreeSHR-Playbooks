@@ -12,3 +12,7 @@ localhost ansible_ssh_user=vagrant deployment_environment=dev
 
 [identity-server]
 localhost ansible_ssh_user=bdshr deployment_environment=dev
+
+[patient-journal-server]
+localhost ansible_ssh_user=bdshr deployment_environment=dev
+

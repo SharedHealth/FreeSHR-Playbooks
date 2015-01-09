@@ -1,0 +1,38 @@
+---
+- name: Clean existing
+  shell: rm -f /tmp/patient-journal.rpm
+  sudo: true
+
+- name: Copy rpm
+  copy: src=/tmp/patient-journal-0.1-1.noarch.rpm dest=/tmp/patient-journal.rpm mode=755
+
+- name: Remove patient-journal
+  yum: name=patient-journal-0.1-1.noarch state=absent
+  sudo: true
+
+- name: Install patient-journal
+  yum: name=/tmp/patient-journal.rpm state=present
+  sudo: true
+  
+- name: Copy patient-journal properties
+  copy: src={{deployment_environment}}-patient-journal
+    dest=/etc/default/patient-journal
+    mode=755
+
+- name: Restart patient-journal
+  service: name=patient-journal state=restarted
+  sudo: true
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+  sudo: true
+- name: Allow bdshr port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8090 -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
+  sudo: true
+  when: iptablesrules.stdout.find("PATIENT-JOURNAL") == -1
+
+- name: save iptables
+  command: service iptables save
+  sudo: true

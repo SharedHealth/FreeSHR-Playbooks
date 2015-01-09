@@ -15,3 +15,6 @@
 
 [identity-server]
 172.18.46.56 ansible_ssh_user=bdshr deployment_environment=qa
+
+[patient-journal-server]
+172.18.46.56 ansible_ssh_user=bdshr deployment_environment=qa
