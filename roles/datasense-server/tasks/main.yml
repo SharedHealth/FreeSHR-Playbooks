@@ -1,11 +1,15 @@
 ---
 - name: Clean existing
-  shell: rm -f /tmp/datasense.rpm
+  shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
+  sudo: true
+
+- name: Clean existing dhis_config folder
+  shell: rm -rf /opt/datasense/lib/dhis_config
   sudo: true
 
 - name: Copy rpm
   sudo: true
-  copy: src=/tmp/datasense-0.1-1.noarch.rpm dest=/tmp/datasense.rpm mode=755
+  copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
 
 - name: Install MySQL
   yum: name={{ item }} state=present
@@ -38,6 +42,9 @@
   copy: src={{deployment_environment}}-datasense
     dest=/etc/default/datasense
     mode=755
+
+- name: Unzip dhis_config
+  unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
 
 - name: Restart datasense
   service: name=datasense state=restarted
