@@ -15,5 +15,5 @@ parameters:
     debug_redirects: false
     use_assetic_controller: true
     api_end_point: ~
-    location_api_end_point: http://pagani.websitewelcome.com/~stagedgh/dghshrml4/public
-    location_auth_key: 9c83d71d41161cbc860380202e43d868ea2b8cc229ed84a2af2ac0818a14cfb4
+    identity_server_domain: null
+    identity_server_port: 8080
