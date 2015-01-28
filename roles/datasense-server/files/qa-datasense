@@ -20,6 +20,7 @@ export TR_SCHEME=http
 export TR_HOST=172.18.46.56
 export TR_PORT=9080
 export TR_CONCEPT_ATOMFEED_PATH=openmrs/ws/atomfeed/concept/recent
+export TR_REFERENCE_TERM_ATOMFEED_PATH=openmrs/ws/atomfeed/conceptreferenceterm/recent
 export TR_USER=admin
 export TR_PASSWORD=Admin123
 export DATASENSE_FACILITY_ID=10000001
