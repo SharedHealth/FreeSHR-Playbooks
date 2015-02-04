@@ -1,6 +1,9 @@
 [shr]
 172.18.46.57 ansible_ssh_user=bdshr deployment_environment=qa
 
+[freeshr-update-server]
+172.18.46.57 ansible_ssh_user=bdshr deployment_environment=qa
+
 [mci-ui]
 172.18.46.56 ansible_ssh_user=bdshr api_uri_prefix=http://127.0.0.1:8081/api/v1
 
@@ -18,3 +21,4 @@
 
 [patient-journal-server]
 172.18.46.56 ansible_ssh_user=bdshr deployment_environment=qa
+

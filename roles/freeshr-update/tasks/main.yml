@@ -1,0 +1,24 @@
+---
+- name: Clean existing rpm
+  shell: rm -f /tmp/freeshr-update.rpm
+  sudo: true
+  
+- name: Copy rpm
+  copy: src=/tmp/freeshr-update-0.1-1.noarch.rpm dest=/tmp/freeshr-update.rpm mode=755
+
+- name: Remove freeshr-update
+  yum: name=freeshr-update-0.1-1.noarch state=absent
+  sudo: true
+
+- name: Install freeshr-update
+  yum: name=/tmp/freeshr-update.rpm state=present
+  sudo: true
+
+- name: Copy freeshr-update properties
+  copy: src={{deployment_environment}}-freeshr-update
+    dest=/etc/default/freeshr-update
+    mode=755
+
+- name: Restart freeshr-update
+  service: name=freeshr-update state=restarted
+  sudo: true
