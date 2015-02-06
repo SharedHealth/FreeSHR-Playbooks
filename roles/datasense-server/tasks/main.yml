@@ -46,8 +46,12 @@
 - name: Unzip dhis_config
   unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
 
+- name: Stop datasense
+  service: name=datasense state=stopped
+  sudo: true
+
 - name: Start datasense
-  service: name=datasense state=restarted
+  service: name=datasense state=started
   sudo: true
 
 - name: Get IpTable rules
