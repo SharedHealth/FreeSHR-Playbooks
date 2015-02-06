@@ -34,10 +34,6 @@
   when: datasense_installed.rc == 0
   sudo: true
 
-- name: Stop datasense
-  service: name=datasense state=stopped
-  sudo: true
-
 - name: Install datasense
   shell: yum install -y /tmp/datasense.rpm
   sudo: true
@@ -51,7 +47,7 @@
   unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
 
 - name: Start datasense
-  service: name=datasense state=started
+  service: name=datasense state=restarted
   sudo: true
 
 - name: Get IpTable rules
