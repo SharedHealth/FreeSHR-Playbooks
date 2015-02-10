@@ -1,8 +1,8 @@
 export MCI_SCHEME=http
 export MCI_HOST=192.168.33.10
 export MCI_PORT=8080
-export MCI_USER=mci
-export MCI_PASSWORD=password
+export MCI_USER=shr
+export MCI_PASSWORD=P@ssword
 export CASSANDRA_KEYSPACE=freeshr
 export CQL_VERSION=3.0.0
 export CASSANDRA_VERSION=1.2
@@ -13,9 +13,9 @@ export SHR_LOG_LEVEL=DEBUG
 export UPDATE_INTERVAL_SECONDS=600
 export MCI_CONTEXT_PATH=/api/v1/feed/patients
 export IDENTITY_SERVER_BASE_URL=http://172.18.46.56:8080
-export DATABASE_URL=jdbc:mysql://localhost:3306/freeSHRUpdate
+export DATABASE_URL=jdbc:mysql://localhost:3306/freeSHRUpdate?createDatabaseIfNotExist=true
 export DATABASE_USER=root
 export DATABASE_PASSWORD=password
-export DATABASE_CHANGELOG_FILE=classpath:/db/changelog/db-changelog.xml
+export DATABASE_CHANGELOG_FILE=classpath:/db/db-changelog.xml
 export DATABASE_DRIVER=com.mysql.jdbc.Driver
 export DATABASE_CON_POOL_SIZE=10
