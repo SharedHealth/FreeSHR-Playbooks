@@ -24,6 +24,13 @@
   sudo: true
   notify: Start mci
 
+- name: Copy properties
+  copy: src={{deployment_environment}}-mci
+    dest=/etc/default/mci
+    mode=755
+  sudo: true
+  notify: Start mci
+
 - name: Start cassandra
   service: name=cassandra state=started
   sudo: true
