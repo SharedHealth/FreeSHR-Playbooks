@@ -33,7 +33,7 @@ export DHIS_PASSWORD=Password678
 export DHIS_AQS_CONFIG_PATH=/opt/datasense/lib/dhis_config/aqs_config/
 # Properties for identity server
 export IDENTITY_SCHEME=http
-export IDENTITY_HOST=172.18.46.56
+export IDENTITY_HOST=172.18.46.53
 export IDENTITY_PORT=8080
 export IDENTITY_USER=shr
 export IDENTITY_PASSWORD=P@ssword
