@@ -3,10 +3,6 @@
   shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
   sudo: true
 
-- name: Clean existing dhis_config folder
-  shell: rm -rf /opt/datasense/lib/dhis_config
-  sudo: true
-
 - name: Copy rpm
   sudo: true
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
@@ -42,6 +38,10 @@
   yum: name=datasense-0.1-1 state=absent
   sudo: true
 
+- name: Clean existing dhis_config folder
+  shell: rm -rf /opt/datasense/lib/dhis_config
+  sudo: true
+  
 - name: Install datasense
   yum: name=/tmp/datasense.rpm state=present
   sudo: true
