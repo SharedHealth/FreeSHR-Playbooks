@@ -11,49 +11,6 @@
   sudo: true
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
 
-- name: Install MySQL
-  yum: name={{ item }} state=present
-  sudo: true
-  with_items:
-    - MySQL-python
-    - mysql
-    - mysql-server
-
-- name: Create Datasense datasense
-  mysql_db: name=datasense state=present login_user=root login_password=password
-  sudo: true
-
-- name: Check for existing installations
-  shell: rpm -q datasense-0.1-1
-  register: datasense_installed
-  ignore_errors: yes
-  sudo: true
-
-- name: Remove existing installation if any
-  shell: yum remove -y datasense-0.1-1
-  when: datasense_installed.rc == 0
-  sudo: true
-
-- name: Install datasense
-  shell: yum install -y /tmp/datasense.rpm
-  sudo: true
-
-- name: Copy Datasense properties
-  copy: src={{deployment_environment}}-datasense
-    dest=/etc/default/datasense
-    mode=755
-
-- name: Unzip dhis_config
-  unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
-
-- name: Stop datasense
-  command: service datasense stop
-  sudo: true
-
-- name: Start datasense
-  command: service datasense start
-  sudo: true
-
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
@@ -66,4 +23,37 @@
 
 - name: save iptables
   command: service iptables save
+  when: iptablesrules.stdout.find("datasense") == -1
+  sudo: true
+  
+- name: Install MySQL
+  yum: name={{ item }} state=present
+  sudo: true
+  with_items:
+    - MySQL-python
+    - mysql
+    - mysql-server
+
+- name: Create Datasense datasense
+  mysql_db: name=datasense state=present login_user=root login_password=password
+  sudo: true
+
+- name: Remove existing installations if any
+  yum: name=datasense-0.1-1 state=absent
+  sudo: true
+
+- name: Install datasense
+  yum: name=/tmp/datasense.rpm state=present
+  sudo: true
+
+- name: Copy Datasense properties
+  copy: src={{deployment_environment}}-datasense
+    dest=/etc/default/datasense
+    mode=755
+
+- name: Unzip dhis_config
+  unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
+
+- name: Start datasense
+  service: name=datasense state=started
   sudo: true
