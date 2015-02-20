@@ -1,0 +1,9 @@
+---
+
+- hosts: nagios_host
+  sudo: True
+  vars_files:
+    - host_vars/nagios.yml
+  roles:
+   - role: nagios
+

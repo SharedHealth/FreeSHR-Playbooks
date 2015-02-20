@@ -1,0 +1,9 @@
+---
+
+- hosts: nagios_client
+  sudo: True
+  vars_files:
+    - host_vars/nrpe.yml
+  roles:
+   - role: nagios-client
+

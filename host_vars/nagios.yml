@@ -1,0 +1,268 @@
+#host_vars/nagios
+
+nagios_users:
+    - name: nagios
+      password: nagios
+
+                                   
+#variables for cgi.cfg
+main_config_file_location: "/etc/nagios/nagios.cfg"
+physical_html_path: "/usr/share/nagios/html"
+url_html_path: "/nagios"
+show_context_help: "no"
+use_pending_states: "yes"
+use_authentication: "yes"
+use_ssl_authentication: "no"
+default_user_name: ""
+authorized_for_read_only: "user1,user2"
+default_statusmap_layout: "5"
+default_statuswrl_layout: "4"
+ping_syntax: "/bin/ping -n -U -c 5 $HOSTADDRESS$"
+refresh_rate: "60"
+result_limit: "100"
+escape_html_tags: "yes"
+lock_author_names: "yes"
+
+#variables for commands.cfg
+#Add your own commands here!
+nagios_commands:
+    - name: check_freeshr
+      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
+    - name: check_mci
+      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
+    - name: check_identityserver
+      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8080 -u /diagnostics/health
+    - name: check_patientjournal
+      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8090 -u /diagnostics/health
+      
+#variables for contacts.cfg
+#Add your own contacts here!
+
+# nagios_contacts:
+#     - name:
+#       use:
+#       alias:
+#       email:
+#     - name:
+#       use:
+#       alias:
+#       email:
+      
+# nagios_contactgroups:
+#     - name:
+#       alias:
+#       members:
+      
+#variables for localhost.cfg
+
+nagios_services:
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: Root Partition
+      check_command: check_local_disk!20%!10%!/
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: Current Users
+      check_command: check_local_users!20!50
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: Total Processes
+      check_command: check_local_procs!250!400!RSZDT
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: Current Load
+      check_command: check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: Swap Usage
+      check_command: check_local_swap!20!10
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      service_description: SSH
+      check_command: check_ssh
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr-servers
+      check_command: check_freeshr
+      service_description: Check SHR Service
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: mci-servers
+      check_command: check_mci
+      service_description: Check MCI Service
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: identity-servers
+      check_command: check_identityserver
+      service_description: Check Identity Service
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: patient-journal-servers
+      check_command: check_patientjournal
+      service_description: Check Patient Journal Service
+      notifications_enabled: 1
+
+      
+nagios_hosts:
+  - use: linux-server
+    name: qa-shr
+    alias: QA SHR
+    address: 172.18.46.57
+  - use: linux-server
+    name: showcase-shr
+    alias: Showcase SHR
+    address: 172.18.46.54
+  - use: linux-server
+    name: qa-mci
+    alias: QA MCI
+    address: 172.18.46.56
+  - use: linux-server
+    name: showcase-mci
+    alias: Showcase MCI
+    address: 172.18.46.53
+  - use: linux-server
+    name: perf-mci
+    alias: Perf MCI
+    address: 172.18.46.2
+  - use: linux-server
+    name: perf-shr1
+    alias: perf shr1
+    address: 172.18.46.2
+  - use: linux-server
+    name: perf-shr2
+    alias: perf shr2
+    address: 172.18.46.175
+  - use: linux-server
+    name: perf-shr3
+    alias: perf shr3
+    address: 172.18.46.174
+  - use: linux-server
+    name: perf-cassandra1
+    alias: perf cassandra 1
+    address: 172.18.46.7
+  - use: linux-server
+    name: perf-cassandra2
+    alias: perf cass 2
+    address: 172.18.46.8
+  - use: linux-server
+    name: perf-cassandra3
+    alias: perf cass 3
+    address: 172.18.46.15
+  - use: linux-server
+    name: perf-cassandra4
+    alias: perf cass 4
+    address: 172.18.46.16
+  - use: linux-server
+    name: qa-identity-server
+    alias: qa identity server
+    address: 172.18.46.56
+  - use: linux-server
+    name: showcase-identity-server
+    alias: showcase identity server
+    address: 172.18.46.53
+  - use: linux-server
+    name: qa-patientjournal-server
+    alias: qa patient journal server
+    address: 172.18.46.56
+  - use: linux-server
+    name: showcase-patientjournal-server
+    alias: showcase patient journal server
+    address: 172.18.46.53
+  - use: linux-server
+    name: showcase-bahmni
+    alias: showcase bahmni
+    address: 172.18.46.52
+  - use: linux-server
+    name: qa-bahmni
+    alias: qa bahmni
+    address: 172.18.46.55
+
+    
+  
+
+
+#variables for nagios.cfg
+#Don't forget to put the definitions for the other hosts out of comment, otherwise nagios won't recognize this.
+#These are the most needed and changeable commands, if you are an experienced user, go check out the real nagios.cfg for additional changes.
+log_file_location: "/var/log/nagios/nagios.log"
+object_cache_file:  "/var/log/nagios/objects.cache"   
+precached_object_file: "/var/log/nagios/objects.precache"      
+resource_file: "/etc/nagios/private/resource.cfg"
+status_file: "/var/log/nagios/status.dat"      
+status_update_interval: "10"
+
+# This determines the effective user that Nagios should run as.  
+# You can either supply a username or a UID.
+nagios_user: "nagios"
+
+nagios_group: "nagios"
+check_external_commands: "yes"
+command_check_interval: "-1"
+use_syslog: "1"
+log_notifications: "1"
+log_service_retries : "1"
+log_host_retries: "1"
+log_event_handlers: "1"
+log_initial_states : "0"
+log_external_commands: "1"
+log_passive_checks: "1"
+
+admin_email: "nagios@localhost"
+admin_pager: "pagenagios@localhost"
+
+#variables for printer.cfg
+#add your printers here!
+
+nagios_printers:
+    - use:
+      name:
+      alias:
+      address:
+      hostgroup:
+
+nagios_printerservices:
+    - use:
+      name:
+      service_description:
+      check_command:
+      normal_check_interval:
+      retry_check_interval:
+      
+#variables for switch.cfg
+
+nagios_switchs:
+    - use:
+      name:
+      alias:
+      address:
+      hostgroup:
+
+nagios_routerservices:
+    - use:
+      name:
+      service_description:
+      check_command:
+
+#variables for windows.cfg
+
+nagios_windows:
+    - use:
+      name:
+      alias:
+      address:
+
+nagios_windowsservices:
+    - use:
+      name:
+      service_description:
+      check_command:
+
+
+dbname: nagios
+dbuser: nagios
+dbpasswd: nagios

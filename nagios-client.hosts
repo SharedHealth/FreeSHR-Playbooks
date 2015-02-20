@@ -1,0 +1,13 @@
+[nagios_client]
+172.18.46.55 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.56 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.57 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.52 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.53 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.54 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.174 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.175 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.7 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.8 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.15 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.16 ansible_ssh_port=22 ansible_ssh_user=bdshr

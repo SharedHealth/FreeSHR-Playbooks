@@ -1,0 +1,7 @@
+nrpe_server_pid: /var/run/nrpe/nrpe.pid
+nrpe_server_user: nrpe
+nrpe_server_group: nrpe
+nrpe_server_plugins_dir: /usr/lib64/nagios/plugins
+nrpe_server_bind_address: 127.0.0.1
+nrpe_server_port: 5666
+nrpe_server_allowed_hosts: 127.0.0.1,192.168.33.13,172.18.46.2,172.18.46.226
