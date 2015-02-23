@@ -18,7 +18,7 @@
     - MySQL-python
 
 - name: Start MySQL service
-  service: name=mysqld state=started
+  service: name=mysqld state=started enabled=yes
   
 - name: Create application database
   mysql_db: name={{ dbname }} state=present

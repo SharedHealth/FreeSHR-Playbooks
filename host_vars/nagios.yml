@@ -38,51 +38,47 @@ nagios_commands:
 #variables for contacts.cfg
 #Add your own contacts here!
 
-# nagios_contacts:
-#     - name:
-#       use:
-#       alias:
-#       email:
-#     - name:
-#       use:
-#       alias:
-#       email:
+nagios_contacts:
+    - name: bdshr
+      use: generic-contact
+      alias: bdshr
+      email: bdshr@thoughtworks.com
       
-# nagios_contactgroups:
-#     - name:
-#       alias:
-#       members:
+nagios_contactgroups:
+  - name: admins
+    alias: Nagios Administrators
+    members: bdshr
       
 #variables for localhost.cfg
 
 nagios_services:
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: Root Partition
       check_command: check_local_disk!20%!10%!/
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: Current Users
       check_command: check_local_users!20!50
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: Total Processes
       check_command: check_local_procs!250!400!RSZDT
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: Current Load
       check_command: check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: Swap Usage
       check_command: check_local_swap!20!10
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers
+      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
       service_description: SSH
       check_command: check_ssh
       notifications_enabled: 1
@@ -212,8 +208,8 @@ log_initial_states : "0"
 log_external_commands: "1"
 log_passive_checks: "1"
 
-admin_email: "nagios@localhost"
-admin_pager: "pagenagios@localhost"
+admin_email: "sharedhealthgroup@gmail.com"
+admin_pager: "pagebshr@localhost"
 
 #variables for printer.cfg
 #add your printers here!
@@ -266,3 +262,7 @@ nagios_windowsservices:
 dbname: nagios
 dbuser: nagios
 dbpasswd: nagios
+
+ssmtp_mailhub: smtp.gmail.com:587
+ssmtp_auth_user: sharedhealthgroup@gmail.com
+ssmtp_auth_pass: <enter pass here>
