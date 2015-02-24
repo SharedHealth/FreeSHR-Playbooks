@@ -18,3 +18,12 @@
    - role: nagios-agent
   tags:
     - nagios-agents
+
+- hosts: logstash_hosts
+  sudo: True
+  vars_files:
+    - host_vars/logstash.yml
+  roles:
+    - role: logstash
+  tags:
+    - logstash-servers

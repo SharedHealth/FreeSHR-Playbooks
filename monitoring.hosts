@@ -18,6 +18,7 @@
 
 [logstash_hosts]
 172.18.46.226 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+#192.168.33.13 ansible_ssh_port=22 ansible_ssh_user=vagrant
 
 [logstash_agents]
 172.18.46.55 ansible_ssh_port=22 ansible_ssh_user=bdshr
