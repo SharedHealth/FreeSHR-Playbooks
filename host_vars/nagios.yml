@@ -86,22 +86,22 @@ nagios_services:
       hostgroup_name: shr-servers
       check_command: check_freeshr
       service_description: Check SHR Service
-      notifications_enabled: 1
+      notifications_enabled: 0
     - use: local-service
       hostgroup_name: mci-servers
       check_command: check_mci
       service_description: Check MCI Service
-      notifications_enabled: 1
+      notifications_enabled: 0
     - use: local-service
       hostgroup_name: identity-servers
       check_command: check_identityserver
       service_description: Check Identity Service
-      notifications_enabled: 1
+      notifications_enabled: 0
     - use: local-service
       hostgroup_name: patient-journal-servers
       check_command: check_patientjournal
       service_description: Check Patient Journal Service
-      notifications_enabled: 1
+      notifications_enabled: 0
 
       
 nagios_hosts:

@@ -1,3 +1,7 @@
+[nagios_host]
+172.18.46.2 ansible_ssh_port=22 ansible_ssh_user=bdshr
+#172.18.46.226 ansible_ssh_port=22 ansible_ssh_user=scaleworks
+
 [nagios_client]
 172.18.46.55 ansible_ssh_port=22 ansible_ssh_user=bdshr
 172.18.46.56 ansible_ssh_port=22 ansible_ssh_user=bdshr
