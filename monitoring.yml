@@ -1,6 +1,6 @@
 ---
 
-- hosts: nagios_host
+- hosts: nagios_hosts
   sudo: True
   vars_files:
     - host_vars/nagios.yml
@@ -8,9 +8,9 @@
    - role: nagios
 
   tags:
-    - nagios-server
+    - nagios-servers
 
-- hosts: nagios_agent
+- hosts: nagios_agents
   sudo: True
   vars_files:
     - host_vars/nrpe.yml
