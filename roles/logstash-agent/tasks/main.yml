@@ -1,5 +1,5 @@
 - name: Enable Logstash repository
-  template: src=logstash_repo
+  template: src=logstash-agent-repo
             dest={{ logstash_yum_config }}
 
 - name: Add Logstash Repo Key
