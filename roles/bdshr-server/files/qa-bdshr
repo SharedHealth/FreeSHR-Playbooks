@@ -19,6 +19,7 @@ export REST_POOL_SIZE=20
 export BDSHR_PORT=8081
 export VALIDATION_ZIP_PATH=/opt/bdshr/etc/validation.zip
 export FACILITY_REGISTRY_URL=http://hrmtest.dghs.gov.bd/api/1.0/facilities/
+export PROVIDER_REGISTRY_URL=http://hrmtest.dghs.gov.bd/api/1.0/providers/
 export FACILITY_REGISTRY_AUTH_TOKEN=9c83d71d41161cbc860380202e43d868ea2b8cc229ed84a2af2ac0818a14cfb4
 export ENCOUNTER_FETCH_LIMIT=20
 export SERVER_CONNECTION_TIMEOUT=10000
