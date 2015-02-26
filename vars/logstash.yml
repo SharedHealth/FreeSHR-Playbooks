@@ -17,6 +17,17 @@ logstash_packages:
 
 logstash_conf_dir: "/etc/logstash/conf.d/"
 
+elasticsearch_yum_config: "/etc/yum.repos.d/elasticsearch.repo"
+elasticsearch_version: "1.4"
+
+logstash_inputs:
+  file: >-
+    path=> "/var/log/*.log"
+
 logstash_outputs:
   file: >-
-          path => "/var/log/logstash/output.log"
+    path => "/var/log/logstash/output.log"
+
+  elasticsearch: >-
+    host => localhost
+          

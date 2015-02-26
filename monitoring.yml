@@ -3,7 +3,7 @@
 - hosts: nagios_hosts
   sudo: True
   vars_files:
-    - host_vars/nagios.yml
+    - vars/nagios.yml
   roles:
    - role: nagios
 
@@ -13,7 +13,7 @@
 - hosts: nagios_agents
   sudo: True
   vars_files:
-    - host_vars/nrpe.yml
+    - vars/nrpe.yml
   roles:
    - role: nagios-agent
   tags:
@@ -22,8 +22,19 @@
 - hosts: logstash_hosts
   sudo: True
   vars_files:
-    - host_vars/logstash.yml
+    - vars/logstash.yml
   roles:
+    - role: elasticsearch
     - role: logstash
   tags:
     - logstash-servers
+
+
+- hosts: logstash_agents
+  sudo: True
+  vars_files:
+    - vars/logstash-agent.yml
+  roles:
+    - role: logstash-agent
+  tags:
+    - logstash-agents
