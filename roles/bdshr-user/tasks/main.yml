@@ -1,0 +1,7 @@
+- name: Create user
+  user: name=bdshr generate_ssh_key=yes ssh_key_bits=2048 state=present password={{ system_user_password }}
+  sudo: yes
+
+- name: configure sudoers
+  lineinfile: "dest=/etc/sudoers state=present backup=yes regexp='^%bdshr' insertafter='^# %wheel' line='bdshr ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
+  sudo: yes

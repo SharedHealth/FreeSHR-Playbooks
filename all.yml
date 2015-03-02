@@ -1,0 +1,86 @@
+- hosts: shr
+  sudo: True
+  roles:
+    - { role: cassandra, tags: ['infrastructure'] }
+    - { role: bdshr-server, tags: ['application'] }
+  tags:
+    - shr
+    
+- hosts: freeshr-update-server
+  sudo: True
+  roles:
+    - { role: freeshr-update }
+  tags:
+    - freeshr-update-server
+
+
+- hosts: mci-ui
+  sudo: true
+  roles:
+    - { role: apache, tags: ['infrastructure'] }
+    - { role: php-packages, tags: ['infrastructure'] }
+    - { role: mci-ui, tags: ['application'] }
+  vars:
+    mci_ui_home: "/var/www/mci_ui"
+    identity_server_domain: "null"
+    identity_server_port: "8080"
+  tags:
+    - mci-ui
+
+
+- hosts: mci-server
+  sudo: true
+  roles:
+    - cassandra
+    - mci-server
+  vars:
+    mci_home: "{{lookup('env', 'HOME')}}/projects/mci"
+    hostname_name: "{{ansible_fqdn}}"
+  tags:
+    - mci-server
+
+- hosts: tr-server
+  sudo: True
+  vars:
+    local_mysql_username: "{{ mysql_username }}"
+    local_mysql_password: "{{ mysql_password }}"
+  roles:
+   - role: mysql
+   - role: tr-server
+  tags:
+    - tr-server
+
+- hosts: datasense
+  sudo: True
+  roles:
+    - role: datasense-server
+  tags:
+    - datasense
+
+- hosts: identity-server
+  sudo: True
+  roles:
+    - { role: identity-server }
+  tags:
+    - identity-server
+
+- hosts: patient-journal-server
+  sudo: True
+  roles:
+    - { role: patient-journal }
+  tags:
+    - patient-journal-server
+
+- hosts: all
+  sudo: True
+  roles:
+    - { role: oracle-java}
+    - { role: bdshr-user}
+    - { role: nagios-agent}
+  vars_files:
+    - group_vars/all
+    - vars/java.yml
+    - vars/nrpe.yml
+  tags:
+    - setup
+    
