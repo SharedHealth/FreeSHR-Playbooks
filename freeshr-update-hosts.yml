@@ -1,5 +1,0 @@
----
-- hosts: freeshr-update-server
-  sudo: True
-  roles:
-    - { role: freeshr-update }

@@ -1,5 +1,0 @@
----
-- hosts: patient-journal-server
-  sudo: True
-  roles:
-    - { role: patient-journal }

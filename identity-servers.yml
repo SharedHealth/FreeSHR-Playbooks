@@ -1,6 +1,0 @@
----
-- hosts: identity-server
-  sudo: True
-  roles:
-    - { role: identity-server }
-

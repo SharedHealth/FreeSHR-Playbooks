@@ -1,8 +1,0 @@
----
-
-- hosts: ci
-  sudo: True
-  vars:
-    go_user: go
-  roles:
-   - role: ci
