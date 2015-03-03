@@ -1,5 +1,5 @@
 [shr]
-172.18.46.54 ansible_ssh_user=bdshr deployment_environment=showcase
+172.18.46.54 ansible_ssh_user=bdshr deployment_environment=showcase run_migrations=yes
 
 [freeshr-update-server]
 172.18.46.54 ansible_ssh_user=bdshr deployment_environment=showcase

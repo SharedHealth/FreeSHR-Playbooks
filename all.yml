@@ -5,7 +5,7 @@
     - { role: bdshr-server, tags: ['application'] }
   tags:
     - shr
-    
+
 - hosts: freeshr-update-server
   sudo: yes
   roles:

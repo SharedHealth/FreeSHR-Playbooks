@@ -32,6 +32,10 @@
     dest=/etc/default/bdshr
     mode=755
 
+- name: Apply migrations to leader node
+  shell: /opt/bdshr/bin/migrate.sh 
+  when: run_migrations == "yes"
+
 - name: Restart bdshr
   service: name=bdshr state=restarted
   sudo: true

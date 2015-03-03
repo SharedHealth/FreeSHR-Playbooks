@@ -1,0 +1,2 @@
+[shr]
+192.168.33.10 ansible_ssh_user=vagrant deployment_environment=dev run_migrations=yes
