@@ -1,6 +1,5 @@
 - hosts: shr
   sudo: yes
-  sudo_user: bdshr
   roles:
     - { role: cassandra, tags: ['infrastructure'] }
     - { role: bdshr-server, tags: ['application'] }
@@ -9,7 +8,6 @@
     
 - hosts: freeshr-update-server
   sudo: yes
-  sudo_user: bdshr
   roles:
     - { role: freeshr-update }
   tags:
@@ -17,7 +15,6 @@
 
 
 - hosts: mci-ui
-  sudo_user: bdshr
   sudo: yes
   roles:
     - { role: apache, tags: ['infrastructure'] }
@@ -33,7 +30,6 @@
 
 - hosts: mci-server
   sudo: yes
-  sudo_user: bdshr
   roles:
     - cassandra
     - mci-server
@@ -45,7 +41,6 @@
 
 - hosts: tr-server
   sudo: yes
-  sudo_user: bdshr
   vars:
     local_mysql_username: "{{ mysql_username }}"
     local_mysql_password: "{{ mysql_password }}"
@@ -57,7 +52,6 @@
 
 - hosts: tr-server
   sudo: yes
-  sudo_user: bdshr
   vars:
     config_home: /var/lib/bdshr-terminology-server/etc
   roles:
@@ -67,7 +61,6 @@
      
 - hosts: datasense
   sudo: yes
-  sudo_user: bdshr
   roles:
     - role: datasense-server
   tags:
@@ -75,7 +68,6 @@
 
 - hosts: identity-server
   sudo: yes
-  sudo_user: bdshr
   roles:
     - { role: identity-server }
   tags:
@@ -83,7 +75,6 @@
 
 - hosts: patient-journal-server
   sudo: yes
-  sudo_user: bdshr
   roles:
     - { role: patient-journal }
   tags:
