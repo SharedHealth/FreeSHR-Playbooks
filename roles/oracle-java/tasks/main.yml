@@ -1,24 +1,21 @@
 - name: Download Java
   command: "wget -q -O {{java_package}} --no-check-certificate --no-cookies --header 'Cookie:oraclelicense=accept-securebackup-cookie' {{download_url}} creates={{java_package}}"
-  sudo: True
 
   
 - name: Remove openJdk if exists
   yum: name={{ java_rpm_name }} state=absent
-  sudo: True
 
 - name: install oracle java rpm
   yum: name={{ java_package }} state=present
-  sudo: True
 
 - name: Make java available for system
   command: 'alternatives --install "/usr/bin/java" "java" "/usr/java/default/bin/java" 2000'
-  sudo: True
+
 
 - name: Make javac available for system
   command: 'alternatives --install "/usr/bin/javac" "javac" "/usr/java/default/bin/javac" 2000'
-  sudo: True
+
 
 - name: Make jar available for system
   command: 'alternatives --install "/usr/bin/jar" "jar" "/usr/java/default/bin/jar" 2000'
-  sudo: True
+
