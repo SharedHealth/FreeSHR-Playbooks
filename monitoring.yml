@@ -4,6 +4,7 @@
   sudo: True
   vars_files:
     - vars/nagios.yml
+    - group_vars/all
   roles:
    - role: nagios
 

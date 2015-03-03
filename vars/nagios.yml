@@ -265,4 +265,3 @@ dbpasswd: nagios
 
 ssmtp_mailhub: smtp.gmail.com:587
 ssmtp_auth_user: sharedhealthgroup@gmail.com
-ssmtp_auth_pass: <enter pass here>

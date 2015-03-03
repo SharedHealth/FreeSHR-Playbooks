@@ -1,8 +1,5 @@
 ---
 
-- name: Ensure that JVM is installed
-  yum: name=java-1.7.0-openjdk-devel state=latest
-
 - name: Install datastax repo
   copy:
     src=datastax.repo

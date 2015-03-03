@@ -1,6 +1,3 @@
-- name: Install openjdk
-  yum: name={{ open_jdk }} state=installed
-
 - name: Enable Logstash repository
   template: src=logstash_repo
             dest={{ logstash_yum_config }}

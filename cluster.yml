@@ -3,6 +3,9 @@
   hosts: cassandra_nodes
   roles:
     - cassandra-cluster
+  dependencies:
+    - { role: oracle-java }
+    - { role: bdshr-user }
 
 - name: "opscenter"
   hosts: 
@@ -10,3 +13,6 @@
     - opscenter_server
   roles:
     - opscenter
+  dependencies:
+    - { role: oracle-java }
+    - { role: bdshr-user }

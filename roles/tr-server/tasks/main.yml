@@ -1,8 +1,5 @@
 ---
 
-- name: Install open jdk
-  yum: name=java-1.7.0-openjdk-devel state=latest
-
 - name: Ensure tmp directory exists
   file: dest=/tmp state=directory
 

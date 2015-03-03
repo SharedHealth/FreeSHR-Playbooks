@@ -1,7 +1,4 @@
 ---
-- name: Install open jdk
-  apt: pkg=openjdk-7-jdk state=latest
-
 - name: add group "tomcat"
   group: name=tomcat
 

@@ -1,11 +1,18 @@
 - name: Download Java
   command: "wget -q -O {{java_package}} --no-check-certificate --no-cookies --header 'Cookie:oraclelicense=accept-securebackup-cookie' {{download_url}} creates={{java_package}}"
-
-- name: Remove openJdk if exists
-  yum: name=java-1.7.0-openjdk state=absent
   
+- name: Remove openJdk if exists
+  yum: name={{ java_rpm_name }} state=absent
+
 - name: install oracle java rpm
   yum: name={{ java_package }} state=present
+  when:
 
-- name: Make Java available for system
+- name: Make java available for system
   command: 'alternatives --install "/usr/bin/java" "java" "/usr/java/default/bin/java" 2000'
+
+- name: Make javac available for system
+  command: 'alternatives --install "/usr/bin/javac" "javac" "/usr/java/default/bin/javac" 2000'
+
+- name: Make jar available for system
+  command: 'alternatives --install "/usr/bin/jar" "jar" "/usr/java/default/bin/jar" 2000'
