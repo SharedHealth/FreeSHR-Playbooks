@@ -1,4 +1,4 @@
-[cassandra_nodes]
+[cassandra_node]
 172.18.46.16 ansible_ssh_port=22 ansible_ssh_user=bdshr 
 172.18.46.7 ansible_ssh_port=22 ansible_ssh_user=bdshr 
 172.18.46.15 ansible_ssh_port=22 ansible_ssh_user=bdshr

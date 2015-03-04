@@ -1,8 +1,26 @@
-- hosts: shr
+- name: "cassandra"
+  hosts: cassandra_node
+  roles:
+    - cassandra-cluster
+  vars_files:
+    - vars/cassandra.yml
+  tags:
+    - cassandra-cluster
+
+- name: "opscenter"
+  hosts: 
+    - cassandra_node
+    - opscenter_server
+  roles:
+    - opscenter
+  tags:
+    - opscenter
+
+- name: "shr"
+  hosts: shr
   sudo: yes
   roles:
-    - { role: cassandra, tags: ['infrastructure'] }
-    - { role: bdshr-server, tags: ['application'] }
+    - { role: bdshr-server }
   tags:
     - shr
 
@@ -31,7 +49,6 @@
 - hosts: mci-server
   sudo: yes
   roles:
-    - cassandra
     - mci-server
   vars:
     mci_home: "{{lookup('env', 'HOME')}}/projects/mci"
@@ -80,21 +97,6 @@
   tags:
     - patient-journal
 
-- name: "cassandra"
-  hosts: cassandra_nodes
-  roles:
-    - cassandra-cluster
-  tags:
-    - cassandra-cluster
-
-- name: "opscenter"
-  hosts: 
-    - cassandra_nodes
-    - opscenter_server
-  roles:
-    - opscenter
-  tags:
-    - opscenter
 
 - hosts: dhis
   sudo: yes
@@ -124,4 +126,4 @@
     - vars/nrpe.yml
   tags:
     - setup
-    
+

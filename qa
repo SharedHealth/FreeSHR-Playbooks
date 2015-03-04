@@ -1,3 +1,10 @@
+[cassandra_node]
+172.18.46.57 ansible_ssh_user=bdshr
+172.18.46.56 ansible_ssh_user=bdshr
+
+[cassandra_seed_node]
+172.18.46.56
+
 [shr]
 172.18.46.57 ansible_ssh_user=bdshr deployment_environment=qa run_migrations=yes
 

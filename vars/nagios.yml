@@ -86,12 +86,12 @@ nagios_services:
       hostgroup_name: shr-servers
       check_command: check_freeshr
       service_description: Check SHR Service
-      notifications_enabled: 0
+      notifications_enabled: 1
     - use: local-service
       hostgroup_name: mci-servers
       check_command: check_mci
       service_description: Check MCI Service
-      notifications_enabled: 0
+      notifications_enabled: 1
     - use: local-service
       hostgroup_name: identity-servers
       check_command: check_identityserver
@@ -101,7 +101,7 @@ nagios_services:
       hostgroup_name: patient-journal-servers
       check_command: check_patientjournal
       service_description: Check Patient Journal Service
-      notifications_enabled: 0
+      notifications_enabled: 1
 
       
 nagios_hosts:
@@ -264,4 +264,3 @@ dbuser: nagios
 dbpasswd: nagios
 
 ssmtp_mailhub: smtp.gmail.com:587
-ssmtp_auth_user: sharedhealthgroup@gmail.com
