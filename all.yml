@@ -2,7 +2,8 @@
   hosts: cassandra_node
   sudo: yes
   roles:
-    - cassandra-cluster
+    - { role: cassandra-cluster}
+    - { role: opscenter, tags: ['opscenter-agent'] }
   vars_files:
     - vars/cassandra.yml
   tags:
@@ -11,10 +12,9 @@
 - name: "opscenter"
   sudo: yes
   hosts: 
-    - cassandra_node
     - opscenter_server
   roles:
-    - opscenter
+    - { role: opscenter , tags: ['opscenter-server'] }
   tags:
     - opscenter
 
