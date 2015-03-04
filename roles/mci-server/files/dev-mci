@@ -17,4 +17,4 @@ export LR_URL=http://hrmtest.dghs.gov.bd/api/1.0/locations
 export IDENTITY_SERVER_BASE_URL=http://127.0.0.1:8080/userInfo/
 export LR_SYNC_FIXED_DELAY=30000
 export FR_CACHE_TTL=86400
-export AUDIT_LOG_SYNC_CRON_EXP=0/15 * * * * *
+export AUDIT_LOG_SYNC_DELAY=15000
