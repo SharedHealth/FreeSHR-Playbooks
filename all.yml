@@ -1,5 +1,6 @@
 - name: "cassandra"
   hosts: cassandra_node
+  sudo: yes
   roles:
     - cassandra-cluster
   vars_files:
@@ -8,6 +9,7 @@
     - cassandra
 
 - name: "opscenter"
+  sudo: yes
   hosts: 
     - cassandra_node
     - opscenter_server
