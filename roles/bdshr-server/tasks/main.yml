@@ -28,7 +28,8 @@
   sudo: true
 
 - name: Copy SHR properties
-  copy: src={{deployment_environment}}-bdshr
+  template:
+    src=bdshr.j2 
     dest=/etc/default/bdshr
     mode=755
 
