@@ -5,7 +5,7 @@
   vars_files:
     - vars/cassandra.yml
   tags:
-    - cassandra-cluster
+    - cassandra
 
 - name: "opscenter"
   hosts: 
