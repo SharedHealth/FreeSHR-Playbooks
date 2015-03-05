@@ -1,5 +1,0 @@
-export PATIENT_JOURNAL_PORT=8090
-export SHR_SERVER_BASE_URL=http://172.18.46.54:8081
-export IDENTITY_SERVER_URL=http://172.18.46.53:8080/loginForm
-export FACILITY_AUTH_TOKEN=9c83d71d41161cbc860380202e43d868ea2b8cc229ed84a2af2ac0818a14cfb4
-export FACILITY_SERVER_URL_PREFIX=http://hrmtest.dghs.gov.bd/api/1.0/facilities

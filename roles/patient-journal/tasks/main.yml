@@ -15,7 +15,7 @@
   sudo: true
   
 - name: Copy patient-journal properties
-  copy: src={{deployment_environment}}-patient-journal
+  template: src=patient-journal
     dest=/etc/default/patient-journal
     mode=755
 
