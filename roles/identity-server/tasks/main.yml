@@ -18,7 +18,7 @@
   copy: src=identityServer.jks dest={{ ansible_env.HOME | default('~') }}/identityServer.jks
   
 - name: Copy identity-server properties
-  copy: src={{deployment_environment}}-identity-server
+  template: src=identity-server
     dest=/etc/default/identity-server
     mode=755
 
