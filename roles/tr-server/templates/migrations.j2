@@ -6,7 +6,7 @@
     <changeSet id="BD-QA-1" author="balajin" context="setup">
         <comment>Prefix for url</comment>
         <sql>
-            update global_property set property_value='{{ rest_uri_prefix }}' where property='webservices.rest.uriPrefix';
+            update global_property set property_value='https://{{ groups['tr-server'][0] }}:9080/openmrs/' where property='webservices.rest.uriPrefix';
         </sql>
     </changeSet>
 
