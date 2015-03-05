@@ -25,7 +25,7 @@
   notify: Start mci
 
 - name: Copy properties
-  copy: src={{deployment_environment}}-mci
+  template: src=mci.j2
     dest=/etc/default/mci
     mode=755
   sudo: true
