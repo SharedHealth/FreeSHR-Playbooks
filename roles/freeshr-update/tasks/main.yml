@@ -15,7 +15,7 @@
   sudo: true
 
 - name: Copy freeshr-update properties
-  copy: src={{deployment_environment}}-freeshr-update
+  template: src=freeshr-update
     dest=/etc/default/freeshr-update
     mode=755
 

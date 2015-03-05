@@ -3,7 +3,7 @@
 172.18.46.56 ansible_ssh_user=bdshr
 
 [cassandra_seed_node]
-172.18.46.56
+172.18.46.57
 
 [opscenter-server]
 172.18.46.55
