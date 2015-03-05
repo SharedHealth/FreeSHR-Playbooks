@@ -1,2 +1,23 @@
+[local:children]
+
 [shr]
-192.168.33.10 ansible_ssh_user=vagrant deployment_environment=dev run_migrations=yes
+192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[datasense]
+192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[mci-server]
+192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[tr-server]
+192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[identity-server]
+192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[local:children]
+shr
+mci-server
+tr-server
+datasense
+identity-server

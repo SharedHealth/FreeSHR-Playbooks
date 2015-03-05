@@ -47,7 +47,7 @@
   sudo: true
 
 - name: Copy Datasense properties
-  copy: src={{deployment_environment}}-datasense
+  template: src=datasense.j2
     dest=/etc/default/datasense
     mode=755
 

@@ -3,7 +3,7 @@
   copy: src='mysql-connector-java-5.0.8-bin.jar' dest=/tmp mode=755
 
 - name: Copy migrations
-  template: src={{deployment_environment}}-migrations.j2 dest=/tmp/{{deployment_environment}}-migrations.xml mode=755
+  template: src=migrations.j2 dest=/tmp/migrations.xml mode=755
 
 - name: Copy httplib2
   copy: src=httplib2-0.8 dest=/tmp mode=755
@@ -25,7 +25,7 @@
   when: rpm_check_liquibase.rc == 1
 
 - name: Clear checksums
-  shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug clearCheckSums
+  shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug clearCheckSums
 
 - name: Apply migrations
-  shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/{{deployment_environment}}-migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug update
+  shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug update
