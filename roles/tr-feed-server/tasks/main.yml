@@ -19,7 +19,7 @@
   file: dest={{config_home}} state=directory
 
 - name: Copy terminology server properties file
-  copy: src={{deployment_environment}}-tr-server.properties
+  template: src=tr-server.properties.j2
     dest={{config_home}}/tr-server.properties
     mode=755 owner=root
 
