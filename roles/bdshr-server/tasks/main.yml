@@ -91,5 +91,4 @@
 - name: Start bdshr
   service: name=bdshr state=restarted
   sudo_user : "{{ sharedhealth_user }}"
-  sudo: yes
   tags: run_bdshr

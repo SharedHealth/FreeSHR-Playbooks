@@ -1,4 +1,5 @@
 ---
 dependencies:
+  - { role: shr-tools}
   - { role: oracle-java }
   - { role: sharedhealth-user }
