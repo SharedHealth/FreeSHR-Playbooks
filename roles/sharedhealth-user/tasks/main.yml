@@ -1,0 +1,15 @@
+- name: Create group
+  user:
+    name={{ sharedhealth_group }}
+    system=yes
+    state=present
+  sudo: yes
+
+- name: Create user
+  user:
+    name={{ sharedhealth_user }}
+    createhome=no
+    group={{ sharedhealth_group }}
+    system=yes
+    state=present 
+  sudo: yes
