@@ -5,3 +5,4 @@
     - htop
     - iftop
   sudo: yes
+  ignore_errors: yes
