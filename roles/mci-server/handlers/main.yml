@@ -1,4 +1,0 @@
-
-- name: Start mci
-  service: name=mci state=restarted
-  sudo: true

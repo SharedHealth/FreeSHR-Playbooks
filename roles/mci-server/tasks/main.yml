@@ -22,14 +22,16 @@
 - name: Install mci
   shell: yum install -y /tmp/mci.rpm
   sudo: true
-  notify: Start mci
 
 - name: Copy properties
   template: src=mci.j2
     dest=/etc/default/mci
     mode=755
   sudo: true
-  notify: Start mci
+
+- name: Apply migrations to leader node
+  shell: /opt/mci/bin/migrate.sh 
+  when: run_migrations == "yes"
 
 - name: Start cassandra
   service: name=cassandra state=started
@@ -47,4 +49,8 @@
 
 - name: save iptables
   command: service iptables save
+  sudo: true
+
+- name: Restart mci
+  service: name=mci state=restarted
   sudo: true

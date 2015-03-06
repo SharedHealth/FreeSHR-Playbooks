@@ -1,5 +1,12 @@
 [local:children]
 
+[cassandra_node]
+192.168.33.19 ansible_ssh_user=bdshr
+
+[cassandra_seed_node]
+192.168.33.19
+
+
 [shr]
 192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
@@ -7,17 +14,19 @@
 192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [mci-server]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [tr-server]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [identity-server]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [local:children]
 shr
 mci-server
 tr-server
 datasense
+cassandra_node
+cassandra_seed_node
 identity-server
