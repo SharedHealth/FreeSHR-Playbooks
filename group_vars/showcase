@@ -2,3 +2,9 @@ datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
 datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
 datasense_circumstances_of_death_uuid: de50c394-1229-4516-8e25-6d4936fbf94d
 datasense_cause_of_death_uuid: bbf127cf-2649-4907-944a-23740fcfb335
+
+
+sharedhealth_group: sharedhealth
+sharedhealth_user: sharedhealth
+bdshr_install_dir: /opt/bdshr
+bdshr_log_dir: /var/log/bdshr

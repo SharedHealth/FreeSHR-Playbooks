@@ -1,4 +1,4 @@
 ---
 dependencies:
   - { role: oracle-java }
-  - { role: bdshr-user }
+  - { role: sharedhealth-user }

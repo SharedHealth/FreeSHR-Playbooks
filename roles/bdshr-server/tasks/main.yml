@@ -1,56 +1,95 @@
 ---
 - name: Clean existing rpm
   shell: rm -f /tmp/bdshr.rpm
-  sudo: true
 
 - name: Clean existing rpm
   shell: rm -f /tmp/shrid.rpm
-  sudo: true
-  
-# - name: copy keystore
-#   copy: src=shrid.cer dest=/tmp/shrid.cer
-#   sudo: true
-  
-# - name: install identity server certificate to java keystore
-#   shell: keytool -import -keystore {{ ansible_env.JAVA_HOME | default('/usr/java/default') }}/lib/security/cacerts -alias shrid -file /tmp/shrid.cer -storepass changeit -noprompt
-#   sudo: true
-#   ignore_errors: true
   
 - name: Copy rpm
   copy: src=/tmp/shr-0.1-1.noarch.rpm dest=/tmp/bdshr.rpm mode=755
 
+- name: Stop bdshr
+  service: name=bdshr state=stopped
+  sudo_user : "{{ sharedhealth_user }}"
+  sudo: yes
+  ignore_errors: yes
+  
 - name: Remove bdshr
   yum: name=shr-0.1-1.noarch state=absent
-  sudo: true
 
 - name: Install bdshr
   yum: name=/tmp/bdshr.rpm state=present
-  sudo: true
 
+- name: Allow app dir access to run user
+  file:
+    path={{ bdshr_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ bdshr_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    
 - name: Copy SHR properties
   template:
     src=bdshr.j2 
     dest=/etc/default/bdshr
     mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Permissions to defaults
+  file:
+    path=/etc/default/bdshr
+    src={{ bdshr_install_dir }}/etc/bdshr
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Permissions to service bdshr
+  file:
+    path=/etc/init.d/bdshr
+    src={{ bdshr_install_dir }}/bin/bdshr
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ bdshr_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
 
 - name: Apply migrations to leader node
-  shell: /opt/bdshr/bin/migrate.sh 
+  shell: "{{ bdshr_install_dir }}/bin/migrate.sh"
   when: run_migrations == "yes"
-
+  remote_user: "{{ sharedhealth_user }}"
+  
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
-  sudo: true
 
 - name: Allow bdshr port through firewall
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 8081 -j ACCEPT -m comment --comment "BDSHR"
-  sudo: true
   when: iptablesrules.stdout.find("BDSHR") == -1
 
 - name: save iptables
   command: service iptables save
-  sudo: true
 
-- name: Restart bdshr
+- name: Start bdshr
   service: name=bdshr state=restarted
-  sudo: true
+  sudo_user : "{{ sharedhealth_user }}"
+  sudo: yes
+  tags: run_bdshr

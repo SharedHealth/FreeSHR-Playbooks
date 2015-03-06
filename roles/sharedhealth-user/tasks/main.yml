@@ -11,5 +11,6 @@
     createhome=no
     group={{ sharedhealth_group }}
     system=yes
-    state=present 
+    state=present
+    shell=/bin/bash
   sudo: yes
