@@ -7,7 +7,7 @@
            state=present
 
 - name: Install logstash forwarder
-  yum: name=logstash_forwarder
+  yum: name=logstash-forwarder
        state=latest
 
 - name: Copy Logstash Output Configuration

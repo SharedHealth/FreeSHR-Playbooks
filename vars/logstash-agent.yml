@@ -1,5 +1,5 @@
 ---
-logstash_repo_key: "http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
+logstash_repo_key: "https://packages.elasticsearch.org/GPG-KEY-elasticsearch"
 logstash_yum_config: "/etc/yum.repos.d/logstashforwarder.repo"
 
 log_files:

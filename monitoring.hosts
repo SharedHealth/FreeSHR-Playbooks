@@ -16,7 +16,7 @@
 172.18.46.15 ansible_ssh_port=22 ansible_ssh_user=bdshr
 172.18.46.16 ansible_ssh_port=22 ansible_ssh_user=bdshr
 
-[logstash_hosts]
+[logstash_host]
 #172.18.46.226 ansible_ssh_port=22 ansible_ssh_user=scaleworks
 192.168.33.13 ansible_ssh_port=22 ansible_ssh_user=vagrant
 

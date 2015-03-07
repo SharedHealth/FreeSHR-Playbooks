@@ -118,13 +118,16 @@
 - hosts: all
   sudo: yes
   roles:
-    - { role: oracle-java}
-    - { role: bdshr-user}
-    - { role: nagios-agent}
+    - { role: oracle-java } 
+    - { role: bdshr-user }
+    - { role: sharedhealth-user }
+    - { role: nagios-agent }
+    - { role: logstash-agent }
   vars_files:
     - group_vars/all
     - vars/java.yml
     - vars/nrpe.yml
+    - vars/logstash-agent.yml
   tags:
     - setup
 

@@ -1,6 +1,6 @@
 {
   "network": {
-    "servers": [ "{{ hostvars[groups['logstash-servers'][0]]['ansible_eth0']['ipv4']['address'] }}:5000" ],
+    "servers": [ "{{ groups['logstash-server'][0] }}:5000" ],
     "timeout": 15,
   },
   "files": {{ log_files | to_json }}

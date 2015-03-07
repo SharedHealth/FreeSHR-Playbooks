@@ -32,6 +32,10 @@
 [patient-journal-server]
 172.18.46.56 ansible_ssh_user=bdshr
 
+[logstash-server]
+172.18.46.2 ansible_ssh_user=bdshr
+
+
 [qa:children]
 cassandra_seed_node
 cassandra_node
