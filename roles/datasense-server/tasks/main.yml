@@ -32,7 +32,7 @@
   yum: name=datasense-0.1-1 state=absent
 
 - name: Clean existing dhis_config folder
-  shell: rm -rf /opt/datasense/lib/dhis_config
+  shell: rm -rf {{ datasense_install_dir}}/lib/dhis_config
   
 - name: Install datasense
   yum: name=/tmp/datasense.rpm state=present
@@ -72,6 +72,15 @@
     group={{ sharedhealth_group }}
     follow=yes
 
+- name: Allow dhis_config access to sharedhealth
+  file:
+    path={{ datasense_install_dir }}/lib/dhis_config
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
 - name: Permissions to service bdshr
   file:
     path=/etc/init.d/datasense
@@ -93,3 +102,4 @@
   service: name=datasense state=restarted enabled=yes
   sudo_user : "{{ sharedhealth_user }}"
   tags: run_datasense
+
