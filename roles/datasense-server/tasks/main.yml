@@ -1,30 +1,25 @@
 ---
 - name: Clean existing
   shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
-  sudo: true
 
 - name: Copy rpm
-  sudo: true
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
 
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
-  sudo: true
+
 
 - name: Allow datasense port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8082 -j ACCEPT -m comment --comment "datasense"
-  sudo: true
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ datasense_port }} -j ACCEPT -m comment --comment "datasense"
   when: iptablesrules.stdout.find("datasense") == -1
 
 - name: save iptables
   command: service iptables save
   when: iptablesrules.stdout.find("datasense") == -1
-  sudo: true
   
 - name: Install MySQL
   yum: name={{ item }} state=present
-  sudo: true
   with_items:
     - MySQL-python
     - mysql
@@ -32,28 +27,69 @@
 
 - name: Create Datasense datasense
   mysql_db: name=datasense state=present login_user=root login_password=password
-  sudo: true
 
 - name: Remove existing installations if any
   yum: name=datasense-0.1-1 state=absent
-  sudo: true
 
 - name: Clean existing dhis_config folder
   shell: rm -rf /opt/datasense/lib/dhis_config
-  sudo: true
   
 - name: Install datasense
   yum: name=/tmp/datasense.rpm state=present
-  sudo: true
+
+- name: Allow app dir access to run user
+  file:
+    path={{ datasense_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ datasense_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
 
 - name: Copy Datasense properties
   template: src=datasense.j2
     dest=/etc/default/datasense
     mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
 
 - name: Unzip dhis_config
-  unarchive: src={{ dhis_config_zip }} dest=/opt/datasense/lib
+  unarchive:
+    src={{ datasense_dhis_config_zip }}
+    dest=/opt/datasense/lib
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+
+- name: Permissions to service bdshr
+  file:
+    path=/etc/init.d/datasense
+    src={{ datasense_install_dir }}/bin/datasense
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/datasense
+    src={{ datasense_install_dir }}/datasense
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
 
 - name: Start datasense
-  service: name=datasense state=started
-  sudo: true
+  service: name=datasense state=started enabled=yes
+  sudo_user : "{{ sharedhealth_user }}"
+  tags: run_datasense
