@@ -8,3 +8,7 @@ sharedhealth_group: sharedhealth
 sharedhealth_user: sharedhealth
 bdshr_install_dir: /opt/bdshr
 bdshr_log_dir: /var/log/bdshr
+bdshr_port: 8081
+bdshr_install_dir: /opt/mci
+bdshr_log_dir: /var/log/mci
+mci_port: 8081

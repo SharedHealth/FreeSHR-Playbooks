@@ -1,52 +1,79 @@
 ---
 - name: Clean existing
   shell: rm -f /tmp/mci.rpm
-  sudo: true
 
 - name: Copy rpm
   copy: src='{{item}}' dest=/tmp/mci.rpm mode=755
   with_fileglob:
     - "{{rpm}}"
 
-- name: Check for existing installations
-  shell: rpm -q mci-0.1-1
-  register: mci_installed
-  ignore_errors: yes
-  sudo: true
-
 - name: Remove existing installation if any
-  shell: yum remove -y mci-0.1-1
-  when: mci_installed.rc == 0
-  sudo: true
+  yum: name=mci-0.1-1.noarch state=absent
 
 - name: Install mci
-  shell: yum install -y /tmp/mci.rpm
-  sudo: true
+  yum: name=/tmp/mci.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ mci_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Allow log dir access to run user
+  file:
+    path={{ mci_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
 
 - name: Copy properties
   template: src=mci.j2
     dest=/etc/default/mci
     mode=755
-  sudo: true
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service mci
+  file:
+    path=/etc/init.d/mci
+    src={{ mci_install_dir }}/bin/mci
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/mci
+    src={{ mci_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
 
 - name: Apply migrations to leader node
-  shell: /opt/mci/bin/migrate.sh 
+  shell: "{{ mci_install_dir }}/bin/migrate.sh"
   when: run_migrations == "yes"
 
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
-  sudo: true
 
 - name: Allow mci port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8081 -j ACCEPT -m comment --comment "MCI"
-  sudo: true
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_port }} -j ACCEPT -m comment --comment "MCI"
   when: iptablesrules.stdout.find("MCI") == -1
 
 - name: save iptables
   command: service iptables save
-  sudo: true
 
 - name: Restart mci
   service: name=mci state=restarted
-  sudo: true
+  sudo_user : "{{ sharedhealth_user }}"
+  tags: run_mci
+
