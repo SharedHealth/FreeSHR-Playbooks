@@ -84,7 +84,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/datasense
-    src={{ datasense_install_dir }}/datasense
+    src={{ datasense_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
