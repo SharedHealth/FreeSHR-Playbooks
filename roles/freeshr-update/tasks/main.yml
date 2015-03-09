@@ -41,7 +41,7 @@
 - name: Permissions to service freeshr-update
   file:
     path=/etc/init.d/freeshr-update
-    src={{ bdshr_install_dir }}/bin/freeshr-update
+    src={{ freeshr_update_install_dir }}/bin/freeshr-update
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -50,7 +50,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/bdshr
-    src={{ bdshr_install_dir }}/var
+    src={{ freeshr_update_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link

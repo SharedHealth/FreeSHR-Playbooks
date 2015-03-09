@@ -18,3 +18,5 @@ datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
 datasense_circumstances_of_death_uuid: de50c394-1229-4516-8e25-6d4936fbf94d
 datasense_cause_of_death_uuid: bbf127cf-2649-4907-944a-23740fcfb335
 
+freeshr_update_install_dir: /opt/freeshr-update
+freeshr_update_log_dir: /var/log/freeshr-update
