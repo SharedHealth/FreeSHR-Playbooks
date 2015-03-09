@@ -14,9 +14,6 @@
   yum: name=/tmp/identity-server.rpm state=present
   sudo: true
 
-- name: copy java keystore
-  copy: src=identityServer.jks dest={{ ansible_env.HOME | default('~') }}/identityServer.jks
-  
 - name: Copy identity-server properties
   template: src=identity-server
     dest=/etc/default/identity-server
