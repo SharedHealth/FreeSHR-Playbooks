@@ -90,6 +90,6 @@
     state=link
 
 - name: Start datasense
-  service: name=datasense state=started enabled=yes
+  service: name=datasense state=restarted enabled=yes
   sudo_user : "{{ sharedhealth_user }}"
   tags: run_datasense
