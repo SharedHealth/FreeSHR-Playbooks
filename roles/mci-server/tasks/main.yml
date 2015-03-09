@@ -72,8 +72,9 @@
 - name: save iptables
   command: service iptables save
 
-- name: Restart mci
-  service: name=mci state=restarted enabled=yes
+- name: Restart
+  service: name=mci state=restarted
+  command: service mci start
   sudo_user : "{{ sharedhealth_user }}"
   tags: run_mci
 
