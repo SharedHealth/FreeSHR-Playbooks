@@ -8,3 +8,6 @@
   rpm_key:
     key: "{{ epel_repo_gpg_key_url }}"
     state: present
+
+- name: Install libselinux-python
+  yum: name=libselinux-python state=present

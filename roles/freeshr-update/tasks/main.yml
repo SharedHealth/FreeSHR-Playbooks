@@ -1,24 +1,61 @@
 ---
 - name: Clean existing rpm
   shell: rm -f /tmp/freeshr-update.rpm
-  sudo: true
   
 - name: Copy rpm
   copy: src=/tmp/freeshr-update-0.1-1.noarch.rpm dest=/tmp/freeshr-update.rpm mode=755
 
 - name: Remove freeshr-update
   yum: name=freeshr-update-0.1-1.noarch state=absent
-  sudo: true
 
 - name: Install freeshr-update
   yum: name=/tmp/freeshr-update.rpm state=present
-  sudo: true
+
+- name: Allow app dir access to run user
+  file:
+    path={{ freeshr_update_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ freeshr_update_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
 
 - name: Copy freeshr-update properties
   template: src=freeshr-update
     dest=/etc/default/freeshr-update
     mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service freeshr-update
+  file:
+    path=/etc/init.d/freeshr-update
+    src={{ bdshr_install_dir }}/bin/freeshr-update
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ bdshr_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
 
 - name: Restart freeshr-update
   service: name=freeshr-update state=restarted
-  sudo: true
+  sudo_user: "{{ sharedhealth_user}}"

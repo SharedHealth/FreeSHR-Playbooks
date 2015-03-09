@@ -123,11 +123,10 @@
     - { role: bdshr-user }
     - { role: sharedhealth-user }
     - { role: nagios-agent }
-    - { role: logstash-agent }
+  #  - { role: logstash-agent }
     - { role: shr-tools }
   vars_files:
     - group_vars/all
-    - vars/java.yml
     - vars/nrpe.yml
     - vars/logstash-agent.yml
   tags:
