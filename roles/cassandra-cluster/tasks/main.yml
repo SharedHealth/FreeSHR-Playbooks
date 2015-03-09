@@ -5,10 +5,25 @@
     owner=root group=root mode=0644
   sudo: yes
 
-- name: Install jna
-  yum: name=jna state=present
-  sudo: yes
+- name: Downlaod jna
+  get_url:
+    url={{ cassandra_jna_download_url }}
+    dest=/usr/share/cassandra/lib/jna.jar
+    owner=cassandra group=cassandra mode=0755
+    
+    
+- name: Update security conf for jna
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "* - memlock unlimited" }
+    - { line: "* - nofile 100000" }
+    - { line: "* - nproc 32768" }
+    - { line: "* - as unlimited" }
 
+    
+  
 - name: Install cassandra
   yum: name=dsc20 state=present
   sudo: yes
@@ -68,11 +83,15 @@
 - name: delete system data
   command: rm -rf /var/lib/cassandra/data/system/*
   sudo: yes
-
+  
 - name: copy config
   template: src=cassandra.yaml dest=/etc/cassandra/conf/
   sudo: yes
+  tags:
+    - copy-config
 
+
+    
 # - name: set hostname/ip for JMX
 #   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
 #   sudo: yes

@@ -21,3 +21,4 @@ datasense_cause_of_death_uuid: 9651ea62-02d6-4049-a186-3b4e0622bccb
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 
+cassandra_jna_download_url: https://maven.java.net/content/repositories/releases/net/java/dev/jna/jna/4.1.0/jna-4.1.0.jar
