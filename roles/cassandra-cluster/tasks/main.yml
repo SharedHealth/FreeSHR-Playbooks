@@ -82,7 +82,7 @@
 #   sudo: yes
 
 - name: start cassandra
-  service: name=cassandra state=started
+  service: name=cassandra state=started enabled=yes
   sudo: yes
 
 #  set /etc/security/limits.d/90-nproc.conf -> * - nproc 32768
