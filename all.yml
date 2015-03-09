@@ -118,11 +118,13 @@
 - hosts: all
   sudo: yes
   roles:
+    - { role: yum-repos }
     - { role: oracle-java } 
     - { role: bdshr-user }
     - { role: sharedhealth-user }
     - { role: nagios-agent }
     - { role: logstash-agent }
+    - { role: shr-tools }
   vars_files:
     - group_vars/all
     - vars/java.yml
