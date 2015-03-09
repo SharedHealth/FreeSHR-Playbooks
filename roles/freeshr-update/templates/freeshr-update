@@ -1,6 +1,6 @@
 export MCI_SCHEME=http
 export MCI_HOST={{ groups['mci-server'][0] }}
-export MCI_PORT=8081
+export MCI_PORT={{ mci_port }}
 export MCI_USER=shr
 export MCI_PASSWORD=P@ssword
 export CASSANDRA_KEYSPACE=freeshr
