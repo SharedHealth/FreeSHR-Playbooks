@@ -1,7 +1,6 @@
 - name: Install packages
   yum: name={{ item }} state=latest
   with_items:
-    - python-software-properties
     - wget
     - curl
     - ntp
@@ -13,12 +12,12 @@
 - name: download go agent
   get_url:
     url=http://download.go.cd/gocd-rpm/go-agent-{{ go_server_version}}.noarch.rpm
-    dest=/tmp/go-server-{{ go_server_version}}.noarch.rpm
+    dest=/tmp/go-agent-{{ go_server_version}}.noarch.rpm
 
 - name: install go agent
   yum: name=/tmp/go-agent-{{ go_server_version}}.noarch.rpm state=present
 
-- name: start go server
+- name: start go agent
   service: name=go-agent enabled=yes state=started
 
     

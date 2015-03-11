@@ -1,3 +1,5 @@
 go_server_version: 14.4.0-1356
 freeshr_playbook_dir: /opt/playbooks
 go_server_admin: bdshr
+go_gradle_version: 2.3
+go_maven_version: 3.2.5

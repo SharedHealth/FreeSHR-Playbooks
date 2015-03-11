@@ -1,14 +1,14 @@
 - name: Download Maven
   command: >
-    wget http://apache.rediris.es/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz 
+    wget http://apache.rediris.es/maven/maven-3/{{ go_maven_version }}/binaries/apache-maven-{{ go_maven_version }}-bin.tar.gz 
     chdir=/tmp 
-    creates=/tmp/apache-maven-{{ maven_version }}-bin.tar.gz
+    creates=/tmp/apache-maven-{{ go_maven_version }}-bin.tar.gz
 
 - name: Unarchive the compressed Maven binaries
-  unarchive: "copy=no src=/tmp/apache-maven-{{ maven_version }}-bin.tar.gz dest=/usr/local creates=/usr/local/apache-maven-{{ maven_version }}"
+  unarchive: "copy=no src=/tmp/apache-maven-{{ go_maven_version }}-bin.tar.gz dest=/usr/local creates=/usr/local/apache-maven-{{ go_maven_version }}"
 
 - name: Update the symbolic link to the Maven install
-  file: "path=/usr/local/maven src=/usr/local/apache-maven-{{ maven_version }} state=link force=yes"
+  file: "path=/usr/local/maven src=/usr/local/apache-maven-{{ go_maven_version }} state=link force=yes"
 
 - name: Set M2_HOME environment variable
   lineinfile: dest=/etc/default/go-agent regexp='^M2_HOME.*' line='M2_HOME=/usr/local/maven' insertbefore='^PATH.*'
