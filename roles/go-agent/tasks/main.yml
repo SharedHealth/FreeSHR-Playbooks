@@ -1,0 +1,11 @@
+- include: agent.yml 
+  sudo: yes
+  tags: agent
+
+- include: maven.yml
+  sudo: yes
+  tags: maven
+  
+- include: gradle.yml
+  sudo: yes
+  tags: gradle

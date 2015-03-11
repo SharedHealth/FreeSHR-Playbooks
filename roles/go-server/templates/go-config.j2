@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="69">
+  <server artifactsdir="artifacts" siteUrl="http://{{ ansible_eth0['ipv4']['address'] }}" purgeStart="1.0" purgeUpto="2.0" commandRepositoryLocation="default" serverId="25028b9e-d3de-461e-92ae-f5d9efae4c12">
+    <security>
+      <passwordFile path="/var/go/htpasswd" />
+      <roles>
+	<role name="go_admin">
+	      <users>
+		<user name="bdshr"/>
+	      </users>
+	</role>
+      </roles>
+      <admins>
+        <user>{{ go_server_admin }}</user>
+      </admins>
+    </security>
+  </server>
+  <pipelines group="SharedHealth-Artifacts">
+    <authorization>
+      <view>
+        <role>go_admin</role>
+      </view>
+    </authorization>
+    <pipeline name="openmrs-module-bdshrclient" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/openmrs-module-bdshrclient.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>install</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="shrclient-omod/target/" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/openmrs-module-bdshrclient/$GO_PIPELINE_COUNTER/build/latest/build/shrclient-omod/target/shrclient-1.0-SNAPSHOT.omod &gt; /tmp/shrclient-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/shr-client.yml -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/qa --extra-vars "omod=/tmp/shrclient-1.0-SNAPSHOT.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/openmrs-module-bdshrclient/$GO_PIPELINE_COUNTER/build/latest/build/shrclient-omod/target/shrclient-1.0-SNAPSHOT.omod &gt; /tmp/shrclient-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/shr-client.yml -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/showcase --extra-vars "omod=/tmp/shrclient-1.0-SNAPSHOT.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="BDSHR" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/FreeSHR.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="defaultJob">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>clean</arg>
+                <arg>test</arg>
+                <arg>dist</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="shr/build/distributions/shr-0.1-1.noarch.rpm" />
+              <test src="shr/build/test-results" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/BDSHR/$GO_PIPELINE_COUNTER/build/latest/defaultJob/shr-0.1-1.noarch.rpm &gt; /tmp/shr-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t shr -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "all_rpms=/tmp/shr-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/BDSHR/$GO_PIPELINE_COUNTER/build/latest/defaultJob/shr-0.1-1.noarch.rpm &gt; /tmp/shr-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t shr -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "all_rpms=/tmp/shr-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="AtomFeedOmod">
+      <materials>
+        <git url="https://github.com/ICT4H/openmrs-atomfeed.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>install</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="**/*.omod" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="release">
+        <approval type="manual" />
+        <jobs>
+          <job name="default">
+            <tasks>
+              <fetchartifact pipeline="AtomFeedOmod" stage="build" job="build" srcdir="openmrs-atomfeed-omod">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="ls">
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="**/*.omod" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="TerminologyServer">
+      <materials>
+        <git url="https://github.com/SharedHealth/Terminology-Server.git" />
+        <pipeline pipelineName="AtomFeedOmod" stageName="release" materialName="AtomFeedOmod" />
+        <pipeline pipelineName="TerminologyServerFeed" stageName="Build" materialName="TerminologyServerFeed" />
+      </materials>
+      <stage name="build" cleanWorkingDir="true">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>dist</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="**/*.rpm" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <fetchartifact pipeline="AtomFeedOmod" stage="release" job="default" srcdir="openmrs-atomfeed-omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <fetchartifact pipeline="TerminologyServerFeed" stage="build" job="build" srcdir="omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="wget">
+                <arg>https://modules.openmrs.org/modulus/api/releases/1066/download/webservices.rest-2.6.9d2016.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars="mysql_username=root" --extra-vars="mysql_password=password" --extra-vars="rpm=/var/lib/go-agent/pipelines/TerminologyServer/build/distributions/bdshr-terminology-server*.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-feed-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars="atomfeedomod=/var/lib/go-agent/pipelines/TerminologyServer/target/openmrs-atomfeed*.omod" --extra-vars="restomod=/var/lib/go-agent/pipelines/TerminologyServer/*.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <fetchartifact pipeline="AtomFeedOmod" stage="release" job="default" srcdir="openmrs-atomfeed-omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <fetchartifact pipeline="TerminologyServerFeed" stage="build" job="build" srcdir="omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="wget">
+                <arg>https://modules.openmrs.org/modulus/api/releases/1066/download/webservices.rest-2.6.9d2016.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars="mysql_username=root" --extra-vars="mysql_password=password" --extra-vars="rpm=/var/lib/go-agent/pipelines/TerminologyServer/build/distributions/bdshr-terminology-server*.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-feed-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars="atomfeedomod=/var/lib/go-agent/pipelines/TerminologyServer/target/openmrs-atomfeed*.omod" --extra-vars="restomod=/var/lib/go-agent/pipelines/TerminologyServer/*.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="TerminologyServerFeed">
+      <materials>
+        <git url="https://github.com/SharedHealth/openmrs-module-freeshr_terminology_feed.git" />
+        <pipeline pipelineName="AtomFeedOmod" stageName="release" materialName="AtomFeedOmod" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>install</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="**/*.omod" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <fetchartifact pipeline="AtomFeedOmod" stage="release" job="default" srcdir="openmrs-atomfeed-omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="wget">
+                <arg>https://modules.openmrs.org/modulus/api/releases/1029/download/webservices.rest-2.5.e52eb0.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/TerminologyServerFeed/$GO_PIPELINE_COUNTER/build/latest/build/omod/target/freeshr-terminology-feed-1.0-SNAPSHOT.omod &gt; /tmp/freeshr-terminology-feed-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-feed-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars="omod=/tmp/freeshr-terminology-feed-1.0-SNAPSHOT.omod" --extra-vars="atomfeedomod=/var/lib/go-agent/pipelines/TerminologyServerFeed/target/openmrs-atomfeed*.omod" --extra-vars="restomod=/var/lib/go-agent/pipelines/TerminologyServerFeed/*.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <fetchartifact pipeline="AtomFeedOmod" stage="build" job="build" srcdir="openmrs-atomfeed-omod/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="wget">
+                <arg>https://modules.openmrs.org/modulus/api/releases/1029/download/webservices.rest-2.5.e52eb0.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/TerminologyServerFeed/$GO_PIPELINE_COUNTER/build/latest/build/omod/target/freeshr-terminology-feed-1.0-SNAPSHOT.omod &gt; /tmp/freeshr-terminology-feed-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t tr-feed-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars="omod=/tmp/freeshr-terminology-feed-1.0-SNAPSHOT.omod" --extra-vars="atomfeedomod=/var/lib/go-agent/pipelines/TerminologyServerFeed/target/openmrs-atomfeed*.omod" --extra-vars="restomod=/var/lib/go-agent/pipelines/TerminologyServerFeed/*.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="openmrs-module_terminology-atomfeed-client" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/openmrs-module-terminology_atomfeed_client.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>install</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="**/*.omod" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa" fetchMaterials="false">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/openmrs-module_terminology-atomfeed-client/$GO_PIPELINE_COUNTER/build/latest/build/target/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod &gt; /tmp/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/tr-feed-client.yml -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/qa --extra-vars "omod=/tmp/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/openmrs-module_terminology-atomfeed-client/$GO_PIPELINE_COUNTER/build/latest/build/target/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod &gt; /tmp/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/tr-feed-client.yml -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/showcase --extra-vars "omod=/tmp/openmrs-module-terminology_atomfeed_client-1.0-SNAPSHOT.omod"</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="bdshr-config">
+      <materials>
+        <git url="https://github.com/SharedHealth/bdshr-config.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="sh">
+                <arg>scripts/package.sh</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="target/bdshr_config.zip" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/qa {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/bahmni-server.yml --extra-vars="release_version=release-5.0" --extra-vars="config_file=/var/lib/go-agent/pipelines/bdshr-config/target/bdshr_config.zip" --tags deploy-config --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="Showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy -v -i {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/showcase {{ freeshr_playbook_dir }}/FreeSHR-Bahmni-Playbooks/bahmni-server.yml --extra-vars="release_version=release-5.0" --extra-vars="config_file=/var/lib/go-agent/pipelines/bdshr-config/target/bdshr_config.zip" --tags deploy-config --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="SHR-Datasense" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/SHR-Datasense.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>clean</arg>
+                <arg>test</arg>
+                <arg>dist</arg>
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="build/distributions/datasense-0.1-1.noarch.rpm" />
+              <artifact src="build/distributions/dhis_config.zip" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/SHR-Datasense/$GO_PIPELINE_COUNTER/build/latest/build/datasense-0.1-1.noarch.rpm &gt; /tmp/datasense-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/SHR-Datasense/$GO_PIPELINE_COUNTER/build/latest/build/dhis_config.zip &gt; /tmp/dhis_config.zip</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t datasense -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "rpm=/tmp/datasense-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/SHR-Datasense/$GO_PIPELINE_COUNTER/build/latest/build/datasense-0.1-1.noarch.rpm &gt; /tmp/datasense-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/SHR-Datasense/$GO_PIPELINE_COUNTER/build/latest/build/dhis_config.zip &gt; /tmp/dhis_config.zip</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t datasense -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "rpm=/tmp/datasense-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="PatientJournal" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/PatientJournal.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>clean</arg>
+                <arg>test</arg>
+                <arg>dist</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <tabs>
+              <tab name="Coverage" path="build/reports/cobertura/index.html" />
+            </tabs>
+            <artifacts>
+              <test src="build/reports/cobertura/" />
+              <artifact src="build/distributions/patient-journal-0.1-1.noarch.rpm" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/PatientJournal/$GO_PIPELINE_COUNTER/build/latest/build/patient-journal-0.1-1.noarch.rpm &gt; /tmp/patient-journal-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t patient-journal -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "all_rpms=/tmp/patient-journal-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/PatientJournal/$GO_PIPELINE_COUNTER/build/latest/build/patient-journal-0.1-1.noarch.rpm &gt; /tmp/patient-journal-0.1-1.noarch.rpm</arg>
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t patient-journal -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "all_rpms=/tmp/patient-journal-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="FreeSHRUpdate" isLocked="false">
+      <materials>
+        <git url="https://github.com/SharedHealth/freeshr-update.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>clean</arg>
+                <arg>test</arg>
+                <arg>dist</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="build/distributions/freeshr-update-0.1-1.noarch.rpm" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/FreeSHRUpdate/$GO_PIPELINE_COUNTER/build/latest/build/freeshr-update-0.1-1.noarch.rpm &gt; /tmp/freeshr-update-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t freeshr-update-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "all_rpms=/tmp/freeshr-update-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/FreeSHRUpdate/$GO_PIPELINE_COUNTER/build/latest/build/freeshr-update-0.1-1.noarch.rpm &gt; /tmp/freeshr-update-0.1-1.noarch.rpm</arg>
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t freeshr-update-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "all_rpms=/tmp/freeshr-update-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="MCI-Pipelines">
+    <pipeline name="mci-ui">
+      <materials>
+        <git url="https://github.com/SharedHealth/MCI-Admin.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="bin/build.sh">
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="build/mci-ui-1.0.tgz" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/mci-ui/$GO_PIPELINE_COUNTER/build/latest/build/mci-ui-1.0.tgz &gt; /tmp/mci-ui-1.0.tgz</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t mci-ui -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "dist=/tmp/mci-ui-1.0.tgz" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/mci-ui/$GO_PIPELINE_COUNTER/build/latest/build/mci-ui-1.0.tgz &gt; /tmp/mci-ui-1.0.tgz</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t mci-ui -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "dist=/tmp/mci-ui-1.0.tgz" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="mci">
+      <materials>
+        <git url="https://github.com/SharedHealth/MCI-Resigtry.git" />
+      </materials>
+      <stage name="build">
+        <jobs>
+          <job name="build">
+            <tasks>
+              <exec command="./gradlew">
+                <arg>clean</arg>
+                <arg>test</arg>
+                <arg>dist</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="mci-api/build/distributions/mci-0.1-1.noarch.rpm" />
+              <test src="mci-api/build/reports/cobertura" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="qa">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/mci/$GO_PIPELINE_COUNTER/build/latest/build/mci-0.1-1.noarch.rpm &gt; /tmp/mci-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t mci-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --extra-vars "rpm=/tmp/mci-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>curl -u {{ go_server_admin }}:{{ go_server_admin_password }} http://{{ ansible_eth0['ipv4']['address'] }}:8153/go/files/mci/$GO_PIPELINE_COUNTER/build/latest/build/mci-0.1-1.noarch.rpm &gt; /tmp/mci-0.1-1.noarch.rpm</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t mci-server -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --extra-vars "rpm=/tmp/mci-0.1-1.noarch.rpm" --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="smoke" />
+  <pipelines group="Setup">
+    <pipeline name="Cassandra-cluster-qa">
+      <materials>
+        <git url="git@github.com:SharedHealth/FreeSHR-Playbooks.git" autoUpdate="false" />
+      </materials>
+      <stage name="QA">
+        <approval type="manual" />
+        <jobs>
+          <job name="set_up">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t cassandra -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/qa --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="Cassandra-cluster-showcase">
+      <materials>
+        <git url="https://github.com/SharedHealth/FreeSHR-Playbooks.git" autoUpdate="false" />
+      </materials>
+      <stage name="showcase">
+        <approval type="manual" />
+        <jobs>
+          <job name="set_up">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>ansible-deploy {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/all.yml -t cassandra -i {{ freeshr_playbook_dir }}/FreeSHR-Playbooks/showcase --vault-password-file ~/.vaultpass.txt</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <environments>
+    <environment name="QA">
+      <environmentvariables>
+        <variable name="FACTER_deploy_bahmni_openerp">
+          <value>false</value>
+        </variable>
+        <variable name="FACTER_deploy_bahmni_openelis">
+          <value>true</value>
+        </variable>
+        <variable name="FACTER_implementation_name">
+          <value>bdshr</value>
+        </variable>
+        <variable name="bahmni_user_name">
+          <value>bahmni</value>
+        </variable>
+      </environmentvariables>
+      <agents>
+        <physical uuid="85a6a995-6274-4b0c-b68f-a147abb9a1b2" />
+      </agents>
+    </environment>
+    <environment name="Build">
+      <agents>
+        <physical uuid="85a6a995-6274-4b0c-b68f-a147abb9a1b2" />
+        <physical uuid="b29e12ae-1d55-4fdb-af0e-9fa0a997ab03" />
+      </agents>
+      <pipelines>
+        <pipeline name="AtomFeedOmod" />
+        <pipeline name="BDSHR" />
+        <pipeline name="bdshr-config" />
+        <pipeline name="Cassandra-cluster-qa" />
+        <pipeline name="Cassandra-cluster-showcase" />
+        <pipeline name="FreeSHRUpdate" />
+        <pipeline name="mci" />
+        <pipeline name="mci-ui" />
+        <pipeline name="openmrs-module-bdshrclient" />
+        <pipeline name="openmrs-module_terminology-atomfeed-client" />
+        <pipeline name="PatientJournal" />
+        <pipeline name="SHR-Datasense" />
+        <pipeline name="TerminologyServer" />
+        <pipeline name="TerminologyServerFeed" />
+      </pipelines>
+    </environment>
+    <environment name="smoke" />
+  </environments>
+  <agents>
+    <agent hostname="{{ inventory_hostname }}" ipaddress="{{ ansible_eth0['ipv4']['address'] }}" uuid="85a6a995-6274-4b0c-b68f-a147abb9a1b2" />
+  </agents>
+</cruise>
+
+

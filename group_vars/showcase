@@ -32,3 +32,5 @@ freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 
 cassandra_jna_download_url: https://maven.java.net/content/repositories/releases/net/java/dev/jna/jna/4.1.0/jna-4.1.0.jar
+
+patient_journal_port: 8090

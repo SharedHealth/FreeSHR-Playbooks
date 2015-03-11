@@ -1,0 +1,3 @@
+go_server_version: 14.4.0-1356
+freeshr_playbook_dir: /opt/playbooks
+go_server_admin: bdshr

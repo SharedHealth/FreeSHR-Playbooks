@@ -114,17 +114,27 @@
      - dhis
   tags:
     - dhis
-     
+
+- hosts: go-server
+  sudo: yes
+  roles:
+    - go-server
+  vars_files:
+    - vars/go.yml
+  tags:
+    - go-server
+  
 - hosts: all
   sudo: yes
   roles:
     - { role: yum-repos }
-    - { role: oracle-java } 
+#    - { role: oracle-java } 
     - { role: bdshr-user }
-    - { role: sharedhealth-user }
-    - { role: nagios-agent }
+#    - { role: sharedhealth-user }
+#    - { role: nagios-agent }
   #  - { role: logstash-agent }
     - { role: shr-tools }
+    - { role: selinux }
   vars_files:
     - group_vars/all
     - vars/nrpe.yml

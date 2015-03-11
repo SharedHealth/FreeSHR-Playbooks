@@ -19,11 +19,6 @@
   register: rpm_check_liquibase
   ignore_errors: True
 
-- name: Install epel repo
-  command:
-    yum install -y http://dl.fedoraproject.org/pub/epel/6/x86_64/liquibase-3.1.0-1.el6.noarch.rpm
-  when: rpm_check_liquibase.rc == 1
-
 - name: Clear checksums
   shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug clearCheckSums
 

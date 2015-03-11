@@ -29,7 +29,7 @@
 
   sudo: true
 - name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8090 -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ patient_journal_port }} -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
   sudo: true
   when: iptablesrules.stdout.find("PATIENT-JOURNAL") == -1
 

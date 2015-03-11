@@ -16,7 +16,7 @@ mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
-datasense_port: 8082
+datasense_port: 8083
 datasense_dhis_config_zip: /tmp/dhis_config.zip
 datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
 datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
@@ -31,3 +31,5 @@ freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 
 cassandra_jna_download_url: https://maven.java.net/content/repositories/releases/net/java/dev/jna/jna/4.1.0/jna-4.1.0.jar
+
+patient_journal_port: 8091

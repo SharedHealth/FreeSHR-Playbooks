@@ -1,0 +1,7 @@
+[go-server]
+172.18.46.168 ansible_ssh_user=bdshr
+
+[go-agent]
+172.18.46.168 ansible_ssh_user=bdshr
+
+
