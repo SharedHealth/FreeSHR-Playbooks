@@ -11,6 +11,8 @@ bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee27
 mci_install_dir: /opt/mci
 mci_log_dir: /var/log/mci
 mci_port: 8081
+mci_idp_client_id: 18554
+mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
@@ -20,6 +22,11 @@ datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
 datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
 datasense_circumstances_of_death_uuid: de50c394-1229-4516-8e25-6d4936fbf94d
 datasense_cause_of_death_uuid: bbf127cf-2649-4907-944a-23740fcfb335
+datasense_idp_client_id: 18552
+datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
+datasense_idp_client_email: rappasam@thoughtworks.com
+datasense_idp_client_password: thoughtworks
+
 
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
