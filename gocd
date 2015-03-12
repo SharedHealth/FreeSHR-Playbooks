@@ -1,7 +1,10 @@
 [go-server]
-172.18.46.168 ansible_ssh_user=bdshr
+#172.18.46.168 ansible_ssh_user=bdshr
 
 [go-agent]
-172.18.46.168 ansible_ssh_user=bdshr
+#172.18.46.168 ansible_ssh_user=bdshr
+172.18.46.166 ansible_ssh_user=bdshr
+172.18.46.167 ansible_ssh_user=scaleworks
+172.18.46.221 ansible_ssh_user=scaleworks
 
 
