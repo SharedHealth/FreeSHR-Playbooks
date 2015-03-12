@@ -37,7 +37,7 @@
   template: src=patient-journal
     dest=/etc/default/patient-journal
     mode=755
-    user={{ sharedhealth_user}}
+    owner={{ sharedhealth_user}}
     group={{ sharedhealth_group}}
 
 - name: Permissions to service patient-journal
