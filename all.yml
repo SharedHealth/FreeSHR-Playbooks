@@ -136,15 +136,15 @@
 - hosts: all
   sudo: yes
   tasks:
-    - name: copy bdshr keys to machine
-      authorized_key: user=bdshr key="{{ lookup('file', '/home/bdshr/.ssh/id_rsa.pub') }}"
+    - name: copy go keys to machine
+      authorized_key: user=bdshr key="{{ lookup('file', '/var/go/.ssh/id_rsa.pub') }}"
   tags:
-    - copy-bdshr-keys
+    - copy-go-keys
   
 - hosts: all
   sudo: yes
   roles:
-    - { role: yum-repos }
+    - { role: shr-base }
 #    - { role: oracle-java } 
     - { role: bdshr-user }
 #    - { role: sharedhealth-user }
