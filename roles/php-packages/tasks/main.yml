@@ -27,6 +27,7 @@
     - php-pear
     - php-xml
     - php-xmlrpc
+    - php-pecl-apcu
 
 - name:  Update Timezone
   lineinfile: dest=/etc/php.ini
