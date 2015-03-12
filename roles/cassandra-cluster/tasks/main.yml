@@ -5,13 +5,16 @@
     owner=root group=root mode=0644
   sudo: yes
 
+- name: Install cassandra
+  yum: name=dsc20 state=present
+  sudo: yes
+
 - name: Downlaod jna
   get_url:
     url={{ cassandra_jna_download_url }}
     dest=/usr/share/cassandra/lib/jna.jar
     owner=cassandra group=cassandra mode=0755
-    
-    
+
 - name: Update security conf for jna
   lineinfile:
     dest: /etc/security/limits.conf
@@ -21,12 +24,6 @@
     - { line: "* - nofile 100000" }
     - { line: "* - nproc 32768" }
     - { line: "* - as unlimited" }
-
-    
-  
-- name: Install cassandra
-  yum: name=dsc20 state=present
-  sudo: yes
 
 - name: Register iptable rules
   shell: iptables -L
