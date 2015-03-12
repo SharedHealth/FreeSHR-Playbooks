@@ -3,40 +3,38 @@
 172.18.46.166 ansible_ssh_user=bdshr
 
 [cassandra_seed_node]
-172.18.46.57
+172.18.46.167
 
 [opscenter-server]
-172.18.46.55
 
 [shr]
-172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.167 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.57 ansible_ssh_user=bdshr
+172.18.46.167 ansible_ssh_user=bdshr
 
 [mci-ui]
-172.18.46.56 ansible_ssh_user=bdshr api_uri_prefix=http://127.0.0.1:8081/api/v1 sso_endpoint=http://127.0.0.1:8080
+172.18.46.166 ansible_ssh_user=bdshr api_uri_prefix=http://127.0.0.1:8081/api/v1 sso_endpoint=http://127.0.0.1:8080
 
 [mci-server]
-172.18.46.56 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes
 
 [tr-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.166 ansible_ssh_user=bdshr
 
 [datasense]
-172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.221 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.166 ansible_ssh_user=bdshr
 
 [patient-journal-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.166 ansible_ssh_user=bdshr
 
 [logstash-server]
-172.18.46.2 ansible_ssh_user=bdshr
 
 
-[qa:children]
+[stg:children]
 cassandra_seed_node
 cassandra_node
 opscenter-server
