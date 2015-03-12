@@ -132,7 +132,8 @@
     - vars/go.yml
   tags:
     - go-agent
-- host: all
+
+- hosts: all
   sudo: yes
   tasks:
     - name: copy bdshr keys to machine
