@@ -6,6 +6,8 @@
 - name: Install current version
   unarchive: src='{{item}}' dest={{mci_ui_home}}
   sudo: true
+  owner=apache
+  group=apache
   with_fileglob:
     - "{{dist}}"
 
