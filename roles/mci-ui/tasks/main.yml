@@ -10,31 +10,8 @@
     - "{{dist}}"
 
 - name: Copy Configuration
-  copy:
-    src=parameters.yml
+  template: src=mci.j2
     dest={{mci_ui_home}}/app/config/parameters.yml
-
-- name:  Update MCI API Endpoint configuration
-  lineinfile: dest={{mci_ui_home}}/app/config/parameters.yml
-              regexp='^    api_end_point{{":"}} '
-              insertafter='^    api_end_point{{":"}} '
-              line='    api_end_point{{":"}} {{api_uri_prefix}}'
-              state=present
-
-- name:  Update Identity Server configuration
-  lineinfile: dest={{mci_ui_home}}/app/config/parameters.yml
-              regexp='^    identity_server_domain{{":"}} '
-              insertafter='^    identity_server_domain{{":"}} '
-              line='    identity_server_domain{{":"}} {{identity_server_domain}}'
-              state=present
-
-- name:  Update Identity Server Port configuration
-  lineinfile: dest={{mci_ui_home}}/app/config/parameters.yml
-              regexp='^    identity_server_port{{":"}} '
-              insertafter='^    identity_server_port{{":"}} '
-              line='    identity_server_port{{":"}} {{identity_server_port}}'
-              state=present
-
 
 - name: Re-Build Applicaiton
   shell: chdir={{mci_ui_home}} bin/deploy.sh
