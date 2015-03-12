@@ -13,15 +13,49 @@
 - name: Install patient-journal
   yum: name=/tmp/patient-journal.rpm state=present
   sudo: true
+
+- name: Allow app dir access to run user
+  file:
+    path={{ patient_journal_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ patient_journal_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
   
 - name: Copy patient-journal properties
   template: src=patient-journal
     dest=/etc/default/patient-journal
     mode=755
+    user={{ sharedhealth_user}}
+    group={{ sharedhealth_group}}
 
-- name: Restart patient-journal
-  service: name=patient-journal state=restarted
-  sudo: true
+- name: Permissions to service patient-journal
+  file:
+    path=/etc/init.d/patient-journal
+    src={{ patient_journal_install_dir }}/bin/patient-journal
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/patient-journal
+    src={{ patient_journal_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
 
 - name: Get IpTable rules
   shell: iptables -L
@@ -36,3 +70,8 @@
 - name: save iptables
   command: service iptables save
   sudo: true
+
+- name: Restart patient-journal
+  service: name=patient-journal state=restarted
+  sudo_user : "{{ sharedhealth_user }}"
+  tags: run_patient_journal
