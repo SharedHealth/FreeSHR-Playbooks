@@ -19,7 +19,4 @@
   sudo: true
 
 - name: Change owner to apache user
-  shell: chown -R apache:apache {{mci_ui_home}}{{item}}
-  with_items:
-    - /app/cache
-    - /app/logs
+  shell: chown -R apache:apache {{mci_ui_home}}
