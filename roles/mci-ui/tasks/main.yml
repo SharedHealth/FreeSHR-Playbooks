@@ -4,10 +4,8 @@
   file: path={{mci_ui_home}} state=directory
 
 - name: Install current version
-  unarchive: src='{{item}}' dest={{mci_ui_home}}
+  unarchive: src='{{item}}' dest={{mci_ui_home}} owner=apache group=apache
   sudo: true
-  owner=apache
-  group=apache
   with_fileglob:
     - "{{dist}}"
 
