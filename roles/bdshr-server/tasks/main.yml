@@ -81,6 +81,5 @@
   command: service iptables save
 
 - name: Start bdshr
-  service: name=bdshr state=restarted
-  sudo_user : "{{ sharedhealth_user }}"
+  service: name=bdshr state=restarted enabled=yes
   tags: run_bdshr
