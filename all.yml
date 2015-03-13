@@ -77,8 +77,6 @@
 
 - hosts: tr-server
   sudo: yes
-  vars:
-    config_home: /var/lib/bdshr-terminology-server/etc
   roles:
    - role: tr-feed-server
   tags:

@@ -1,27 +1,41 @@
 ---
 
 - name: Copy atom feed omod
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
+  copy:
+    src='{{ item }}'
+    dest={{ tr_server_install_dir }}/modules/
+    mode=0755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
   with_fileglob:
     - "{{omod}}"
 
 - name: Copy Rest services
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
+  copy:
+    src='{{ item }}'
+    dest={{ tr_server_install_dir}}/modules/
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group}}
   with_fileglob:
     - "{{restomod}}"
 
 - name: Copy terminology feed omod
-  copy: src='{{ item }}' dest=/var/lib/bdshr-terminology-server/modules/ mode=755 owner=root
+  copy:
+    src='{{ item }}'
+    dest={{ tr_server_install_dir}}/modules/
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group}}
   with_fileglob:
     - "{{atomfeedomod}}"
 
-- name: Ensure terminology server config directory exists
-  file: dest={{config_home}} state=directory
-
 - name: Copy terminology server properties file
   template: src=tr-server.properties.j2
-    dest={{config_home}}/tr-server.properties
-    mode=755 owner=root
+    dest={{ tr_server_install_dir}}/etc/tr-server.properties
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group}}
 
 - name: Restart terminology-server
-  service: name=bdshr-terminology-server state=restarted
+  service: name=bdshr-terminology-server state=restarted enabled=yes
