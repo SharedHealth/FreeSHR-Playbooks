@@ -57,5 +57,4 @@
 
 
 - name: Restart freeshr-update
-  service: name=freeshr-update state=restarted
-  sudo_user: "{{ sharedhealth_user}}"
+  service: name=freeshr-update state=restarted enabled=yes
