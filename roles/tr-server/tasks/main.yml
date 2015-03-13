@@ -55,7 +55,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/bdshr-terminology-server
-    src={{ tr_server_install_dir }}/var
+    src={{ tr_server_install_dir }}/run
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
