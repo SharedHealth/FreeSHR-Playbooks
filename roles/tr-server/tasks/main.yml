@@ -12,12 +12,56 @@
   sudo: True
   yum: name=bdshr-terminology-server state=removed
 
-- name: Install RPM
+- name: Install terminology server
   sudo: True
   yum: name=/tmp/bdshr-terminology-server.rpm state=present
 
+
+- name: Allow app dir access to run user
+  file:
+    path={{ tr_server_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Allow log dir access to run user
+  file:
+    path={{ tr_server_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Permissions to tr server config
+  file:
+    path=/etc/bdshr-terminology-server
+    src={{ tr_server_install_dir }}/etc
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Permissions to service bdshr
+  file:
+    path=/etc/init.d/bdshr-terminology-server
+    src={{ tr_server_install_dir }}/bin/bdshr
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr-terminology-server
+    src={{ bdshr_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
 - name: Restart terminology-server
-  service: name=bdshr-terminology-server state=restarted
+  service: name=bdshr-terminology-server state=restarted enabled=yes
 
 - name: Get IpTable rules
   shell: iptables -L
