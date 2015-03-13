@@ -72,6 +72,5 @@
   sudo: true
 
 - name: Restart patient-journal
-  service: name=patient-journal state=restarted
-  sudo_user : "{{ sharedhealth_user }}"
+  service: name=patient-journal state=restarted enabled=yes
   tags: run_patient_journal
