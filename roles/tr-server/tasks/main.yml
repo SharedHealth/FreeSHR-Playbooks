@@ -46,7 +46,7 @@
 - name: Permissions to service bdshr
   file:
     path=/etc/init.d/bdshr-terminology-server
-    src={{ tr_server_install_dir }}/bin/bdshr
+    src={{ tr_server_install_dir }}/bin/bdshr-terminology-server
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
