@@ -1,0 +1,15 @@
+---
+
+- name: Create Seed data directory
+  file: path={{ mci_seed_data_dir }} state=directory
+
+- name: Copy Scripts
+  copy: src='{{item}}' dest={{ mci_seed_data_dir }} mode=755
+  with_fileglob:
+    - "{{script}}"
+
+- name: Install MCI LR data
+  shell: "cqlsh -f {{ mci_seed_data_dir }}/{{ location_data }} {{ groups['cassandra_seed_node'][0] }} -k {{mci_keyspace}}"
+  when: run_migrations == "yes"
+
+

@@ -57,6 +57,13 @@
   tags:
     - mci-server
 
+- hosts: cassandra_seed_node
+  sudo: yes
+  roles:
+    - mci-seed-data
+  tags:
+    - mci-seed-data
+
 - hosts: tr-server
   sudo: yes
   vars:
