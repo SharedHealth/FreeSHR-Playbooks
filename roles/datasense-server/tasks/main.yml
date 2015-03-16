@@ -24,7 +24,9 @@
     - MySQL-python
     - mysql
     - mysql-server
-  
+
+- name: Start MySQL
+  service: name=mysqld state=started
 
 - name: Create Datasense datasense
   mysql_db: name=datasense state=present login_user=root login_password=password
