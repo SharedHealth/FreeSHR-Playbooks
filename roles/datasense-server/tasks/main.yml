@@ -28,6 +28,10 @@
 - name: Start MySQL
   service: name=mysqld state=started
 
+- name: Create Mysql login
+  command: /usr/bin/mysqladmin -u root password 'password'
+  sudo: yes
+
 - name: Create Datasense datasense
   mysql_db: name=datasense state=present login_user=root login_password=password
 
