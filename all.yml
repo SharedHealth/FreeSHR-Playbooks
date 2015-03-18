@@ -149,7 +149,7 @@
 - hosts: all
   sudo: yes
   roles:
-    - {role: selinux, selinux_state: permissive}
+    - {role: selinux, selinux_state: permissive, selinux_policy: targeted }
   tags:
     - selinux
     
@@ -159,13 +159,11 @@
     - { role: shr-base }
     - { role: bdshr-user }
     - { role: nagios-agent }
-    - { role: logstash-agent }
     - { role: shr-tools }
-    - { role: selinux }
+    - { role: selinux, selinux_state: permissive, selinux_policy: targeted }
   vars_files:
     - group_vars/all
     - vars/nrpe.yml
-    - vars/logstash-agent.yml
   tags:
     - setup
 
