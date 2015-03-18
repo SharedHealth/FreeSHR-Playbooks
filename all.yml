@@ -145,16 +145,21 @@
       authorized_key: user=bdshr key="{{ lookup('file', '/var/go/.ssh/id_rsa.pub') }}"
   tags:
     - copy-go-keys
-  
+
+- hosts: all
+  sudo: yes
+  roles:
+    - {role: selinux, selinux_state: permissive}
+  tags:
+    - selinux
+    
 - hosts: all
   sudo: yes
   roles:
     - { role: shr-base }
-#    - { role: oracle-java } 
     - { role: bdshr-user }
-#    - { role: sharedhealth-user }
-#    - { role: nagios-agent }
-  #  - { role: logstash-agent }
+    - { role: nagios-agent }
+    - { role: logstash-agent }
     - { role: shr-tools }
     - { role: selinux }
   vars_files:
