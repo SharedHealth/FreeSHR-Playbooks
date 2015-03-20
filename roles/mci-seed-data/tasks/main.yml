@@ -3,13 +3,13 @@
 - name: Create Seed data directory
   file: path={{ mci_seed_data_dir }} state=directory
 
-- name: Copy Scripts
-  copy: src='{{item}}' dest={{ mci_seed_data_dir }} mode=755
+- name: Copy LR Scripts
+  copy: src='{{ item }}' dest={{ mci_seed_data_dir }} mode=755
   with_fileglob:
-    - "{{script}}"
+    - "{{mci_seed_data_source}}/{{ seed_data_locations_file }}"
 
 - name: Install MCI LR data
-  shell: "cqlsh -f {{ mci_seed_data_dir }}/{{ seed_data_locations }} {{ groups['cassandra_seed_node'][0] }} -k {{mci_keyspace}}"
+  shell: "cqlsh -f {{ mci_seed_data_dir }}/{{ seed_data_locations_file }} {{ groups['cassandra_seed_node'][0] }} -k {{mci_keyspace}}"
 
 - name: Delete Scripts
   shell: "rm -rf {{mci_seed_data_dir}}"  
