@@ -9,6 +9,7 @@ bdshr_idp_client_id: 18550
 bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
 bdshr_idp_client_email: mritunjd@thoughtworks.com
 bdshr_idp_client_password: thoughtworks
+bdshr_log_level: DEBUG
 
 seed_data_locations: locations.cql
 
@@ -20,7 +21,7 @@ mci_idp_client_id: 18554
 mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
 mci_keyspace: mci
 mci_http_scheme: http
-
+mci_log_level: DEBUG
 mci_ui_idp_client_id: 18551
 mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
 
@@ -41,6 +42,7 @@ datasense_idp_client_password: thoughtworks
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 freeshr_keyspace: freeshr
+freeshr_update_log_level: DEBUG
 
 cassandra_jna_download_url: https://maven.java.net/content/repositories/releases/net/java/dev/jna/jna/4.1.0/jna-4.1.0.jar
 
