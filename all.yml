@@ -59,8 +59,13 @@
 
 - hosts: cassandra_seed_node
   sudo: yes
+  vars:
+    data_destination_dir: "{{ mci_seed_data_dir }}"
+    data_source_dir: "{{ mci_seed_data_source }}"
+    data_file: "{{ seed_data_locations_file }}"
+    keyspace: "{{ mci_keyspace }}"
   roles:
-    - mci-seed-data
+    - { role: cassandra-data-dump }
   tags:
     - mci-seed-data
 

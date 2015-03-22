@@ -1,0 +1,17 @@
+---
+
+- name: Create Destination Directory
+  file: path={{ data_destination_dir }} state=directory
+
+- name: Copy Scripts
+  copy: src='{{ item }}' dest={{ data_destination_dir }} mode=755
+  with_fileglob:
+    - "{{ data_source_dir }}/{{ data_file }}"
+
+- name: Install Data
+  shell: "cqlsh -f {{ data_destination_dir }}/{{ data_file }} {{ groups['cassandra_seed_node'][0] }} -k {{ keyspace }}"
+
+- name: Delete Scripts
+  shell: "rm -rf {{ data_destination_dir }}"
+
+
