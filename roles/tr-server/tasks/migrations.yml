@@ -15,10 +15,8 @@
   uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
 
 - name: Check whether liquibase is installed already
-  command: rpm -q liquibase
-  register: rpm_check_liquibase
-  ignore_errors: True
-
+  yum: name=liquibase state=present
+  
 - name: Clear checksums
   shell: liquibase --url="jdbc:mysql://localhost:3306/terminologies" --username=root --password=password --changeLogFile=/tmp/migrations.xml --classpath=/tmp/mysql-connector-java-5.0.8-bin.jar --logLevel=debug clearCheckSums
 
