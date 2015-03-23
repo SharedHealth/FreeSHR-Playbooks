@@ -32,7 +32,7 @@
 172.18.46.166 ansible_ssh_user=bdshr
 
 [haproxy]
-172.18.46.221 ansible_ssh_user=vagrant
+172.18.46.221 ansible_ssh_user=bdshr
 
 [logstash-server]
 
