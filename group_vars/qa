@@ -53,3 +53,4 @@ patient_journal_log_dir: /var/log/patient-journal
 
 tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
+tr_server_port: 9080

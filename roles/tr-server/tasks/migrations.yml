@@ -12,7 +12,7 @@
   command: python setup.py install chdir=/tmp/httplib2-0.8
 
 - name: Wait for tr server to start
-  uri: url=http://localhost:9080/openmrs/index.htm timeout=300 return_content=true
+  uri: url=http://localhost:{{ tr_server_port }}/openmrs/index.htm timeout=300 return_content=true
 
 - name: Check whether liquibase is installed already
   yum: name=liquibase state=present

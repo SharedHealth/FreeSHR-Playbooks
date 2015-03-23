@@ -7,6 +7,9 @@
 [mci-server]
 192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key mci_worker_id=0
 
+[mci-ui]
+192.168.33.19 ansible_ssh_user=vagrant api_uri_prefix=http://127.0.0.1:8081/api/v1 sso_endpoint=http://127.0.0.1:8080
+
 [tr-server]
 172.18.46.56 ansible_ssh_user=bdshr
 
@@ -22,6 +25,9 @@
 
 [logstash-server]
 192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+
+[haproxy]
+192.168.33.10 ansible_ssh_user=vagrant
 
 
 [local:children]

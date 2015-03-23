@@ -31,6 +31,9 @@
 [patient-journal-server]
 172.18.46.166 ansible_ssh_user=bdshr
 
+[haproxy]
+172.18.46.221 ansible_ssh_user=vagrant
+
 [logstash-server]
 
 
@@ -46,3 +49,4 @@ tr-server
 datasense
 identity-server
 patient-journal-server
+haproxy

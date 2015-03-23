@@ -1,0 +1,127 @@
+#---------------------------------------------------------------------
+# Example configuration for a possible web application.  See the
+# full configuration options online.
+#
+#   http://haproxy.1wt.eu/download/1.4/doc/configuration.txt
+#
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+#---------------------------------------------------------------------
+# main frontend which proxys to the backends
+#---------------------------------------------------------------------
+frontend http-in
+        bind :80
+        
+        # Define hosts
+        acl host_shr_service hdr(host) -i shr.twhosted.com
+        acl host_mci_service hdr(host) -i mci.twhosted.com
+        acl host_mci_admin   hdr(host) -i mci-admin.twhosted.com
+        acl host_tr_service  hdr(host) -i tr.twhosted.com
+        acl host_pj_service  hdr(host) -i pj.twhosted.com
+
+        ## figure out which one to use
+        use_backend shr-service-cluster if host_shr_service
+        use_backend mci-service-cluster if host_mci_service
+        use_backend mci-admin-node if host_mci_admin
+        use_backend tr-server-node if host_tr_service
+        use_backend pjournal-node if host_pj_service
+
+
+
+#---------------------------------------------------------------------
+# round robin balancing between the SHR Service backends
+#---------------------------------------------------------------------
+backend shr-service-cluster
+    balance     roundrobin
+    {% for host in groups['shr'] %}
+    server shr{{ loop.index }} {{host}}:{{ bdshr_port }} check
+    {% endfor %}
+    
+
+#---------------------------------------------------------------------
+# round robin balancing between the MCI Service backends
+#---------------------------------------------------------------------
+backend mci-service-cluster
+    balance     roundrobin
+    {% for host in groups['mci-server'] %}
+    server mci{{ loop.index }} {{host}}:{{ mci_port }} check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# source between the MCI Admin backends
+#---------------------------------------------------------------------
+backend mci-admin-node
+    balance     source
+    {% for host in groups['mci-ui'] %}
+    server mciadmin{{ loop.index }} {{host}}:80 check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# round robin balancing between the TR backends
+#---------------------------------------------------------------------
+backend tr-server-node
+    balance     roundrobin
+    {% for host in groups['tr-server'] %}
+    server tr{{ loop.index }}  {{host}}:{{ tr_server_port }} check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# round robin balancing between the Patient Journal backends
+#---------------------------------------------------------------------
+backend pjournal-node
+    balance     source
+    {% for host in groups['mci-ui'] %}
+    server pj{{ loop.index }}  {{host}}:{{ patient_journal_port }} check
+    {% endfor %}
+    

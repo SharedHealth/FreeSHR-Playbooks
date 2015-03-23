@@ -1,0 +1,19 @@
+- name: "create hosts file entries for TR server lookup"
+  lineinfile: dest=/etc/hosts regexp='tr.dghs.gov.bd' line="{{ groups['haproxy'][0] }} tr.dghs.gov.bd" state=present
+  when: exclude != "tr" and exclude != "all"
+
+- name: "create hosts file entries for SHR server lookup"
+  lineinfile: dest=/etc/hosts regexp='shr.dghs.gov.bd' line="{{ groups['haproxy'][0] }} shr.dghs.gov.bd" state=present
+  when: exclude != "shr" and exclude != "all"
+
+- name: "create hosts file entries for MCI server lookup"
+  lineinfile: dest=/etc/hosts regexp='mci.dghs.gov.bd' line="{{ groups['haproxy'][0] }} mci.dghs.gov.bd" state=present
+  when: exclude != "mci-server" and exclude != "all"
+
+- name: "create hosts file entries for MCI admin lookup"
+  lineinfile: dest=/etc/hosts regexp='mci-admin.dghs.gov.bd' line="{{ groups['haproxy'][0] }} mci-admin.dghs.gov.bd" state=present
+  when: exclude != "mci-ui" and exclude != "all"
+
+- name: "create hosts file entries for Patient Journal lookup"
+  lineinfile: dest=/etc/hosts regexp='pj.dghs.gov.bd' line="{{ groups['haproxy'][0] }} pj.dghs.gov.bd" state=present
+  when: exclude != "patient-journal" and exclude != "all"

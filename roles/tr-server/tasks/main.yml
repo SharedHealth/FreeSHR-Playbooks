@@ -69,7 +69,7 @@
   sudo: true
 
 - name: Allow terminology server port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9080 -j ACCEPT -m comment --comment "TerminologyServer"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ tr_server_port }} -j ACCEPT -m comment --comment "TerminologyServer"
   sudo: true
   when: iptablesrules.stdout.find("TerminologyServer") == -1
 
