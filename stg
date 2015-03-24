@@ -17,7 +17,7 @@
 172.18.46.166 ansible_ssh_user=bdshr api_uri_prefix=http://127.0.0.1:8081/api/v1 sso_endpoint=http://127.0.0.1:8080
 
 [mci-server]
-172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=3
+172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=3 mci_server_urls=http://172.18.46.166:8081
 
 [tr-server]
 172.18.46.166 ansible_ssh_user=bdshr
