@@ -5,7 +5,7 @@
 192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [mci-server]
-192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key mci_worker_id=0 mci_server_urls=http://192.168.33.19:8081
+192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key mci_worker_id=0
 
 [mci-ui]
 192.168.33.19 ansible_ssh_user=vagrant

@@ -18,7 +18,7 @@
 172.18.46.53 ansible_ssh_user=bdshr
 
 [mci-server]
-172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=2 mci_server_urls=https://bdshr-mci.twhosted.com,http://172.18.46.53:8081
+172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=2
 
 [tr-server]
 172.18.46.53 ansible_ssh_user=bdshr

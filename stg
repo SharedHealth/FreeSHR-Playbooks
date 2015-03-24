@@ -17,7 +17,7 @@
 172.18.46.166 ansible_ssh_user=bdshr
 
 [mci-server]
-172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=3 mci_server_urls=http://172.18.46.166:8081
+172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=3
 
 [tr-server]
 172.18.46.166 ansible_ssh_user=bdshr
