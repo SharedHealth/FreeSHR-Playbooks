@@ -1,0 +1,8 @@
+- name: Clone git-crypt repo
+  git: repo=https://github.com/SharedHealth/git-crypt.git dest={{ git_crypt_dir }}
+
+- name: Make git-crypt
+  shell: "make -C {{ git_crypt_dir }}"
+
+- name: Add git-crypt to path
+  command: "cp {{git_crypt_dir}}/git-crypt /usr/local/bin"

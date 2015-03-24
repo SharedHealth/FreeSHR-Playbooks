@@ -5,7 +5,11 @@
 - include: maven.yml
   sudo: yes
   tags: maven
-  
+
 - include: gradle.yml
   sudo: yes
   tags: gradle
+
+- include: git-crypt.yml
+  sudo: yes
+  tags: git-crypt
