@@ -1,4 +1,4 @@
-export SHR_VERSION=v1
+export SHR_VERSION=
 export PATIENT_JOURNAL_PORT={{ patient_journal_port }}
 export SHR_SERVER_BASE_URL=http://{{ groups['shr'][0] }}:{{ bdshr_port }}
 export IDENTITY_SERVER_URL=http://{{ groups['identity-server'][0] }}:8080/loginForm
