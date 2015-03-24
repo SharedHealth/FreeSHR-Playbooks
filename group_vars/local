@@ -30,6 +30,7 @@ mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
+datasense_log_level: DEBUG
 datasense_port: 8083
 datasense_dhis_config_zip: /tmp/dhis_config.zip
 datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
