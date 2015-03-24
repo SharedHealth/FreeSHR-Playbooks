@@ -22,7 +22,7 @@ mci_port: 8081
 mci_idp_client_id: 18554
 mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
 mci_keyspace: mci
-mci_server_url=http://192.168.33.19:8081
+mci_server_url: http://192.168.33.19:8081
 mci_log_level: DEBUG
 
 mci_ui_idp_client_id: 18551
