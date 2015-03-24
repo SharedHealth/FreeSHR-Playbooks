@@ -27,6 +27,7 @@ mci_log_level: DEBUG
 mci_ui_idp_client_id: 18551
 mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
 
+
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: DEBUG
@@ -40,6 +41,7 @@ datasense_idp_client_id: 18552
 datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
 datasense_idp_client_email: rappasam@thoughtworks.com
 datasense_idp_client_password: thoughtworks
+
 bahmni_oncloud_facility_id: 10019841
 
 

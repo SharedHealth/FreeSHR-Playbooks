@@ -15,7 +15,7 @@
 172.18.46.54 ansible_ssh_user=bdshr
 
 [mci-ui]
-172.18.46.53 ansible_ssh_user=bdshr api_uri_prefix=http://127.0.0.1:8081/api/v1 so_endpoint=http://127.0.0.1:8080
+172.18.46.53 ansible_ssh_user=bdshr
 
 [mci-server]
 172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=2 mci_server_urls=https://bdshr-mci.twhosted.com,http://172.18.46.53:8081
