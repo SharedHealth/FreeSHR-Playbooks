@@ -60,6 +60,29 @@
     group={{ sharedhealth_group }}
     state=link
 
+- name: link openmrs to var run
+  file:
+    path=/var/run/bdshr-terminology-server/openmrs
+    src={{ tr_server_install_dir }}/openmrs
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: create home .openmrs
+  file:
+    path=/home/{{ sharedhealth_user }}/.OpenMRS
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=directory
+
+- name: link modules  home .openmrs
+  file:
+    path=/home/{{ sharedhealth_user }}/.OpenMRS/modules
+    src={{ tr_server_install_dir }}/modules
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted enabled=yes
 
