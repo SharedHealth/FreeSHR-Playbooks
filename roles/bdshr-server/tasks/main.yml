@@ -10,12 +10,10 @@
 
 - name: Stop bdshr
   service: name=bdshr state=stopped
-  sudo_user : "{{ sharedhealth_user }}"
-  sudo: yes
   ignore_errors: yes
   
 - name: Remove bdshr
-  yum: name=shr-0.1-1.noarch state=absent
+  yum: name=shr.noarch state=absent
 
 - name: Install bdshr
   yum: name=/tmp/bdshr.rpm state=present
