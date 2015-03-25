@@ -1,6 +1,15 @@
 - name: Clone git-crypt repo
   git: repo=https://github.com/SharedHealth/git-crypt.git dest={{ git_crypt_dir }}
 
+- name: Allow dir access to run user
+  file:
+    path={{ git_crypt_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
 - name: Make git-crypt
   shell: "make -C {{ git_crypt_dir }}"
 
