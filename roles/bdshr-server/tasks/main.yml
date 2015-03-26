@@ -1,12 +1,9 @@
 ---
 - name: Clean existing rpm
-  shell: rm -f /tmp/bdshr.rpm
+  shell: rm -f {{ bdshr_rpm_dest }}
 
-- name: Clean existing rpm
-  shell: rm -f /tmp/shrid.rpm
-  
 - name: Copy rpm
-  copy: src=/tmp/shr-0.1-1.noarch.rpm dest=/tmp/bdshr.rpm mode=755
+  copy: src={{ bdshr_rpm_source }} dest={{ bdshr_rpm_dest }} mode=755
 
 - name: Stop bdshr
   service: name=bdshr state=stopped
@@ -16,7 +13,7 @@
   yum: name=shr.noarch state=absent
 
 - name: Install bdshr
-  yum: name=/tmp/bdshr.rpm state=present
+  yum: name={{ bdshr_rpm_dest }} state=present
 
 - name: Allow app dir access to run user
   file:
