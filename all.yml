@@ -153,6 +153,7 @@
   sudo: yes
   roles:
     - { role: haproxy }
+    - { role: host-entries, exclude: "none" }
   tags:
     - haproxy
 

@@ -13,12 +13,13 @@ export CASSANDRA_MIGRATIONS_PATH=org/freeshr/cassandra/migrations
 export REST_POOL_SIZE=20
 export BDSHR_PORT={{ bdshr_port }}
 export VALIDATION_ZIP_PATH=/opt/bdshr/etc/validation.zip
-export FACILITY_REGISTRY_URL=http://hrmtest.dghs.gov.bd/api/1.0/facilities/
-export PROVIDER_REGISTRY_URL=http://hrmtest.dghs.gov.bd/api/1.0/providers/
+export FACILITY_REGISTRY_URL={{ facility_registry_url }}
+export PROVIDER_REGISTRY_URL={{ provider_registry_url }}
 export ENCOUNTER_FETCH_LIMIT=20
 export SERVER_CONNECTION_TIMEOUT=10000
-export TR_SERVER_BASE_URL=http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}
-export IDENTITY_SERVER_BASE_URL=http://{{ groups['identity-server'][0] }}:8080/token/
+export TR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }} %}{% endif %}
+
+export IDENTITY_SERVER_BASE_URL={{ idp_user_info_url }}
 export SHR_LOG_LEVEL={{ bdshr_log_level }}
 export FACILITY_CACHE_TTL_SECONDS=864000
 export IDP_CLIENT_ID={{ bdshr_idp_client_id }}
@@ -26,4 +27,4 @@ export IDP_AUTH_TOKEN={{ bdshr_idp_auth_token }}
 export SHR_VERSION=v1
 export IS_LATEST_SHR=true
 export LOCAL_CACHE_TTL={{ bdshr_local_cache_ttl }}
-export MCI_SERVER_URL=http://{{ groups['mci-server'][0] }}:{{ mci_port }}
+export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %} http://{{ groups['mci-server'][0] }}:{{ mci_port }} %}{% endif %}

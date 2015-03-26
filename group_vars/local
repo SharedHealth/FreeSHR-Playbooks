@@ -61,3 +61,19 @@ patient_journal_log_dir: /var/log/patient-journal
 tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_server_port: 9080
+
+enable_proxy_routing: true
+shr_host_name: shr.twhosted.com
+mci_host_name: mci.twhosted.com
+tr_host_name: tr.twhosted.com
+fr_host_name: fr.twhosted.com
+lr_host_name: lr.twhosted.com
+pr_host_name: pr.twhosted.com
+pj_host_name: pj.twhosted.com
+mci_admin_host_name: mci-admin.twhosted.com
+
+
+idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
+facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
+location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
+provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers

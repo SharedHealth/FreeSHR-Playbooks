@@ -35,6 +35,9 @@
 [logstash-server]
 172.18.46.2 ansible_ssh_user=bdshr
 
+[haproxy]
+172.18.46.52 ansible_ssh_user=bdshr
+
 [showcase:children]
 cassandra_seed_node
 cassandra_node
@@ -47,3 +50,4 @@ tr-server
 datasense
 identity-server
 patient-journal-server
+haproxy

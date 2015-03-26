@@ -62,13 +62,13 @@ defaults
 #---------------------------------------------------------------------
 frontend http-in
         bind :80
-        
+
         # Define hosts
-        acl host_shr_service hdr(host) -i shr.twhosted.com
-        acl host_mci_service hdr(host) -i mci.twhosted.com
-        acl host_mci_admin   hdr(host) -i mci-admin.twhosted.com
-        acl host_tr_service  hdr(host) -i tr.twhosted.com
-        acl host_pj_service  hdr(host) -i pj.twhosted.com
+        acl host_shr_service hdr(host) -i {{ shr_host_name }}
+        acl host_mci_service hdr(host) -i {{ mci_host_name }}
+        acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
+        acl host_tr_service  hdr(host) -i {{ tr_host_name }}
+        acl host_pj_service  hdr(host) -i {{ pj_host_name }}
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service

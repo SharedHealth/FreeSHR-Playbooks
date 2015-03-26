@@ -29,6 +29,9 @@
 [haproxy]
 192.168.33.10 ansible_ssh_user=vagrant
 
+[patient-journal-server]
+192.168.33.10 ansible_ssh_user=vagrant
+
 
 [local:children]
 shr
@@ -40,3 +43,5 @@ cassandra_seed_node
 identity-server
 cassandra_seed_node
 cassandra_node
+haproxy
+

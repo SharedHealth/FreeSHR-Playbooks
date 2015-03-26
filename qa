@@ -51,3 +51,4 @@ tr-server
 datasense
 identity-server
 patient-journal-server
+haproxy

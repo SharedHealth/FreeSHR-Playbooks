@@ -6,8 +6,8 @@
 
 - name: define proxy config
   template: 
-      src=haproxy.j2 
-      dest=/etc/haproxy/haproxy.cfg 
+      src=haproxy.j2
+      dest=/etc/haproxy/haproxy.cfg
       mode=644
       owner=haproxy
       group=haproxy
