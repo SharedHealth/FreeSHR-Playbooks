@@ -4,8 +4,8 @@
 - name: Allow dir access to run user
   file:
     path={{ git_crypt_dir }}
-    owner={{ sharedhealth_user }}
-    group={{ sharedhealth_group }}
+    owner={{go_user}}
+    group={{go_user}}
     follow=yes
     recurse=yes
     state=directory
@@ -14,4 +14,4 @@
   shell: "make -C {{ git_crypt_dir }}"
 
 - name: Add git-crypt to path
-  command: "cp {{git_crypt_dir}}/git-crypt /usr/local/bin"
+  command: "cp {{git_crypt_dir}}/git-crypt /usr/bin"
