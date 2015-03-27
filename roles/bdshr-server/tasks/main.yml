@@ -1,6 +1,6 @@
 ---
 - name: Clean existing rpm
-  shell: rm -f {{ bdshr_rpm_dest }}
+  shell: rm -f /tmp/bdshr.rpm
 
 - name: Copy rpm
   copy: src={{ bdshr_rpm_source }} dest=/tmp/bdshr.rpm mode=755
