@@ -4,10 +4,10 @@
   sudo: true
 
 - name: Copy rpm
-  copy: src=/tmp/patient-journal-0.1-1.noarch.rpm dest=/tmp/patient-journal.rpm mode=755
+  copy: src={{ rpm }} dest=/tmp/patient-journal.rpm mode=755
 
 - name: Remove patient-journal
-  yum: name=patient-journal-0.1-1.noarch state=absent
+  yum: name=patient-journal.noarch state=absent
   sudo: true
 
 - name: Install patient-journal
