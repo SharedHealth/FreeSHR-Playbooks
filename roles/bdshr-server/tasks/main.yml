@@ -3,7 +3,7 @@
   shell: rm -f /tmp/bdshr.rpm
 
 - name: Copy rpm
-  copy: src={{ bdshr_rpm_source }} dest=/tmp/bdshr.rpm mode=755
+  copy: src={{ rpm }} dest=/tmp/bdshr.rpm mode=755
 
 - name: Remove bdshr
   yum: name=shr.noarch state=absent

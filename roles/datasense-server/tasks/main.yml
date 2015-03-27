@@ -36,7 +36,7 @@
   mysql_db: name=datasense state=present login_user=root login_password=password
 
 - name: Remove existing installations if any
-  yum: name=datasense-0.1-1 state=absent
+  yum: name=datasense.noarch state=absent
 
 - name: Clean existing dhis_config folder
   shell: rm -rf {{ datasense_install_dir}}/lib/dhis_config
