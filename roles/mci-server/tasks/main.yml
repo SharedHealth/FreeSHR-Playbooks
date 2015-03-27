@@ -3,12 +3,10 @@
   shell: rm -f /tmp/mci.rpm
 
 - name: Copy rpm
-  copy: src='{{item}}' dest=/tmp/mci.rpm mode=755
-  with_fileglob:
-    - "{{rpm}}"
+  copy: src='{{ rpm }}' dest=/tmp/mci.rpm mode=755
 
 - name: Remove existing installation if any
-  yum: name=mci-0.1-1.noarch state=absent
+  yum: name=mci.noarch state=absent
 
 - name: Install mci
   yum: name=/tmp/mci.rpm state=present
