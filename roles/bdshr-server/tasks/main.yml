@@ -3,17 +3,13 @@
   shell: rm -f {{ bdshr_rpm_dest }}
 
 - name: Copy rpm
-  copy: src={{ bdshr_rpm_source }} dest={{ bdshr_rpm_dest }} mode=755
+  copy: src={{ bdshr_rpm_source }} dest=/tmp/bdshr.rpm mode=755
 
-- name: Stop bdshr
-  service: name=bdshr state=stopped
-  ignore_errors: yes
-  
 - name: Remove bdshr
   yum: name=shr.noarch state=absent
 
 - name: Install bdshr
-  yum: name={{ bdshr_rpm_dest }} state=present
+  yum: name=/tmp/bdshr.rpm state=present
 
 - name: Allow app dir access to run user
   file:

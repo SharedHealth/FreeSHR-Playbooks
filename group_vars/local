@@ -11,8 +11,6 @@ bdshr_idp_client_email: mritunjd@thoughtworks.com
 bdshr_idp_client_password: thoughtworks
 bdshr_log_level: DEBUG
 bdshr_keyspace: freeshr
-bdshr_rpm_source: /tmp/bdshr.rpm
-bdshr_rpm_dest: /tmp/bdshr.rpm
 
 
 seed_data_locations_file: locations.cql
