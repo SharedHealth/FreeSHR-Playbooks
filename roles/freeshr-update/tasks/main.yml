@@ -3,10 +3,10 @@
   shell: rm -f /tmp/freeshr-update.rpm
   
 - name: Copy rpm
-  copy: src=/tmp/freeshr-update-0.1-1.noarch.rpm dest=/tmp/freeshr-update.rpm mode=755
+  copy: src={{ rpm }} dest=/tmp/freeshr-update.rpm mode=755
 
 - name: Remove freeshr-update
-  yum: name=freeshr-update-0.1-1.noarch state=absent
+  yum: name=freeshr-update.noarch state=absent
 
 - name: Install freeshr-update
   yum: name=/tmp/freeshr-update.rpm state=present
