@@ -4,7 +4,7 @@
   file: path={{ data_destination_dir }} state=directory
 
 - name: Copy Scripts
-  copy: src='{{ item }}' dest={{ data_destination_dir }} mode=755
+  copy: src='{{ item }}' dest={{ data_destination_dir }} mode=0644
   with_fileglob:
     - "{{ data_source_dir }}/{{ data_file }}"
 
