@@ -9,6 +9,8 @@ bdshr_port: 9081
 bdshr_local_cache_ttl: 86400
 bdshr_idp_client_id: 18550
 bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
+bdshr_idp_client_email: mritunjd@thoughtworks.com
+bdshr_idp_client_password: thoughtworks
 bdshr_log_level: DEBUG
 bdshr_keyspace: freeshr
 
