@@ -60,7 +60,7 @@ tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_server_port: 9080
 
-enable_proxy_routing: true
+enable_proxy_routing: false
 shr_host_name: shr.twhosted.com
 mci_host_name: mci.twhosted.com
 tr_host_name: tr.twhosted.com
