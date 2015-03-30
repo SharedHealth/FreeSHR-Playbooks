@@ -1,6 +1,6 @@
 export SHR_VERSION=
 export PATIENT_JOURNAL_PORT={{ patient_journal_port }}
 export SHR_SERVER_BASE_URL=http://{{ groups['shr'][0] }}:{{ bdshr_port }}
-export IDENTITY_SERVER_URL=http://{{ groups['identity-server'][0] }}:8080/loginForm
+export IDENTITY_SERVER_URL=http://{{ idp_user_login_url }}
 export FACILITY_AUTH_TOKEN=9c83d71d41161cbc860380202e43d868ea2b8cc229ed84a2af2ac0818a14cfb4
 export FACILITY_SERVER_URL=http://hrmtest.dghs.gov.bd/api/1.0/facilities
