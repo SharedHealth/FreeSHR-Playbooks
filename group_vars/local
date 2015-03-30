@@ -42,7 +42,7 @@ datasense_idp_client_id: 18552
 datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
 datasense_idp_client_email: rappasam@thoughtworks.com
 datasense_idp_client_password: thoughtworks
-bahmni_oncloud_facility_id: 10019841
+datasense_cloud_hosted_facility_ids: 10019841
 datasense_mysql_user_password: datasense
 
 freeshr_update_install_dir: /opt/freeshr-update
@@ -74,7 +74,7 @@ mci_admin_host_name: mci-admin.twhosted.com
 
 
 idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
-idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/loginForm
+idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/signin
 facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
