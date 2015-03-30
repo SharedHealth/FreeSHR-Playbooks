@@ -74,11 +74,7 @@
 
 - hosts: tr-server
   sudo: yes
-  vars:
-    local_mysql_username: "{{ mysql_username }}"
-    local_mysql_password: "{{ mysql_password }}"
   roles:
-   - role: mysql
    - role: tr-server
    - { role: host-entries, exclude: "tr" }
   tags:

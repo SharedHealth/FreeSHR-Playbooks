@@ -1,4 +1,9 @@
 ---
+- name: Create Terminology database
+  mysql_db: name=terminologies state=present login_user={{ local_mysql_username }} login_password={{ local_mysql_password }}
+
+- name: Copy database migrations
+  copy: src=chunking_history.sql.bz2 dest=/tmp/chunking_history.sql.bz2
 
 - name: Ensure tmp directory exists
   file: dest=/tmp state=directory
