@@ -1,4 +1,13 @@
 ---
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_user }}
+    name=datasense
+    password={{ datasense_mysql_user_password }}
+    priv=*.*:ALL,GRANT
+    state=present
+
 - name: Clean existing
   shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
 
@@ -18,8 +27,12 @@
   command: service iptables save
   when: iptablesrules.stdout.find("datasense") == -1
   
-- name: Create Datasense datasense
-  mysql_db: name=datasense state=present login_user=root login_password=password
+- name: Create Datasense database
+  mysql_db:
+    name=datasense
+    state=present
+    login_user=datasense
+    login_password={{ datasense_mysql_user_password }}
 
 - name: Remove existing installations if any
   yum: name=datasense.noarch state=absent

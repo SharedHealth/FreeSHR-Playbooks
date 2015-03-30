@@ -1,0 +1,2 @@
+tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
+tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties

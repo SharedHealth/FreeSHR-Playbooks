@@ -60,6 +60,6 @@
   action: service name=mysqld state=started enabled=true
 
 - name: Update mysql root password
-  command: /usr/bin/mysqladmin -u {{ local_mysql_username }} password {{ local_mysql_password }}
+  command: /usr/bin/mysqladmin -u root password {{ mysql_root_password }}
   ignore_errors: yes
 

@@ -41,9 +41,8 @@ datasense_idp_client_id: 18552
 datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
 datasense_idp_client_email: rappasam@thoughtworks.com
 datasense_idp_client_password: thoughtworks
-
 bahmni_oncloud_facility_id: 10019841
-
+datasense_mysql_user_password: datasense
 
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
@@ -58,6 +57,9 @@ patient_journal_log_dir: /var/log/patient-journal
 tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_server_port: 9080
+tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
+tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
+tr_mysql_user_password: terminologies
 
 
 enable_proxy_routing: false
