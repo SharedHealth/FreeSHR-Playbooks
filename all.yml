@@ -22,7 +22,6 @@
   sudo: yes
   roles:
     - { role: bdshr-server }
-    - { role: host-entries, exclude: "shr" }
   tags:
     - shr
 
@@ -40,7 +39,6 @@
     - { role: apache, tags: ['infrastructure'] }
     - { role: php-packages, tags: ['infrastructure'] }
     - { role: mci-ui, tags: ['application'] }
-    - { role: host-entries, exclude: "mci-ui" }
   vars:
     mci_ui_home: "/var/www/mci_ui"
     identity_server_domain: "null"
@@ -53,7 +51,6 @@
   sudo: yes
   roles:
     - { role: mci-server }
-    - { role: host-entries, exclude: "mci-server" }
   vars:
     mci_home: "{{lookup('env', 'HOME')}}/projects/mci"
     hostname_name: "{{ansible_fqdn}}"
@@ -76,7 +73,6 @@
   sudo: yes
   roles:
    - role: tr-server
-   - { role: host-entries, exclude: "tr" }
   tags:
     - tr-server
 
@@ -91,7 +87,6 @@
   sudo: yes
   roles:
     - role: datasense-server
-    - { role: host-entries, exclude: "tr" }
   tags:
     - datasense
 
@@ -106,7 +101,6 @@
   sudo: yes
   roles:
     - { role: patient-journal }
-    - { role: host-entries, exclude: "patient-journal" }
   tags:
     - patient-journal
 
@@ -149,7 +143,6 @@
   sudo: yes
   roles:
     - { role: haproxy }
-    - { role: host-entries, exclude: "none" }
   tags:
     - haproxy
 

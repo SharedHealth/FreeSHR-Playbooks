@@ -2,3 +2,4 @@ dependencies:
   - { role: oracle-java }
   - { role: sharedhealth-user }
   - { role: mysql, local_mysql_username: {{ tr_mysql_user }}, local_mysql_password: {{ tr_mysql_password }} }
+  - { role: host-entries, exclude: "none" }
