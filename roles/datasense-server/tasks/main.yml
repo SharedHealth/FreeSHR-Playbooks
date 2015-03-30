@@ -8,8 +8,6 @@
     priv=*.*:ALL,GRANT
     state=present
 
-- name: Clean existing
-  shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
@@ -108,3 +106,5 @@
   service: name=datasense state=restarted enabled=yes
   tags: run_datasense
 
+- name: Clean existing
+  shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
