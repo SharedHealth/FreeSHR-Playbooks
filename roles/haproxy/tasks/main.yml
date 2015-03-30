@@ -12,4 +12,15 @@
       owner=haproxy
       group=haproxy
 
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow listen access to haproxy
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT -m comment --comment "BDSHR"
+  when: iptablesrules.stdout.find("HAPROXY") == -1
+
+- name: save iptables
+  command: service iptables save
+  
 - service: name=haproxy state=restarted enabled=yes
