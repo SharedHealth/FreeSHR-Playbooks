@@ -2,7 +2,7 @@
 - name: Create mysql user
   mysql_user:
     login_user=root
-    login_password={{ mysql_root_user }}
+    login_password={{ mysql_root_password }}
     name=terminologies
     password={{ tr_mysql_user_password }}
     priv=*.*:ALL,GRANT
