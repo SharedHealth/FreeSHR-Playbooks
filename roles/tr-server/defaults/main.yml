@@ -1,2 +1,3 @@
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
+rpm: /tmp/bdshr-terminology-server-0.1-1.noarch.rpm

@@ -18,9 +18,7 @@
   file: dest=/tmp state=directory
 
 - name: Copy RPM
-  copy: src='{{ item }}' dest=/tmp/bdshr-terminology-server.rpm owner=root mode=777
-  with_fileglob:
-    - "{{rpm}}"
+  copy: src='{{ rpm }}' dest=/tmp/bdshr-terminology-server.rpm owner=root mode=777
 
 - name: Uninstall previous terminology server
   sudo: True
