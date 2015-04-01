@@ -1,6 +1,7 @@
 ---
 - name: Drop mysql datasense user
   command: mysql -uroot -p{{ mysql_root_password }} -e "DROP USER 'datasense'@'localhost'";
+  ignore_errors: true
 
 - name: Create mysql datasense user
   command: mysql -uroot -p{{ mysql_root_password }} -e "CREATE USER 'datasense'@'localhost' identified by '{{ datasense_mysql_user_password }}'";
