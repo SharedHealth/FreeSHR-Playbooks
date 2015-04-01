@@ -1,13 +1,12 @@
 ---
-- name: Create mysql user
-  mysql_user:
-    login_user=root
-    login_password={{ mysql_root_password }}
-    name=datasense
-    password={{ datasense_mysql_user_password }}
-    priv=*.*:ALL,GRANT
-    state=present
+- name: Drop mysql datasense user
+  command: mysql -uroot -p{{ mysql_root_password }} -e "DROP USER 'datasense'@'localhost'";
 
+- name: Create mysql datasense user
+  command: mysql -uroot -p{{ mysql_root_password }} -e "CREATE USER 'datasense'@'localhost' identified by '{{ datasense_mysql_user_password }}'";
+
+- name: Grant previlege for datasense user
+  command: mysql -uroot -p{{ mysql_root_password }} -e "GRANT ALL PRIVILEGES on datasense.* to 'datasense'@'localhost'"
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
