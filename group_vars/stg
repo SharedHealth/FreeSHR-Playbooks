@@ -90,7 +90,5 @@ facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
 
-tr_mysql_user_password: password
-datasense_mysql_user_password: password
 mysql_root_password: password
 

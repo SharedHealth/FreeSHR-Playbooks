@@ -53,7 +53,7 @@
   yum: name={{ item }} state=present
   with_items:
     - mysql-community-server
-    - mysql
+    - mysql-community-client
     - MySQL-python
 
 - name: Start Mysql Service
