@@ -1,4 +1,4 @@
 config.file.path={{ tr_server_install_dir }}/etc/tr-server.properties
-webservices.rest.uriPrefix={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }} %}{% endif %}/openmrs/ws
+webservices.rest.uriPrefix={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}{% endif %}/openmrs/ws
 concept.uri=/rest/v1/tr/concepts/
 concept.reference.term.uri=/rest/v1/tr/referenceterms/
