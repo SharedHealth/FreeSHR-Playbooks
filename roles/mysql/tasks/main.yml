@@ -52,7 +52,7 @@
 - name: Install MySQL
   yum: name={{ item }} state=present
   with_items:
-    - mysql-server
+    - mysql-community-server
     - mysql
     - MySQL-python
 
