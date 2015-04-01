@@ -8,7 +8,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
   with_fileglob:
-    - "{{omod}}"
+    - "{{atomfeedomod}}"
 
 - name: Copy Rest services
   copy:
@@ -16,7 +16,7 @@
     dest={{ tr_server_install_dir}}/modules/
     mode=755
     owner={{ sharedhealth_user }}
-    group={{ sharedhealth_group}}
+    group={{ sharedhealth_group }}
   with_fileglob:
     - "{{restomod}}"
 
@@ -26,9 +26,9 @@
     dest={{ tr_server_install_dir}}/modules/
     mode=755
     owner={{ sharedhealth_user }}
-    group={{ sharedhealth_group}}
+    group={{ sharedhealth_group }}
   with_fileglob:
-    - "{{atomfeedomod}}"
+    - "{{trfeedomod}}"
 
 - name: Copy terminology server properties file
   template: src=tr-server.properties.j2
