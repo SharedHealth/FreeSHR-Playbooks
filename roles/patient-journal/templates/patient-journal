@@ -9,3 +9,4 @@ export IDENTITY_SERVER_USER_INFO_URL={{idp_user_info_url}}
 export IDP_CLIENT_ID={{ patient_journal_idp_client_id }}
 export IDP_AUTH_TOKEN={{ patient_journal_idp_auth_token }}
 export SESSION_TIMEOUT_SECONDS={{patient_journal_session_timeout_seconds}}
+export PATIENT_JOURNAL_LOG_LEVEL={{patient_journal_log_level}}
