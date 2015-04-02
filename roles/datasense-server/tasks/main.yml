@@ -70,7 +70,7 @@
 - name: Unzip dhis_config
   unarchive:
     src={{ datasense_dhis_config_zip }}
-    dest=/opt/datasense/lib
+    dest={{ datasense_install_dir}}/lib
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
