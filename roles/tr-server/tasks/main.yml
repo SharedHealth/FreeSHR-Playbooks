@@ -110,7 +110,27 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
-    
+
+- name: Copy atom feed omod
+  copy:
+    src='{{ item }}'
+    dest={{ tr_server_install_dir }}/modules/
+    mode=0755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+  with_fileglob:
+    - "{{atomfeedomod}}"
+
+- name: Copy Rest services
+  copy:
+    src='{{ item }}'
+    dest={{ tr_server_install_dir}}/modules/
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+  with_fileglob:
+    - "{{restomod}}"
+
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted enabled=yes
 
