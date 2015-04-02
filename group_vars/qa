@@ -86,7 +86,7 @@ mci_admin_host_name: bdshr-mci-admin-qa.twhosted.com
 
 # general 3rd party api definitions
 idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
-idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/loginForm
+idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/signin
 facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
