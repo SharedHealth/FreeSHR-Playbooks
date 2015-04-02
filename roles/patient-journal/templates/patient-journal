@@ -1,9 +1,9 @@
 export PATIENT_JOURNAL_PORT={{ patient_journal_port }}
-export MCI_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients
+export MCI_SERVER_PATIENTS_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients
 export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ bdshr_port }}{% endif %}
 
 export SHR_VERSION=
-export FACILITY_SERVER_URL={{facility_registry_url}}
+export FACILITY_REGISTRY_URL={{facility_registry_url}}
 export IDENTITY_SERVER_LOGIN_URL={{idp_user_login_url}}
 export IDENTITY_SERVER_USER_INFO_URL={{idp_user_info_url}}
 export IDP_CLIENT_ID={{ patient_journal_idp_client_id }}
