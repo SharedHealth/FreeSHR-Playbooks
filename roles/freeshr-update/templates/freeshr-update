@@ -17,8 +17,8 @@ export IDP_AUTH_TOKEN={{ bdshr_idp_auth_token }}
 export IDP_CLIENT_EMAIL={{ bdshr_idp_client_email }}
 export IDP_CLIENT_PASSWORD={{ bdshr_idp_client_password }}
 export DATABASE_URL=jdbc:mysql://localhost:3306/freeSHRUpdate?createDatabaseIfNotExist=true
-export DATABASE_USER=root
-export DATABASE_PASSWORD=password
+export DATABASE_USER=freeshrupdate
+export DATABASE_PASSWORD={{ freeshr_update_mysql_user_password }}
 export DATABASE_CHANGELOG_FILE=classpath:/db/db-changelog.xml
 export DATABASE_DRIVER=com.mysql.jdbc.Driver
 export DATABASE_CON_POOL_SIZE=10

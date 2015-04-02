@@ -1,7 +1,23 @@
 ---
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name=freeshrupdate
+    password={{ freeshr_update_mysql_user_password }}
+    priv=freeSHRUpdate.*:ALL,GRANT
+    state=present
+
+- name: Create freeSHRUpdate database
+  mysql_db:
+    name=freeSHRUpdate
+    state=present
+    login_user=freeshrupdate
+    login_password={{ freeshr_update_mysql_user_password }}
+
 - name: Clean existing rpm
   shell: rm -f /tmp/freeshr-update.rpm
-  
+
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/freeshr-update.rpm mode=755
 

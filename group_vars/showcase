@@ -49,6 +49,7 @@ freeshr_update_log_dir: /var/log/freeshr-update
 freeshr_update_log_level: DEBUG
 freeshr_update_interval_seconds: 120
 freeshr_retry_update_interval_seconds: 180
+freeshr_update_mysql_user_password: password
 
 patient_journal_port: 8090
 patient_journal_install_dir: /opt/patient-journal
