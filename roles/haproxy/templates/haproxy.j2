@@ -121,7 +121,7 @@ backend tr-server-node
 #---------------------------------------------------------------------
 backend pjournal-node
     balance     source
-    {% for host in groups['mci-ui'] %}
+    {% for host in groups['patient-journal-server'] %}
     server pj{{ loop.index }}  {{host}}:{{ patient_journal_port }} check
     {% endfor %}
     
