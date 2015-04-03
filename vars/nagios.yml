@@ -1,4 +1,5 @@
 #host_vars/nagios
+#host_vars/nagios
 
 nagios_users:
     - name: nagios
@@ -53,132 +54,55 @@ nagios_contactgroups:
 
 nagios_services:
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: Root Partition
       check_command: check_local_disk!20%!10%!/
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: Current Users
       check_command: check_local_users!20!50
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: Total Processes
       check_command: check_local_procs!250!400!RSZDT
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: Current Load
       check_command: check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: Swap Usage
       check_command: check_local_swap!20!10
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers,mci-servers,bahmni-servers,cassandra-servers
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
       service_description: SSH
       check_command: check_ssh
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: shr-servers
+      hostgroup_name: shr
       check_command: check_freeshr
       service_description: Check SHR Service
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: mci-servers
+      hostgroup_name: mci-server
       check_command: check_mci
       service_description: Check MCI Service
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: identity-servers
+      hostgroup_name: identity-server
       check_command: check_identityserver
       service_description: Check Identity Service
       notifications_enabled: 0
     - use: local-service
-      hostgroup_name: patient-journal-servers
+      hostgroup_name: patient-journal-server
       check_command: check_patientjournal
       service_description: Check Patient Journal Service
       notifications_enabled: 1
-
-      
-nagios_hosts:
-  - use: linux-server
-    name: qa-shr
-    alias: QA SHR
-    address: 172.18.46.57
-  - use: linux-server
-    name: showcase-shr
-    alias: Showcase SHR
-    address: 172.18.46.54
-  - use: linux-server
-    name: qa-mci
-    alias: QA MCI
-    address: 172.18.46.56
-  - use: linux-server
-    name: showcase-mci
-    alias: Showcase MCI
-    address: 172.18.46.53
-  - use: linux-server
-    name: perf-mci
-    alias: Perf MCI
-    address: 172.18.46.2
-  - use: linux-server
-    name: perf-shr1
-    alias: perf shr1
-    address: 172.18.46.2
-  - use: linux-server
-    name: perf-shr2
-    alias: perf shr2
-    address: 172.18.46.175
-  - use: linux-server
-    name: perf-shr3
-    alias: perf shr3
-    address: 172.18.46.174
-  - use: linux-server
-    name: perf-cassandra1
-    alias: perf cassandra 1
-    address: 172.18.46.7
-  - use: linux-server
-    name: perf-cassandra2
-    alias: perf cass 2
-    address: 172.18.46.8
-  - use: linux-server
-    name: perf-cassandra3
-    alias: perf cass 3
-    address: 172.18.46.15
-  - use: linux-server
-    name: perf-cassandra4
-    alias: perf cass 4
-    address: 172.18.46.16
-  - use: linux-server
-    name: qa-identity-server
-    alias: qa identity server
-    address: 172.18.46.56
-  - use: linux-server
-    name: showcase-identity-server
-    alias: showcase identity server
-    address: 172.18.46.53
-  - use: linux-server
-    name: qa-patientjournal-server
-    alias: qa patient journal server
-    address: 172.18.46.56
-  - use: linux-server
-    name: showcase-patientjournal-server
-    alias: showcase patient journal server
-    address: 172.18.46.53
-  - use: linux-server
-    name: showcase-bahmni
-    alias: showcase bahmni
-    address: 172.18.46.52
-  - use: linux-server
-    name: qa-bahmni
-    alias: qa bahmni
-    address: 172.18.46.55
-
-    
   
 
 

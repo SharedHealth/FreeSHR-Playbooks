@@ -94,7 +94,8 @@
      group=nagios
      mode=0664
   notify: Restart Apache
-
+  tags: hosts
+  
 - name: Add hostgroups.cfg
   template:
      src=hostgroups.cfg
@@ -103,7 +104,8 @@
      group=nagios
      mode=0664
   notify: Restart Apache
-
+  tags: hosts
+  
 - name: Add services.cfg
   template:
      src=services.cfg
@@ -112,6 +114,7 @@
      group=nagios
      mode=0664
   notify: Restart Apache
+  tags: hosts
   
 - name: Add timeperiods.cfg
   template:

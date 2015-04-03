@@ -34,9 +34,6 @@
 [haproxy]
 172.18.46.221 ansible_ssh_user=bdshr
 
-[logstash-server]
-
-
 [stg:children]
 cassandra_seed_node
 cassandra_node
