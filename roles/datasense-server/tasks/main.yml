@@ -1,4 +1,10 @@
 ---
+
+- name: install dependencies
+  yum: name={{ item }} state=latest
+  with_items:
+    - unzip
+  
 - name: Create mysql user
   mysql_user:
     login_user=root
