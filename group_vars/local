@@ -27,9 +27,10 @@ mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426
 mci_keyspace: mci
 mci_server_url: http://192.168.33.19:8081
 mci_log_level: DEBUG
-
 mci_ui_idp_client_id: 18551
 mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
+mci_cassandra_replication_strategy: SimpleStrategy
+mci_cassandra_replication_factor: 1
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
