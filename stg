@@ -34,6 +34,10 @@
 [haproxy]
 172.18.46.221 ansible_ssh_user=bdshr
 
+[external-registries]
+103.247.238.96 host_alias=hrmtest.dghs.gov.bd
+
+
 [stg:children]
 cassandra_seed_node
 cassandra_node

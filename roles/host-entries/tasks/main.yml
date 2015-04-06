@@ -17,3 +17,8 @@
 - name: "create hosts file entries for Patient Journal lookup"
   lineinfile: dest=/etc/hosts regexp='{{ pj_host_name }}' line="{{ groups['haproxy'][0] }} {{ pj_host_name }}" state=present
   when: exclude != "patient-journal" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
+
+- name: "create hosts file entries for external registry lookup"
+  lineinfile: dest=/etc/hosts regexp="{{ hostvars[groups['external-registries'][0]].host_alias }}" line="{{ groups['external-registries'][0] }} {{ hostvars[groups['external-registries'][0]].host_alias }}" state=present
+  when: exclude != "all" and "'external-registries' in group_names" and hostvars[groups['external-registries'][0]].host_alias is defined
+
