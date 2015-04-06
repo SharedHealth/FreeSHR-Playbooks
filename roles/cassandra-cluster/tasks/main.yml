@@ -58,14 +58,14 @@
 - name: Allow Opscenter monitoring
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 61620 -j ACCEPT -m comment --comment "OpscenterMonitoring"
   sudo: yes
-  when: iptablesrules.stdout.find("CassandraNative") == -1
+  when: iptablesrules.stdout.find("OpscenterMonitoring") == -1
   tags: iptables
 
 
 - name: Allow Opscenter agents
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 61621 -j ACCEPT -m comment --comment "OpscenterAgents"
   sudo: yes
-  when: iptablesrules.stdout.find("CassandraNative") == -1
+  when: iptablesrules.stdout.find("OpscenterAgents") == -1
   tags: iptables
 
 - name: save iptables

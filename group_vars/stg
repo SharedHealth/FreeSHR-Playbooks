@@ -13,6 +13,9 @@ bdshr_idp_client_email: mritunjd@thoughtworks.com
 bdshr_idp_client_password: thoughtworks
 bdshr_log_level: DEBUG
 bdshr_keyspace: freeshr
+bdshr_cassandra_replication_strategy: SimpleStrategy
+bdshr_cassandra_replication_factor: 1
+
 
 # seed data vars
 seed_data_locations_file: locations.cql
