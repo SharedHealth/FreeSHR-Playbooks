@@ -193,3 +193,12 @@
    - role: nagios
   tags:
     - nagios-server
+
+- hosts: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
+  sudo: True
+  vars_files:
+    - vars/nrpe.yml
+  roles:
+   - role: nagios-agent
+  tags:
+    - nagios-agents
