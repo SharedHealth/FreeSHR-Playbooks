@@ -27,6 +27,8 @@ lock_author_names: "yes"
 #variables for commands.cfg
 #Add your own commands here!
 nagios_commands:
+    - name: check_host_no_ping
+      line: $USER1$/check_dummy 0
     - name: check_freeshr
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
     - name: check_mci
@@ -75,11 +77,6 @@ nagios_services:
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Swap Usage
       check_command: check_local_swap!20!10
-      notifications_enabled: 1
-    - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
-      service_description: SSH
-      check_command: check_ssh
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: shr
