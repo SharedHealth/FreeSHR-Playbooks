@@ -30,8 +30,6 @@ nagios_commands:
     - name: check_freeshr
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
     - name: check_mci
-      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
-    - name: check_identityserver
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8080 -u /diagnostics/health
     - name: check_patientjournal
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8090 -u /diagnostics/health
@@ -54,32 +52,32 @@ nagios_contactgroups:
 
 nagios_services:
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Root Partition
       check_command: check_local_disk!20%!10%!/
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Current Users
       check_command: check_local_users!20!50
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Total Processes
       check_command: check_local_procs!250!400!RSZDT
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Current Load
       check_command: check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Swap Usage
       check_command: check_local_swap!20!10
       notifications_enabled: 1
     - use: local-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,identity-server,patient-journal-server,haproxy
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: SSH
       check_command: check_ssh
       notifications_enabled: 1
@@ -93,11 +91,6 @@ nagios_services:
       check_command: check_mci
       service_description: Check MCI Service
       notifications_enabled: 1
-    - use: local-service
-      hostgroup_name: identity-server
-      check_command: check_identityserver
-      service_description: Check Identity Service
-      notifications_enabled: 0
     - use: local-service
       hostgroup_name: patient-journal-server
       check_command: check_patientjournal
