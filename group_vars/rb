@@ -77,6 +77,8 @@ tr_server_port: 9080
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
 tr_mysql_user_password: terminologies
+tr_api_user_name: trapiuser
+tr_api_user_password: Trapiuser123
 
 # haproxy vars
 enable_proxy_routing: false
