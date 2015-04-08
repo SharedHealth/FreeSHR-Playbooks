@@ -101,6 +101,11 @@
  #   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
  #   sudo: yes
 
+- name: install system monitoring tools
+  yum: name={{ item }} state=present
+  with_items:
+    - dstat
+  
 - name: start cassandra
   service: name=cassandra state=started enabled=yes
   sudo: yes
