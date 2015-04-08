@@ -88,19 +88,19 @@
     - copy-config
 
 
+- name: allow cassandra user to write to commitlog
+  file:
+    path={{ cassandra_commit_log_dir }}
+    owner=cassandra
+    group=cassandra
+    follow=yes
+    recurse=yes
+    state=directory
     
-# - name: set hostname/ip for JMX
-#   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
-#   sudo: yes
-
-# - name: ensure tmp is not mounted as noexec
-#   command: mount -o remount,exec /dev/mapper/vg-tmp
-#   sudo: yes
+ # - name: set hostname/ip for JMX
+ #   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
+ #   sudo: yes
 
 - name: start cassandra
   service: name=cassandra state=started enabled=yes
   sudo: yes
-
-#  set /etc/security/limits.d/90-nproc.conf -> * - nproc 32768
-#  sudo sysctl -p
-#  sudo swapoff --all
