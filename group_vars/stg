@@ -82,14 +82,14 @@ tr_api_user_password: Trapiuser123
 
 # haproxy vars
 enable_proxy_routing: true
-shr_host_name: shr.twhosted.com
-mci_host_name: mci.twhosted.com
-tr_host_name: tr.twhosted.com
+shr_host_name: shrstg.twhosted.com
+mci_host_name: mcistg.twhosted.com
+tr_host_name: trstg.twhosted.com
 fr_host_name: hrmtest.dghs.gov.bd
 lr_host_name: hrmtest.dghs.gov.bd
 pr_host_name: hrmtest.dghs.gov.bd
-pj_host_name: pj.twhosted.com
-mci_admin_host_name: mci-admin-qa.twhosted.com
+pj_host_name: pjstg.twhosted.com
+mci_admin_host_name: mci-adminstg.twhosted.com
 
 
 # general 3rd party api definitions
