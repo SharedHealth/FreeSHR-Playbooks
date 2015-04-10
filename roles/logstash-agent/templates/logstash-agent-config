@@ -1,7 +1,0 @@
-{
-  "network": {
-    "servers": [ "{{ groups['logstash-server'][0] }}:5000" ],
-    "timeout": 15,
-  },
-  "files": {{ log_files | to_json }}
-}
