@@ -41,6 +41,9 @@
 [nagios_hosts]
 172.18.46.2 ansible_ssh_user=bdshr
 
+[dhis]
+172.18.46.225 ansible_ssh_user=bdshr
+
 [qa:children]
 cassandra_seed_node
 cassandra_node
