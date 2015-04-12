@@ -1,5 +1,5 @@
 parameters:
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: {{mci_ui_secret}}
     api_endpoint: {% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{mci_host_name}}{% else %}http://{{groups['mci-server'][0]}}:{{mci_port}}{% endif %}/api/v1
     sso_endpoint: {{idp_sso_base_url}}
     app_token: {{mci_ui_idp_auth_token}}
