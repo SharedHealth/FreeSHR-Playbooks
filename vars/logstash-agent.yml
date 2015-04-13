@@ -1,9 +1,0 @@
----
-logstash_repo_key: "https://packages.elasticsearch.org/GPG-KEY-elasticsearch"
-logstash_yum_config: "/etc/yum.repos.d/logstashforwarder.repo"
-
-log_files:
-  - paths:
-      - /var/log/*.log
-    fields:
-      type: syslog
