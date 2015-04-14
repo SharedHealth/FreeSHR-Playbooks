@@ -3,7 +3,7 @@
   with_items:
     - nrpe
     - nagios-plugins-all
-
+    - check_nrpe
 
 - name: copy nrpe.cfg
   template:
@@ -32,3 +32,10 @@
   sudo: yes
   tags: iptables
 
+- name: create entry for failed events check in nrpe.cfg file at datasense server
+  lineinfile: dest=/etc/nagios/nrpe.cfg line='{{ datasense_nrpe_failed_events_cmd }} -u {{ datasense_mysql_monitoring_user }} -p {{ datasense_mysql_monitoring_pass }}'
+  when: "'datasense' in group_names"
+
+- name: create entry for failed events check in nrpe.cfg file at freeshr update server
+  lineinfile: dest=/etc/nagios/nrpe.cfg line='{{ freeshr_update_nrpe_failed_events_cmd }} -u {{ freeshr_update_mysql_monitoring_user }} -p {{ freeshr_update_mysql_monitoring_pass }}'
+  when: "'freeshr-update-server' in group_names"

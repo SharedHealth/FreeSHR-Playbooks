@@ -16,6 +16,7 @@
     - nagios-plugins-all
     - libselinux-python
     - python-passlib
+    - check_nrpe
 
 - name: Find iptable rules
   shell: iptables -L

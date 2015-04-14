@@ -16,6 +16,15 @@
     priv=freeSHRUpdate.*:ALL,GRANT
     state=present
 
+- name: Create mysql user for nagios monitoring
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name={{ freeshr_update_mysql_monitoring_user }}
+    password={{ freeshr_update_mysql_monitoring_pass }}
+    priv=freeSHRUpdate.*:SELECT,GRANT
+    state=present
+
 - name: Clean existing rpm
   shell: rm -f /tmp/freeshr-update.rpm
 

@@ -35,6 +35,8 @@ nagios_commands:
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8080 -u /diagnostics/health
     - name: check_patientjournal
       line: $USER1$/check_http -H $HOSTADDRESS$ -p 8090 -u /diagnostics/health
+    - name: check_nrpe
+      line: $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
       
 #variables for contacts.cfg
 #Add your own contacts here!
@@ -93,7 +95,16 @@ nagios_services:
       check_command: check_patientjournal
       service_description: Check Patient Journal Service
       notifications_enabled: 1
-  
+    - use: local-service
+      hostgroup_name: datasense
+      check_command: check_nrpe!ds_check_failed_events
+      service_description: Datasense Failed Events Check
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: freeshr-update-server
+      check_command: check_nrpe!fsu_check_failed_events
+      service_description: FreeSHR Update Failed Events Check
+      notifications_enabled: 1
 
 
 #variables for nagios.cfg

@@ -4,7 +4,6 @@
   yum: name={{ item }} state=latest
   with_items:
     - unzip
-  
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
@@ -36,6 +35,15 @@
     name=datasense
     password={{ datasense_mysql_user_password }}
     priv=datasense.*:ALL,GRANT
+    state=present
+
+- name: Create mysql user for nagios monitoring
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name={{ datasense_mysql_monitoring_user }}
+    password={{ datasense_mysql_monitoring_pass }}
+    priv=datasense.*:SELECT,GRANT
     state=present
 
 - name: Remove existing installations if any
