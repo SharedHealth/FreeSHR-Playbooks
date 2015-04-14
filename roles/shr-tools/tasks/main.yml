@@ -1,6 +1,7 @@
 - name: install lsof, htop, iftop
   yum: name={{ item }} state=present
   with_items:
+    - wget
     - lsof
     - htop
     - iftop

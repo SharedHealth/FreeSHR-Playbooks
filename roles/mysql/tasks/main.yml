@@ -17,9 +17,6 @@
     - MySQL-python
   when: anyMysqlPresent | success and mysqlVersion.stdout.find('5.1') != -1
 
-- name: Install wget
-  yum: name=wget state=present
-
 - name: Check if RPM is present
   stat: path=mysql-community-release-el6-5.noarch.rpm
   register: mysqlRPM

@@ -5,14 +5,6 @@
   with_items:
     - unzip
   
-- name: Create mysql user
-  mysql_user:
-    login_user=root
-    login_password={{ mysql_root_password }}
-    name=datasense
-    password={{ datasense_mysql_user_password }}
-    priv=datasense.*:ALL,GRANT
-    state=present
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
@@ -34,8 +26,17 @@
   mysql_db:
     name=datasense
     state=present
-    login_user=datasense
-    login_password={{ datasense_mysql_user_password }}
+    login_user=root
+    login_password={{ mysql_root_password }}
+
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name=datasense
+    password={{ datasense_mysql_user_password }}
+    priv=datasense.*:ALL,GRANT
+    state=present
 
 - name: Remove existing installations if any
   yum: name=datasense.noarch state=absent
