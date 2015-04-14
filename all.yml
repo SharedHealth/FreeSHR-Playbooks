@@ -194,7 +194,7 @@
   tags:
     - nagios-server
 
-- hosts: all
+- hosts: all:!dhis:!external-registries
   sudo: True
   vars_files:
     - vars/nrpe.yml
