@@ -55,6 +55,9 @@ datasense_cloud_hosted_facility_ids: 10019841
 datasense_mysql_user_password: datasense
 datasense_mysql_monitoring_user: dsmonitor
 datasense_mysql_monitoring_pass: monitorpass
+datasense_encounter_sync_interval: 10000
+datasense_tr_sync_interval: 30000
+datasense_max_failed_events: 50
 
 # freeshr update vars
 freeshr_update_install_dir: /opt/freeshr-update
