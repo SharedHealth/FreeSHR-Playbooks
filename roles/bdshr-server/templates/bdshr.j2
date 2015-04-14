@@ -1,11 +1,9 @@
 export MCI_PATIENT_PATH=/api/v1/patients
-export TR_USER={{tr_api_user_name}}
-export TR_PASSWORD={{tr_api_user_password}}
+export TR_USER=admin
+export TR_PASSWORD=Admin123
 export CASSANDRA_KEYSPACE={{ bdshr_keyspace }}
 export CQL_VERSION=3.0.0
 export CASSANDRA_VERSION=2
-export CASSANDRA_USER=cassandra
-export CASSANDRA_PASSWORD=cassandra
 export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
 export CASSANDRA_PORT=9042
 export CASSANDRA_TIMEOUT=60000
@@ -30,3 +28,5 @@ export SHR_VERSION=v1
 export IS_LATEST_SHR=true
 export LOCAL_CACHE_TTL={{ bdshr_local_cache_ttl }}
 export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
+export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
+
