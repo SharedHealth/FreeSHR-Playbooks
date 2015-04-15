@@ -13,6 +13,8 @@ bdshr_log_level: DEBUG
 bdshr_keyspace: freeshr
 bdshr_cassandra_replication_strategy: SimpleStrategy
 bdshr_cassandra_replication_factor: 1
+bdshr_cassandra_user: bdshr
+bdshr_cassandra_pass: bdshr
 
 
 seed_data_locations_file: locations.cql
@@ -54,6 +56,8 @@ datasense_mysql_monitoring_pass: monitorpass
 datasense_encounter_sync_interval: 10000
 datasense_tr_sync_interval: 30000
 datasense_max_failed_events: 50
+datasense_failed_events_warn_threshold: 34
+datasense_failed_events_error_threshold: 49
 
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
@@ -63,6 +67,8 @@ freeshr_retry_update_interval_seconds: 180
 freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
 freeshr_update_mysql_monitoring_pass: monitorpass
+freeshr_update_failed_events_warn_threshold: 14
+freeshr_update_failed_events_error_threshold: 19
 
 patient_journal_port: 8090
 patient_journal_install_dir: /opt/patient-journal
@@ -108,5 +114,6 @@ cassandra_cluster_name: 'bdshr'
 #fhir vars
 fhir_document_schema_version: v1
 
-datasense_nrpe_failed_events_cmd: command[ds_check_failed_events]=/usr/lib64/nagios/plugins/check_mysql_query -q "select count(*) from datasense.failed_events" -w 0:34 -c 49 -P 3306
-freeshr_update_nrpe_failed_events_cmd: command[fsu_check_failed_events]=/usr/lib64/nagios/plugins/check_mysql_query -q "select count(*) from freeSHRUpdate.failed_events" -w 0:14 -c 19 -P 3306
+
+#ntp
+freeshr_ntp_timezone: Asia/Calcutta

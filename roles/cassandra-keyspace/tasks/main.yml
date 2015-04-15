@@ -1,0 +1,10 @@
+---
+
+- name: copy create user script
+  template:
+    src=create_keyspace.cql dest=/tmp/create_keyspace.cql
+
+- name: execute create user script
+  command: cqlsh -h {{ groups['cassandra_seed_node'][0] }} -u {{ cassandra_admin_user }} -p {{ cassandra_admin_pass }} -f /tmp/cassandra_user.cql
+  register: command_result
+  failed_when: "'Exception' in command_result.stderr"
