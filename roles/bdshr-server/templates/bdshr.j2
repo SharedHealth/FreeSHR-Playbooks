@@ -32,3 +32,4 @@ export LOCAL_CACHE_TTL={{ bdshr_local_cache_ttl }}
 export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
 export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
 
+export IDENTITY_CACHE_TTL={{ bdshr_identity_cache_ttl }}

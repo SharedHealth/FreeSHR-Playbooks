@@ -4,5 +4,30 @@
 172.18.46.15 ansible_ssh_port=22 ansible_ssh_user=bdshr
 172.18.46.8 ansible_ssh_port=22 ansible_ssh_user=bdshr
 
+[cassandra_seed_node]
+172.18.46.16 ansible_ssh_port=22 ansible_ssh_user=bdshr 
+
+[shr]
+172.18.46.2 ansible_ssh_port=22 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.175 ansible_ssh_port=22 ansible_ssh_user=bdshr
+172.18.46.174 ansible_ssh_port=22 ansible_ssh_user=bdshr
+
 [opscenter_server]
 172.18.46.2 ansible_ssh_port=22 ansible_ssh_user=bdshr 
+
+[mci-server]
+172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=2
+
+[tr-server]
+172.18.46.53 ansible_ssh_user=bdshr
+
+
+[external-registries]
+103.247.238.96 host_alias=hrmtest.dghs.gov.bd
+
+[perf:children]
+cassandra_node
+shr
+opscenter_server
+mci-server
+tr-server

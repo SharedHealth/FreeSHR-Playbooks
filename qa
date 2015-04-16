@@ -57,3 +57,5 @@ datasense
 identity-server
 patient-journal-server
 haproxy
+dhis
+nagios_hosts

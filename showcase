@@ -32,9 +32,6 @@
 [patient-journal-server]
 172.18.46.53 ansible_ssh_user=bdshr
 
-[logstash-server]
-172.18.46.2 ansible_ssh_user=bdshr
-
 [haproxy]
 172.18.46.52 ansible_ssh_user=bdshr
 
