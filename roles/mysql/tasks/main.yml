@@ -53,8 +53,13 @@
     - mysql-community-client
     - MySQL-python
 
+- name: Copy mysql config
+  template: src=my.cnf.j2
+    dest=/etc/my.cnf
+    mode=755
+
 - name: Start Mysql Service
-  action: service name=mysqld state=started enabled=true
+  action: service name=mysqld state=restarted enabled=true
 
 - name: Update mysql root password
   command: /usr/bin/mysqladmin -u root password {{ mysql_root_password }}
