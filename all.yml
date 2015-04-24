@@ -15,7 +15,16 @@
   roles:
     - { role: opscenter }
   tags:
-    - opscenter
+    - opscenter-server
+
+- name: "opscenter-agents"
+  sudo: yes
+  hosts: 
+    - cassandra_node
+  roles:
+    - { role: opscenter }
+  tags:
+    - opscenter-agent
 
 - name: "shr"
   hosts: shr
