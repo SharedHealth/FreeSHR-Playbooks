@@ -25,7 +25,7 @@
 
 - name: copy rsyslog configuration
   template:
-    name=haproxy.rsyslog.j2
+    src=haproxy.rsyslog.j2
     dest=/etc/rsyslog.d/haproxy.conf
 
 - name: enable rsyslog udp server
