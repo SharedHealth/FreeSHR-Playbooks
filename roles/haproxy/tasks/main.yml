@@ -46,6 +46,8 @@
     line=$UDPServerAddress 127.0.0.1
     insertafter=^\$UDPServerRun
     state=present
+
+- service: name=rsyslog state=restarted
   
 - service: name=haproxy state=restarted enabled=yes
 
