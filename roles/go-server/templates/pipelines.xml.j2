@@ -884,7 +884,7 @@
             <tasks>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>ansible-playbook /playbooks/FreeSHR-Playbooks/all.yml -t mci-seed-data -i /playbooks/FreeSHR-Playbooks/qa --vault-password-file ~/.vaultpass.txt --extra-vars="mci_keyspace=mci_seed"</arg>
+                <arg>ansible-playbook /playbooks/FreeSHR-Playbooks/all.yml -t mci-seed-data -i /playbooks/FreeSHR-Playbooks/qa --vault-password-file ~/.vaultpass.txt</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -935,7 +935,7 @@
             <tasks>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-locations --extra-vars="shr_client_database=openmrs_fresh" --vault-password-file ~/.vaultpass.txt</arg>
+                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-locations --vault-password-file ~/.vaultpass.txt</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -944,7 +944,7 @@
             <tasks>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-facilities --extra-vars="shr_client_database=openmrs_fresh" --vault-password-file ~/.vaultpass.txt</arg>
+                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-facilities --vault-password-file ~/.vaultpass.txt</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -953,7 +953,7 @@
             <tasks>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-providers --extra-vars="shr_client_database=openmrs_fresh" --vault-password-file ~/.vaultpass.txt</arg>
+                <arg>ansible-deploy /playbooks/FreeSHR-Bahmni-Playbooks/shr-client.yml -i /playbooks/FreeSHR-Bahmni-Playbooks/qa -t shr-client-providers --vault-password-file ~/.vaultpass.txt</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
