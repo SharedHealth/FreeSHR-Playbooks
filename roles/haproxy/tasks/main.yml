@@ -22,5 +22,30 @@
 
 - name: save iptables
   command: service iptables save
+
+- name: copy rsyslog configuration
+  template:
+    name=haproxy.rsyslog.j2
+    dest=/etc/rsyslog.d/haproxy.conf
+
+- name: enable rsyslog udp server
+  lineinfile:
+    dest=/etc/rsyslog.cfg
+    line=$ModLoad imudp
+    state=present
+
+- name: rsyslog udp server configuration
+  lineinfile:
+    dest=/etc/rsyslog.cfg
+    line=$UDPServerRun 514
+    state=present
+
+- name: rsyslog udp allow only localhost
+  lineinfile:
+    dest=/etc/rsyslog.cfg
+    line=$UDPServerAddress 127.0.0.1
+    insertafter=^\$UDPServerRun
+    state=present
   
 - service: name=haproxy state=restarted enabled=yes
+
