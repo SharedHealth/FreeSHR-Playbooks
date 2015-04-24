@@ -30,19 +30,19 @@
 
 - name: enable rsyslog udp server
   lineinfile:
-    dest=/etc/rsyslog.cfg
+    dest=/etc/rsyslog.conf
     line='$ModLoad imudp'
     state=present
 
 - name: rsyslog udp server configuration
   lineinfile:
-    dest=/etc/rsyslog.cfg
+    dest=/etc/rsyslog.conf
     line='$UDPServerRun 514'
     state=present
 
 - name: rsyslog udp allow only localhost
   lineinfile:
-    dest=/etc/rsyslog.cfg
+    dest=/etc/rsyslog.conf
     line='$UDPServerAddress 127.0.0.1'
     insertafter='^\$UDPServerRun'
     state=present
