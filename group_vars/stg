@@ -7,9 +7,9 @@ bdshr_install_dir: /opt/bdshr
 bdshr_log_dir: /var/log/bdshr
 bdshr_port: 9081
 bdshr_local_cache_ttl: 86400
-bdshr_idp_client_id: 18550
-bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
-bdshr_idp_client_email: mritunjd@thoughtworks.com
+bdshr_idp_client_id: 18581
+bdshr_idp_auth_token: 45eda6b14c07b5774661f099ff3603358fedbb08a82ec0376099c3c72f721d22
+bdshr_idp_client_email: shr-server@local.staging.com
 bdshr_idp_client_password: thoughtworks
 bdshr_log_level: INFO
 bdshr_keyspace: freeshr
@@ -29,14 +29,14 @@ mci_seed_data_source: /var/go/seed-data/mci
 mci_install_dir: /opt/mci
 mci_log_dir: /var/log/mci
 mci_port: 9082
-mci_idp_client_id: 18554
-mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+mci_idp_client_id: 18591
+mci_idp_auth_token: 63e46ec753faf7dc3188da1c273cdda52e44aeb1c5e1157c896e508b80a53e3c
 mci_keyspace: mci
 mci_server_url: http://mci.twhosted.com
 mci_log_level: INFO
 mci_ui_secret: 8B6k5QU0fAH5pIKlwDSKdp9Aakz5K20Z
-mci_ui_idp_client_id: 18551
-mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
+mci_ui_idp_client_id: 18591
+mci_ui_idp_auth_token: 63e46ec753faf7dc3188da1c273cdda52e44aeb1c5e1157c896e508b80a53e3c
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 
@@ -50,9 +50,9 @@ datasense_death_codes: 419620001,22473b09-9dfb-47ce-b117-32a10e5b9a5f
 datasense_date_of_death_uuid: a6e20fe1-4044-4ce7-8440-577f7f814765
 datasense_circumstances_of_death_uuid: 9bd4b258-eb1d-4762-bcf7-e38183069e0c
 datasense_cause_of_death_uuid: 9651ea62-02d6-4049-a186-3b4e0622bccb
-datasense_idp_client_id: 18552
-datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
-datasense_idp_client_email: rappasam@thoughtworks.com
+datasense_idp_client_id: 18583
+datasense_idp_auth_token: d90159ddeeb0cf2a90da6c525375dbf5ca87cc057cd95c9d65501b66f253d2a0
+datasense_idp_client_email: datasense@local.staging.com
 datasense_idp_client_password: thoughtworks
 datasense_cloud_hosted_facility_ids: 10019841
 datasense_mysql_user_password: datasense
@@ -80,8 +80,8 @@ freeshr_update_failed_events_error_threshold: 19
 patient_journal_port: 9083
 patient_journal_install_dir: /opt/patient-journal
 patient_journal_log_dir: /var/log/patient-journal
-patient_journal_idp_client_id: 18553
-patient_journal_idp_auth_token: 36007186ea16c1590af00cd94c0d63ddf891476a93d8696341832a217fcdf0b9
+patient_journal_idp_client_id: 18585
+patient_journal_idp_auth_token: 06078120b0062e7e16f1599696341d415487429cd51770bcbff8a452d93d469b
 patient_journal_session_timeout_seconds: 300
 patient_journal_log_level: INFO
 
