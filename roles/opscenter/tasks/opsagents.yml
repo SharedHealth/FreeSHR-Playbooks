@@ -1,55 +1,55 @@
 - name: Register iptable rules
   shell: iptables -L
   register: iptablesrules
-  sudo: yes
+
 
 - name: Allow Opscenter monitoring
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 61620 -j ACCEPT -m comment --comment "OpscenterMonitoring"
-  sudo: yes
+
   when: iptablesrules.stdout.find("OpscenterMonitoring") == -1
 
 - name: Allow Opscenter agents
   command: /sbin/iptables -I INPUT 1 -p tcp --dport 61621 -j ACCEPT -m comment --comment "OpscenterAgents"
-  sudo: yes
+
   when: iptablesrules.stdout.find("OpscenterAgents") == -1
 
 - name: save iptables
   shell: iptables-save > /etc/sysconfig/iptables
-  sudo: yes
+
 
 - name: remove existing agent
   yum: name=datastax-agent state=absent
-  sudo: yes
+
 
 - name: install agent
   yum: name=datastax-agent state=present
-  sudo: yes
+
 
 - name: stop agent
   service: name=datastax-agent state=stopped
-  sudo: yes
+
   
 - name: set server address
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='stomp_interface' line='stomp_interface: 172.18.46.2' backup=yes create=yes" 
-  sudo: yes
+
 
 - name: disable ssl
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='use_ssl' line='use_ssl: 0' backup=yes create=yes"
-  sudo: yes
+
 
 - name: set local_address
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='local_address' line='local_address: {{ inventory_hostname }}' backup=yes create=yes"
-  sudo: yes
+
 
 - name: set agent_rpc_broadcast_address
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='agent_rpc_broadcast_interface' line='agent_rpc_broadcast_address: {{ inventory_hostname }}' backup=yes create=yes"
-  sudo: yes
+
 
 - name: set agent_rpc_interface
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='agent_rpc_interface' line='agent_rpc_interface: {{ inventory_hostname }}' backup=yes create=yes"
-  sudo: yes
+
 
 - name: start agent
-  service: name=datastax-agent state=started
-  sudo: yes
+  service: name=datastax-agent state=started enabled=yes
+
   
