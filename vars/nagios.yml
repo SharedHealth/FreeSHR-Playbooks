@@ -29,12 +29,6 @@ lock_author_names: "yes"
 nagios_commands:
     - name: check_host_no_ping
       line: $USER1$/check_dummy 0
-    - name: check_freeshr
-      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8081 -u /diagnostics/health
-    - name: check_mci
-      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8080 -u /diagnostics/health
-    - name: check_patientjournal
-      line: $USER1$/check_http -H $HOSTADDRESS$ -p 8090 -u /diagnostics/health
     - name: check_nrpe
       line: $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
       
@@ -82,23 +76,38 @@ nagios_services:
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: shr
-      check_command: check_freeshr
+      check_command: check_nrpe!check_freeshr
       service_description: Check SHR Service
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: mci-server
-      check_command: check_mci
+      check_command: check_nrpe!check_mci
       service_description: Check MCI Service
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: patient-journal-server
-      check_command: check_patientjournal
+      check_command: check_nrpe!check_pj
       service_description: Check Patient Journal Service
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: datasense
       check_command: check_nrpe!ds_check_failed_events
       service_description: Datasense Failed Events Check
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: datasense
+      check_command: check_nrpe!check_datasense
+      service_description: Check Datasense server 
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: mci-ui
+      check_command: check_nrpe!check_mciui
+      service_description: Check MCI Admin server 
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: tr-server
+      check_command: check_nrpe!check_tr
+      service_description: Check Terminology server 
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: freeshr-update-server

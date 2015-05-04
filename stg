@@ -5,7 +5,6 @@
 [cassandra_seed_node]
 172.18.46.167
 
-[opscenter-server]
 
 [shr]
 172.18.46.167 ansible_ssh_user=bdshr run_migrations=yes
@@ -41,7 +40,6 @@
 [stg:children]
 cassandra_seed_node
 cassandra_node
-opscenter-server
 shr
 freeshr-update-server
 mci-server

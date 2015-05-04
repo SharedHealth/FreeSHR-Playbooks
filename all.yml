@@ -185,7 +185,7 @@
   tags:
     - setup
 
-- hosts: all
+- hosts: all!dhis:!external-registries
   sudo: yes
   name: Gather facts for all hosts, to be used for nagios-server setup
   tasks:
