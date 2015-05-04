@@ -77,17 +77,32 @@ nagios_services:
     - use: local-service
       hostgroup_name: shr
       check_command: check_nrpe!check_freeshr
-      service_description: Check SHR Service
+      service_description: Check SHR Service Available
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: shr
+      check_command: check_nrpe!check_freeshr_svc
+      service_description: Check SHR Service Process
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: mci-server
       check_command: check_nrpe!check_mci
-      service_description: Check MCI Service
+      service_description: Check MCI Service Available
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: mci-server
+      check_command: check_nrpe!check_mci_svc
+      service_description: Check MCI Service Process
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: patient-journal-server
       check_command: check_nrpe!check_pj
-      service_description: Check Patient Journal Service
+      service_description: Check Patient Journal Available
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: patient-journal-server
+      check_command: check_nrpe!check_pj_svc
+      service_description: Check Patient Journal Process
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: datasense
@@ -96,8 +111,8 @@ nagios_services:
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: datasense
-      check_command: check_nrpe!check_datasense
-      service_description: Check Datasense server 
+      check_command: check_nrpe!check_datasense_svc
+      service_description: Check Datasense server process
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: mci-ui
@@ -113,6 +128,11 @@ nagios_services:
       hostgroup_name: freeshr-update-server
       check_command: check_nrpe!fsu_check_failed_events
       service_description: FreeSHR Update Failed Events Check
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: freeshr-update-server
+      check_command: check_nrpe!check_freeshr_update_svc
+      service_description: FreeSHR Update Process Check
       notifications_enabled: 1
 
 
