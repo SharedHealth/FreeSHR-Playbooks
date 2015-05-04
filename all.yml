@@ -164,14 +164,14 @@
   tags:
     - copy-go-keys
 
-- hosts: all
+- hosts: all:!external-registries
   sudo: yes
   roles:
     - {role: selinux, selinux_state: permissive, selinux_policy: targeted }
   tags:
     - selinux
     
-- hosts: all
+- hosts: all:!dhis:!external-registries
   sudo: yes
   roles:
     - { role: shr-base }
