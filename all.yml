@@ -92,6 +92,17 @@
   tags:
     - tr-feed-server
      
+- hosts: tr-server
+  sudo: yes
+  vars:
+    data_destination_dir: "{{ tr_seed_data_dest_dir }}"
+    data_source_dir: "{{ tr_seed_data_source }}"
+    data_file: "{{ tr_seed_data_file }}"
+  roles:
+   - role: tr-seed-data
+  tags:
+    - tr-seed-data
+
 - hosts: datasense
   sudo: yes
   roles:
