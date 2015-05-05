@@ -125,6 +125,11 @@ nagios_services:
       service_description: Check Terminology server 
       notifications_enabled: 1
     - use: local-service
+      hostgroup_name: tr-server
+      check_command: check_nrpe!check_tr_svc
+      service_description: Check Terminology server process
+      notifications_enabled: 1
+    - use: local-service
       hostgroup_name: freeshr-update-server
       check_command: check_nrpe!fsu_check_failed_events
       service_description: FreeSHR Update Failed Events Check

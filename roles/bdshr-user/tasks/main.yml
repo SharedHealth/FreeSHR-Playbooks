@@ -11,7 +11,7 @@
     - update-user
 
 - name: configure sudoers
-  lineinfile: "dest=/etc/sudoers state=present backup=yes regexp='^%bdshr' insertafter='^# %wheel' line='bdshr ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
+  lineinfile: "dest=/etc/sudoers state=present backup=yes regexp='^bdshr' insertafter='^# %wheel' line='bdshr ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
   sudo: yes
 
 - name: allow bdshr ssh access

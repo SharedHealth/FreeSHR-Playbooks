@@ -36,6 +36,21 @@
 [external-registries]
 103.247.238.96 host_alias=hrmtest.dghs.gov.bd
 
+[bahmni-app-active]
+172.18.46.163 ansible_ssh_user=bdshr
+172.18.46.169 ansible_ssh_user=bdshr
+
+[bahmni-app-passive]
+172.18.46.165 ansible_ssh_user=bdshr
+172.18.46.161 ansible_ssh_user=bdshr
+
+[bahmni-db-active]
+172.18.46.163 ansible_ssh_user=bdshr
+172.18.46.169 ansible_ssh_user=bdshr
+
+[bahmni-db-passive]
+172.18.46.165 ansible_ssh_user=bdshr
+172.18.46.161 ansible_ssh_user=bdshr
 
 [stg:children]
 cassandra_seed_node
@@ -49,3 +64,7 @@ datasense
 identity-server
 patient-journal-server
 haproxy
+bahmni-db-passive
+bahmni-db-active
+bahmni-app-passive
+bahmni-app-active

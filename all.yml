@@ -182,7 +182,7 @@
   tags:
     - selinux
     
-- hosts: all:!dhis:!external-registries
+- hosts: all
   sudo: yes
   roles:
     - { role: shr-base }
@@ -196,14 +196,6 @@
   tags:
     - setup
 
-- hosts: all!dhis:!external-registries
-  sudo: yes
-  name: Gather facts for all hosts, to be used for nagios-server setup
-  tasks:
-    - fail: msg=""
-      when: false
-  tags: nagios-server
-      
 - hosts: nagios_hosts
   sudo: yes
   vars_files:
