@@ -5,6 +5,8 @@
 [cassandra_seed_node]
 172.18.46.167
 
+[opscenter-server]
+172.18.46.221
 
 [shr]
 172.18.46.167 ansible_ssh_user=bdshr run_migrations=yes

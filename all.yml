@@ -11,20 +11,20 @@
 - name: "opscenter"
   sudo: yes
   hosts: 
-    - opscenter_server
+    - opscenter-server
   roles:
     - { role: opscenter }
   tags:
-    - opscenter-server
+    - opscenterserver
 
-- name: "opscenter-agents"
+- name: "opscenter-agent"
   sudo: yes
   hosts: 
     - cassandra_node
   roles:
     - { role: opscenter }
   tags:
-    - opscenter-agent
+    - opscenteragent
 
 - name: "shr"
   hosts: shr

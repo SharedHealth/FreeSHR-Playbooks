@@ -30,7 +30,7 @@
 
   
 - name: set server address
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='stomp_interface' line='stomp_interface: 172.18.46.2' backup=yes create=yes" 
+  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='stomp_interface' line='stomp_interface: {{ groups['opscenter-server'][0] }}' backup=yes create=yes" 
 
 
 - name: disable ssl
