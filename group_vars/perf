@@ -123,3 +123,5 @@ fhir_document_schema_version: v1
 freeshr_ntp_timezone: Asia/Calcutta
 #nagios - nrpe
 nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.2
+nagios_openmrs_user: admin
+nagios_openmrs_user_password: test

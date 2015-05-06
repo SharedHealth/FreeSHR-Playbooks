@@ -31,7 +31,15 @@ nagios_commands:
       line: $USER1$/check_dummy 0
     - name: check_nrpe
       line: $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
-      
+    - name: check_mysql_replication
+      line: $USER1$/check_mysql -H $ARG3$ -u$ARG1$ -p$ARG2$  -S -w30 -c60
+    - name: check_apache_httpd
+      line: $USER1$/check_http -H $HOSTADDRESS$ --ssl -u /bahmni/registration/ -e "HTTP/1.1 200"
+    - name: check_openmrs_access_to_db
+      line: $USER1$/check_http -H $HOSTADDRESS$ -u /openmrs/ws/rest/v1/patient?q=GAN200000 --ssl -a$ARG1$:$ARG2$
+    - name: check_failed_events_in_mysql
+      line: $USER1$/check_mysql_query --username=$ARG1$ --password=$ARG2$ --database=$ARG3$ --critical=$ARG4$ --query="SELECT COUNT(*) as result from failed_events"
+
 #variables for contacts.cfg
 #Add your own contacts here!
 
@@ -51,28 +59,33 @@ nagios_contactgroups:
 nagios_services:
     - use: local-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
-      service_description: Root Partition
-      check_command: check_local_disk!20%!10%!/
+      service_description: Disk space /
+      check_command:  check_nrpe!check_disk
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
+      service_description: Disk space /tmp
+      check_command:  check_nrpe!check_disk_tmp
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Current Users
-      check_command: check_local_users!20!50
+      check_command:  check_nrpe!check_users
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Total Processes
-      check_command: check_local_procs!250!400!RSZDT
+      check_command:  check_nrpe!check_total_procs
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Current Load
-      check_command: check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
+      check_command:  check_nrpe!check_load
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy
       service_description: Swap Usage
-      check_command: check_local_swap!20!10
+      check_command:  check_nrpe!check_swap
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: shr
@@ -111,6 +124,11 @@ nagios_services:
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: datasense
+      check_command: check_nrpe!check_mysql
+      service_description: Datasense mysql access
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: datasense
       check_command: check_nrpe!check_datasense_svc
       service_description: Check Datasense server process
       notifications_enabled: 1
@@ -131,6 +149,11 @@ nagios_services:
       notifications_enabled: 1
     - use: local-service
       hostgroup_name: freeshr-update-server
+      check_command: check_nrpe!check_mysql
+      service_description: FreeSHR mysql access
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: freeshr-update-server
       check_command: check_nrpe!fsu_check_failed_events
       service_description: FreeSHR Update Failed Events Check
       notifications_enabled: 1
@@ -139,8 +162,39 @@ nagios_services:
       check_command: check_nrpe!check_freeshr_update_svc
       service_description: FreeSHR Update Process Check
       notifications_enabled: 1
+# bahmni services
+    - use: local-service
+      hostgroup_name: bahmni-app-active
+      service_description: Bahmni openmrs access to db
+      check_command: check_nrpe!check_openmrs_access_to_db
+      notifications_enabled: 1
+    - use: emrhighlyavailableservice
+      hostgroup_name: bahmni-app-active
+      service_description: Bahmni Apache
+      check_command: check_nrpe!check_apache_httpd
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: bahmni-db-active
+      service_description: Bahmni access to mysql
+      check_command: check_nrpe!check_mysql
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: bahmni-db-active
+      service_description: Bahmni failed events
+      check_command: check_nrpe!check_failed_events_in_mysql
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: bahmni-db-passive
+      service_description: Bahmni access to mysql
+      check_command: check_nrpe!check_mysql
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: bahmni-db-passive
+      service_description: Bahmni mysql replication
+      check_command: check_nrpe!check_mysql_replication
+      notifications_enabled: 1
 
-
+      
 #variables for nagios.cfg
 #Don't forget to put the definitions for the other hosts out of comment, otherwise nagios won't recognize this.
 #These are the most needed and changeable commands, if you are an experienced user, go check out the real nagios.cfg for additional changes.
