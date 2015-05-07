@@ -39,7 +39,8 @@ nagios_commands:
       line: $USER1$/check_http -H $HOSTADDRESS$ -u /openmrs/ws/rest/v1/patient?q=GAN200000 --ssl -a$ARG1$:$ARG2$
     - name: check_failed_events_in_mysql
       line: $USER1$/check_mysql_query --username=$ARG1$ --password=$ARG2$ --database=$ARG3$ --critical=$ARG4$ --query="SELECT COUNT(*) as result from failed_events"
-
+    - name: check_openmrs_scheduled_task
+      line: $USER1$/check_scheduled_tasks.py -H $HOSTADDRESS$ -p 8080 -u /openmrs/ws/rest/v1/bahmnicore/scheduledTasks -a$ARG1$:$ARG2$ $ARG3$
 #variables for contacts.cfg
 #Add your own contacts here!
 
@@ -167,6 +168,11 @@ nagios_services:
       hostgroup_name: bahmni-app-active
       service_description: Bahmni openmrs access to db
       check_command: check_nrpe!check_openmrs_access_to_db
+      notifications_enabled: 1
+    - use: local-service
+      hostgroup_name: bahmni-app-active
+      service_description: Bahmni openmrs access to db
+      check_command: check_nrpe!check_openmrs_scheduled_task
       notifications_enabled: 1
     - use: emrhighlyavailableservice
       hostgroup_name: bahmni-app-active
