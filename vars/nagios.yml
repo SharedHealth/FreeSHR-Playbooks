@@ -199,6 +199,11 @@ nagios_services:
       service_description: Bahmni mysql replication
       check_command: check_nrpe!check_mysql_replication
       notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: cassandra_node
+      service_description: Cassandra service status
+      check_command: check_nrpe!check_cassandra_svc
+      notifications_enabled: 1
 
       
 #variables for nagios.cfg
