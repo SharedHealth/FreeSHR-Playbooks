@@ -1,5 +1,6 @@
 stomp_interface: {{ groups['opscenter-server'][0] }}
 use_ssl: 0
+hosts: ['{{ inventory_hostname }}']
 local_address: {{ inventory_hostname }}
 agent_rpc_broadcast_address: {{ inventory_hostname }}
 agent_rpc_interface: {{ inventory_hostname }}
