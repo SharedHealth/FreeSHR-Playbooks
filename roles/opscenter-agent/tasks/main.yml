@@ -27,22 +27,15 @@
   service: name=datastax-agent state=stopped
 
   
-- name: set server address
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='stomp_interface' line='stomp_interface: {{ groups['opscenter-server'][0] }}' backup=yes create=yes" 
-
-
-- name: disable ssl
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='use_ssl' line='use_ssl: 0' backup=yes create=yes"
-
-
-- name: set local_address
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='local_address' line='local_address: {{ inventory_hostname }}' backup=yes create=yes"
-
-
-- name: set agent_rpc_broadcast_address
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='agent_rpc_broadcast_interface' line='agent_rpc_broadcast_address: {{ inventory_hostname }}' backup=yes create=yes"
-
-
+- name: copy configuration
+  template:
+    src=address.yaml.j2
+    dest=/var/lib/datastax-agent/conf/address.yaml
+    mode=0644
+    owner=root
+    group=root
+    backup=yes
+    
 - name: set agent_rpc_interface
   lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='agent_rpc_interface' line='agent_rpc_interface: {{ inventory_hostname }}' backup=yes create=yes"
 
