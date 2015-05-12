@@ -36,10 +36,6 @@
     group=root
     backup=yes
     
-- name: set agent_rpc_interface
-  lineinfile: "dest=/var/lib/datastax-agent/conf/address.yaml regexp='agent_rpc_interface' line='agent_rpc_interface: {{ inventory_hostname }}' backup=yes create=yes"
-
-
 - name: start agent
   service: name=datastax-agent state=started enabled=yes
 
