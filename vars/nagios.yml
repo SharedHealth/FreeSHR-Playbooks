@@ -60,108 +60,108 @@ nagios_contactgroups:
 nagios_services:
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Disk space /
+      service_description: disk_space
       check_command:  check_nrpe!check_disk
       notifications_enabled: 1
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Disk space /tmp
+      service_description: tmp_disk_space
       check_command:  check_nrpe!check_disk_tmp
       notifications_enabled: 1
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Current Users
+      service_description: current_users
       check_command:  check_nrpe!check_users
       notifications_enabled: 1
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Total Processes
+      service_description: total_processes
       check_command:  check_nrpe!check_total_procs
       notifications_enabled: 1
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Current Load
+      service_description: current_load
       check_command:  check_nrpe!check_load
       notifications_enabled: 1
     - use: freeshr-system-service
       hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
-      service_description: Swap Usage
+      service_description: swap_usage
       check_command:  check_nrpe!check_swap
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: shr
       check_command: check_nrpe!check_freeshr
-      service_description: Check SHR Service Available
+      service_description: shr_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: shr
       check_command: check_nrpe!check_freeshr_svc
-      service_description: Check SHR Service Process
+      service_description: shr_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: mci-server
       check_command: check_nrpe!check_mci
-      service_description: Check MCI Service Available
+      service_description: mci_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: mci-server
       check_command: check_nrpe!check_mci_svc
-      service_description: Check MCI Service Process
+      service_description: mci_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: patient-journal-server
       check_command: check_nrpe!check_pj
-      service_description: Check Patient Journal Available
+      service_description: pj_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: patient-journal-server
       check_command: check_nrpe!check_pj_svc
-      service_description: Check Patient Journal Process
+      service_description: pj_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: datasense
       check_command: check_nrpe!ds_check_failed_events
-      service_description: Datasense Failed Events Check
+      service_description: datasense_failed_events
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: datasense
       check_command: check_nrpe!check_mysql
-      service_description: Datasense mysql access
+      service_description: datasense_mysql_access
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: datasense
       check_command: check_nrpe!check_datasense_svc
-      service_description: Check Datasense server process
+      service_description: datasense_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: mci-ui
       check_command: check_nrpe!check_mciui
-      service_description: Check MCI Admin server 
+      service_description: mci_admin_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: tr-server
       check_command: check_nrpe!check_tr
-      service_description: Check Terminology server 
+      service_description: tr_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: tr-server
       check_command: check_nrpe!check_tr_svc
-      service_description: Check Terminology server process
+      service_description: tr_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: freeshr-update-server
       check_command: check_nrpe!check_mysql
-      service_description: FreeSHR mysql access
+      service_description: freeshr_update_mysql_access
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: freeshr-update-server
       check_command: check_nrpe!fsu_check_failed_events
-      service_description: FreeSHR Update Failed Events Check
+      service_description: freeshr_update_failed_events
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: freeshr-update-server
       check_command: check_nrpe!check_freeshr_update_svc
-      service_description: FreeSHR Update Process Check
+      service_description: freeshr_update_proc
       notifications_enabled: 1
 # bahmni services
     - use: freeshr-app-service
