@@ -35,10 +35,6 @@
 [haproxy]
 172.18.46.52 ansible_ssh_user=bdshr
 
-[nagios_hosts]
-172.18.46.2 ansible_ssh_user=bdshr
-
-
 [showcase:children]
 cassandra_seed_node
 cassandra_node
