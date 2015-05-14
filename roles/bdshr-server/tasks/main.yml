@@ -2,7 +2,7 @@
 - name: Disable nagios notifications for host
   nagios: action=disable_alerts host={{ inventory_hostname }} services=shr_proc,shr_http
   delegate_to: "{{ item }}"
-  with_items: groups['nagios-server']
+  with_items: groups['nagios-hosts']
 
 - name: Clean existing rpm
   shell: rm -f /tmp/bdshr.rpm
