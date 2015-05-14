@@ -57,7 +57,7 @@ datasense_mysql_monitoring_pass: monitorpass
 datasense_encounter_sync_interval: 10000
 datasense_tr_sync_interval: 30000
 datasense_max_failed_events: 50
-datasense_failed_events_warn_threshold: 34
+datasense_failed_events_warn_threshold: 9
 datasense_failed_events_error_threshold: 49
 
 freeshr_update_install_dir: /opt/freeshr-update
@@ -68,7 +68,7 @@ freeshr_retry_update_interval_seconds: 180
 freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
 freeshr_update_mysql_monitoring_pass: monitorpass
-freeshr_update_failed_events_warn_threshold: 14
+freeshr_update_failed_events_warn_threshold: 9
 freeshr_update_failed_events_error_threshold: 19
 
 patient_journal_port: 8090
