@@ -1,0 +1,4 @@
+system_user_password:password 
+ssmtp_auth_pass: test
+ssmtp_auth_user: test@example.org
+go_server_admin_password: admin
