@@ -1,42 +1,43 @@
+192.168.33.19 ansible_ssh_user=vagrant  ansible_ssh_port=22
+
 [shr]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [freeshr-update-server]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [datasense]
-192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [mci-server]
-192.168.33.10 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key mci_worker_id=0
+192.168.33.19 ansible_ssh_user=vagrant run_migrations=yes ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key mci_worker_id=0
 
 [mci-ui]
-192.168.33.10 ansible_ssh_user=vagrant
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [tr-server]
-192.168.33.17 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [identity-server]
-192.168.33.10 ansible_ssh_user=vagrant
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [cassandra_node]
-192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [cassandra_seed_node]
-192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [logstash-server]
-192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [haproxy]
-192.168.33.18 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [patient-journal-server]
-192.168.33.10 ansible_ssh_user=vagrant
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [external-registries]
-103.247.238.96 host_alias=hrmtest.dghs.gov.bd
-
+103.247.238.96 host_alias=hrmtest.dghs.gov.bd ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 
 [local:children]
 shr

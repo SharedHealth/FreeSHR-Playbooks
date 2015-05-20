@@ -6,7 +6,7 @@
   sudo: yes
 
 - name: Install cassandra
-  yum: name=dsc20 state=latest
+  yum: name=dsc20 state=present
   sudo: yes
 
 - name: Downlaod jna
