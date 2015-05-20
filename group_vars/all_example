@@ -1,4 +1,4 @@
-system_user_password: vagrant 
+system_user_password: $6$rounds=100000$muayTKKXo06Dzs21$uTA7TGKfr9XQT0RAJCsmpQXdPUChbAOCvfF481SY.6SaV6si4Pez3A6QLn00lvH7AdwYAmJyhUm5kjjhjqt3a/
 ssmtp_auth_pass: test
 ssmtp_auth_user: test@example.org
 go_server_admin_password: admin
