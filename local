@@ -11,7 +11,7 @@
 192.168.33.19
 
 [mci-server]
-192.168.33.19 mci_worker_id=0
+192.168.33.19 mci_worker_id=0 run_migrations=yes
 
 [mci-ui]
 192.168.33.19
