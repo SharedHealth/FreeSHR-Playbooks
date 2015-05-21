@@ -8,7 +8,7 @@
 192.168.33.10 run_migrations=yes 
 
 [datasense]
-192.168.33.19
+192.168.33.17
 
 [mci-server]
 192.168.33.19 mci_worker_id=0 run_migrations=yes
@@ -17,7 +17,7 @@
 192.168.33.19
 
 [tr-server]
-192.168.33.28
+192.168.33.17
 
 [identity-server]
 192.168.33.19
