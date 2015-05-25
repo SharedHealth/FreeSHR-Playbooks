@@ -1,0 +1,2 @@
+cassandra_keyspace_replication_strategy: SimpleStrategy
+cassandra_keyspace_replication_factor: 1

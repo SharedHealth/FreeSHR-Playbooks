@@ -15,8 +15,7 @@ bdshr_log_level: INFO
 bdshr_keyspace: freeshr
 bdshr_cassandra_replication_strategy: SimpleStrategy
 bdshr_cassandra_replication_factor: 1
-bdshr_cassandra_user: bdshr
-bdshr_cassandra_pass: bdshr
+bdshr_cassandra_user: freeshr
 bdshr_identity_cache_ttl: 60
 
 

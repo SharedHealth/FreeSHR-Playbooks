@@ -4,3 +4,4 @@ dependencies:
   - { role: oracle-java }
   - { role: sharedhealth-user }
   - { role: host-entries, exclude: "shr" }
+  - { role: cassandra-keyspace, cassandra_keyspace: "{{ bdshr_keyspace }}", cassandra_keyspace_user: "{{ bdshr_cassandra_user }}", cassandra_keyspace_pass: "{{ bdshr_cassandra_pass }}" }

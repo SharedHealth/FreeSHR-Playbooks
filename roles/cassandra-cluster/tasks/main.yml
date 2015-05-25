@@ -109,12 +109,14 @@
 - name: start cassandra
   service: name=cassandra state=started enabled=yes
 
-# - name: copy cassandra user credentials change script
-#   template:
-#     src=cassandra_users.cql dest=/tmp/cassandra_users.cql
-#   tags: creds
+- name: Pause for Cassandra to start up
+  pause: seconds=20
 
-# - name: execute change cassandra user credentials script
-#   command: cqlsh -h {{ groups['cassandra_seed_node'][0] }} -u cassandra -p cassandra -f /tmp/cassandra_user.cql
-#   ignore_errors: yes
-#   tags: creds
+- name: copy cassandra user credentials change script
+  template:
+    src=cassandra_users.cql dest=/tmp/cassandra_users.cql
+    mode=0644
+
+- name: execute change cassandra user credentials script
+  shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u cassandra -p cassandra -f /tmp/cassandra_users.cql"
+  ignore_errors: true
