@@ -33,6 +33,7 @@ mci_ui_idp_client_id: 18551
 mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
+mci_cassandra_user: mci
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
