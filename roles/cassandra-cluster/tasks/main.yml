@@ -110,7 +110,7 @@
   service: name=cassandra state=started enabled=yes
 
 - name: Pause for Cassandra to start up
-  pause: seconds=20
+  pause: seconds=30
 
 - name: copy cassandra user credentials change script
   template:
