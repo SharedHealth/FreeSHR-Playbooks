@@ -9,7 +9,7 @@
     - "{{ data_source_dir }}/{{ data_file }}"
 
 - name: Install Data
-  shell: "cqlsh -f {{ data_destination_dir }}/{{ data_file }} {{ groups['cassandra_seed_node'][0] }} -k {{ keyspace }}"
+  shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u {{ cassandra_keyspace_user }} -p {{ cassandra_keyspace_pass }} -f {{ data_destination_dir }}/{{ data_file }} -k {{ keyspace }}"
 
 - name: Delete Scripts
   shell: "rm -rf {{ data_destination_dir }}"
