@@ -120,4 +120,4 @@
 - name: execute change cassandra user credentials script
   shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u cassandra -p {{ cassandra_old_admin_pass }} -f /tmp/cassandra_users.cql"
   register: command_result
-  failed_when: "'Connection error' in command_result.stderr"
+  
