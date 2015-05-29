@@ -2,6 +2,7 @@ system_user_password: $6$rounds=100000$muayTKKXo06Dzs21$uTA7TGKfr9XQT0RAJCsmpQXd
 ssmtp_auth_pass: test
 ssmtp_auth_user: test@example.org
 go_server_admin_password: admin
+cassandra_old_admin_pass: cassandra_example_old_admin_pass
 cassandra_admin_pass: cassandra_user_password
 bdshr_cassandra_pass: example_shr_password
 mci_cassandra_pass: example_mci_password
