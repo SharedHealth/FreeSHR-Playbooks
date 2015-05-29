@@ -1,2 +1,3 @@
 ---
 cassandra_sys_auth_replication_strategy: SimpleStrategy
+cassandra_sys_auth_replication_factor: 1
