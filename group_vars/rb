@@ -39,6 +39,9 @@ mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 mci_cassandra_user: mci
+mci_invalid_hid_pattern: ^[^9]|^.[^89]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
+mci_start_hid: 9800000000
+mci_end_hid: 9999999999
 
 # datasense vars
 datasense_install_dir: /opt/datasense
