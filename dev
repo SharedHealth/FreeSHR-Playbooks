@@ -38,6 +38,9 @@
 [nagios_hosts]
 172.18.46.2 ansible_ssh_user=bdshr
 
+[shr-client]
+172.18.46.59 ansible_ssh_user=bdshr
+
 [qa:children]
 cassandra_seed_node
 cassandra_node
@@ -52,3 +55,4 @@ identity-server
 patient-journal-server
 haproxy
 nagios_hosts
+shr-client
