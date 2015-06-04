@@ -41,7 +41,7 @@
 [shr-client]
 172.18.46.59 ansible_ssh_user=bdshr
 
-[qa:children]
+[dev:children]
 cassandra_seed_node
 cassandra_node
 opscenter-server
