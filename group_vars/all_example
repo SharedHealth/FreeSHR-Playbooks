@@ -9,7 +9,7 @@ mci_cassandra_pass: example_mci_password
 mci_invalid_hid_pattern: ^[^9]|^.[^89]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
 mci_start_hid: 9800000000
 mci_end_hid: 9999999999
-health_id_replenish_delay=60000
-health_id_replenish_initial_delay=10000
-health_id_block_size=10000
-health_id_block_size_threshold=1000
+health_id_replenish_delay: 60000
+health_id_replenish_initial_delay: 10000
+health_id_block_size: 10000
+health_id_block_size_threshold: 1000
