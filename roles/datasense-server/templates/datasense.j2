@@ -7,7 +7,7 @@ export DATABASE_DRIVER=com.mysql.jdbc.Driver
 export DATABASE_CON_POOL_SIZE=10
 export SHR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ bdshr_port }}{% endif %}
 
-export MCI_SERVER_PATIENT_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/default/patients
+export MCI_SERVER_PATIENT_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients
 export TR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}{% endif %}
 
 export TR_CONCEPT_ATOMFEED_PATH=/openmrs/ws/atomfeed/concept/recent
