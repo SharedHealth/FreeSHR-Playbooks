@@ -11,6 +11,7 @@
       mode=644
       owner=haproxy
       group=haproxy
+      backup=yes
 
 - name: Get IpTable rules
   shell: iptables -L
@@ -27,6 +28,7 @@
   template:
     src=haproxy.rsyslog.j2
     dest=/etc/rsyslog.d/haproxy.conf
+    backup=yes
 
 - name: enable rsyslog udp server
   lineinfile:
