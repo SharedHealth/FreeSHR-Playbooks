@@ -45,7 +45,7 @@ datasense_log_dir: /var/log/datasense
 datasense_log_level: INFO
 datasense_port: 9084
 datasense_dhis_config_zip: /tmp/dhis_config.zip
-datasense_catchment_list: 3026,1004,2015
+datasense_catchment_list: 3026,2015
 datasense_death_codes: 419620001,a9029f84-197e-11e5-81c2-00505682700b
 datasense_date_of_death_uuid: a9047f75-197e-11e5-81c2-00505682700b
 datasense_circumstances_of_death_uuid: a90525b0-197e-11e5-81c2-00505682700b
