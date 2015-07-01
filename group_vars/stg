@@ -47,10 +47,10 @@ datasense_log_level: INFO
 datasense_port: 9084
 datasense_dhis_config_zip: /tmp/dhis_config.zip
 datasense_catchment_list: 3026,2015
-datasense_death_codes: 419620001,22473b09-9dfb-47ce-b117-32a10e5b9a5f
-datasense_date_of_death_uuid: a6e20fe1-4044-4ce7-8440-577f7f814765
-datasense_circumstances_of_death_uuid: 9bd4b258-eb1d-4762-bcf7-e38183069e0c
-datasense_cause_of_death_uuid: 9651ea62-02d6-4049-a186-3b4e0622bccb
+datasense_death_codes: 419620001,a9029f84-197e-11e5-81c2-00505682700b
+datasense_date_of_death_uuid: a9047f75-197e-11e5-81c2-00505682700b
+datasense_circumstances_of_death_uuid: a90525b0-197e-11e5-81c2-00505682700b
+datasense_cause_of_death_uuid: a904d409-197e-11e5-81c2-00505682700b
 datasense_idp_client_id: 18605
 datasense_idp_auth_token: bbe6b0a547fefd9ddb5c5c2b66e6185a0d9305c4c41a346e49472d633cba2af1
 datasense_idp_client_email: datasense@chittagong.com
