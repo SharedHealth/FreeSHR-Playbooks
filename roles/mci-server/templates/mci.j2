@@ -24,4 +24,5 @@ export IDP_CLIENT_ID={{ mci_idp_client_id }}
 export IDP_AUTH_TOKEN={{ mci_idp_auth_token }}
 export WORKER_ID={{ mci_worker_id }}
 export MCI_LOG_LEVEL={{ mci_log_level }}
-export SERVER_URL={{ mci_server_url }}
+export SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
+
