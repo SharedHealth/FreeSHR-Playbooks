@@ -1,4 +1,4 @@
-export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
+export MCI_SERVER_URL=http://{{ groups['mci-server'][0] }}:{{ mci_port }}
 
 export CASSANDRA_KEYSPACE={{ bdshr_keyspace }}
 export CQL_VERSION=3.0.0
