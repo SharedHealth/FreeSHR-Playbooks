@@ -1,7 +1,7 @@
 export MCI_SCHEME=http
 export MCI_HOST={{ groups['mci-server'][0] }}
 export MCI_PORT={{ mci_port }}
-export CASSANDRA_KEYSPACE=freeshr
+export CASSANDRA_KEYSPACE={{ bdshr_keyspace }}
 export CQL_VERSION=3.0.0
 export CASSANDRA_VERSION=2
 export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
