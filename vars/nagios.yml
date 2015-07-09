@@ -88,6 +88,11 @@ nagios_services:
       service_description: swap_usage
       check_command:  check_nrpe!check_swap
       notifications_enabled: 1
+    - use: freeshr-system-service
+      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal-server,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      service_description: ntpd_status
+      check_command:  check_nrpe!check_ntpd
+      notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: shr
       check_command: check_nrpe!check_freeshr
