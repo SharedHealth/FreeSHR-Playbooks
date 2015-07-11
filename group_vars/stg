@@ -50,7 +50,7 @@ datasense_death_codes: 419620001,a9029f84-197e-11e5-81c2-00505682700b
 datasense_date_of_death_uuid: a9047f75-197e-11e5-81c2-00505682700b
 datasense_circumstances_of_death_uuid: a90525b0-197e-11e5-81c2-00505682700b
 datasense_pnc_given_within_48_hours_after_birth_uuid: 50a33584-1e47-11e5-b5a9-00505682700b
-datasense_new_born_care_uuid: 8aa22d67-1e49-11e5-b5a9-00505682700b
+datasense_new_born_care_uuid: 7b5d9c2d-4aef-4c4c-b5da-5af389a6057a
 datasense_cause_of_death_uuid: a904d409-197e-11e5-81c2-00505682700b
 datasense_idp_client_id: 18605
 datasense_idp_auth_token: bbe6b0a547fefd9ddb5c5c2b66e6185a0d9305c4c41a346e49472d633cba2af1
