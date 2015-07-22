@@ -56,6 +56,7 @@ datasense_mysql_user_password: datasense
 datasense_mysql_monitoring_user: dsmonitor
 datasense_mysql_monitoring_pass: monitorpass
 datasense_encounter_sync_interval: 10000
+datasense_patient_update_sync_interval: 10000
 datasense_tr_sync_interval: 30000
 datasense_max_failed_events: 50
 datasense_failed_events_warn_threshold: 34
