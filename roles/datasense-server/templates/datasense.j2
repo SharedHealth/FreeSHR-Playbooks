@@ -7,9 +7,12 @@ export DATABASE_DRIVER=com.mysql.jdbc.Driver
 export DATABASE_CON_POOL_SIZE=10
 export SHR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ bdshr_port }}{% endif %}
 
-export MCI_SERVER_PATIENT_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients
 export TR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}{% endif %}
 
+export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
+
+export MCI_SERVER_PATIENT_URI=/api/default/patients
+export MCI_SERVER_PATIENT_UPDATE_FEED_URI=/api/v1/feed/patients
 export TR_CONCEPT_ATOMFEED_PATH=/openmrs/ws/atomfeed/concept/recent
 export TR_REFERENCE_TERM_ATOMFEED_PATH=/openmrs/ws/atomfeed/conceptreferenceterm/recent
 export TR_MEDICATION_ATOMFEED_PATH=/openmrs/ws/atomfeed/medication/recent
@@ -40,5 +43,6 @@ export NEW_BORN_CARE_UUID={{ datasense_new_born_care_uuid }}
 export PENTA_THREE_DRUG_UUID={{ datasense_penta_three_drug_uuid }}
 export CLOUD_HOSTED_FACILITY_IDs={{datasense_cloud_hosted_facility_ids}}
 export ENCOUNTER_SYNC_JOB_INTERVAL={{datasense_encounter_sync_interval}}
+export PATIENT_UPDATE_SYNC_JOB_INTERVAL={{datasense_patient_update_sync_interval}}
 export TR_SYNC_JOB_INTERVAL={{datasense_tr_sync_interval}}
 export MAX_FAILED_EVENTS={{datasense_max_failed_events}}
