@@ -4,6 +4,7 @@ export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_prox
 
 export SHR_VERSION=
 export FACILITY_REGISTRY_URL={{facility_registry_url}}
+export PROVIDER_REGISTRY_URL={{provider_registry_url}}
 export IDENTITY_SERVER_LOGIN_URL={{idp_user_login_url}}
 export IDENTITY_SERVER_USER_INFO_URL={{idp_user_info_url}}
 export IDP_CLIENT_ID={{ patient_journal_idp_client_id }}
