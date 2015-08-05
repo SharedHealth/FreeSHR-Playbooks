@@ -16,7 +16,7 @@
 
 - name: Allow app dir access to run user
   file:
-    path={{ healthid_install_dir }}
+    path={{ healthId_install_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -26,7 +26,7 @@
 
 - name: Allow log dir access to run user
   file:
-    path={{ healthid_log_dir }}
+    path={{ healthId_log_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -43,7 +43,7 @@
 - name: Permissions to service healthid-service
   file:
     path=/etc/init.d/healthId
-    src={{ healthid_install_dir }}/bin/healthId
+    src={{ healthId_install_dir }}/bin/healthId
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -52,7 +52,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/healthId
-    src={{ healthid_install_dir }}/var
+    src={{ healthId_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
