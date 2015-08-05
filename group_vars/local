@@ -107,6 +107,7 @@ lr_host_name: lr.twhosted.com
 pr_host_name: pr.twhosted.com
 pj_host_name: pj.twhosted.com
 mci_admin_host_name: mci-admin.twhosted.com
+healthId_host_name: healthId.twhosted.com
 
 
 idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token

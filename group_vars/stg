@@ -128,6 +128,7 @@ lr_host_name: hrmtest.dghs.gov.bd
 pr_host_name: hrmtest.dghs.gov.bd
 pj_host_name: pjstg.twhosted.com
 mci_admin_host_name: mci-adminstg.twhosted.com
+healthId_host_name: healthIdstg.twhosted.com
 
 
 # general 3rd party api definitions

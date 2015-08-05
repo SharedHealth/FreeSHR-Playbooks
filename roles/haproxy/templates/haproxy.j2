@@ -69,6 +69,7 @@ frontend http-in
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
+	acl host_healthId_service hdr(host) -i {{ healthId_host_name }}
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
@@ -76,6 +77,7 @@ frontend http-in
         use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
+        use_backend healthId-node if host_healthid_service
 
 
 
@@ -124,4 +126,13 @@ backend pjournal-node
     {% for host in groups['patient-journal-server'] %}
     server pj{{ loop.index }}  {{host}}:{{ patient_journal_port }} check
     {% endfor %}
-    
+
+
+#---------------------------------------------------------------------
+# Only one HealthId backend
+#---------------------------------------------------------------------
+backend healthId-node
+    balance     source
+    {% for host in groups['healthid-server'] %}
+    server healthId{{ loop.index }}  {{host}}:{{ healthId_port }} check
+    {% endfor %}
