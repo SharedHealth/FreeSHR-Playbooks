@@ -85,7 +85,7 @@
 - name: Unzip dhis_config
   unarchive:
     src={{ datasense_dhis_config_zip }}
-    dest={{ datasense_install_dir}}/lib
+    dest={{ datasense_install_dir}}/lib/dhis_config
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -121,4 +121,4 @@
   tags: run_datasense
 
 - name: Clean existing
-  shell: rm -f /tmp/datasense.rpm /tmp/dhis_config.zip
+  shell: rm -f /tmp/datasense.rpm {{ datasense_dhis_config_zip }}
