@@ -20,7 +20,7 @@
 [mci-server]
 172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=2
 
-[healthId-server]
+[healthid-server]
 172.18.46.53 ansible_ssh_user=bdshr run_migrations=yes
 
 [tr-server]
