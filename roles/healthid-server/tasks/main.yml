@@ -16,7 +16,7 @@
 
 - name: Allow app dir access to run user
   file:
-    path={{ healthid_service_install_dir }}
+    path={{ healthid_install_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -26,7 +26,7 @@
 
 - name: Allow log dir access to run user
   file:
-    path={{ healthid_service_log_dir }}
+    path={{ healthid_log_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -43,7 +43,7 @@
 - name: Permissions to service healthid-service
   file:
     path=/etc/init.d/healthId
-    src={{ healthid_service_install_dir }}/bin/healthId
+    src={{ healthid_install_dir }}/bin/healthId
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -52,7 +52,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/healthId
-    src={{ healthid_service_install_dir }}/var
+    src={{ healthid_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -68,7 +68,7 @@
 
   sudo: true
 - name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ healthId_service_port }} -j ACCEPT -m comment --comment "HEALTHID_SERVICE"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ healthId_port }} -j ACCEPT -m comment --comment "HEALTHID_SERVICE"
   sudo: true
   when: iptablesrules.stdout.find("HEALTHID_SERVICE") == -1
 
