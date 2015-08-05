@@ -51,6 +51,9 @@
 
 - name: Clean existing dhis_config folder
   shell: rm -rf {{ datasense_install_dir}}/lib/dhis_config
+
+- name: Create dhis_config folder
+  shell: mkdir {{ datasense_install_dir}}/lib/dhis_config
   
 - name: Install datasense
   yum: name=/tmp/datasense.rpm state=present
