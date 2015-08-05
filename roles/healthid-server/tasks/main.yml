@@ -11,7 +11,7 @@
   sudo: true
 
 - name: Install healthid-service
-  yum: name=/tmp/patient-journal.rpm state=present
+  yum: name=/tmp/healthId.rpm state=present
   sudo: true
 
 - name: Allow app dir access to run user
@@ -47,6 +47,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
+    force=yes
 
 
 - name: Permissions to var run

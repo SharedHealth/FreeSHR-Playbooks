@@ -1,12 +1,14 @@
 export PATIENT_JOURNAL_PORT={{ patient_journal_port }}
-export MCI_SERVER_PATIENTS_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/default/patients
-export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ bdshr_port }}{% endif %}
-
-export SHR_VERSION=
-export FACILITY_REGISTRY_URL={{facility_registry_url}}
 export IDENTITY_SERVER_LOGIN_URL={{idp_user_login_url}}
 export IDENTITY_SERVER_USER_INFO_URL={{idp_user_info_url}}
 export IDP_CLIENT_ID={{ patient_journal_idp_client_id }}
 export IDP_AUTH_TOKEN={{ patient_journal_idp_auth_token }}
 export SESSION_TIMEOUT_SECONDS={{patient_journal_session_timeout_seconds}}
-export PATIENT_JOURNAL_LOG_LEVEL={{patient_journal_log_level}}
+
+export CASSANDRA_KEYSPACE={{ healthId_keyspace }}
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_USER={{ mci_cassandra_user }}
+export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
+export CASSANDRA_TIMEOUT=60000
+export CASSANDRA_MIGRATIONS_PATH=org/sharedhealth/healthId/cassandra/migrations
