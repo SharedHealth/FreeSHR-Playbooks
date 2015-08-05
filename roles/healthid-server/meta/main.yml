@@ -2,6 +2,6 @@ dependencies:
   - { role: oracle-java }
   - { role: sharedhealth-user }
   - { role: host-entries, exclude: "healthid-service" }
-  - { role: cassandra-keyspace, cassandra_keyspace: "{{ healthId_keyspace }}", cassandra_keyspace_user: "{{ healthId_cassandra_user }}", cassandra_keyspace_pass: "{{ healthId_cassandra_pass }}", cassandra_keyspace_replication_strategy: "{{ bdshr_cassandra_replication_strategy }}", cassandra_keyspace_replication_factor: "{{ healthId_cassandra_replication_factor }}" }
+  - { role: cassandra-keyspace, cassandra_keyspace: "{{ healthId_keyspace }}", cassandra_keyspace_user: "{{ mci_cassandra_user }}", cassandra_keyspace_pass: "{{ mci_cassandra_pass }}", cassandra_keyspace_replication_strategy: "{{ bdshr_cassandra_replication_strategy }}", cassandra_keyspace_replication_factor: "{{ healthId_cassandra_replication_factor }}" }
 
 
