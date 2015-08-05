@@ -1,0 +1,81 @@
+---
+- name: Clean existing
+  shell: rm -f /tmp/healthId.rpm
+  sudo: true
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/healthId.rpm mode=755
+
+- name: Remove healthid-service
+  yum: name=healthId.noarch state=absent
+  sudo: true
+
+- name: Install healthid-service
+  yum: name=/tmp/patient-journal.rpm state=present
+  sudo: true
+
+- name: Allow app dir access to run user
+  file:
+    path={{ healthid_service_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ healthid_service_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+  
+- name: Copy healthid-service properties
+  template: src=healthId-service.j2
+    dest=/etc/default/healthId
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Permissions to service healthid-service
+  file:
+    path=/etc/init.d/healthId
+    src={{ healthid_service_install_dir }}/bin/healthId
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/healthId
+    src={{ healthid_service_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Apply migrations to leader node
+  shell: "{{ healthId_install_dir }}/bin/migrate.sh"
+  when: run_migrations == "yes"
+  
+    
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+  sudo: true
+- name: Allow bdshr port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ healthId_service_port }} -j ACCEPT -m comment --comment "HEALTHID_SERVICE"
+  sudo: true
+  when: iptablesrules.stdout.find("HEALTHID_SERVICE") == -1
+
+- name: save iptables
+  command: service iptables save
+  sudo: true
+
+- name: Restart healthId
+  service: name=healthId state=restarted enabled=yes
+  tags: run_healthId_service

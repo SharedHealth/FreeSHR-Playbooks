@@ -127,6 +127,14 @@
     - patient-journal
 
 
+- hosts: healthid-server
+  sudo: yes
+  roles:
+    - { role: healthid-server }
+  tags:
+    - healthid-server
+
+
 - hosts: dhis
   sudo: yes
   user: user

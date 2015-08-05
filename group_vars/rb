@@ -42,6 +42,20 @@ mci_invalid_hid_pattern: "^[^9]|^.[^89]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\
 mci_start_hid: 9800000000
 mci_end_hid: 9999999999
 
+
+# healthId vars
+healthId_install_dir: /opt/healthId
+healthId_log_dir: /var/log/healthId
+healthId_port: 8086
+healthId_idp_client_id: 18554
+healthId_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+healthId_keyspace: healthId
+healthId_log_level: DEBUG
+healthId_cassandra_replication_strategy: SimpleStrategy
+healthId_cassandra_replication_factor: 1
+healthId_cassandra_user: mci
+
+
 # datasense vars
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
