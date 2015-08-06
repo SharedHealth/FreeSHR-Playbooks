@@ -1,9 +1,9 @@
-export PATIENT_JOURNAL_PORT={{ patient_journal_port }}
+export HID_LOG_LEVEL={{ healthId_log_level }}
+export HEALTH_ID_SERVICE_PORT={{ healthId_port }}
 export IDENTITY_SERVER_LOGIN_URL={{idp_user_login_url}}
 export IDENTITY_SERVER_USER_INFO_URL={{idp_user_info_url}}
-export IDP_CLIENT_ID={{ patient_journal_idp_client_id }}
-export IDP_AUTH_TOKEN={{ patient_journal_idp_auth_token }}
-export SESSION_TIMEOUT_SECONDS={{patient_journal_session_timeout_seconds}}
+export IDP_CLIENT_ID={{ healthId_idp_client_id }}
+export IDP_AUTH_TOKEN={{ healthId_idp_auth_token }}
 
 export CASSANDRA_KEYSPACE={{ healthId_keyspace }}
 export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
@@ -12,3 +12,11 @@ export CASSANDRA_USER={{ mci_cassandra_user }}
 export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
 export CASSANDRA_TIMEOUT=60000
 export CASSANDRA_MIGRATIONS_PATH=org/sharedhealth/healthId/cassandra/migrations
+
+export INVALID_HID_PATTERN="{{ mci_invalid_hid_pattern }}"
+export MCI_START_HID={{ mci_start_hid }}
+export MCI_END_HID={{ mci_end_hid }}
+export HEALTH_ID_REPLENISH_DELAY={{ health_id_replenish_delay }}
+export HEALTH_ID_REPLENISH_INITIAL_DELAY={{ health_id_replenish_initial_delay }}
+export HEALTH_ID_BLOCK_SIZE={{ health_id_block_size }}
+export HEALTH_ID_BLOCK_SIZE_THRESHOLD={{ health_id_block_size_threshold }}
