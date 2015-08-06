@@ -12,6 +12,8 @@ export CASSANDRA_USER={{ mci_cassandra_user }}
 export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
 export CASSANDRA_TIMEOUT=60000
 export CASSANDRA_MIGRATIONS_PATH=org/sharedhealth/healthId/cassandra/migrations
+export CASSANDRA_REPLICATION_STRATEGY={{ healthId_cassandra_replication_strategy }}
+export CASSANDRA_REPLICATION_FACTOR={{ healthId_cassandra_replication_factor }}
 
 export INVALID_HID_PATTERN="{{ mci_invalid_hid_pattern }}"
 export MCI_START_HID={{ mci_start_hid }}
