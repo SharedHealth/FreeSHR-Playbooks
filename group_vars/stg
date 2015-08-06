@@ -67,7 +67,7 @@ datasense_tr_sync_interval: 900000
 datasense_max_failed_events: 50
 datasense_failed_events_warn_threshold: 9
 datasense_failed_events_error_threshold: 49
-datasense_dhis_base_url: http://172.18.46.154:8080/dhis
+datasense_dhis_base_url: http://172.18.46.154:8080/
 datasense_dhis_user: datasense
 datasense_dhis_password: Password678
 
