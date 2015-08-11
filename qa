@@ -47,6 +47,16 @@
 [dhis]
 172.18.46.225 ansible_ssh_user=bdshr
 
+[bahmni-app-active]
+172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.57 ansible_ssh_user=bdshr
+172.18.46.151 ansible_ssh_user=bdshr
+
+[bahmni-db-active]
+172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.57 ansible_ssh_user=bdshr
+172.18.46.151 ansible_ssh_user=bdshr
+
 [qa:children]
 cassandra_seed_node
 cassandra_node
@@ -59,6 +69,8 @@ tr-server
 datasense
 identity-server
 patient-journal-server
+bahmni-app-active
+bahmni-db-active
 haproxy
 dhis
 nagios_hosts
