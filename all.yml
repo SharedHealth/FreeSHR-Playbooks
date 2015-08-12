@@ -194,10 +194,12 @@
     
 - hosts: all
   sudo: yes
+  vars:
+    setup_nrpe: "yes"
   roles:
     - { role: shr-base }
     - { role: bdshr-user }
-    - { role: nagios-agent }
+    - { role: nagios-agent, when: setup_nrpe == "yes" }
     - { role: shr-tools }
     - { role: selinux, selinux_state: permissive, selinux_policy: targeted }
   vars_files:
