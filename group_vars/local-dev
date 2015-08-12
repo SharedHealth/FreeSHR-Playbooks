@@ -1,0 +1,130 @@
+sharedhealth_group: sharedhealth
+sharedhealth_user: sharedhealth
+
+bdshr_install_dir: /opt/bdshr
+bdshr_log_dir: /var/log/bdshr
+bdshr_port: 8082
+bdshr_local_cache_ttl: 86400
+bdshr_idp_client_id: 18550
+bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
+bdshr_idp_client_email: mritunjd@thoughtworks.com
+bdshr_idp_client_password: thoughtworks
+bdshr_log_level: DEBUG
+bdshr_keyspace: freeshr
+bdshr_cassandra_replication_strategy: SimpleStrategy
+bdshr_cassandra_replication_factor: 1
+bdshr_cassandra_user: freeshr
+bdshr_identity_cache_ttl: 60
+
+seed_data_locations_file: locations.cql
+
+mci_seed_data_dir: /opt/mci/seed-data
+mci_seed_data_source: ~/seed-data/mci
+mci_install_dir: /opt/mci
+mci_log_dir: /var/log/mci
+mci_port: 8081
+mci_idp_client_id: 18554
+mci_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+mci_keyspace: mci
+mci_log_level: DEBUG
+mci_ui_secret: 8B6k5QU0fAH5pIKlwDSKdp9Aakz5K20Z
+mci_ui_idp_client_id: 18551
+mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
+mci_cassandra_replication_strategy: SimpleStrategy
+mci_cassandra_replication_factor: 1
+mci_cassandra_user: mci
+
+datasense_install_dir: /opt/datasense
+datasense_log_dir: /var/log/datasense
+datasense_log_level: DEBUG
+datasense_port: 8083
+datasense_dhis_config_zip: /tmp/dhis_config.zip
+datasense_catchment_list: 3026
+datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
+datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
+datasense_circumstances_of_death_uuid: de50c394-1229-4516-8e25-6d4936fbf94d
+datasense_cause_of_death_uuid: bbf127cf-2649-4907-944a-23740fcfb335
+datasense_pnc_given_within_48_hours_after_birth_uuid: 50a33584-1e47-11e5-b5a9-00505682700b
+datasense_new_born_care_uuid: 8aa22d67-1e49-11e5-b5a9-00505682700b
+datasense_penta_three_drug_uuid: 8aa22d67-1e49-11e5-b5a9-00505682700b
+datasense_idp_client_id: 18552
+datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
+datasense_idp_client_email: rappasam@thoughtworks.com
+datasense_idp_client_password: thoughtworks
+datasense_cloud_hosted_facility_ids: 10019841
+datasense_mysql_user_password: datasense
+datasense_mysql_monitoring_user: dsmonitor
+datasense_mysql_monitoring_pass: monitorpass
+datasense_encounter_sync_interval: 10000
+datasense_patient_update_sync_interval: 10000
+datasense_tr_sync_interval: 30000
+datasense_max_failed_events: 50
+datasense_failed_events_warn_threshold: 34
+datasense_failed_events_error_threshold: 49
+datasense_dhis_base_url: http://172.18.46.225:8080/dhis
+datasense_dhis_user: datasense
+datasense_dhis_password: Password678
+datasense_catchment_list: 3026,1004,2015
+
+
+freeshr_update_install_dir: /opt/freeshr-update
+freeshr_update_log_dir: /var/log/freeshr-update
+freeshr_update_log_level: DEBUG
+freeshr_update_interval_seconds: 120
+freeshr_retry_update_interval_seconds: 180
+freeshr_update_mysql_user_password: password
+freeshr_update_mysql_monitoring_user: fsumonitor
+freeshr_update_mysql_monitoring_pass: monitorpass
+freeshr_update_failed_events_warn_threshold: 14
+freeshr_update_failed_events_error_threshold: 19
+
+patient_journal_port: 8091
+patient_journal_install_dir: /opt/patient-journal
+patient_journal_log_dir: /var/log/patient-journal
+patient_journal_idp_client_id: 18553
+patient_journal_idp_auth_token: 36007186ea16c1590af00cd94c0d63ddf891476a93d8696341832a217fcdf0b9
+patient_journal_session_timeout_seconds: 300
+patient_journal_log_level: DEBUG
+
+tr_server_install_dir: /opt/bdshr-terminology-server
+tr_server_log_dir: /var/log/bdshr-terminology-server
+tr_server_port: 9080
+tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
+tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
+tr_mysql_user_password: terminologies
+tr_api_user_name: trapiuser
+tr_api_user_password: Trapiuser123
+tr_seed_data_source: ~/seed-data/tr
+tr_seed_data_file: openrms_concept_data.sql
+tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
+
+enable_proxy_routing: false
+shr_host_name: shr.localdev.com
+mci_host_name: mci.localdev.com
+tr_host_name: tr.localdev.com
+fr_host_name: fr.localdev.com
+lr_host_name: lr.localdev.com
+pr_host_name: pr.localdev.com
+pj_host_name: pj.localdev.com
+mci_admin_host_name: mci-admin.localdev.com
+healthId_host_name: healthId.localdev.com
+
+
+idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
+idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/signin
+idp_sso_base_url: http://{{groups['identity-server'][0]}}:8080
+facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
+location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
+provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
+
+mysql_root_password: password
+
+cassandra_commit_log_dir: /var/lib/cassandra/commitlog
+cassandra_cluster_name: 'bdshr'
+
+#fhir vars
+fhir_document_schema_version: v1
+
+
+#ntp
+freeshr_ntp_timezone: Asia/Calcutta
