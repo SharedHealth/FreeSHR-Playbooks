@@ -1,8 +1,8 @@
 [shr]
-192.168.33.31  run_migrations=yes 
+192.168.33.31 run_migrations=yes 
 
 [freeshr-update-server]
-192.168.33.31 run_migrations=yes 
+192.168.33.31 
 
 [datasense]
 192.168.33.32
@@ -11,7 +11,7 @@
 192.168.33.33 mci_worker_id=0 run_migrations=yes
 
 [healthid-server]
-192.168.33.33 ansible_ssh_user=bdshr run_migrations=yes
+192.168.33.33 run_migrations=yes
 
 [mci-ui]
 192.168.33.33

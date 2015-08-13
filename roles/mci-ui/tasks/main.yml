@@ -9,6 +9,9 @@
   with_fileglob:
     - "{{dist}}"
 
+- name: Create app config directory
+  file: path={{mci_ui_home}}/app/config state=directory
+
 - name: Copy Configuration
   template: src=mci.j2
     dest={{mci_ui_home}}/app/config/parameters.yml
