@@ -1,6 +1,3 @@
-192.168.33.31 ansible_ssh_user=vagrant  ansible_ssh_port=22 ansible_ssh_pass=vagrant
-192.168.33.19 ansible_ssh_user=vagrant  ansible_ssh_port=22 ansible_ssh_pass=vagrant
-
 [shr]
 192.168.33.31  run_migrations=yes 
 
@@ -11,13 +8,13 @@
 192.168.33.32
 
 [mci-server]
-192.168.33.19 mci_worker_id=0 run_migrations=yes
+192.168.33.33 mci_worker_id=0 run_migrations=yes
 
 [healthid-server]
-192.168.33.19 ansible_ssh_user=bdshr run_migrations=yes
+192.168.33.33 ansible_ssh_user=bdshr run_migrations=yes
 
 [mci-ui]
-192.168.33.19
+192.168.33.33
 
 [tr-server]
 192.168.33.32
@@ -26,7 +23,7 @@
 192.168.33.32
 
 [cassandra_node]
-192.168.33.19
+192.168.33.33
 192.168.33.31
 
 [cassandra_seed_node]
@@ -34,9 +31,6 @@
 
 [patient-journal-server]
 192.168.33.31
-
-[external-registries]
-103.247.238.96 host_alias=hrmtest.dghs.gov.bd
 
 [local-dev:children]
 shr
