@@ -9,6 +9,7 @@
     - unzip
     - gcc-c++
     - openssl-devel
+    - jq
   tags: base
 
 - name: download go agent
