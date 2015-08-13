@@ -13,3 +13,7 @@
 - include: git-crypt.yml
   sudo: yes
   tags: git-crypt
+
+- include: git-hub-release-publish.yml
+  sudo: yes
+  tags: git-hub-release-publish
