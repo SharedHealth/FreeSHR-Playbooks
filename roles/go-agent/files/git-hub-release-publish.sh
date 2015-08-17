@@ -3,12 +3,14 @@
 export COMMIT_HASH="$GO_REVISION"
 export RELEASE_NAME="$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER"
 export IS_PRERELEASE=true
-export BINARY_FILE_PATH="/var/lib/go-agent/pipelines/$GO_PIPELINE_NAME/installers/$BINARY_NAME-$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER.noarch.rpm"
-if "$OMOD" == "true"; then
+
+if [ "$OMOD" == "true" ]; then
     export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-SNAPSHOT.omod"
 else
     export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER.noarch.rpm"
 fi
+
+export BINARY_FILE_PATH="/var/lib/go-agent/pipelines/$GO_PIPELINE_NAME/installers/$BINARY_FILE_NAME"
 export GH_REPO_OWNER=sharedhealth
 
 info() {
