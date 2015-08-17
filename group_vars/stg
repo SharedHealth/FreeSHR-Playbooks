@@ -37,6 +37,13 @@ mci_ui_idp_auth_token: aa9c82b74adcfe1fd644f2615fdd5f6810641ebdb9f04074628d6f2ab
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 mci_cassandra_user: mci
+health_id_replenish_delay: 60000
+health_id_replenish_initial_delay: 10000
+health_id_block_size: 10000
+health_id_block_size_threshold: 1000
+mci_search_mapping_task_delay=1000
+mci_search_mapping_task_initial_delay=1000
+mci_search_mapping_task_block_size=10
 
 
 # healthId vars
