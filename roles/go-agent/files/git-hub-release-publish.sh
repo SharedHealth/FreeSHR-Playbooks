@@ -4,8 +4,10 @@ export COMMIT_HASH="$GO_REVISION"
 export RELEASE_NAME="$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER"
 export IS_PRERELEASE=true
 
-if [ "$OMOD" == "true" ]; then
+if [ "$DIST_TYPE" == "omod" ]; then
     export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-SNAPSHOT.omod"
+elif [ "$DIST_TYPE" == "zip" ]; then
+    export BINARY_FILE_NAME="$BINARY_NAME.zip"
 else
     export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER.noarch.rpm"
 fi
