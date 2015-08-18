@@ -52,7 +52,6 @@ datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: DEBUG
 datasense_port: 8082
-datasense_dhis_config_zip: /tmp/dhis_config.zip
 datasense_catchment_list: 3026,1004,2015
 datasense_death_codes: 419620001,2e73f3fb-117f-4964-b679-e4186bded708
 datasense_date_of_death_uuid: 2f55ddd6-947e-439e-8fca-b12c55751a5e
