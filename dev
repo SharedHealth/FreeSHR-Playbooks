@@ -1,31 +1,31 @@
 [cassandra_node]
-172.18.46.158 ansible_ssh_user=bdshr
-172.18.46.157 ansible_ssh_user=bdshr
+172.18.46.156 ansible_ssh_user=bdshr
+172.18.46.199 ansible_ssh_user=bdshr
 
 [cassandra_seed_node]
-172.18.46.158
+172.18.46.156
 
 [opscenter-server]
 172.18.46.199
 
 [shr]
-172.18.46.158 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.156 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.158 ansible_ssh_user=bdshr
+172.18.46.156 ansible_ssh_user=bdshr
 
 [mci-ui]
-172.18.46.157 ansible_ssh_user=bdshr
+172.18.46.199 ansible_ssh_user=bdshr
 
 [mci-server]
-172.18.46.157 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
+172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
 
 [healthid-server]
-172.18.46.157 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes
 
 
 [tr-server]
-172.18.46.157 ansible_ssh_user=bdshr
+172.18.46.199 ansible_ssh_user=bdshr
 
 [datasense]
 172.18.46.156 ansible_ssh_user=bdshr
@@ -34,7 +34,7 @@
 172.18.46.199 ansible_ssh_user=bdshr
 
 [patient-journal-server]
-172.18.46.157 ansible_ssh_user=bdshr
+172.18.46.156 ansible_ssh_user=bdshr
 
 [haproxy]
 172.18.46.199 ansible_ssh_user=bdshr
