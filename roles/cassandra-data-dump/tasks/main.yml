@@ -4,14 +4,14 @@
   file: path={{ data_destination_dir }} state=directory
 
 - name: Copy Scripts
-  copy: src='{{ item }}' dest={{ data_destination_dir }} mode=0644
+  copy: src='{{ item }}' dest={{ data_destination_dir }}/{{ sql_file }} mode=0644
   with_fileglob:
-    - "{{ data_source_dir }}/{{ data_file }}"
+    - "{{ data_source }}"
 
 - name: Install Data
-  shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u {{ cassandra_keyspace_user }} -p {{ cassandra_keyspace_pass }} -f {{ data_destination_dir }}/{{ data_file }} -k {{ keyspace }}"
+  shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u {{ cassandra_keyspace_user }} -p {{ cassandra_keyspace_pass }} -f {{ data_destination_dir }}/{{ sql_file }} -k {{ keyspace }}"
 
 - name: Delete Scripts
-  shell: "rm -rf {{ data_destination_dir }}"
+  shell: "rm -rf {{ data_destination_dir }}/{{ sql_file }}"
 
 

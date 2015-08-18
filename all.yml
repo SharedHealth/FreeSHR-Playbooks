@@ -70,8 +70,8 @@
   sudo: yes
   vars:
     data_destination_dir: "{{ mci_seed_data_dir }}"
-    data_source_dir: "{{ mci_seed_data_source }}"
-    data_file: "{{ seed_data_locations_file }}"
+    sql_file: "locations.sql"
+    data_source: "{{ data_file }}"
     keyspace: "{{ mci_keyspace }}"
     cassandra_keyspace_user: "{{ mci_cassandra_user }}"
     cassandra_keyspace_pass: "{{ mci_cassandra_pass }}"
