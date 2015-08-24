@@ -7,7 +7,7 @@
   copy: src={{ rpm }} dest=/tmp/identity-server.rpm mode=755
 
 - name: Remove identity-server
-  yum: name=identity-server-0.1-1.noarch state=absent
+  yum: name=identity-server.noarch state=absent
   sudo: true
 
 - name: Install identity-server
