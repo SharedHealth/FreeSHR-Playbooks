@@ -5,7 +5,7 @@ sharedhealth_user: sharedhealth
 # shr variables
 bdshr_install_dir: /opt/bdshr
 bdshr_log_dir: /var/log/bdshr
-bdshr_port: 8083
+bdshr_port: 8081
 bdshr_local_cache_ttl: 86400
 bdshr_idp_client_id: 18550
 bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
@@ -141,9 +141,9 @@ healthId_host_name: healthId.twhosted.com
 
 
 # general 3rd party api definitions
-idp_user_info_url: http://{{groups['identity-server'][0]}}:8084/token
-idp_user_login_url: http://{{groups['identity-server'][0]}}:8084/signin
-idp_sso_base_url: http://{{groups['identity-server'][0]}}:8084
+idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
+idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/signin
+idp_sso_base_url: http://{{groups['identity-server'][0]}}:8080
 facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers

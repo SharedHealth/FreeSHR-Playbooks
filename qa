@@ -12,7 +12,7 @@
 172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.57 ansible_ssh_user=bdshr
 
 [mci-ui]
 172.18.46.56 ansible_ssh_user=bdshr
