@@ -36,12 +36,12 @@
 172.18.46.52 ansible_ssh_user=bdshr
 
 [bahmni-app-active]
-172.18.46.52 ansible_ssh_user=bdshr
+172.18.46.147 ansible_ssh_user=bdshr
 172.18.46.54 ansible_ssh_user=bdshr
 172.18.46.200 ansible_ssh_user=bdshr
 
 [bahmni-db-active]
-172.18.46.52 ansible_ssh_user=bdshr
+172.18.46.147 ansible_ssh_user=bdshr
 172.18.46.54 ansible_ssh_user=bdshr
 172.18.46.200 ansible_ssh_user=bdshr
 
