@@ -27,13 +27,13 @@
 172.18.46.56 ansible_ssh_user=bdshr
 
 [datasense]
-172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.56 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [patient-journal-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [logstash-server]
 172.18.46.2 ansible_ssh_user=bdshr
