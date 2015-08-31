@@ -55,7 +55,6 @@ mci-server
 mci-ui
 tr-server
 datasense
-identity-server
 patient-journal-server
 haproxy
 bahmni-db-active
