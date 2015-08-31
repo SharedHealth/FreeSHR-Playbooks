@@ -12,7 +12,7 @@
 172.18.46.54 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.54 ansible_ssh_user=bdshr
+172.18.46.52 ansible_ssh_user=bdshr
 
 [mci-ui]
 172.18.46.53 ansible_ssh_user=bdshr
@@ -29,11 +29,8 @@
 [datasense]
 172.18.46.52 ansible_ssh_user=bdshr
 
-[identity-server]
-172.18.46.53 ansible_ssh_user=bdshr
-
 [patient-journal-server]
-172.18.46.53 ansible_ssh_user=bdshr
+172.18.46.52 ansible_ssh_user=bdshr
 
 [haproxy]
 172.18.46.52 ansible_ssh_user=bdshr

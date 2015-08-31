@@ -3,7 +3,7 @@ sharedhealth_user: sharedhealth
 
 bdshr_install_dir: /opt/bdshr
 bdshr_log_dir: /var/log/bdshr
-bdshr_port: 8081
+bdshr_port: 8083
 bdshr_local_cache_ttl: 86400
 bdshr_idp_client_id: 18550
 bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
