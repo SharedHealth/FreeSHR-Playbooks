@@ -6,7 +6,7 @@
     owner=root group=root mode=0644
 
 - name: Install opscenter
-  yum: name=opscenter-free state=present
+  yum: name=opscenter state=present
 
 - name: Register iptable rules
   shell: iptables -L

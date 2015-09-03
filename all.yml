@@ -2,11 +2,20 @@
   hosts: cassandra_node
   sudo: yes
   roles:
-    - { role: cassandra-cluster}
+    - { role: cassandra-cluster }
+    - { role: cassandra-cleanup }
   vars_files:
     - vars/cassandra.yml
   tags:
     - cassandra
+
+- name: "cassandra-cleanup"
+  hosts: cassandra_node
+  sudo: yes
+  roles:
+    - { role: cassandra-cleanup }
+  tags:
+    - cassandra-cleanup
 
 - name: "opscenter"
   sudo: yes

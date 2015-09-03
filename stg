@@ -1,6 +1,6 @@
 [cassandra_node]
-172.18.46.167 ansible_ssh_user=bdshr
-172.18.46.166 ansible_ssh_user=bdshr
+172.18.46.167 ansible_ssh_user=bdshr repair_on="fri"
+172.18.46.166 ansible_ssh_user=bdshr repair_on="sat"
 
 [cassandra_seed_node]
 172.18.46.167

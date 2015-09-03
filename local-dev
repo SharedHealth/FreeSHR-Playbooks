@@ -23,8 +23,8 @@
 192.168.33.32
 
 [cassandra_node]
-192.168.33.33
-192.168.33.31
+192.168.33.33 repair_on="thu"
+192.168.33.31 repair_on="mon"
 
 [cassandra_seed_node]
 192.168.33.31
