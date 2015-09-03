@@ -12,4 +12,4 @@
   shell: "mysql -u {{ mysql_user }} -p{{ mysql_password }}  -h 127.0.0.1 {{ database }} < {{ data_destination_dir }}/{{ sql_file }}"
 
 - name: Delete Scripts
-  shell: "rm -rf {{ data_destination_dir }}"
+  file: path={{ data_destination_dir }} state=absent
