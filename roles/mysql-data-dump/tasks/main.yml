@@ -1,0 +1,15 @@
+---
+
+- name: Create Destination Directory
+  file: path={{ data_destination_dir }} state=directory
+
+- name: Copy Scripts
+  copy: src='{{ item }}' dest={{ data_destination_dir }}/{{ sql_file }} mode=0644
+  with_fileglob:
+    - "{{ data_file }}"
+
+- name: Install Data
+  shell: "mysql -u {{ mysql_user }} -p{{ mysql_password }}  -h 127.0.0.1 {{ database }} < {{ data_destination_dir }}/{{ sql_file }}"
+
+- name: Delete Scripts
+  shell: "rm -rf {{ data_destination_dir }}"

@@ -123,8 +123,6 @@ tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
 tr_mysql_user_password: terminologies
 tr_api_user_name: trapiuser
 tr_api_user_password: Trapiuser123
-tr_seed_data_source: ~/seed-data/tr
-tr_seed_data_file: openrms_concept_data.sql
 tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
   
 # haproxy vars
