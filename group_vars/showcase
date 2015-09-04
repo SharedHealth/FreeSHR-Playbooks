@@ -33,10 +33,10 @@ mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 mci_cassandra_user: mci
-health_id_replenish_delay: 60000
-health_id_replenish_initial_delay: 10000
-health_id_block_size: 10000
-health_id_block_size_threshold: 1000
+mci_health_id_replenish_delay: 60000
+mci_health_id_replenish_initial_delay: 10000
+mci_health_id_block_size: 10000
+mci_health_id_block_size_threshold: 1000
 mci_search_mapping_task_delay: 1000
 mci_search_mapping_task_initial_delay: 1000
 mci_search_mapping_task_block_size: 10
