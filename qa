@@ -12,7 +12,7 @@
 172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.57 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [mci-ui]
 172.18.46.56 ansible_ssh_user=bdshr
@@ -30,10 +30,10 @@
 172.18.46.55 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [patient-journal-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [logstash-server]
 172.18.46.2 ansible_ssh_user=bdshr
@@ -48,12 +48,12 @@
 172.18.46.225 ansible_ssh_user=bdshr
 
 [bahmni-app-active]
-172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.149 ansible_ssh_user=bdshr
 172.18.46.57 ansible_ssh_user=bdshr
 172.18.46.151 ansible_ssh_user=bdshr
 
 [bahmni-db-active]
-172.18.46.55 ansible_ssh_user=bdshr
+172.18.46.149 ansible_ssh_user=bdshr
 172.18.46.57 ansible_ssh_user=bdshr
 172.18.46.151 ansible_ssh_user=bdshr
 
