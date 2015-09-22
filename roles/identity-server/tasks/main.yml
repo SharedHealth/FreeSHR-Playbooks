@@ -29,7 +29,7 @@
 
   sudo: true
 - name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8080 -j ACCEPT -m comment --comment "IDENTITY-SERVER"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ idp_port }} -j ACCEPT -m comment --comment "IDENTITY-SERVER"
   sudo: true
   when: iptablesrules.stdout.find("IDENTITY-SERVER") == -1
 
