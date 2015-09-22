@@ -59,8 +59,6 @@
     - { role: mci-ui, tags: ['application'] }
   vars:
     mci_ui_home: "/var/www/mci_ui"
-    identity_server_domain: "null"
-    identity_server_port: "8080"
   tags:
     - mci-ui
 
