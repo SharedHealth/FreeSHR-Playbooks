@@ -1,5 +1,8 @@
 ---
 
+- name: Remove MCI UI home directory
+  file: path={{mci_ui_home}} state=absent
+
 - name: Create {{mci_ui_home}} dir
   file: path={{mci_ui_home}} state=directory
 

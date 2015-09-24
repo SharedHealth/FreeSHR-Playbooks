@@ -17,3 +17,6 @@
 - include: git-hub-release-publish.yml
   sudo: yes
   tags: git-hub-release-publish
+
+- include: php.yml
+  sudo: yes
