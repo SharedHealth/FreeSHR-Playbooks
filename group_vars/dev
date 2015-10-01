@@ -135,12 +135,13 @@ healthId_host_name: healthId.twhosted.com
 
 
 # general 3rd party api definitions
-idp_user_info_url: http://{{groups['identity-server'][0]}}:8080/token
-idp_user_login_url: http://{{groups['identity-server'][0]}}:8080/signin
-idp_sso_base_url: http://{{groups['identity-server'][0]}}:8080
-facility_registry_url: http://{{groups['identity-server'][0]}}:8080/api/1.0/facilities
-location_registry_url: http://{{groups['identity-server'][0]}}:8080/api/1.0/locations
-provider_registry_url: http://{{groups['identity-server'][0]}}:8080/api/1.0/providers
+idp_port: 8080
+idp_user_info_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/token
+idp_user_login_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/signin
+idp_sso_base_url: http://{{groups['identity-server'][0]}}:{{idp_port}}
+facility_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/facilities
+location_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/locations
+provider_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/providers
 
 mysql_root_password: password
 
