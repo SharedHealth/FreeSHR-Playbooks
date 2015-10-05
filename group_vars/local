@@ -126,7 +126,7 @@ cassandra_commit_log_dir: /var/lib/cassandra/commitlog
 cassandra_cluster_name: 'bdshr'
 
 #fhir vars
-fhir_document_schema_version: v1
+fhir_document_schema_version: v2
 
 
 #ntp
