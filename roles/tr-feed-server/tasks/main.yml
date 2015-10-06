@@ -1,4 +1,7 @@
 ---
+- name: Delete terminology feed omod
+  shell: rm -f {{ tr_server_install_dir}}/modules/freeshr-terminology-feed-*.omod
+  sudo: yes
 
 - name: Copy terminology feed omod
   copy:
