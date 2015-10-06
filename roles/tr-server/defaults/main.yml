@@ -1,5 +1,5 @@
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
 rpm: /tmp/bdshr-terminology-server-0.2-1.noarch.rpm
-atomfeedomod: /tmp/openmrs-atomfeed-2.3.omod
-restomod: /tmp/webservices.rest-2.9.omod
+atomfeedomod: /tmp/openmrs-atomfeed-2.5.omod
+restomod: /tmp/webservices.rest-2.12.omod
