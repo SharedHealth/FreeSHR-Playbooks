@@ -29,9 +29,6 @@
 [datasense]
 172.18.46.221 ansible_ssh_user=bdshr
 
-[identity-server]
-172.18.46.166 ansible_ssh_user=bdshr
-
 [patient-journal-server]
 172.18.46.166 ansible_ssh_user=bdshr
 
@@ -66,7 +63,6 @@ mci-server
 mci-ui
 tr-server
 datasense
-identity-server
 patient-journal-server
 haproxy
 bahmni-db-passive
