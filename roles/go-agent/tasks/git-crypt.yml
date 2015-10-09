@@ -14,6 +14,7 @@
   shell: "make -C {{ git_crypt_dir }}"
 
 - name: Add git-crypt to path
+  sudo: yes
   file:
     src={{ git_crypt_dir}}/git-crypt
     dest=/usr/bin/git-crypt
@@ -21,3 +22,5 @@
     group=go
     mode=0755
     state=link
+    
+
