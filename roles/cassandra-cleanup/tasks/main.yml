@@ -8,7 +8,7 @@
 
 - name: Install cron
   cron: name="setting up cron" 
-        cron_file="cassandra-cleanup" minute="30" hour="23"
+        cron_file="cassandra-cleanup" minute="30" hour="14"
         weekday="{{ repair_on }}"
         job="/bin/sh /opt/cassandra-cleanup/cassandra-repair.sh"
         state="present" user="root"
