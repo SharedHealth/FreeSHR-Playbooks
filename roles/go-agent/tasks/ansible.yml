@@ -1,0 +1,10 @@
+
+- name: Ensure ansible is installed
+  yum: name=ansible state=latest
+
+- name: Copy the ansible-deploy plugin
+  copy:
+    src=ansible-deploy.sh
+    dest=/bin/ansible-deploy
+    owner=root group=root mode=755
+  sudo: yes

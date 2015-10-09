@@ -10,6 +10,13 @@
   sudo: yes
   tags: gradle
 
+- include: ansible.yml
+  sudo: yes
+
+- include: shr-playbooks.yml
+  sudo: yes
+  tags: playbooks
+
 - include: git-crypt.yml
   sudo: yes
   tags: git-crypt

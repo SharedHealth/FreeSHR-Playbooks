@@ -3,6 +3,7 @@
   yum:
     name: "{{ epel_repo_url }}"
     state: present
+  sudo: yes
 
 - name: Import EPEL GPG key.
   rpm_key:

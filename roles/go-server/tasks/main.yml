@@ -2,10 +2,6 @@
   sudo: yes
   tags: base
 
-- include: shr-playbooks.yml
-  sudo: yes
-  tags: playbooks
-
 - include: gocd.yml
   sudo: yes
   tags: gocd  
