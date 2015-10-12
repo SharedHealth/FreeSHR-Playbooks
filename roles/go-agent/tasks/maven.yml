@@ -20,4 +20,4 @@
   lineinfile: dest=/etc/default/go-agent regexp='^MAVEN_OPTS=.*' line='MAVEN_OPTS="-Xms256m -Xmx512m"' insertafter='^M2.*'
 
 - name: Add Maven binaries to PATH environment variable
-  lineinfile: dest=/etc/default/go-agent regexp='^PATH=\$M2_HOME*' line='PATH=$M2_HOME:$PATH'
+  lineinfile: dest=/etc/default/go-agent regexp='^PATH=\$M2_HOME*' line='PATH=$M2_HOME/bin:$PATH'
