@@ -4,7 +4,7 @@
 
 - name: Copy the ansible-deploy plugin
   copy:
-    src=ansible-deploy.sh
+    src={{location}}/ansible-deploy.sh
     dest=/bin/ansible-deploy
     owner=root group=root mode=755
   sudo: yes
