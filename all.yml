@@ -50,29 +50,6 @@
   tags:
     - freeshr-update-server
 
-
-- hosts: mci-ui
-  sudo: yes
-  roles:
-    - { role: apache, tags: ['infrastructure'] }
-    - { role: php-packages, tags: ['infrastructure'] }
-    - { role: mci-ui, tags: ['application'] }
-  vars:
-    mci_ui_home: "/var/www/mci_ui"
-  tags:
-    - mci-ui
-
-
-- hosts: mci-server
-  sudo: yes
-  roles:
-    - { role: mci-server }
-  vars:
-    mci_home: "{{lookup('env', 'HOME')}}/projects/mci"
-    hostname_name: "{{ansible_fqdn}}"
-  tags:
-    - mci-server
-
 - hosts: cassandra_seed_node
   sudo: yes
   vars:

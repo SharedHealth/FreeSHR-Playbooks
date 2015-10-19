@@ -1,0 +1,33 @@
+- name: Set up keyspace and users
+  hosts: cassandra_seed_node
+  sudo: yes
+  roles:
+  - { role: cassandra-keyspace, 
+      cassandra_keyspace: "{{ mci_keyspace }}", 
+      cassandra_keyspace_user: "{{ mci_cassandra_user }}", 
+      cassandra_keyspace_pass: "{{ mci_cassandra_pass }}",  
+      cassandra_keyspace_replication_strategy: "{{ mci_cassandra_replication_strategy }}", 
+      cassandra_keyspace_replication_factor: "{{ mci_cassandra_replication_factor }}" }
+  tags:
+    - mci-server
+
+- name: Install MCI
+  hosts: mci-server
+  sudo: yes
+  roles:
+    - { role: mci-server }
+  vars:
+    hostname_name: "{{ansible_fqdn}}"
+  tags:
+    - mci-server
+
+- hosts: mci-ui
+  sudo: yes
+  roles:
+    - { role: apache, tags: ['infrastructure'] }
+    - { role: php-packages, tags: ['infrastructure'] }
+    - { role: mci-ui, tags: ['application'] }
+  vars:
+    mci_ui_home: "/var/www/mci_ui"
+  tags:
+    - mci-ui

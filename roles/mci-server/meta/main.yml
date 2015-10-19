@@ -3,4 +3,3 @@ dependencies:
   - { role: oracle-java }
   - { role: sharedhealth-user }
   - { role: host-entries, exclude: "mci-server" }
-  - { role: cassandra-keyspace, cassandra_keyspace: "{{ mci_keyspace }}", cassandra_keyspace_user: "{{ mci_cassandra_user }}", cassandra_keyspace_pass: "{{ mci_cassandra_pass }}",  cassandra_keyspace_replication_strategy: "{{ mci_cassandra_replication_strategy }}", cassandra_keyspace_replication_factor: "{{ mci_cassandra_replication_factor }}" }
