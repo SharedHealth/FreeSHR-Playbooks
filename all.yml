@@ -50,20 +50,6 @@
   tags:
     - freeshr-update-server
 
-- hosts: cassandra_seed_node
-  sudo: yes
-  vars:
-    data_destination_dir: "{{ mci_seed_data_dir }}"
-    sql_file: "locations.cql"
-    data_source: "{{ data_file }}"
-    keyspace: "{{ mci_keyspace }}"
-    cassandra_keyspace_user: "{{ mci_cassandra_user }}"
-    cassandra_keyspace_pass: "{{ mci_cassandra_pass }}"
-  roles:
-    - { role: cassandra-data-dump }
-  tags:
-    - mci-seed-data
-
 - hosts: tr-server
   sudo: yes
   roles:
