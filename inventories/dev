@@ -1,1 +1,63 @@
-../dev
+[cassandra_node]
+172.18.46.156 ansible_ssh_user=bdshr repair_on="fri"
+172.18.46.199 ansible_ssh_user=bdshr repair_on="sat"
+
+[cassandra_seed_node]
+172.18.46.156
+
+[opscenter-server]
+172.18.46.199
+
+[shr]
+172.18.46.156 ansible_ssh_user=bdshr run_migrations=yes
+
+[freeshr-update-server]
+172.18.46.156 ansible_ssh_user=bdshr
+
+[mci-ui]
+172.18.46.199 ansible_ssh_user=bdshr
+
+[mci-server]
+172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
+
+[healthid-server]
+172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes
+
+
+[tr-server]
+172.18.46.199 ansible_ssh_user=bdshr
+
+[datasense]
+172.18.46.156 ansible_ssh_user=bdshr
+
+[identity-server]
+172.18.46.199 ansible_ssh_user=bdshr
+
+[patient-journal-server]
+172.18.46.156 ansible_ssh_user=bdshr
+
+[haproxy]
+172.18.46.199 ansible_ssh_user=bdshr
+
+[nagios_hosts]
+172.18.46.2 ansible_ssh_user=bdshr
+
+[shr-client]
+172.18.46.59 ansible_ssh_user=bdshr
+172.18.46.60 ansible_ssh_user=bdshr
+
+[dev:children]
+cassandra_seed_node
+cassandra_node
+opscenter-server
+shr
+freeshr-update-server
+mci-server
+mci-ui
+tr-server
+datasense
+identity-server
+patient-journal-server
+haproxy
+nagios_hosts
+shr-client

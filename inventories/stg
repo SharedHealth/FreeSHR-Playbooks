@@ -1,1 +1,71 @@
-../stg
+[cassandra_node]
+172.18.46.167 ansible_ssh_user=bdshr repair_on="fri"
+172.18.46.166 ansible_ssh_user=bdshr repair_on="sat"
+
+[cassandra_seed_node]
+172.18.46.167
+
+[opscenter-server]
+172.18.46.221
+
+[shr]
+172.18.46.167 ansible_ssh_user=bdshr run_migrations=yes
+
+[freeshr-update-server]
+172.18.46.167 ansible_ssh_user=bdshr
+
+[mci-ui]
+172.18.46.166 ansible_ssh_user=bdshr
+
+[mci-server]
+172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=3
+
+[healthid-server]
+172.18.46.166 ansible_ssh_user=bdshr run_migrations=yes
+
+[tr-server]
+172.18.46.166 ansible_ssh_user=bdshr
+
+[datasense]
+172.18.46.221 ansible_ssh_user=bdshr
+
+[patient-journal-server]
+172.18.46.166 ansible_ssh_user=bdshr
+
+[haproxy]
+172.18.46.221 ansible_ssh_user=bdshr
+
+[external-registries]
+103.247.238.96 host_alias=hrmtest.dghs.gov.bd
+
+[bahmni-app-active]
+172.18.46.163 ansible_ssh_user=bdshr
+172.18.46.169 ansible_ssh_user=bdshr
+172.18.46.158 ansible_ssh_user=bdshr
+
+[bahmni-app-passive]
+172.18.46.157 ansible_ssh_user=bdshr
+
+[bahmni-db-active]
+172.18.46.163 ansible_ssh_user=bdshr
+172.18.46.169 ansible_ssh_user=bdshr
+172.18.46.158 ansible_ssh_user=bdshr
+
+[bahmni-db-passive]
+172.18.46.157 ansible_ssh_user=bdshr
+
+[stg:children]
+cassandra_seed_node
+cassandra_node
+shr
+freeshr-update-server
+mci-server
+mci-ui
+tr-server
+datasense
+patient-journal-server
+haproxy
+bahmni-db-passive
+bahmni-db-active
+bahmni-app-passive
+bahmni-app-active
