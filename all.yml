@@ -108,24 +108,6 @@
   tags:
     - dhis
 
-- hosts: go-server
-  sudo: yes
-  roles:
-    - go-server
-  vars_files:
-    - vars/go.yml
-  tags:
-    - go-server
-
-- hosts: go-agent
-  sudo: yes
-  roles:
-    - go-agent
-  vars_files:
-    - vars/go.yml
-  tags:
-    - go-agent
-
 - hosts: haproxy
   sudo: yes
   roles:
