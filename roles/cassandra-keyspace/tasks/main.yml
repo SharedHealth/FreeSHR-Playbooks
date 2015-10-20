@@ -10,3 +10,7 @@
   shell: "cqlsh {{ groups['cassandra_seed_node'][0] }} -u cassandra -p {{ cassandra_admin_pass }} -f /tmp/create_keyspace.cql"
   register: command_result
   failed_when: "'Exception' in command_result.stderr"
+
+- name: Delete create user script
+  shell: "rm /tmp/create_keyspace.cql"
+  sudo: yes
