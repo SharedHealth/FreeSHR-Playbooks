@@ -35,21 +35,6 @@
   tags:
     - opscenter-agent
 
-- name: "shr"
-  hosts: shr
-  sudo: yes
-  roles:
-    - { role: bdshr-server }
-  tags:
-    - shr
-
-- hosts: freeshr-update-server
-  sudo: yes
-  roles:
-    - { role: freeshr-update }
-  tags:
-    - freeshr-update-server
-
 - hosts: tr-server
   sudo: yes
   roles:

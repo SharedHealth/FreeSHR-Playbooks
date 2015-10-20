@@ -1,0 +1,27 @@
+- name: Set up keyspace and users
+  hosts: cassandra_seed_node
+  sudo: yes
+  roles:
+    -  { role: cassandra-keyspace, cassandra_keyspace: "{{ bdshr_keyspace }}", 
+    cassandra_keyspace_user: "{{ bdshr_cassandra_user }}", 
+    cassandra_keyspace_pass: "{{ bdshr_cassandra_pass }}", 
+    cassandra_keyspace_replication_strategy: "{{ bdshr_cassandra_replication_strategy }}", 
+    cassandra_keyspace_replication_factor: "{{ bdshr_cassandra_replication_factor }}" }
+  tags:
+    - shr
+
+- name: "Install FreeSHR"
+  hosts: shr
+  sudo: yes
+  roles:
+    - { role: bdshr-server }
+  tags:
+    - shr
+
+- name: "Install FreeSHR-Update-Server"
+  hosts: freeshr-update-server
+  sudo: yes
+  roles:
+    - { role: freeshr-update }
+  tags:
+    - freeshr-update-server
