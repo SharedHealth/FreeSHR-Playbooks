@@ -13,15 +13,5 @@
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
 
-- name: Install ntp
-  yum: name=ntp state=present
-  tags: ntp
-  
-- name: Set the correct timezone.
-  file: src=/usr/share/zoneinfo/{{ freeshr_ntp_timezone }}  dest=/etc/localtime state=link force=yes
-  tags: ntp
 
-- name: start and enable ntpd
-  service: name=ntpd state=started enabled=yes
-  tags: ntp
 

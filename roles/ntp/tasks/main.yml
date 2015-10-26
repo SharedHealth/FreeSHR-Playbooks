@@ -1,0 +1,9 @@
+---
+- name: Install ntp
+  yum: name=ntp state=present
+  
+- name: Set the correct timezone.
+  file: src=/usr/share/zoneinfo/{{ freeshr_ntp_timezone }}  dest=/etc/localtime state=link force=yes
+
+- name: start and enable ntpd
+  service: name=ntpd state=started enabled=yes

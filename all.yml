@@ -120,6 +120,13 @@
   tags:
     - setup
 
+- hosts: all:!external-registries
+  sudo: yes
+  roles:
+    - { role: ntp }
+  tags:
+    - ntp
+
 - hosts: nagios_hosts
   sudo: yes
   vars_files:
