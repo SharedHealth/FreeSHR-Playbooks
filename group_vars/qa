@@ -62,7 +62,7 @@ datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: DEBUG
 datasense_port: 8082
-datasense_catchment_list: 3026,1004,2015
+datasense_catchment_list: 3026,1004,2015,3033
 datasense_idp_client_id: 18552
 datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
 datasense_idp_client_email: rappasam@thoughtworks.com
