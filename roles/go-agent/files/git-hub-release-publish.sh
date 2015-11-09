@@ -44,7 +44,7 @@ create_release() {
     curl -s -S -X POST https://api.github.com/repos/$owner/$repo/releases \
 	 -H "Authorization: token $token" \
 	 -H "Content-Type: application/json" \
-	 -d '{"tag_name": "'"$tag_name"'", "name" : "'"$release_name"'", "prerelease": "'"$prerelease"'", "target_commitish": "'"$release_commit"'" }';
+	 -d '{"tag_name": "'"$tag_name"'", "name" : "'"$release_name"'", "prerelease": '"$prerelease"', "target_commitish": "'"$release_commit"'" }';
 }
 
 upload_asset() {
