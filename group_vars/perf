@@ -75,7 +75,6 @@ datasense_failed_events_error_threshold: 49
 datasense_dhis_base_url: http://172.18.46.225:8080/dhis
 datasense_dhis_user: datasense
 datasense_dhis_password: Password678
-datasense_catchment_list: 3026,1004,2015
 
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
