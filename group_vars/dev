@@ -118,9 +118,6 @@ enable_proxy_routing: false
 shr_host_name: shr.twhosted.com
 mci_host_name: bdshr-mci-qa.twhosted.com
 tr_host_name: bdshr-tr-qa.twhosted.com
-fr_host_name: hrmtest.dghs.gov.bd
-lr_host_name: hrmtest.dghs.gov.bd
-pr_host_name: hrmtest.dghs.gov.bd
 pj_host_name: pj-qa.twhosted.com
 mci_admin_host_name: bdshr-mci-admin-qa.twhosted.com
 healthId_host_name: healthId.twhosted.com
