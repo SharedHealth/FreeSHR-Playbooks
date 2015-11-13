@@ -97,9 +97,6 @@ enable_proxy_routing: false
 shr_host_name: shr.localdev.com
 mci_host_name: mci.localdev.com
 tr_host_name: tr.localdev.com
-fr_host_name: fr.localdev.com
-lr_host_name: lr.localdev.com
-pr_host_name: pr.localdev.com
 pj_host_name: pj.localdev.com
 mci_admin_host_name: mci-admin.localdev.com
 healthId_host_name: healthId.localdev.com
