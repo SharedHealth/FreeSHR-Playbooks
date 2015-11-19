@@ -67,8 +67,8 @@ datasense_dhis_password: Password678
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 freeshr_update_log_level: DEBUG
-freeshr_update_interval_seconds: 120
-freeshr_retry_update_interval_seconds: 180
+freeshr_update_interval: 120000
+freeshr_retry_update_interval: 180000
 freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
 freeshr_update_mysql_monitoring_pass: monitorpass
