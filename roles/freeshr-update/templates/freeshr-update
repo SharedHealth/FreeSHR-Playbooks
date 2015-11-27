@@ -12,6 +12,7 @@ export PATIENT_UPDATE_READ_INTERVAL={{ freeshr_update_interval }}
 export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
 export PATIENT_UPDATE_RETRY_INTERVAL={{ freeshr_retry_update_interval }}
 export PATIENT_UPDATE_FEED_CONTEXT_PATH=/api/default/feed/patients
+export PATIENT_CONTEXT_PATH=/api/v1/patients
 export IDP_SERVER_LOGIN_URL={{ idp_user_login_url }}
 export IDP_CLIENT_ID={{ bdshr_idp_client_id }}
 export IDP_AUTH_TOKEN={{ bdshr_idp_auth_token }}
