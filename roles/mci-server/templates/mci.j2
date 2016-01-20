@@ -28,7 +28,9 @@ export WORKER_ID={{ mci_worker_id }}
 export MCI_LOG_LEVEL={{ mci_log_level }}
 export SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
 
-export INVALID_HID_PATTERN="{{ mci_invalid_hid_pattern }}"
+export MCI_INVALID_HID_PATTERN="{{ mci_invalid_hid_pattern }}"
+export ORG_INVALID_HID_PATTERN="{{ mci_org_invalid_hid_pattern }}"
+export HID_STORAGE_PATH={{ mci_hid_storage_path }}
 export MCI_START_HID={{ mci_start_hid }}
 export MCI_END_HID={{ mci_end_hid }}
 export HEALTH_ID_REPLENISH_DELAY={{ mci_health_id_replenish_delay }}
