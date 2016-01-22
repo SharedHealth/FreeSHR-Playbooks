@@ -43,6 +43,7 @@ mci_search_mapping_task_block_size: 10
 mci_max_failed_events: 50
 mci_failed_event_retry_limit: 5
 mci_hid_storage_path: /opt/mci/hid
+mci_org_code: 10019862
 
 
 # healthId vars
