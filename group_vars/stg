@@ -116,12 +116,12 @@ tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 
 # haproxy vars
 enable_proxy_routing: true
-shr_host_name: shrstg.twhosted.com
-mci_host_name: mcistg.twhosted.com
-tr_host_name: trstg.twhosted.com
-pj_host_name: pjstg.twhosted.com
-mci_admin_host_name: mci-adminstg.twhosted.com
-healthId_host_name: healthIdstg.twhosted.com
+shr_host_name: shr-staging.twhosted.com
+mci_host_name: mci-staging.twhosted.com
+tr_host_name: tr-staging.twhosted.com
+pj_host_name: pj-staging.twhosted.comcom
+mci_admin_host_name: mciadmin-staging.twhosted.com
+datasense_host_name: datasense-staging.twhosted.com
 
 
 # general 3rd party api definitions
