@@ -13,9 +13,7 @@
   tags: base
 
 - name: download go agent
-  get_url:
-    url=http://download.go.cd/gocd-rpm/go-agent-{{ go_server_version}}.noarch.rpm
-    dest=/tmp/go-agent-{{ go_server_version}}.noarch.rpm
+  command: "wget -q -O /tmp/go-agent-{{ go_server_version}}.noarch.rpm --no-check-certificate --no-cookies http://download.go.cd/binaries/{{ go_server_version}}/rpm/go-agent-{{ go_server_version}}.noarch.rpm"
 
 - name: install go agent
   yum: name=/tmp/go-agent-{{ go_server_version}}.noarch.rpm state=present
