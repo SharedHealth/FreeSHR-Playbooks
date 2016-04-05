@@ -71,12 +71,8 @@ frontend http-in
         block if host_shr_service !network_allowed
         acl host_mci_service hdr(host) -i {{ mci_host_name }}
         block if host_mci_service !network_allowed
-        acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
-        block if host_mci_admin !network_allowed
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         block if host_tr_service !network_allowed
-        acl host_pj_service  hdr(host) -i {{ pj_host_name }}
-        block if host_pj_service !network_allowed
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
@@ -140,7 +136,7 @@ backend tr-server-node
     {% endfor %}
 
 #---------------------------------------------------------------------
-# round robin balancing between the Patient Journal backends
+# source between the Patient Journal backends
 #---------------------------------------------------------------------
 backend pjournal-node
     balance     source
