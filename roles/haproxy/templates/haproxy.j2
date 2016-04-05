@@ -35,6 +35,8 @@ global
     # turn on stats unix socket
     stats socket /var/lib/haproxy/stats
 
+    tune.ssl.default-dh-param 2048
+
 #---------------------------------------------------------------------
 # common defaults that all the 'listen' and 'backend' sections will
 # use if not designated in their block
@@ -62,14 +64,19 @@ defaults
 #---------------------------------------------------------------------
 frontend http-in
         bind :80
+        acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci-server'] %} {{host}} {% endfor %} {% for host in groups['mci-ui'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal-server'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['freeshr-update-server'] %} {{host}} {% endfor %}
 
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
+        block if host_shr_service !network_allowed
         acl host_mci_service hdr(host) -i {{ mci_host_name }}
+        block if host_mci_service !network_allowed
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
+        block if host_mci_admin !network_allowed
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
+        block if host_tr_service !network_allowed
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
-        acl host_datasense_service  hdr(host) -i {{ datasense_host_name }}
+        block if host_pj_service !network_allowed
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
@@ -77,8 +84,23 @@ frontend http-in
         use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
-        use_backend datasense-node if host_datasense_service
 
+frontend https-in
+        bind :443 ssl crt /etc/ssl/private/xip.io.pem
+
+        # Define hosts
+        acl host_shr_service hdr(host) -i {{ shr_host_name }}
+        acl host_mci_service hdr(host) -i {{ mci_host_name }}
+        acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
+        acl host_tr_service  hdr(host) -i {{ tr_host_name }}
+        acl host_pj_service  hdr(host) -i {{ pj_host_name }}
+
+        ## figure out which one to use
+        use_backend shr-service-cluster if host_shr_service
+        use_backend mci-service-cluster if host_mci_service
+        use_backend mci-admin-node if host_mci_admin
+        use_backend tr-server-node if host_tr_service
+        use_backend pjournal-node if host_pj_service
 
 #---------------------------------------------------------------------
 # round robin balancing between the SHR Service backends
@@ -124,13 +146,4 @@ backend pjournal-node
     balance     source
     {% for host in groups['patient-journal-server'] %}
     server pj{{ loop.index }}  {{host}}:{{ patient_journal_port }} check
-    {% endfor %}
-
-#---------------------------------------------------------------------
-# round robin balancing between the Patient Journal backends
-#---------------------------------------------------------------------
-backend datasense-node
-    balance     source
-    {% for host in groups['datasense'] %}
-    server pj{{ loop.index }}  {{host}}:{{ datasense_port }} check
     {% endfor %}
