@@ -17,7 +17,7 @@ export FACILITY_REGISTRY_URL={{ facility_registry_url }}
 export PROVIDER_REGISTRY_URL={{ provider_registry_url }}
 export ENCOUNTER_FETCH_LIMIT=20
 export SERVER_CONNECTION_TIMEOUT=10000
-export TR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}{% if is_ssl_enabled is defined and is_ssl_enabled != false %}https{% else %}http://{{ tr_host_name }},http://{{ tr_host_name }}{% endif %}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}{% endif %}
+export TR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and if is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ tr_host_name }},http://{{ tr_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ tr_server_port }}{% endif %}
 
 export IDENTITY_SERVER_BASE_URL={{ idp_user_info_url }}
 export SHR_LOG_LEVEL={{ bdshr_log_level }}
@@ -28,6 +28,6 @@ export SHR_VERSION=v1
 export IS_LATEST_SHR=true
 export LOCAL_CACHE_TTL={{ bdshr_local_cache_ttl }}
 export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
-export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}{% if is_ssl_enabled is defined and is_ssl_enabled != false %}https{% else %}http://{{ mci_host_name }},http://{{ mci_host_name }}{% endif %}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
+export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and if is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ mci_host_name }},http://{{ mci_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
 
 export IDENTITY_CACHE_TTL={{ bdshr_identity_cache_ttl }}
