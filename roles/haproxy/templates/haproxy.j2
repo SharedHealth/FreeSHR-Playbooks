@@ -64,6 +64,8 @@ defaults
 #---------------------------------------------------------------------
 frontend http-in
         bind :80
+        reqadd X-Forwarded-Proto:\ http
+
         acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci-server'] %} {{host}} {% endfor %} {% for host in groups['mci-ui'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal-server'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['freeshr-update-server'] %} {{host}} {% endfor %}
 
         # Define hosts
@@ -83,6 +85,7 @@ frontend http-in
 
 frontend https-in
         bind :443 ssl crt /etc/ssl/private/xip.io.pem
+        reqadd X-Forwarded-Proto:\ https
 
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
