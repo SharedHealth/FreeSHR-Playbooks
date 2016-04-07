@@ -79,9 +79,7 @@ frontend http-in
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
         use_backend mci-service-cluster if host_mci_service
-        use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
-        use_backend pjournal-node if host_pj_service
 
 frontend https-in
         bind :443 ssl crt /etc/ssl/private/xip.io.pem
