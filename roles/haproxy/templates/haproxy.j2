@@ -66,19 +66,25 @@ frontend http-in
         bind :80
         reqadd X-Forwarded-Proto:\ http
 
-        acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci-server'] %} {{host}} {% endfor %} {% for host in groups['mci-ui'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal-server'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['freeshr-update-server'] %} {{host}} {% endfor %} {% for host in groups['bahmni-app-active'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %} {% for host in groups['bahmni-app-passive'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %}
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci-server'] %} {{host}} {% endfor %} {% for host in groups['mci-ui'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal-server'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['freeshr-update-server'] %} {{host}} {% endfor %} {% for host in groups['bahmni-app-active'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %} {% for host in groups['bahmni-app-passive'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %}{% endif %}
+
 
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
-        redirect scheme https code 302 if host_shr_service !network_allowed
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_shr_service !network_allowed{% endif %}
+
         acl host_mci_service hdr(host) -i {{ mci_host_name }}
-        redirect scheme https code 302 if host_mci_service !network_allowed
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_service !network_allowed{% endif %}
+
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
-        redirect scheme https code 302 if host_tr_service !network_allowed
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_tr_service !network_allowed{% endif %}
+
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
-        redirect scheme https code 302 if host_mci_admin !network_allowed
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_admin !network_allowed{% endif %}
+
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
-        redirect scheme https code 302 if host_pj_service !network_allowed
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_pj_service !network_allowed{% endif %}
+
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
@@ -87,8 +93,9 @@ frontend http-in
         use_backend mci-admin-node if host_mci_admin
         use_backend pjournal-node if host_pj_service
 
+{% if is_ssl_enabled is defined and is_ssl_enabled != false %}
 frontend https-in
-        bind :443 ssl crt /etc/ssl/private/xip.io.pem
+        bind :443 ssl crt {{ pem_file_path }}
         reqadd X-Forwarded-Proto:\ https
 
         # Define hosts
@@ -104,6 +111,8 @@ frontend https-in
         use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
+{% endif %}
+
 
 #---------------------------------------------------------------------
 # round robin balancing between the SHR Service backends
