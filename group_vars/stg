@@ -117,6 +117,7 @@ tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 # haproxy vars
 enable_proxy_routing: true
 is_ssl_enabled: true
+pem_file_path: /etc/ssl/private/xip.io.pem
 shr_host_name: shr-staging.twhosted.com
 mci_host_name: mci-staging.twhosted.com
 tr_host_name: tr-staging.twhosted.com
