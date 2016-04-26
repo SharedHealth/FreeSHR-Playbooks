@@ -1,7 +1,24 @@
 #!/bin/bash
 
-export COMMIT_HASH="$GO_REVISION"
-export RELEASE_NAME="$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER"
+if [ -z "$REVISION" ]; then
+	export COMMIT_HASH="$GO_REVISION"
+else
+    export COMMIT_HASH="$REVISION"
+fi
+
+if [ -z "$PIPELINE_COUNTER" ]; then
+    export PIPELINE_COUNTER_PARAM="$GO_PIPELINE_COUNTER"
+else
+    export PIPELINE_COUNTER_PARAM="$PIPELINE_COUNTER"
+fi
+
+if [ -z "$PIPELINE_NAME" ]; then
+    export PIPELINE_NAME_PARAM="$GO_PIPELINE_NAME"
+else
+    export PIPELINE_NAME_PARAM="$PIPELINE_NAME"
+fi
+
+export RELEASE_NAME="$RELEASE_MAJOR_VERSION-$PIPELINE_COUNTER_PARAM"
 export IS_PRERELEASE=true
 
 if [ "$DIST_TYPE" == "omod" ]; then
@@ -9,10 +26,10 @@ if [ "$DIST_TYPE" == "omod" ]; then
 elif [ "$DIST_TYPE" == "zip" ]; then
     export BINARY_FILE_NAME="$BINARY_NAME.zip"
 else
-    export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-$GO_PIPELINE_COUNTER.noarch.rpm"
+    export BINARY_FILE_NAME="$BINARY_NAME-$RELEASE_MAJOR_VERSION-$PIPELINE_COUNTER_PARAM.noarch.rpm"
 fi
 
-export BINARY_FILE_PATH="/var/lib/go-agent/pipelines/$GO_PIPELINE_NAME/installers/$BINARY_FILE_NAME"
+export BINARY_FILE_PATH="/var/lib/go-agent/pipelines/$PIPELINE_NAME_PARAM/installers/$BINARY_FILE_NAME"
 export GH_REPO_OWNER=sharedhealth
 
 info() {
