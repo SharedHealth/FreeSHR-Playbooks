@@ -52,10 +52,10 @@
 [bahmni-db-active]
 172.18.46.163 ansible_ssh_user=bdshr
 172.18.46.169 ansible_ssh_user=bdshr
-172.18.46.158 ansible_ssh_user=bdshr
+172.18.46.61 ansible_ssh_user=bdshr
 
 [bahmni-db-passive]
-172.18.46.157 ansible_ssh_user=bdshr
+172.18.46.62 ansible_ssh_user=bdshr
 
 [stg:children]
 cassandra_seed_node
