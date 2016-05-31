@@ -42,8 +42,8 @@
 103.247.238.96 host_alias=hrmtest.dghs.gov.bd
 
 [bahmni-app-active]
-172.18.46.163 ansible_ssh_user=bdshr openmrs_port=8080
-172.18.46.169 ansible_ssh_user=bdshr openmrs_port=8080
+172.18.46.163 ansible_ssh_user=bdshr openmrs_port=8050
+172.18.46.169 ansible_ssh_user=bdshr openmrs_port=8050
 172.18.46.158 ansible_ssh_user=bdshr use_http=true openmrs_port=8050
 
 [bahmni-app-passive]
