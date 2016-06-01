@@ -184,6 +184,11 @@ nagios_services:
       service_description: Bahmni Apache
       check_command: check_nrpe!check_apache_httpd
       notifications_enabled: 1
+    - use: emrhighlyavailableservice
+      hostgroup_name: bahmni-app-active
+      service_description: Bahmni openmrs http
+      check_command: check_nrpe!check_openmrs_http
+      notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: bahmni-db-active
       service_description: Bahmni access to mysql
@@ -203,6 +208,11 @@ nagios_services:
       hostgroup_name: bahmni-db-passive
       service_description: Bahmni mysql replication
       check_command: check_nrpe!check_mysql_replication
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: bahmni-event-log-active
+      service_description: Bahmni Event log http
+      check_command: check_nrpe!check_event_log_http
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: cassandra_node

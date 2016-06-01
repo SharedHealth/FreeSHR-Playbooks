@@ -46,6 +46,9 @@
 172.18.46.169 ansible_ssh_user=bdshr openmrs_port=8050
 172.18.46.158 ansible_ssh_user=bdshr use_http=true openmrs_port=8050
 
+[bahmni-event-log-active]
+172.18.46.158 ansible_ssh_user=bdshr bahmni_event_log_service_port=9081
+
 [bahmni-app-passive]
 172.18.46.157 ansible_ssh_user=bdshr use_http=true
 172.18.46.63 ansible_ssh_user=bdshr
