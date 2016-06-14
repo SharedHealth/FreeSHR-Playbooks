@@ -2,4 +2,5 @@ dependencies:
   - { role: oracle-java }
   - { role: sharedhealth-user }
   - { role: mysql }
+  - { role: shr-base }
   - { role: host-entries, exclude: "none" }

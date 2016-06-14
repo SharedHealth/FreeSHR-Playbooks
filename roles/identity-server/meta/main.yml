@@ -1,3 +1,4 @@
 dependencies:
   - { role: oracle-java }
   - { role: bdshr-user }
+  - { role: shr-base }
