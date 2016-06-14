@@ -3,5 +3,6 @@ dependencies:
   - { role: shr-tools}
   - { role: oracle-java }
   - { role: sharedhealth-user }
+  - { role: shr-base }
   - { role: host-entries, exclude: "shr" }
   
