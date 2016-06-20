@@ -1,5 +1,5 @@
 [cassandra_node]
-172.18.46.54 ansible_ssh_user=bdshr repair_on="sat"
+172.18.46.52 ansible_ssh_user=bdshr repair_on="sat"
 172.18.46.53 ansible_ssh_user=bdshr repair_on="fri"
 
 [cassandra_seed_node]
