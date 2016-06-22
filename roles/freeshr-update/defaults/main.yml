@@ -1,4 +1,4 @@
-rpm: /tmp/freeshr-update-0.2-1.noarch.rpm
+rpm: /tmp/freeshr-update-2.5-1.noarch.rpm
 
 freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
