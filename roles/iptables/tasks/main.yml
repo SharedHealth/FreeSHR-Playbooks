@@ -1,6 +1,9 @@
 ---
 # tasks file for iptables
 
+- name: start iptables
+  service: name=iptables state=started enabled=yes
+
 - name: get iptables rules
   shell: iptables -L
   register: iptablesrules
