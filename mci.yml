@@ -45,3 +45,11 @@
     - { role: cassandra-data-dump }
   tags:
     - mci-seed-data
+
+- name: Install MCI Registry
+  hosts: mci-registry
+  sudo: yes
+  roles:
+    - { role: mci-registry }
+  tags:
+    - mci-registry

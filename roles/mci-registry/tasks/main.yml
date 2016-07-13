@@ -1,0 +1,72 @@
+---
+- name: Clean existing
+  shell: rm -f /tmp/mci-registry.rpm
+
+- name: Copy rpm
+  copy: src='{{ rpm }}' dest=/tmp/mci-registry.rpm mode=755
+
+- name: Remove existing installation if any
+  yum: name=mci-registry.noarch state=absent
+
+- name: Install mci-registry
+  yum: name=/tmp/mci-registry.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ mci_registry_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ mci_registry_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Copy properties
+  template: src=mci-registry.j2
+    dest=/etc/default/mci-registry
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service mci-registry
+  file:
+    path=/etc/init.d/mci-registry
+    src={{ mci_registry_install_dir }}/bin/mci-registry
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Permissions to var run
+  file:
+    path=/var/run/mci-registry
+    src={{ mci_registry_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow mci-registry port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_registry_port }} -j ACCEPT -m comment --comment "MCI-Registry"
+  when: iptablesrules.stdout.find("MCI-Registry") == -1
+
+- name: save iptables
+  command: service iptables save
+
+- name: Restart
+  service: name=mci-registry state=restarted enabled=yes
+  tags: run_mci_registry
+
