@@ -120,6 +120,7 @@ is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/xip.io.pem
 shr_host_name: shr-staging.twhosted.com
 mci_host_name: mci-staging.twhosted.com
+mci_registry_host_name: mci-registry-staging.twhosted.com
 tr_host_name: tr-staging.twhosted.com
 pj_host_name: pjournal-staging.twhosted.com
 mci_admin_host_name: mciadmin-staging.twhosted.com

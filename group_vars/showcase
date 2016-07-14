@@ -113,6 +113,7 @@ is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/xip.io.pem
 shr_host_name: shr-showcase.twhosted.com
 mci_host_name: mci-showcase.twhosted.com
+mci_registry_host_name: mci-registry-showcase.twhosted.com
 tr_host_name: tr-showcase.twhosted.com
 pj_host_name: pjournal-showcase.twhosted.com
 mci_admin_host_name: mciadmin-showcase.twhosted.com

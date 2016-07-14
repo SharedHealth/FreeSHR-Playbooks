@@ -110,6 +110,7 @@ tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 enable_proxy_routing: false
 shr_host_name: shr.twhosted.com
 mci_host_name: bdshr-mci-qa.twhosted.com
+mci_registry_host_name: mci-registry-qa.twhosted.com
 tr_host_name: bdshr-tr.twhosted.com
 pj_host_name: pj-qa.twhosted.com
 mci_admin_host_name: bdshr-mci-admin-qa.twhosted.com

@@ -76,6 +76,9 @@ frontend http-in
         acl host_mci_service hdr(host) -i {{ mci_host_name }}
         {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_service !network_allowed{% endif %}
 
+        acl host_mci_registry hdr(host) -i {{ mci_registry_host_name }}
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_registry !network_allowed{% endif %}
+
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_tr_service !network_allowed{% endif %}
 
@@ -89,6 +92,7 @@ frontend http-in
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
         use_backend mci-service-cluster if host_mci_service
+        use_backend mci-registry-cluster if host_mci_registry
         use_backend tr-server-node if host_tr_service
         use_backend mci-admin-node if host_mci_admin
         use_backend pjournal-node if host_pj_service
@@ -101,6 +105,7 @@ frontend https-in
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
         acl host_mci_service hdr(host) -i {{ mci_host_name }}
+        acl host_mci_registry hdr(host) -i {{ mci_registry_host_name }}
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
@@ -108,6 +113,7 @@ frontend https-in
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
         use_backend mci-service-cluster if host_mci_service
+        use_backend mci-registry-cluster if host_mci_registry
         use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
@@ -131,6 +137,15 @@ backend mci-service-cluster
     balance     roundrobin
     {% for host in groups['mci-server'] %}
     server mci{{ loop.index }} {{host}}:{{ mci_port }} check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# round robin balancing between the MCI Registry backends
+#---------------------------------------------------------------------
+backend mci-registry-cluster
+    balance     roundrobin
+    {% for host in groups['mci-registry'] %}
+    server mci-registry{{ loop.index }} {{host}}:{{ mci_registry_port }} check
     {% endfor %}
 
 #---------------------------------------------------------------------

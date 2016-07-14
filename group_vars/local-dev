@@ -98,6 +98,7 @@ tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 enable_proxy_routing: false
 shr_host_name: shr.localdev.com
 mci_host_name: mci.localdev.com
+mci_registry_host_name: mci-registry.localdev.com
 tr_host_name: tr.localdev.com
 pj_host_name: pj.localdev.com
 mci_admin_host_name: mci-admin.localdev.com
