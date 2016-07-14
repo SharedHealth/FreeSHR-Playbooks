@@ -40,14 +40,12 @@
 172.18.46.54 ansible_ssh_user=bdshr
 172.18.46.200 ansible_ssh_user=bdshr use_http=true
 172.18.46.182 ansible_ssh_user=bdshr use_http=true
-172.18.46.180 ansible_ssh_user=bdshr
 
 [bahmni-db-active]
 172.18.46.147 ansible_ssh_user=bdshr
 172.18.46.54 ansible_ssh_user=bdshr
 172.18.46.200 ansible_ssh_user=bdshr
 172.18.46.182 ansible_ssh_user=bdshr
-172.18.46.180 ansible_ssh_user=bdshr
 
 [bahmni-db-passive]
 
