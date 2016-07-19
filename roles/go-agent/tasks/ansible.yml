@@ -1,6 +1,6 @@
 
 - name: Ensure ansible is installed
-  yum: name=ansible state=latest
+  yum: name=ansible1.9 state=latest
 
 - name: Copy the ansible-deploy plugin
   copy:
