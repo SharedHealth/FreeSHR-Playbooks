@@ -6,6 +6,7 @@ cassandra_old_admin_pass: cassandra
 cassandra_admin_pass: cassandra_user_password
 bdshr_cassandra_pass: example_shr_password
 mci_cassandra_pass: example_mci_password
+mci_registry_cassandra_pass: example_mci_password
 mci_invalid_hid_pattern: ^[^9]|^.[^89]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
 mci_other_org_invalid_hid_pattern: ^[^9]|^.[^1-7]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
 mci_start_hid: 9800000000

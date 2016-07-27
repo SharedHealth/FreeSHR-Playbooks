@@ -42,6 +42,14 @@ mci_failed_event_retry_limit: 5
 mci_hid_storage_path: /opt/mci/hid
 mci_org_code: 10019862
 
+#MCI-Registry
+mci_registry_install_dir: /opt/mci-registry
+mci_registry_log_dir: /var/log/mci-registry
+mci_registry_port: 8085
+mci_registry_log_level: DEBUG
+mci_registry_keyspace: mci
+mci_registry_cassandra_user: mci
+
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: DEBUG
