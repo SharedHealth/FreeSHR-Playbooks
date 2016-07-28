@@ -55,6 +55,11 @@
     group={{ sharedhealth_group }}
     state=link
 
+- name: Apply migrations to leader node
+  shell: "{{ mci_registry_install_dir }}/bin/migrate.sh"
+  when: run_migrations == "yes"
+
+
 - name: Get IpTable rules
   shell: iptables -L
   register: iptablesrules
