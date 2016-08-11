@@ -1,6 +1,5 @@
 192.168.33.10 ansible_ssh_user=vagrant  ansible_ssh_port=22 ansible_ssh_pass=vagrant
 192.168.33.19 ansible_ssh_user=vagrant  ansible_ssh_port=22 ansible_ssh_pass=vagrant
-192.168.33.17 ansible_ssh_user=vagrant  ansible_ssh_port=22 ansible_ssh_pass=vagrant
 
 [shr]
 192.168.33.10  run_migrations=yes 
@@ -56,8 +55,9 @@ datasense
 cassandra_node
 cassandra_seed_node
 identity-server
-cassandra_seed_node
 cassandra_node
+healthid-server
 haproxy
 freeshr-update-server
 
+mci-ui
