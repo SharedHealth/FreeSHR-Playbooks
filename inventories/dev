@@ -33,7 +33,7 @@
 172.18.46.156 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.199 ansible_ssh_user=bdshr
+172.18.46.60 ansible_ssh_user=bdshr
 
 [patient-journal-server]
 172.18.46.156 ansible_ssh_user=bdshr
