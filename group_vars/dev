@@ -52,6 +52,7 @@ mci_registry_port: 8085
 mci_registry_log_level: DEBUG
 mci_registry_keyspace: mci
 mci_registry_cassandra_user: mci
+mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
 
 # healthId vars
 healthId_install_dir: /opt/healthId

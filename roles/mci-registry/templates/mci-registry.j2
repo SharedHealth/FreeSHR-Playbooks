@@ -11,3 +11,5 @@ export CASSANDRA_TIMEOUT=60000
 export MCI_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_registry_host_name }}{% else %}http://{{ groups['mci-registry'][0] }}:{{ mci_registry_port }}{% endif %}
 
 export PATIENT_LINK_URI={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients/
+
+export PROFILES_FOLDER_PATH={mci_registry_profiles_folder}
