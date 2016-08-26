@@ -38,6 +38,13 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
 
+- name: Copy profiles
+  copy:
+   src=profiles/
+   dest={{ mci_registry_profiles_folder }}
+   mode=755
+   owner={{ sharedhealth_user }}
+   group={{ sharedhealth_group }}
 
 - name: Permissions to service mci-registry
   file:
