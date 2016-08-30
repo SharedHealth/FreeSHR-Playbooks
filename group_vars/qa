@@ -65,6 +65,7 @@ healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: mci
+healthid_storage_path: /opt/healthId/hids
 
 
 # datasense vars
