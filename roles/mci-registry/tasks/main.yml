@@ -30,7 +30,6 @@
     recurse=yes
     state=directory
 
-
 - name: Copy properties
   template: src=mci-registry.j2
     dest=/etc/default/mci-registry
@@ -53,6 +52,16 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
+
+- name: Create health id file directory path
+  file:
+    path={{ mci_health_id_file_directory_path }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    mode=0640
+    follow=yes
+    recurse=yes
+    state=directory
 
 - name: Permissions to var run
   file:

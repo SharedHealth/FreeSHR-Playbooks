@@ -139,6 +139,7 @@ pj_host_name: pj-qa.twhosted.com
 mci_admin_host_name: bdshr-mci-admin-qa.twhosted.com
 healthId_host_name: healthId.twhosted.com
 
+mci_health_id_file_directory_path: /var/lib/mci
 
 # general 3rd party api definitions
 idp_port: 8084
