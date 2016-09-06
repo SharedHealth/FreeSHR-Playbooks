@@ -70,7 +70,6 @@
     group={{ sharedhealth_group }}
     mode=0640
     follow=yes
-    recurse=yes
     state=touch
 
 - name: Permissions to var run
