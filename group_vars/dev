@@ -53,13 +53,19 @@ mci_registry_log_level: DEBUG
 mci_registry_keyspace: mci
 mci_registry_cassandra_user: mci
 mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
+mci_registry_idp_client_id: 18545
+mci_registry_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
+mci_registry_idp_client_email: anjalyj@thoughtworks.com
+mci_registry_idp_client_password: thoughtworks
+mci_registry_healthId_replenish_block_size: 10
+mci_registry_healthId_replenish_threshold: 5
 
 # healthId vars
 healthId_install_dir: /opt/healthId
 healthId_log_dir: /var/log/healthId
 healthId_port: 8086
-healthId_idp_client_id: 18554
-healthId_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+healthId_idp_client_id: 18546
+healthId_idp_auth_token: 61aeaa45a711ac6b3e660e4abb2cb863f93ae90815f0edf40a134dffedf6d885
 healthId_keyspace: healthId
 healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
@@ -137,7 +143,8 @@ healthId_host_name: healthId.twhosted.com
 # general 3rd party api definitions
 idp_port: 8084
 idp_user_info_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/token
-idp_user_login_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/signin
+idp_login_url_path: /signin
+idp_user_login_url: http://{{groups['identity-server'][0]}}:{{idp_port}}{{idp_login_url_path}}
 idp_sso_base_url: http://{{groups['identity-server'][0]}}:{{idp_port}}
 facility_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/facilities
 location_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/locations
