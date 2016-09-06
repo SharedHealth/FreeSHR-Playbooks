@@ -58,10 +58,20 @@
     path={{ mci_health_id_file_directory_path }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
-    mode=0640
+    mode=0750
     follow=yes
     recurse=yes
     state=directory
+
+- name: Create health id file
+  file:
+    path={{mci_health_id_file_directory_path}}/{{mci_registry_idp_client_id}}-available_hids.txt
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    mode=0640
+    follow=yes
+    recurse=yes
+    state=touch
 
 - name: Permissions to var run
   file:
