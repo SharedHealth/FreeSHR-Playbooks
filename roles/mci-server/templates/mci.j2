@@ -15,15 +15,21 @@ export IS_LATEST_API_VERSION=true
 export FR_URL={{ facility_registry_url }}
 export PR_URL={{ provider_registry_url }}
 export LR_URL={{ location_registry_url }}
-export IDENTITY_SERVER_BASE_URL={{ idp_user_info_url }}
+
 export LR_SYNC_FIXED_DELAY=86400000
 export LR_SYNC_INITIAL_DELAY=14400000
 export FR_CACHE_TTL=86400
 export AUDIT_LOG_SYNC_DELAY=30000
 export DUPLICATE_PATIENT_FEED_DELAY=5000
 export DUPLICATE_PATIENT_FEED_INITIAL_DELAY=10000
+
+export IDENTITY_SERVER_BASE_URL={{ idp_sso_base_url }}
+export IDENTITY_SERVER_SIGNIN_PATH={{ idp_login_url_path }}
+export IDENTITY_SERVER_USER_INFO_PATH={{ idp_user_info_url_path }}
 export IDP_CLIENT_ID={{ mci_idp_client_id }}
 export IDP_AUTH_TOKEN={{ mci_idp_auth_token }}
+export IDP_CLIENT_EMAIL={{ mci_idp_client_email}}
+export IDP_CLIENT_PASSWORD={{ mci_idp_client_password}}
 export WORKER_ID={{ mci_worker_id }}
 export MCI_LOG_LEVEL={{ mci_log_level }}
 export SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}
@@ -36,10 +42,17 @@ export MCI_START_HID={{ mci_start_hid }}
 export MCI_END_HID={{ mci_end_hid }}
 export OTHER_ORG_START_HID={{ mci_other_org_start_hid }}
 export OTHER_ORG_END_HID={{ mci_other_org_end_hid }}
+
+export HID_SERVICE_BASE_URL=http://{{groups['healthid-server'][0]}}:{{healthId_port}}
+export HID_SERVICE_NEXT_BLOCK_URL=/healthIds/nextBlock/mci/%s?blockSize=%s
+export HID_SERVICE_MARK_USED_URL=/healthIds/markUsed/%s
+export HID_SERVICE_CHECK_HID_URL=/healthIds/checkAvailability/%s?orgCode=%s
 export HEALTH_ID_REPLENISH_DELAY={{ mci_health_id_replenish_delay }}
 export HEALTH_ID_REPLENISH_INITIAL_DELAY={{ mci_health_id_replenish_initial_delay }}
 export HEALTH_ID_BLOCK_SIZE={{ mci_health_id_block_size }}
 export HEALTH_ID_BLOCK_SIZE_THRESHOLD={{ mci_health_id_block_size_threshold }}
+export HID_LOCAL_STORAGE_PATH={{mci_health_id_file_directory_path}}/{{mci_idp_client_id}}-available_hids.txt
+
 export SEARCH_MAPPING_TASK_DELAY={{mci_search_mapping_task_delay}}
 export SEARCH_MAPPING_TASK_INITIAL_DELAY={{mci_search_mapping_task_initial_delay}}
 export SEARCH_MAPPING_TASK_BLOCK_SIZE={{mci_search_mapping_task_block_size}}

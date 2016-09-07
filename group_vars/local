@@ -27,6 +27,8 @@ mci_log_level: DEBUG
 mci_ui_secret: 8B6k5QU0fAH5pIKlwDSKdp9Aakz5K20Z
 mci_ui_idp_client_id: 18551
 mci_ui_idp_auth_token: 8dee09178ee632b2453b772f6aba069aac2a1935dc53c0bae447851fa91b53fb
+mci_idp_client_email: sohamg@thoughtworks.com
+mci_idp_client_password: thoughtworks
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 mci_cassandra_user: mci
@@ -125,8 +127,11 @@ pj_host_name: pj.twhosted.com
 mci_admin_host_name: mci-admin.twhosted.com
 healthId_host_name: healthId.twhosted.com
 
+mci_health_id_file_directory_path: /var/lib/mci
 
 idp_port: 8084
+idp_login_url_path: /signin
+idp_user_info_url_path: /token
 idp_user_info_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/token
 idp_user_login_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/signin
 idp_sso_base_url: http://{{groups['identity-server'][0]}}:{{idp_port}}

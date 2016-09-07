@@ -30,6 +30,8 @@ mci_log_level: INFO
 mci_ui_secret: 8B6k5QU0fAH5pIKlwDSKdp9Aakz5K20Z
 mci_ui_idp_client_id: 18591
 mci_ui_idp_auth_token: aa9c82b74adcfe1fd644f2615fdd5f6810641ebdb9f04074628d6f2ab6c98d77
+mci_idp_client_email: sohamg@thoughtworks.com
+mci_idp_client_password: thoughtworks
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
 mci_cassandra_user: mci
