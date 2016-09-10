@@ -63,6 +63,7 @@ healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: mci
+healthid_storage_path: /lib/healthId/hids
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
@@ -132,6 +133,8 @@ healthId_host_name: healthId.twhosted.com
 idp_user_info_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/token
 idp_user_login_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/signin
 idp_sso_base_url: http://hrmtest.dghs.gov.bd/api/1.0/sso
+idp_login_url_path: /signin
+idp_user_info_url_path: /token
 facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
