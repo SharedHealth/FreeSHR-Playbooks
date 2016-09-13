@@ -54,6 +54,12 @@ mci_registry_log_level: DEBUG
 mci_registry_keyspace: mci
 mci_registry_cassandra_user: mci
 mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
+mci_registry_idp_client_id: 18545
+mci_registry_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
+mci_registry_idp_client_email: anjalyj@thoughtworks.com
+mci_registry_idp_client_password: thoughtworks
+mci_registry_healthId_replenish_block_size: 10
+mci_registry_healthId_replenish_threshold: 5
 
 # healthId vars
 healthId_install_dir: /opt/healthId
