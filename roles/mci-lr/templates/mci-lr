@@ -1,0 +1,14 @@
+export MCI_LOG_LEVEL=INFO
+export CASSANDRA_KEYSPACE={{ mci_keyspace }}
+export CQL_VERSION=3.1.1
+export CASSANDRA_VERSION=2
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_USER={{ mci_cassandra_user }}
+export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
+export CASSANDRA_TIMEOUT=60000
+export LR_URL={{ location_registry_url }}
+export LR_SYNC_FIXED_DELAY=86400000
+export LR_SYNC_INITIAL_DELAY=14400000
+export IDP_CLIENT_ID={{ mci_idp_client_id }}
+export IDP_X_AUTH_TOKEN={{ mci_idp_auth_token }}

@@ -6,7 +6,6 @@ export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
 export CASSANDRA_PORT=9042
 export CASSANDRA_USER={{ mci_registry_cassandra_user }}
 export CASSANDRA_PASSWORD={{ mci_registry_cassandra_pass }}
-export CASSANDRA_MIGRATIONS_PATH=org/sharedhealth/mci/cassandra/migrations
 export CASSANDRA_TIMEOUT=60000
 export MCI_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_registry_host_name }}{% else %}http://{{ groups['mci-registry'][0] }}:{{ mci_registry_port }}{% endif %}
 

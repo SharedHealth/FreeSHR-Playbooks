@@ -52,6 +52,10 @@ mci_registry_keyspace: mci
 mci_registry_cassandra_user: mci
 mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
 
+#MCI-LR
+mci_lr_install_dir: /opt/mci-lr
+mci_lr_log_dir: /var/log/mci-lr
+
 # healthId vars
 healthId_install_dir: /opt/healthId
 healthId_log_dir: /var/log/healthId

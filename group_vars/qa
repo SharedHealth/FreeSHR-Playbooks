@@ -61,6 +61,10 @@ mci_registry_idp_client_password: thoughtworks
 mci_registry_healthId_replenish_block_size: 10
 mci_registry_healthId_replenish_threshold: 5
 
+#MCI-LR
+mci_lr_install_dir: /opt/mci-lr
+mci_lr_log_dir: /var/log/mci-lr
+
 # healthId vars
 healthId_install_dir: /opt/healthId
 healthId_log_dir: /var/log/healthId

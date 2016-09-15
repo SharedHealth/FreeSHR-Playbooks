@@ -53,3 +53,11 @@
     - { role: mci-registry }
   tags:
     - mci-registry
+
+- name: "Install MCI-LR"
+  hosts: mci-lr
+  sudo: yes
+  roles:
+    - { role: mci-lr }
+  tags:
+    - mci-lr
