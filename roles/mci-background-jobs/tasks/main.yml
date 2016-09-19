@@ -1,0 +1,61 @@
+---
+
+- name: Clean existing rpm
+  shell: rm -f /tmp/mci-background-jobs.rpm
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/mci-background-jobs.rpm mode=755
+
+- name: Remove mci-background-jobs
+  yum: name=mci-background-jobs.noarch state=absent
+
+- name: Install mci-background-jobs
+  yum: name=/tmp/mci-background-jobs.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ mci_background_jobs_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ mci_background_jobs_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Copy mci-background-jobs properties
+  template: src=mci-background-jobs
+    dest=/etc/default/mci-background-jobs
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service mci-background-jobs
+  file:
+    path=/etc/init.d/mci-background-jobs
+    src={{ mci_background_jobs_install_dir }}/bin/mci-background-jobs
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ mci_background_jobs_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Restart mci-background-jobs
+  service: name=mci-background-jobs state=restarted enabled=yes

@@ -26,6 +26,9 @@
 [mci-lr]
 192.168.33.17
 
+[mci-background-jobs]
+192.168.33.19
+
 [tr-server]
 192.168.33.17
 
@@ -56,6 +59,7 @@ shr
 mci-server
 mci-registry
 mci-lr
+mci-background-jobs
 tr-server
 datasense
 cassandra_node

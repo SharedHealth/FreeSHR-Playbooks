@@ -61,3 +61,11 @@
     - { role: mci-lr }
   tags:
     - mci-lr
+
+- name: "Install MCI-Background-Jobs"
+  hosts: mci-background-jobs
+  sudo: yes
+  roles:
+    - { role: mci-background-jobs }
+  tags:
+    - mci-background-jobs

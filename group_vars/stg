@@ -59,6 +59,10 @@ mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
 mci_lr_install_dir: /opt/mci-lr
 mci_lr_log_dir: /var/log/mci-lr
 
+#MCI-Background-Jobs
+mci_background_jobs_install_dir: /opt/mci-background-jobs
+mci_background_jobs_log_dir: /var/log/mci-background-jobs
+
 # healthId vars
 healthId_install_dir: /opt/healthId
 healthId_log_dir: /var/log/healthId
