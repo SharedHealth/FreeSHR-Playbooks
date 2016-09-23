@@ -18,13 +18,13 @@
 172.18.46.199 ansible_ssh_user=bdshr
 
 [mci-registry]
-172.18.46.199 ansible_ssh_user=bdshr
+172.18.46.108 ansible_ssh_user=bdshr
 
 [mci-server]
 172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
 
 [mci-lr]
-172.18.46.59 ansible_ssh_user=bdshr
+172.18.46.108 ansible_ssh_user=bdshr
 
 [healthid-server]
 172.18.46.59 ansible_ssh_user=bdshr run_migrations=yes
