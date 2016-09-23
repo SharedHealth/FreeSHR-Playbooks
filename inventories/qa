@@ -72,6 +72,8 @@ shr
 freeshr-update-server
 mci-server
 mci-ui
+mci-registry
+mci-lr
 tr-server
 datasense
 identity-server
