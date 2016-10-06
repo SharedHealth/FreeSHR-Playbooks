@@ -1,7 +1,11 @@
 ---
+
+- name: Copy epel-release rpm
+  copy: src=epel-release-6-8.noarch.rpm dest=/tmp/epel-release-6-8.noarch.rpm mode=755
+
 - name: Install EPEL repo.
   yum:
-    name: "{{ epel_repo_url }}"
+    name: /tmp/epel-release-6-8.noarch.rpm
     state: present
   sudo: yes
 
