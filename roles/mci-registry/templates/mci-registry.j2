@@ -14,7 +14,8 @@ export PATIENT_LINK_URI={% if enable_proxy_routing is defined and enable_proxy_r
 export PROFILES_FOLDER_PATH={{mci_registry_profiles_folder}}
 
 export IDP_BASE_URL={{idp_sso_base_url}}
-export IDP_URL={{idp_login_url_path}}
+export IDP_SIGNIN_URL={{idp_login_url_path}}
+export IDP_USERINFO_URL=/token/%s
 export IDP_CLIENT_ID={{mci_registry_idp_client_id}}
 export IDP_X_AUTH_TOKEN={{mci_registry_idp_auth_token}}
 export IDP_EMAIL={{mci_registry_idp_client_email}}
