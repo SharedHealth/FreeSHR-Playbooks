@@ -54,6 +54,9 @@ mci_registry_log_level: DEBUG
 mci_registry_keyspace: mci
 mci_registry_cassandra_user: mci
 mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
+mci_registry_healthId_replenish_block_size: 50
+mci_registry_healthId_replenish_threshold: 20
+mci_registry_hid_replenish_delay: 10000
 
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr

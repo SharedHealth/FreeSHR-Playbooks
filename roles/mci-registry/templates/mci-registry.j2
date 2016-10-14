@@ -25,7 +25,7 @@ export HID_SERVICE_BASE_URL=http://{{groups['healthid-server'][0]}}:{{healthId_p
 export HID_SERVICE_NEXT_BLOCK_URL=/healthIds/nextBlock/mci/%s?blockSize=%s
 export HID_SERVICE_MARK_USED_URL=/healthIds/markUsed/%s
 export HID_REPLENISH_INITIAL_DELAY=0
-export HID_REPLENISH_DELAY=60000
+export HID_REPLENISH_DELAY={{mci_registry_hid_replenish_delay}}
 export HID_REPLENISH_BLOCK_SIZE={{mci_registry_healthId_replenish_block_size}}
 export HID_REPLENISH_THRESHOLD={{mci_registry_healthId_replenish_threshold}}
 export HID_LOCAL_STORAGE_PATH={{mci_health_id_file_directory_path}}/{{mci_registry_idp_client_id}}-available_hids.txt

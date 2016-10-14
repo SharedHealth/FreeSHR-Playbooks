@@ -58,8 +58,9 @@ mci_registry_idp_client_id: 18545
 mci_registry_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
 mci_registry_idp_client_email: anjalyj@thoughtworks.com
 mci_registry_idp_client_password: thoughtworks
-mci_registry_healthId_replenish_block_size: 10
-mci_registry_healthId_replenish_threshold: 5
+mci_registry_healthId_replenish_block_size: 50
+mci_registry_healthId_replenish_threshold: 20
+mci_registry_hid_replenish_delay: 10000
 
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr
