@@ -1,18 +1,15 @@
 ---
 - name: Clean existing
-  shell: rm -f /tmp/patient-journal.rpm
-  sudo: true
+  file: path=/tmp/patient-journal.rpm state=absent
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/patient-journal.rpm mode=755
 
 - name: Remove patient-journal
   yum: name=patient-journal.noarch state=absent
-  sudo: true
 
 - name: Install patient-journal
   yum: name=/tmp/patient-journal.rpm state=present
-  sudo: true
 
 - name: Allow app dir access to run user
   file:
@@ -22,7 +19,6 @@
     follow=yes
     recurse=yes
     state=directory
-
 
 - name: Allow log dir access to run user
   file:
@@ -48,7 +44,6 @@
     group={{ sharedhealth_group }}
     state=link
 
-
 - name: Permissions to var run
   file:
     path=/var/run/patient-journal
@@ -61,15 +56,12 @@
   shell: iptables -L
   register: iptablesrules
 
-  sudo: true
 - name: Allow bdshr port through firewall
   command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ patient_journal_port }} -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
-  sudo: true
   when: iptablesrules.stdout.find("PATIENT-JOURNAL") == -1
 
 - name: save iptables
   command: service iptables save
-  sudo: true
 
 - name: Restart patient-journal
   service: name=patient-journal state=restarted enabled=yes

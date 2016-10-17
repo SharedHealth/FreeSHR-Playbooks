@@ -1,3 +1,0 @@
-rpm: /tmp/shr-2.5-1.noarch.rpm
-bdshr_identity_cache_ttl: 60
-fhir_document_schema_version: v1

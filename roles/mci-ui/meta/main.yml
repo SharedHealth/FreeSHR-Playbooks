@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: host-entries, exclude: "mci-ui" }
-  - { role: shr-base }

@@ -10,13 +10,10 @@
 - name: Make java available for system
   command: 'alternatives --install "/usr/bin/java" "java" "/usr/java/default/bin/java" 2000'
 
-
 - name: Make javac available for system
   command: 'alternatives --install "/usr/bin/javac" "javac" "/usr/java/default/bin/javac" 2000'
   when: java_runtime == "jdk"
 
-
 - name: Make jar available for system
   command: 'alternatives --install "/usr/bin/jar" "jar" "/usr/java/default/bin/jar" 2000'
   when: java_runtime == "jdk"
-

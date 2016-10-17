@@ -1,7 +1,0 @@
-- include: base.yml 
-  sudo: yes
-  tags: base
-
-- include: gocd.yml
-  sudo: yes
-  tags: gocd  

@@ -5,5 +5,5 @@
     - lsof
     - htop
     - iftop
-  sudo: yes
+  become_user: root
   ignore_errors: yes

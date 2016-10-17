@@ -1,4 +1,0 @@
-dependencies:
-  - { role: oracle-java , jdk_update: 8u92, jdk_build: b14}
-  - { role: sharedhealth-user }
-  - { role: shr-base }

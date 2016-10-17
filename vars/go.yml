@@ -1,6 +1,0 @@
-go_server_version: 16.3.0-3183
-freeshr_playbook_dir: /opt/playbooks
-git_crypt_dir: /opt/git-crypt
-go_server_admin: bdshr
-go_gradle_version: 2.3
-go_maven_version: 3.2.5

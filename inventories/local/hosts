@@ -1,0 +1,45 @@
+[datasense]
+192.168.33.21
+
+[patient-journal]
+192.168.33.22 ansible_ssh_user=vagrant ansible_ssh_port=22
+
+[shr]
+192.168.33.23  run_migrations=yes 
+
+[freeshr-update-server]
+192.168.33.24 run_migrations=yes 
+
+[mci-server]
+192.168.33.25 mci_worker_id=0 run_migrations=yes
+
+[healthid-server]
+192.168.33.26 run_migrations=yes
+
+[mci-ui]
+192.168.33.27
+
+[mci-registry]
+192.168.33.28
+
+[mci-lr]
+192.168.33.29
+
+[mci-background-jobs]
+192.168.33.30
+
+[tr-server]
+192.168.33.31
+
+[identity-server]
+192.168.33.32
+
+[cassandra_node]
+192.168.33.33 repair_on="thu"
+192.168.33.34 repair_on="mon"
+
+[cassandra_seed_node]
+192.168.33.33
+
+[haproxy]
+192.168.33.34

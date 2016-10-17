@@ -1,7 +1,0 @@
-rpm: /tmp/freeshr-update-2.5-1.noarch.rpm
-
-freeshr_update_mysql_user_password: password
-freeshr_update_mysql_monitoring_user: fsumonitor
-freeshr_update_mysql_monitoring_pass: monitorpass
-freeshr_update_failed_events_warn_threshold: 14
-freeshr_update_failed_events_error_threshold: 19

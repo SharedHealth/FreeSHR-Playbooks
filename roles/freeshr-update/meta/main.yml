@@ -1,5 +1,0 @@
-dependencies:
-  - { role: oracle-java }
-  - { role: sharedhealth-user }
-  - { role: mysql }
-  - { role: shr-base }

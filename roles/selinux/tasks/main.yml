@@ -1,7 +1,0 @@
-- name: install libselinux-python
-  yum: name=libselinux-python state=present
-  
-- name: set selinux state and policy
-  selinux:
-    policy={{ selinux_policy }}
-    state={{ selinux_state }}

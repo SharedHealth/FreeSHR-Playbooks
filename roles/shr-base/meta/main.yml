@@ -1,3 +1,4 @@
 dependencies:
   - { role: ntp }
   - { role: iptables }
+  - { role: shr-tools }

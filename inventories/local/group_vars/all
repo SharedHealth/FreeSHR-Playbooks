@@ -1,0 +1,5 @@
+sharedhealth_group: sharedhealth
+sharedhealth_user: sharedhealth
+
+#ntp
+freeshr_ntp_timezone: Asia/Calcutta

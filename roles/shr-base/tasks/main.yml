@@ -1,21 +1,19 @@
 ---
-
-- name: Copy epel-release rpm
-  copy: src=epel-release-6-8.noarch.rpm dest=/tmp/epel-release-6-8.noarch.rpm mode=755
+- name: Check for pre-installed epel repo
+  command: "yum repolist epel -C -e 0"
+  register: check_epel
 
 - name: Install EPEL repo.
   yum:
-    name: /tmp/epel-release-6-8.noarch.rpm
+    name: "{{ epel_repo_url }}"
     state: present
-  sudo: yes
+  when: check_epel.stdout.find('epel') == -1
 
 - name: Import EPEL GPG key.
   rpm_key:
     key: "{{ epel_repo_gpg_key_url }}"
     state: present
+  when: check_epel.stdout.find('epel') == -1
 
 - name: Install libselinux-python
   yum: name=libselinux-python state=present
-
-
-
