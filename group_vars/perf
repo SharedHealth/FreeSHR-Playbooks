@@ -59,6 +59,21 @@ mci_registry_hid_replenish_delay: 10000
 mci_lr_install_dir: /opt/mci-lr
 mci_lr_log_dir: /var/log/mci-lr
 
+#MCI-Background-Jobs
+mci_bg_install_dir: /opt/mci-background-jobs
+mci_bg_log_dir: /var/log/mci-background-jobs
+mci_bg_log_level: INFO
+mci_bg_idp_client_id: 18691
+mci_bg_idp_auth_token: cd778d4ec6561c89c0da05c01f6f365f6c4b470a7692e80a4640571c112a7567
+mci_bg_idp_client_email: anthony@thoughtworks.com
+mci_bg_idp_client_password: thoughtworks
+mci_bg_hid_mark_used_block_size: 5
+mci_bg_hid_mark_used_delay: 60000
+mci_bg_hid_mark_used_initial_delay: 30000
+mci_bg_max_failed_event_limit: 10
+mci_bg_failed_event_process_block_size: 5
+mci_bg_failed_event_retry_limit: 5
+
 # healthId vars
 healthId_install_dir: /opt/healthId
 healthId_log_dir: /var/log/healthId
@@ -125,13 +140,13 @@ tr_api_user_password: Trapiuser123
 tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 
 enable_proxy_routing: false
-shr_host_name: shr.twhosted.com
-mci_host_name: bdshr-mci-qa.twhosted.com
-mci_registry_host_name: mci-registry-qa.twhosted.com
-tr_host_name: bdshr-tr.twhosted.com
-pj_host_name: pj-qa.twhosted.com
-mci_admin_host_name: bdshr-mci-admin-qa.twhosted.com
-healthId_host_name: healthId.twhosted.com
+shr_host_name: shr-perf.twhosted.com
+mci_host_name: bdshr-mci-perf.twhosted.com
+mci_registry_host_name: mci-registry-perf.twhosted.com
+tr_host_name: tr-perf.twhosted.com
+pj_host_name: pj-perf.twhosted.com
+mci_admin_host_name: mci-admin-perf.twhosted.com
+healthid_server_host_name: healthid-perf.twhosted.com
 
 
 idp_user_info_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/token

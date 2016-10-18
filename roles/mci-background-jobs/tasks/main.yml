@@ -14,7 +14,7 @@
 
 - name: Allow app dir access to run user
   file:
-    path={{ mci_background_jobs_install_dir }}
+    path={{ mci_bg_install_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -24,7 +24,7 @@
 
 - name: Allow log dir access to run user
   file:
-    path={{ mci_background_jobs_log_dir }}
+    path={{ mci_bg_log_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -32,7 +32,7 @@
     state=directory
 
 - name: Copy mci-background-jobs properties
-  template: src=mci-background-jobs
+  template: src=mci-background-jobs.j2
     dest=/etc/default/mci-background-jobs
     mode=755
     owner={{ sharedhealth_user }}
@@ -42,7 +42,7 @@
 - name: Permissions to service mci-background-jobs
   file:
     path=/etc/init.d/mci-background-jobs
-    src={{ mci_background_jobs_install_dir }}/bin/mci-background-jobs
+    src={{ mci_bg_install_dir }}/bin/mci-background-jobs
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -51,7 +51,7 @@
 - name: Permissions to var run
   file:
     path=/var/run/bdshr
-    src={{ mci_background_jobs_install_dir }}/var
+    src={{ mci_bg_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link

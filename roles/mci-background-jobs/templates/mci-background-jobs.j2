@@ -1,0 +1,24 @@
+export MCI_LOG_LEVEL={{ mci_bg_log_level }}
+export CASSANDRA_KEYSPACE={{ mci_keyspace }}
+export CQL_VERSION=3.1.1
+export CASSANDRA_VERSION=2
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_USER={{ mci_cassandra_user }}
+export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
+export CASSANDRA_TIMEOUT=60000
+export IDP_BASE_URL={{ idp_sso_base_url }}
+export IDP_SIGNIN_PATH={{ idp_login_url_path }}
+export IDP_CLIENT_ID={{ mci_bg_idp_client_id }}
+export IDP_X_AUTH_TOKEN={{ mci_bg_idp_auth_token }}
+export IDP_EMAIL={{ mci_bg_idp_client_email }}
+export IDP_PASSWORD={{ mci_bg_idp_client_password }}
+export HID_SERVICE_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ healthid_server_host_name }}{% else %}http://{{groups['healthid-server'][0]}}:{{healthId_port}}{% endif %}
+
+export HID_SERVICE_MARK_USED_URL=/healthIds/markUsed/%s
+export HID_MARK_USED_BLOCK_SIZE={{mci_bg_hid_mark_used_block_size}}
+export HID_MARK_USED_TASK_DELAY={{mci_bg_hid_mark_used_delay}}
+export HID_MARK_USED_TASK_INITIAL_DELAY={{mci_bg_hid_mark_used_initial_delay}}
+export MAX_FAILED_EVENTS_LIMIT={{mci_bg_max_failed_event_limit}}
+export FAILED_EVENTS_PROCESS_BLOCK_SIZE={{mci_bg_failed_event_process_block_size}}
+export FAILED_EVENT_RETRY_LIMIT={{mci_bg_failed_event_retry_limit}}
