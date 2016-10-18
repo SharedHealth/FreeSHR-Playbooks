@@ -1,0 +1,38 @@
+---
+- name: Check if RPM is present
+  stat: path=mysql-community-release-el6-5.noarch.rpm
+  register: mysqlRPM
+
+- name: Check if mysql RPM is installed
+  command: rpm -qa | grep -i mysql-community
+  register: installedRPM
+
+- name: Download latest mysql RPM if not present
+  command: wget http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
+  when: 
+    - mysqlRPM.stat.exists == false
+    - installedRPM.stdout.find('mysql-community-release') == -1
+
+- name: Install RPM if not installed previously
+  command: rpm -Uvh mysql-community-release-el6-5.noarch.rpm
+  when: installedRPM.stdout.find('mysql-community-release') == -1
+
+- name: Install MySQL
+  yum: name={{ item }} state=present
+  with_items:
+    - mysql-community-server
+    - mysql-community-client
+    - MySQL-python
+
+- name: Copy mysql config
+  template: src=my.cnf.j2
+    dest=/etc/my.cnf
+    mode=755
+
+- name: Start Mysql Service
+  action: service name=mysqld state=started enabled=true
+
+- name: Update mysql root password
+  command: /usr/bin/mysqladmin -u root password {{ mysql_root_password }}
+  ignore_errors: yes
+

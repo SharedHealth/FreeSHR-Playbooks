@@ -1,4 +1,5 @@
-rpm: /tmp/datasense-2.5-1.noarch.rpm
+release_build: 1
+rpm: /tmp/datasense-{{release_version}}-{{release_build}}.noarch.rpm
 datasense_dhis_config_zip: /tmp/dhis_config.zip
 
 datasense_mysql_user_password: datasense

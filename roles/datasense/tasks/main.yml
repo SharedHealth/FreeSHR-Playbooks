@@ -1,0 +1,125 @@
+---
+- name: install dependencies
+  yum: name={{ item }} state=latest
+  with_items:
+    - unzip
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow datasense port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ datasense_port }} -j ACCEPT -m comment --comment "datasense"
+  when: iptablesrules.stdout.find("datasense") == -1
+
+- name: save iptables
+  command: service iptables save
+  when: iptablesrules.stdout.find("datasense") == -1
+  
+- name: Create Datasense database
+  mysql_db:
+    name=datasense
+    state=present
+    login_user=root
+    login_password={{ mysql_root_password }}
+
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name=datasense
+    password={{ datasense_mysql_user_password }}
+    priv=datasense.*:ALL,GRANT
+    state=present
+
+- name: Create mysql user for nagios monitoring
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name={{ datasense_mysql_monitoring_user }}
+    password={{ datasense_mysql_monitoring_pass }}
+    priv=datasense.*:SELECT,GRANT
+    state=present
+
+- name: Remove existing installations if any
+  yum: name=datasense.noarch state=absent
+
+- name: Clean existing dhis_config folder
+  file: path={{ datasense_install_dir}}/lib/dhis_config state=absent
+
+- name: Create dhis_config folder
+  file: path={{ datasense_install_dir}}/lib/dhis_config state=directory
+  
+- name: Install datasense
+  yum: name=/tmp/datasense.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ datasense_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Allow log dir access to run user
+  file:
+    path={{ datasense_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Copy Datasense properties
+  template: src=datasense.j2
+    dest=/etc/default/datasense
+    mode=755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Unzip dhis_config
+  unarchive:
+    src={{ datasense_dhis_config_zip }}
+    dest={{ datasense_install_dir}}/lib/dhis_config
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+
+- name: Allow dhis_config access to sharedhealth
+  file:
+    path={{ datasense_install_dir }}/lib/dhis_config
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+
+- name: Permissions to service datasense
+  file:
+    path=/etc/init.d/datasense
+    src={{ datasense_install_dir }}/bin/datasense
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Permissions to var run
+  file:
+    path=/var/run/datasense
+    src={{ datasense_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+- name: Start datasense
+  service: name=datasense state=restarted enabled=yes
+  tags: run_datasense
+
+- name: Clean existing
+  file: path={{ item }} state=absent
+  with_items:
+  - /tmp/datasense.rpm
+  - "{{ datasense_dhis_config_zip }}"

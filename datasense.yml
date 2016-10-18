@@ -1,0 +1,9 @@
+- hosts: datasense
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.txt
+  roles:
+    - datasense
+  tags:
+    - datasense

@@ -1,0 +1,21 @@
+datasense_install_dir: /opt/datasense
+datasense_log_dir: /var/log/datasense
+datasense_log_level: DEBUG
+datasense_port: 8082
+datasense_catchment_list: 3026,1004,2015,3033
+datasense_idp_client_id: 18552
+datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
+datasense_idp_client_email: rappasam@thoughtworks.com
+datasense_idp_client_password: thoughtworks
+datasense_mysql_user_password: datasense
+datasense_mysql_monitoring_user: dsmonitor
+datasense_mysql_monitoring_pass: monitorpass
+datasense_encounter_sync_interval: 10000
+datasense_patient_update_sync_interval: 10000
+datasense_tr_sync_interval: 30000
+datasense_max_failed_events: 500
+datasense_failed_events_warn_threshold: 9
+datasense_failed_events_error_threshold: 49
+datasense_dhis_base_url: http://{{ groups['dhis'][0]}}:{{hostvars[groups['dhis'][0]]['dhis_port']}}/dhis
+datasense_dhis_user: datasense
+datasense_dhis_password: Password678
