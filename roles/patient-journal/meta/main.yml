@@ -2,5 +2,5 @@ dependencies:
   - { role: shr-base }
   - { role: sharedhealth-user }
   - { role: oracle-java }
-#  - { role: host-entries, exclude: "patient-journal" }
+  - { role: host-entries, exclude: "patient-journal" }
 

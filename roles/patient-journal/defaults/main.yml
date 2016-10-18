@@ -1,1 +1,2 @@
-rpm: "/tmp/patient-journal-2.5-1.noarch.rpm"
+release_build: 1
+rpm: /tmp/patient-journal-{{release_version}}-{{release_build}}.noarch.rpm

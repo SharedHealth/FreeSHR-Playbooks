@@ -1,0 +1,7 @@
+- hosts: patient-journal
+  become_user: root
+  become: yes
+  roles:
+    - patient-journal
+  tags:
+    - patient-journal
