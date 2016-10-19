@@ -7,3 +7,11 @@
     - tr-server
   tags:
     - tr-server
+
+- hosts: tr-server
+  become_user: root
+  become: yes
+  roles:
+   - role: tr-feed-server
+  tags:
+    - tr-feed-server

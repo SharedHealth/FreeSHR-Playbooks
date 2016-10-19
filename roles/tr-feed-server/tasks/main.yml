@@ -1,0 +1,22 @@
+---
+- name: Delete terminology feed omod
+  file: path={{ tr_server_install_dir}}/modules/freeshr-terminology-feed-*.omod state=absent
+
+- name: Copy terminology feed omod
+  copy:
+    src='{{ trfeedomod }}'
+    dest={{ tr_server_install_dir}}/modules/
+    mode=0755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    force=no
+
+- name: Copy terminology server properties file
+  template: src=tr-server.properties.j2
+    dest={{ tr_server_install_dir}}/etc/tr-server.properties
+    mode=0750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group}}
+
+- name: Restart terminology-server
+  service: name=bdshr-terminology-server state=restarted enabled=yes
