@@ -26,6 +26,9 @@
 [mci-lr]
 172.18.46.108 ansible_ssh_user=bdshr
 
+[mci-background-jobs]
+172.18.46.108 ansible_ssh_user=bdshr
+
 [healthid-server]
 172.18.46.59 ansible_ssh_user=bdshr run_migrations=yes
 
@@ -61,6 +64,7 @@ mci-server
 mci-ui
 mci-registry
 mci-lr
+mci-background-jobs
 tr-server
 datasense
 identity-server
