@@ -3,7 +3,7 @@
   file: path=/tmp/patient-journal.rpm state=absent
 
 - name: Copy rpm
-  copy: src={{ rpm }} dest=/tmp/patient-journal.rpm mode=755
+  copy: src={{ rpm }} dest=/tmp/patient-journal.rpm mode=0755
 
 - name: Remove patient-journal
   yum: name=patient-journal.noarch state=absent
@@ -19,6 +19,7 @@
     follow=yes
     recurse=yes
     state=directory
+    mode=0750
 
 - name: Allow log dir access to run user
   file:
@@ -28,11 +29,13 @@
     follow=yes
     recurse=yes
     state=directory
+    mode=0750
+
   
 - name: Copy patient-journal properties
   template: src=patient-journal
     dest=/etc/default/patient-journal
-    mode=755
+    mode=0750
     owner={{ sharedhealth_user}}
     group={{ sharedhealth_group}}
 
@@ -43,6 +46,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
+    mode=0755
 
 - name: Permissions to var run
   file:
@@ -51,6 +55,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
+    mode=0750
 
 - name: Get IpTable rules
   shell: iptables -L
