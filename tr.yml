@@ -1,0 +1,9 @@
+- hosts: tr-server
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.txt
+  roles:
+    - tr-server
+  tags:
+    - tr-server
