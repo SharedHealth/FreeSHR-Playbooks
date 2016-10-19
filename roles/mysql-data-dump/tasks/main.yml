@@ -1,0 +1,19 @@
+---
+
+- name: Create Destination Directory
+  file: path={{ data_destination_dir }} state=directory
+
+- name: Copy Scripts
+  copy: src='{{ data_file }}' dest={{ data_destination_dir }}/{{ sql_file }} mode=0644
+
+- name: Install Data
+  mysql_db:
+    login_user={{ mysql_user }}
+    login_password={{ mysql_password }}
+    login_host={{ mysql_host }}
+    name=terminologies
+    state=import
+    target='{{ data_destination_dir }}/{{ sql_file }}'
+
+- name: Delete Scripts
+  file: path={{ data_destination_dir }} state=absent

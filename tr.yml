@@ -12,6 +12,23 @@
   become_user: root
   become: yes
   roles:
-   - role: tr-feed-server
+    - tr-feed-server
   tags:
     - tr-feed-server
+
+- hosts: tr-server
+  become_user: root
+  become: yes
+  vars:
+    sql_file: "concept_data.sql"
+    database: "terminologies"
+    data_destination_dir: "{{ tr_seed_data_dest_dir }}"
+    mysql_user: "terminologies"
+    mysql_password: "{{ tr_mysql_user_password }}"
+    mysql_host: "127.0.0.1"
+  vars_files:
+    - vars/all.txt
+  roles:
+    - mysql-data-dump
+  tags:
+    - tr-seed-data

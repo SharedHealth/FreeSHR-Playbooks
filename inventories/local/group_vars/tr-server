@@ -2,7 +2,6 @@ tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
-tr_mysql_user_password: terminologies
 tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
 
 tr_server_port: 9080
