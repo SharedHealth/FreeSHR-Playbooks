@@ -21,4 +21,8 @@ provider_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/
 tr_api_user_name: trapiuser
 tr_api_user_password: Trapiuser123
 
+#Cassandra
+cassandra_commit_log_dir: /var/lib/cassandra/commitlog
+cassandra_cluster_name: 'bdshr'
+
 release_version: 2.5

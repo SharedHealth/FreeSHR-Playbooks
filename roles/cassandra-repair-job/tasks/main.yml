@@ -1,0 +1,14 @@
+- name: Create folder for clean up scripts
+  file: path=/opt/cassandra-cleanup state=directory
+
+- name: Copy script
+  copy: src=cassandra-repair.sh
+        dest=/opt/cassandra-cleanup/cassandra-repair.sh
+        owner=root group=root mode=0644
+
+- name: Install cron
+  cron: name="setting up cron" 
+        cron_file="cassandra-cleanup" minute="30" hour="23"
+        weekday="{{ repair_on }}"
+        job="/bin/sh /opt/cassandra-cleanup/cassandra-repair.sh"
+        state="present" user="root"

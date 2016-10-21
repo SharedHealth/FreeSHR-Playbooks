@@ -2,7 +2,7 @@
   become_user: root
   become: yes
   vars_files:
-    - vars/all.txt
+    - vars/all.yml
   roles:
     - datasense
   tags:

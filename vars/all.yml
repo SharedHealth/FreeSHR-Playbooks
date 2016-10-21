@@ -1,0 +1,17 @@
+system_user_password: $6$rounds=100000$pnoVqeJpPoG9lErD$OfDQpOu3jKM16Cj27l0x1mbv5sIqiK7u9Hm3wMfLA5FUjLDmGPBYZbuAHU8B6tToP5gLZgyXB/fKpgtxyjECI1
+ssmtp_auth_pass: p@ssw0rd876
+ssmtp_auth_user: sharedhealthgroup@gmail.com
+go_server_admin_password: andazapnaapna
+cassandra_old_admin_pass: cassandra
+cassandra_admin_pass: cassandra
+bdshr_cassandra_pass: fr33shr678
+mci_cassandra_pass: 11m12c13i
+mci_registry_cassandra_pass: 11m12c13i
+mci_invalid_hid_pattern: ^[^9]|^.[^89]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
+mci_other_org_invalid_hid_pattern: ^[^9]|^.[^1-7]|(^\\d{0,9}$)|(^\\d{11,}$)|((\\d)\\4{2})\\d*((\\d)\\6{2})|(\\d)\\7{3}
+mci_start_hid: 9800000000
+mci_end_hid: 9999999999
+mci_other_org_start_hid: 9100000000
+mci_other_org_end_hid: 9799999999
+mysql_root_password: password
+tr_mysql_user_password: terminologies

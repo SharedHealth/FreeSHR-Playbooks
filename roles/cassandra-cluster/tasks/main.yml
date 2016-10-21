@@ -1,0 +1,7 @@
+- include: install_cassandra.yml
+  tags: install-cassandra
+
+- include: cassandra_user.yml
+  tags:
+    - install-cassandra
+    - setup-user

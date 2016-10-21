@@ -2,7 +2,7 @@
   become_user: root
   become: yes
   vars_files:
-    - vars/all.txt
+    - vars/all.yml
   roles:
     - tr-server
   tags:
@@ -27,7 +27,7 @@
     mysql_password: "{{ tr_mysql_user_password }}"
     mysql_host: "127.0.0.1"
   vars_files:
-    - vars/all.txt
+    - vars/all.yml
   roles:
     - mysql-data-dump
   tags:
