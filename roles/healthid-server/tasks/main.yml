@@ -1,0 +1,77 @@
+---
+- name: Clean existing
+  file: path=/tmp/healthId.rpm state=absent
+
+- name: Remove healthid-service
+  yum: name=healthId.noarch state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/healthId.rpm mode=0755
+
+- name: Install healthid-service
+  yum: name=/tmp/healthId.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ healthId_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Allow log dir access to run user
+  file:
+    path={{ healthId_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy healthid-service properties
+  template: src=healthId-service.j2
+    dest=/etc/default/healthId
+    mode=0750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Permissions to service healthid-service
+  file:
+    path=/etc/init.d/healthId
+    src={{ healthId_install_dir }}/bin/healthId
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    force=yes
+    mode=0750
+
+- name: Permissions to var run
+  file:
+    path=/var/run/healthId
+    src={{ healthId_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0750
+
+- name: Apply migrations to leader node
+  shell: "{{ healthId_install_dir }}/bin/migrate.sh"
+  when: run_migrations == "yes"
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow bdshr port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ healthId_port }} -j ACCEPT -m comment --comment "HEALTHID_SERVICE"
+  when: iptablesrules.stdout.find("HEALTHID_SERVICE") == -1
+
+- name: save iptables
+  command: service iptables save
+
+- name: Restart healthId
+  service: name=healthId state=restarted enabled=yes
+  tags: run_healthId_service
