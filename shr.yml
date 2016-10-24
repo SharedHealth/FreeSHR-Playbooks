@@ -23,3 +23,14 @@
     - shr-server
   tags:
     - shr
+
+- name: "Install FreeSHR-Update-Server"
+  hosts: freeshr-update-server
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    - freeshr-update
+  tags:
+    - freeshr-update-server

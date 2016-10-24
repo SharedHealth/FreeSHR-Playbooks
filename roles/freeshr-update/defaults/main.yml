@@ -1,0 +1,9 @@
+release_build: 1
+rpm: /tmp/freeshr-update-{{release_version}}-{{release_build}}.noarch.rpm
+
+freeshr_update_mysql_user_password: password
+freeshr_update_mysql_monitoring_user: fsumonitor
+freeshr_update_mysql_monitoring_pass: monitorpass
+freeshr_update_failed_events_warn_threshold: 14
+freeshr_update_failed_events_error_threshold: 19
+fhir_document_schema_version: v2

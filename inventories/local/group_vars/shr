@@ -1,3 +1,4 @@
+# shr variables
 shr_install_dir: /opt/bdshr
 shr_log_dir: /var/log/bdshr
 shr_port: 8082
@@ -12,3 +13,14 @@ shr_cassandra_replication_strategy: SimpleStrategy
 shr_cassandra_replication_factor: 1
 shr_cassandra_user: freeshr
 shr_identity_cache_ttl: 60
+
+# freeshr update vars
+freeshr_update_install_dir: /opt/freeshr-update
+freeshr_update_log_dir: /var/log/freeshr-update
+freeshr_update_log_level: DEBUG
+freeshr_update_interval: 120000
+freeshr_retry_update_interval: 180000
+freeshr_update_mysql_monitoring_user: fsumonitor
+freeshr_update_mysql_monitoring_pass: monitorpass
+freeshr_update_failed_events_warn_threshold: 9
+freeshr_update_failed_events_error_threshold: 19

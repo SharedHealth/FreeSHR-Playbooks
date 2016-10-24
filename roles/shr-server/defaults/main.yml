@@ -1,4 +1,4 @@
 release_build: 1
 rpm: /tmp/shr-{{release_version}}-{{release_build}}.noarch.rpm
 shr_identity_cache_ttl: 60
-fhir_document_schema_version: v1
+fhir_document_schema_version: v2

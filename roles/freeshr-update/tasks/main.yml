@@ -1,0 +1,85 @@
+---
+- name: Create freeSHRUpdate database
+  mysql_db:
+    name=freeSHRUpdate
+    state=present
+    login_user=root
+    login_password={{ mysql_root_password }}
+
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name=freeshrupdate
+    password={{ freeshr_update_mysql_user_password }}
+    priv=freeSHRUpdate.*:ALL,GRANT
+    state=present
+
+- name: Create mysql user for nagios monitoring
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name={{ freeshr_update_mysql_monitoring_user }}
+    password={{ freeshr_update_mysql_monitoring_pass }}
+    priv=freeSHRUpdate.*:SELECT,GRANT
+    state=present
+
+- name: Clean existing rpm
+  file: path=/tmp/freeshr-update.rpm state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/freeshr-update.rpm mode=755
+
+- name: Remove freeshr-update
+  yum: name=freeshr-update.noarch state=absent
+
+- name: Install freeshr-update
+  yum: name=/tmp/freeshr-update.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ freeshr_update_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Allow log dir access to run user
+  file:
+    path={{ freeshr_update_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy freeshr-update properties
+  template: src=freeshr-update
+    dest=/etc/default/freeshr-update
+    mode=750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Permissions to service freeshr-update
+  file:
+    path=/etc/init.d/freeshr-update
+    src={{ freeshr_update_install_dir }}/bin/freeshr-update
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0750
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ freeshr_update_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0750
+
+- name: Restart freeshr-update
+  service: name=freeshr-update state=restarted enabled=yes
