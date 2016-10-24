@@ -6,7 +6,7 @@ export DATABASE_CHANGELOG_FILE=classpath:/db/changelog/db-changelog.xml
 export DATABASE_DRIVER=com.mysql.jdbc.Driver
 export DATABASE_CON_POOL_SIZE=10
 
-export SHR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ hostvars[groups['shr'][0]]['bdshr_port'] }}{% endif %}
+export SHR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ hostvars[groups['shr'][0]]['shr_port'] }}{% endif %}
 
 export TR_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ hostvars[groups['tr-server'][0]]['tr_server_port'] }}{% endif %}
 

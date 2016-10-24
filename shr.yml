@@ -1,0 +1,25 @@
+- name: "Add SHR Cassandra User"
+  hosts: cassandra_seed_node
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    -  { role: cassandra-keyspace, cassandra_keyspace: "{{ hostvars[groups['shr-server'][0]]['shr_keyspace'] }}",
+        cassandra_keyspace_user: "{{ hostvars[groups['shr-server'][0]]['shr_cassandra_user'] }}",
+        cassandra_keyspace_pass: "{{ shr_cassandra_pass }}",
+        cassandra_keyspace_replication_strategy: "{{ hostvars[groups['shr-server'][0]]['shr_cassandra_replication_strategy'] }}",
+        cassandra_keyspace_replication_factor: "{{ hostvars[groups['shr-server'][0]]['shr_cassandra_replication_factor'] }}" }
+  tags:
+    - shr
+
+- name: "Install FreeSHR"
+  hosts: shr-server
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    - shr-server
+  tags:
+    - shr

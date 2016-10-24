@@ -1,0 +1,33 @@
+export MCI_PATIENT_PATH=/api/default/patients
+export TR_USER={{tr_api_user_name}}
+export TR_PASSWORD={{tr_api_user_password}}
+export CASSANDRA_KEYSPACE={{ shr_keyspace }}
+export CASSANDRA_VERSION=2
+export CQL_VERSION=3.1.1
+export CASSANDRA_USER={{ shr_cassandra_user }}
+export CASSANDRA_PASSWORD={{ shr_cassandra_pass }}
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_TIMEOUT=60000
+export CASSANDRA_MIGRATIONS_PATH=org/freeshr/cassandra/migrations
+export REST_POOL_SIZE=20
+export BDSHR_PORT={{ shr_port }}
+export VALIDATION_ZIP_PATH=/opt/bdshr/etc/validation.zip
+export FACILITY_REGISTRY_URL={{ facility_registry_url }}
+export PROVIDER_REGISTRY_URL={{ provider_registry_url }}
+export ENCOUNTER_FETCH_LIMIT=20
+export SERVER_CONNECTION_TIMEOUT=10000
+export TR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ tr_host_name }},http://{{ tr_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ hostvars[groups['tr-server'][0]]['tr_server_port'] }}{% endif %}
+
+export IDENTITY_SERVER_BASE_URL={{ idp_user_info_url }}
+export SHR_LOG_LEVEL={{ shr_log_level }}
+export FACILITY_CACHE_TTL_SECONDS=864000
+export IDP_CLIENT_ID={{ shr_idp_client_id }}
+export IDP_AUTH_TOKEN={{ shr_idp_auth_token }}
+export SHR_VERSION=v1
+export IS_LATEST_SHR=true
+export LOCAL_CACHE_TTL={{ shr_local_cache_ttl }}
+export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
+export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ mci_host_name }},http://{{ mci_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ hostvars[groups['mci-server'][0]]['mci_port'] }}{% endif %}
+
+export IDENTITY_CACHE_TTL={{ shr_identity_cache_ttl }}

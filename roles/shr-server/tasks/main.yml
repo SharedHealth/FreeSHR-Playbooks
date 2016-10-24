@@ -1,0 +1,77 @@
+---
+- name: Clean existing rpm
+  file: path=/tmp/shr.rpm state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/shr.rpm mode=755
+
+- name: Remove SHR
+  yum: name=shr.noarch state=absent
+
+- name: Install SHR
+  yum: name=/tmp/shr.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ shr_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Allow log dir access to run user
+  file:
+    path={{ shr_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy SHR properties
+  template:
+    src=bdshr.j2
+    dest=/etc/default/bdshr
+    mode=644
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    mode=0750
+
+- name: Permissions to service bdshr
+  file:
+    path=/etc/init.d/bdshr
+    src={{ shr_install_dir }}/bin/bdshr
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0750
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ shr_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0750
+
+- name: Apply migrations to leader node
+  shell: "{{ shr_install_dir }}/bin/migrate.sh"
+  when: run_migrations == "yes"
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow bdshr port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ shr_port }} -j ACCEPT -m comment --comment "BDSHR"
+  when: iptablesrules.stdout.find("BDSHR") == -1
+
+- name: save iptables
+  command: service iptables save
+
+- name: Start bdshr
+  service: name=bdshr state=restarted enabled=yes
