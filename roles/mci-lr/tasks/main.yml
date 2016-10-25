@@ -1,7 +1,7 @@
 ---
 
 - name: Clean existing rpm
-  shell: rm -f /tmp/mci-lr.rpm
+  file: path=/tmp/mci-lr.rpm state=absent
 
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/mci-lr.rpm mode=755

@@ -1,6 +1,6 @@
 ---
 - name: Clean existing
-  shell: rm -f /tmp/mci.rpm
+  file: path=/tmp/mci.rpm state=absent
 
 - name: Copy rpm
   copy: src='{{ rpm }}' dest=/tmp/mci.rpm mode=755
@@ -47,7 +47,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
-    mode=0750
+    mode=0755
 
 - name: Permissions to var run
   file:

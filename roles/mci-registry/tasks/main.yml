@@ -1,9 +1,9 @@
 ---
 - name: Clean existing
-  shell: rm -f /tmp/mci-registry.rpm
+  file: path=/tmp/mci-registry.rpm state=absent
 
 - name: Copy rpm
-  copy: src='{{ rpm }}' dest=/tmp/mci-registry.rpm mode=755
+  copy: src='{{ rpm }}' dest=/tmp/mci-registry.rpm mode=0755
 
 - name: Remove existing installation if any
   yum: name=mci-registry.noarch state=absent
@@ -54,7 +54,7 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
-    mode=0750
+    mode=0755
 
 - name: Create health id file directory path
   file:

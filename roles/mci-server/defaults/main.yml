@@ -1,1 +1,2 @@
-rpm: "/tmp/mci-2.5-1.noarch.rpm"
+release_build: 1
+rpm: "/tmp/mci-{{release_version}}-{{release_build}}.noarch.rpm"
