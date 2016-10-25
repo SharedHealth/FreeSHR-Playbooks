@@ -1,0 +1,4 @@
+---
+dependencies:
+  - { role: shr-base }
+  - { role: host-entries, exclude: "none" }
