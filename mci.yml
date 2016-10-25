@@ -61,3 +61,14 @@
     - mci-lr
   tags:
     - mci-lr
+
+- name: Install MCI Registry
+  hosts: mci-registry
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    - mci-registry
+  tags:
+    - mci-registry
