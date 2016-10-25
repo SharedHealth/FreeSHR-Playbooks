@@ -1,0 +1,6 @@
+dependencies:
+  - { role: shr-tools}
+  - { role: shr-base }
+  - { role: oracle-java }
+  - { role: sharedhealth-user }
+  - { role: host-entries, exclude: "mci-server" }

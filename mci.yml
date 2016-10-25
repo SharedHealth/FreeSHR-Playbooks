@@ -24,4 +24,32 @@
   tags:
     - healthid-server
 
+- name: Set up keyspace and users
+  hosts: cassandra_seed_node
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+  - { role: cassandra-keyspace,
+      cassandra_keyspace: "{{ hostvars[groups['mci'][0]]['mci_keyspace'] }}",
+      cassandra_keyspace_user: "{{ hostvars[groups['mci'][0]]['mci_cassandra_user'] }}",
+      cassandra_keyspace_pass: "{{ mci_cassandra_pass }}",
+      cassandra_keyspace_replication_strategy: "{{ hostvars[groups['mci'][0]]['mci_cassandra_replication_strategy'] }}",
+      cassandra_keyspace_replication_factor: "{{ hostvars[groups['mci'][0]]['mci_cassandra_replication_factor'] }}" }
+  tags:
+    - mci-server
+
+- name: Install MCI
+  hosts: mci-server
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    - mci-server
+  tags:
+    - mci-server
+
+
 
