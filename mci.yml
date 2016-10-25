@@ -72,3 +72,14 @@
     - mci-registry
   tags:
     - mci-registry
+
+- name: Install MCI UI
+  hosts: mci-ui
+  become_user: root
+  become: yes
+  roles:
+    - role: mci-ui
+  vars:
+    mci_ui_home: "/var/www/mci_ui"
+  tags:
+    - mci-ui

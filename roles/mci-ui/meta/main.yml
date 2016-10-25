@@ -1,0 +1,6 @@
+---
+dependencies:
+  - { role: shr-base }
+  - { role: apache }
+  - { role: php-packages }
+  - { role: host-entries, exclude: "mci-ui" }

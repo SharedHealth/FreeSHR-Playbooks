@@ -1,0 +1,24 @@
+---
+
+- name: Remove MCI UI home directory
+  file: path={{mci_ui_home}} state=absent
+
+- name: Create {{mci_ui_home}} dir
+  file: path={{mci_ui_home}} state=directory
+
+- name: Install current version
+  unarchive: src={{dist}} dest={{mci_ui_home}} owner=apache group=apache
+
+- name: Create app config directory
+  file: path={{mci_ui_home}}/app/config state=directory
+
+- name: Copy Configuration
+  template: src=mci.j2
+    dest={{mci_ui_home}}/app/config/parameters.yml
+
+- name: Re-Build Applicaiton
+  shell: chdir={{mci_ui_home}} bin/deploy.sh
+  notify: restart apache
+
+- name: Change owner to apache user
+  shell: chown -R apache:apache {{mci_ui_home}}
