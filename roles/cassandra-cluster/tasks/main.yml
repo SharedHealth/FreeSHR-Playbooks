@@ -1,7 +1,92 @@
-- include: install_cassandra.yml
-  tags: install-cassandra
+- name: Install datastax repo
+  copy:
+    src=datastax.repo
+    dest=/etc/yum.repos.d/datastax.repo
+    owner=root group=root mode=0644
 
-- include: cassandra_user.yml
-  tags:
-    - install-cassandra
-    - setup-user
+- name: Install cassandra
+  yum: name=dsc20 state=present
+
+- name: Downlaod jna
+  get_url:
+    url={{ cassandra_jna_download_url }}
+    dest=/usr/share/cassandra/lib/jna.jar
+    owner=cassandra group=cassandra mode=0755
+
+- name: Update security conf for jna
+  lineinfile:
+    dest: /etc/security/limits.conf
+    line: "{{ item.line }}"
+  with_items:
+    - { line: "* - memlock unlimited" }
+    - { line: "* - nofile 100000" }
+    - { line: "* - nproc 32768" }
+    - { line: "* - as unlimited" }
+
+- name: Register iptable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow cassandra rpc port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9160 -j ACCEPT -m comment --comment "CassandraRpc"
+  when: iptablesrules.stdout.find("CassandraRpc") == -1
+
+- name: Allow Cassandra inter-node cluster communication
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7000 -j ACCEPT -m comment --comment "CassandraInterNode"
+  when: iptablesrules.stdout.find("CassandraInterNode") == -1
+
+- name: Allow Cassandra JMX monitoring
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7199 -j ACCEPT -m comment --comment "CassandraJMX"
+  when: iptablesrules.stdout.find("CassandraJMX") == -1
+
+- name: Allow Cassandra cql native transport
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9042 -j ACCEPT -m comment --comment "CassandraNative"
+  when: iptablesrules.stdout.find("CassandraNative") == -1
+
+- name: Allow Opscenter monitoring
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61620 -j ACCEPT -m comment --comment "OpscenterMonitoring"
+  when:
+    - iptablesrules.stdout.find("OpscenterMonitoring") == -1
+    - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
+
+- name: Allow Opscenter agents
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61621 -j ACCEPT -m comment --comment "OpscenterAgents"
+  when:
+    - iptablesrules.stdout.find("OpscenterAgents") == -1
+    - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
+
+- name: save iptables
+  command: service iptables save
+
+- name: stop cassandra
+  service: name=cassandra state=stopped
+
+# doing this deletes all data in the system. We should do this only if a default cluster is already setup.
+#- name: delete system data
+#  command: rm -rf /var/lib/cassandra/data/system/*
+
+- name: copy config
+  template: src=cassandra.yaml dest=/etc/cassandra/conf/
+
+- name: allow cassandra user to write to commitlog
+  file:
+    path={{ cassandra_commit_log_dir }}
+    owner=cassandra
+    group=cassandra
+    follow=yes
+    recurse=yes
+    state=directory
+
+ # - name: set hostname/ip for JMX
+ #   lineinfile: dest=/etc/cassandra/conf/cassandra-env.sh regexp='hostname' line='JVM_OPTS="$JVM_OPTS -Djava.rmi.server.hostname={{ inventory_hostname }}"' backup=yes
+
+- name: install system monitoring tools
+  yum: name={{ item }} state=present
+  with_items:
+    - dstat
+
+- name: start cassandra
+  service: name=cassandra state=started enabled=yes
+
+- name: Pause for Cassandra to start up
+  pause: seconds=60

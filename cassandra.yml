@@ -1,22 +1,24 @@
-- name: "cassandra"
+- name: "Install Cassandra"
   hosts: cassandra_node
   become_user: root
   become: yes
   roles:
-    - { role: cassandra-cluster, tags: install-cassandra }
+    - cassandra-cluster
     - cassandra-repair-job
   vars_files:
     - vars/all.yml
   tags:
     - cassandra
     
-- name: "cassandra"
+- name: "Setup Cassandra users"
   hosts: cassandra_seed_node
   become_user: root
   become: yes
   roles:
-     - { role: cassandra-cluster, tags: setup-user }
+     - cassandra-user-setup
   vars_files:
     - vars/all.yml
+  run_once: true
   tags:
+    - cassandra
     - cassandra-user-setup
