@@ -83,3 +83,14 @@
     mci_ui_home: "/var/www/mci_ui"
   tags:
     - mci-ui
+
+- name: "Install MCI-Background-Jobs"
+  hosts: mci-background-jobs
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/all.yml
+  roles:
+    - mci-background-jobs
+  tags:
+    - mci-background-jobs

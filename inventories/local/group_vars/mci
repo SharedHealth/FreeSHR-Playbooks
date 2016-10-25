@@ -58,3 +58,19 @@ mci_registry_hid_replenish_delay: 10000
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr
 mci_lr_log_dir: /var/log/mci-lr
+
+
+#MCI-Background-Jobs
+mci_bg_install_dir: /opt/mci-background-jobs
+mci_bg_log_dir: /var/log/mci-background-jobs
+mci_bg_log_level: INFO
+mci_bg_idp_client_id: 18691
+mci_bg_idp_auth_token: cd778d4ec6561c89c0da05c01f6f365f6c4b470a7692e80a4640571c112a7567
+mci_bg_idp_client_email: anthony@thoughtworks.com
+mci_bg_idp_client_password: thoughtworks
+mci_bg_hid_mark_used_block_size: 5
+mci_bg_hid_mark_used_delay: 60000
+mci_bg_hid_mark_used_initial_delay: 30000
+mci_bg_max_failed_event_limit: 10
+mci_bg_failed_event_process_block_size: 5
+mci_bg_failed_event_retry_limit: 5
