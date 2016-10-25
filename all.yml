@@ -1,0 +1,11 @@
+- hosts: all:!external-registries
+  become_user: root
+  become: yes
+  roles:
+    - shr-base
+    - { role: ssh-user, ssh_user: bdshr }
+    - { role: selinux, selinux_state: permissive, selinux_policy: targeted }
+  vars_files:
+    - vars/all.yml
+  tags:
+    - setup
