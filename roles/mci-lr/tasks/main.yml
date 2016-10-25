@@ -1,0 +1,64 @@
+---
+
+- name: Clean existing rpm
+  shell: rm -f /tmp/mci-lr.rpm
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/mci-lr.rpm mode=755
+
+- name: Remove mci-lr
+  yum: name=mci-lr.noarch state=absent
+
+- name: Install mci-lr
+  yum: name=/tmp/mci-lr.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ mci_lr_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ mci_lr_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy mci-lr properties
+  template: src=mci-lr
+    dest=/etc/default/mci-lr
+    mode=0750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service mci-lr
+  file:
+    path=/etc/init.d/mci-lr
+    src={{ mci_lr_install_dir }}/bin/mci-lr
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0755
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/bdshr
+    src={{ mci_lr_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Restart mci-lr
+  service: name=mci-lr state=restarted enabled=yes

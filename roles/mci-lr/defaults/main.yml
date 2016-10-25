@@ -1,0 +1,2 @@
+release_build: 1
+rpm: /tmp/mci-lr-{{release_version}}-{{release_build}}.noarch.rpm

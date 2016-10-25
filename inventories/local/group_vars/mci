@@ -38,3 +38,7 @@ healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: healthId
 healthId_storage_path: /lib/healthId/hids
+
+#MCI-LR
+mci_lr_install_dir: /opt/mci-lr
+mci_lr_log_dir: /var/log/mci-lr
