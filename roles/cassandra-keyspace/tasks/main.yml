@@ -12,5 +12,4 @@
   failed_when: "'Exception' in command_result.stderr"
 
 - name: Delete create user script
-  shell: "rm /tmp/create_keyspace.cql"
-  sudo: yes
+  file: path=/tmp/create_keyspace.cql state=absent

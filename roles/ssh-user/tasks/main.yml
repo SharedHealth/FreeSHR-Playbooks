@@ -2,17 +2,14 @@
   user:
     name={{ ssh_user }}
     state=present
-  sudo: yes
 
 - name: Create user
   user: name={{ ssh_user }} group={{ ssh_user }} generate_ssh_key=yes ssh_key_bits=2048 state=present password={{ system_user_password }}
-  sudo: yes
   tags:
     - update-user
 
 - name: configure sudoers
   lineinfile: "dest=/etc/sudoers state=present backup=yes regexp='^{{ ssh_user }}' insertafter='^# %wheel' line='{{ ssh_user }} ALL=(ALL) NOPASSWD: ALL' validate='visudo -cf %s'"
-  sudo: yes
 
 - name: allow user ssh access
   lineinfile:
