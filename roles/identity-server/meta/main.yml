@@ -1,0 +1,4 @@
+dependencies:
+  - { role: shr-base }
+  - { role: oracle-java }
+  - { role: sharedhealth-user }

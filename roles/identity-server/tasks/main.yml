@@ -1,0 +1,72 @@
+---
+- name: Clean existing
+  file: path=/tmp/identity-server.rpm state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/identity-server.rpm mode=0755
+
+- name: Remove identity-server
+  yum: name=identity-server.noarch state=absent
+
+- name: Install identity-server
+  yum: name=/tmp/identity-server.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path=/opt/identity-server/
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+
+- name: Allow log dir access to run user
+  file:
+    path=/opt/identity-server/
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy identity-server properties
+  template: src=identity-server
+    dest=/etc/default/identity-server
+    mode=0755
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+- name: Permissions to service identity-server
+  file:
+    path=/etc/init.d/identity-server
+    src=/opt/identity-server/bin/identity-server
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0755
+
+- name: Permissions to var run
+  file:
+    path=/var/run/mci
+    src=/opt/identity-server/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0755
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow bdshr port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ idp_port }} -j ACCEPT -m comment --comment "IDENTITY-SERVER"
+  when: iptablesrules.stdout.find("IDENTITY-SERVER") == -1
+
+- name: save iptables
+  command: service iptables save
+
+- name: Restart identity-server
+  service: name=identity-server state=restarted enabled=yes

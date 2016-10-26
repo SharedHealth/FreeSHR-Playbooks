@@ -19,3 +19,12 @@
     - haproxy
   tags:
     - haproxy
+
+- hosts: identity-server
+  become_user: root
+  become: yes
+  roles:
+    - identity-server
+  tags:
+    - identity-server
+
