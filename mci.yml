@@ -2,23 +2,19 @@
   hosts: cassandra_seed_node
   become_user: root
   become: yes
-  vars_files:
-      - vars/all.yml
   roles:
   - { role: cassandra-keyspace,
-      cassandra_keyspace: "{{ hostvars[groups['mci'][0]]['healthId_keyspace'] }}",
-      cassandra_keyspace_user: "{{ hostvars[groups['mci'][0]]['healthId_cassandra_user'] }}",
-      cassandra_keyspace_pass: "{{ healthId_cassandra_pass }}",
-      cassandra_keyspace_replication_strategy: "{{ hostvars[groups['mci'][0]]['healthId_cassandra_replication_strategy'] }}",
-      cassandra_keyspace_replication_factor: "{{ hostvars[groups['mci'][0]]['healthId_cassandra_replication_factor'] }}" }
+      cassandra_keyspace: "{{ hostvars[groups['healthid-server'][0]]['healthId_keyspace'] }}",
+      cassandra_keyspace_user: "{{ hostvars[groups['healthid-server'][0]]['healthId_cassandra_user'] }}",
+      cassandra_keyspace_pass: "{{ hostvars[groups['healthid-server'][0]]['healthId_cassandra_pass'] }}",
+      cassandra_keyspace_replication_strategy: "{{ hostvars[groups['healthid-server'][0]]['healthId_cassandra_replication_strategy'] }}",
+      cassandra_keyspace_replication_factor: "{{ hostvars[groups['healthid-server'][0]]['healthId_cassandra_replication_factor'] }}" }
   tags:
     - healthid-server
 
 - hosts: healthid-server
   become_user: root
   become: yes
-  vars_files:
-        - vars/all.yml
   roles:
     - healthid-server
   tags:
@@ -28,15 +24,13 @@
   hosts: cassandra_seed_node
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
   - { role: cassandra-keyspace,
-      cassandra_keyspace: "{{ hostvars[groups['mci'][0]]['mci_keyspace'] }}",
-      cassandra_keyspace_user: "{{ hostvars[groups['mci'][0]]['mci_cassandra_user'] }}",
-      cassandra_keyspace_pass: "{{ mci_cassandra_pass }}",
-      cassandra_keyspace_replication_strategy: "{{ hostvars[groups['mci'][0]]['mci_cassandra_replication_strategy'] }}",
-      cassandra_keyspace_replication_factor: "{{ hostvars[groups['mci'][0]]['mci_cassandra_replication_factor'] }}" }
+      cassandra_keyspace: "{{ hostvars[groups['mci-server'][0]]['mci_keyspace'] }}",
+      cassandra_keyspace_user: "{{ hostvars[groups['mci-server'][0]]['mci_cassandra_user'] }}",
+      cassandra_keyspace_pass: "{{ hostvars[groups['mci-server'][0]]['mci_cassandra_pass'] }}",
+      cassandra_keyspace_replication_strategy: "{{ hostvars[groups['mci-server'][0]]['mci_cassandra_replication_strategy'] }}",
+      cassandra_keyspace_replication_factor: "{{ hostvars[groups['mci-server'][0]]['mci_cassandra_replication_factor'] }}" }
   tags:
     - mci-server
 
@@ -44,8 +38,6 @@
   hosts: mci-server
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
     - mci-server
   tags:
@@ -55,8 +47,6 @@
   hosts: mci-lr
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
     - mci-lr
   tags:
@@ -66,8 +56,6 @@
   hosts: mci-registry
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
     - mci-registry
   tags:

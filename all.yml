@@ -5,16 +5,12 @@
     - shr-base
     - { role: ssh-user, ssh_user: bdshr }
     - { role: selinux, selinux_state: permissive, selinux_policy: targeted }
-  vars_files:
-    - vars/all.yml
   tags:
     - setup
 
 - hosts: haproxy
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
     - haproxy
   tags:

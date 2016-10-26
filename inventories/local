@@ -62,3 +62,17 @@ healthid-server
 [shr:children]
 shr-server
 freeshr-update-server
+
+[cassandra:children]
+cassandra_node
+cassandra_seed_node
+
+[local:children]
+shr
+mci
+cassandra
+tr-server
+datasense
+identity-server
+haproxy
+freeshr-update-server
