@@ -1,6 +1,6 @@
 ---
 - name: Delete terminology feed omod
-  file: path={{ tr_server_install_dir}}/modules/freeshr-terminology-feed-*.omod state=absent
+  shell: rm -f {{ tr_server_install_dir}}/modules/freeshr-terminology-feed-*.omod
 
 - name: Copy terminology feed omod
   copy:
