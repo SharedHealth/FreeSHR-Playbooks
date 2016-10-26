@@ -1,0 +1,22 @@
+- include: agent.yml 
+  tags: agent
+
+- include: maven.yml
+  tags: maven
+
+- include: gradle.yml
+  tags: gradle
+
+- include: shr-playbooks.yml
+  tags: ansible-deploy
+
+- include: ansible.yml
+  tags: ansible-deploy
+
+- include: git-crypt.yml
+  tags: git-crypt
+
+- include: git-hub-release-publish.yml
+  tags: git-hub-release-publish
+
+- include: php.yml

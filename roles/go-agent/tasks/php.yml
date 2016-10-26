@@ -1,0 +1,22 @@
+---
+- name: Install EPEL
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+- name: Check for remi repository
+  command: rpm -q remi-release
+  register: rpm_check_remi_release
+  ignore_errors: True
+
+- name: Add repository
+  command: rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+  when: rpm_check_remi_release.rc == 1
+
+- name: Ensure PHP packages are installed
+  yum: name={{ item }} state=present enablerepo=remi-php55
+  with_items:
+    - php-cli
+    - php-common
+    - php-pear
+    - php-xml
+    - php-xmlrpc
+    - php-pecl-apcu

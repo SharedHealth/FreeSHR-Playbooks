@@ -1,0 +1,45 @@
+- name : download go server rpm
+  command: >
+    wget -q -O https://download.go.cd/binaries/{{ go_server_version }}/rpm/go-server-{{ go_server_version }}.noarch.rpm 
+    chdir=/tmp
+    creates=/tmp/go-server-{{ go_server_version}}.noarch.rpm
+
+- name: install go server
+  yum: name=/tmp/go-server-{{ go_server_version}}.noarch.rpm state=present
+
+- name: create go user
+  command: "htpasswd -sbn {{ go_server_admin }} {{ go_server_admin_password }}"
+  register: passfile_contents
+  tags:
+    - go-user
+
+- name: save go user
+  lineinfile:
+    line='{{ passfile_contents.stdout }}'
+    dest=/var/go/htpasswd
+    create=yes
+    owner=go
+    group=go
+    mode=0640
+  tags:
+    - go-user
+
+- name: start go server
+  service: name=go-server enabled=yes state=started
+  tags:
+    - go-user
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow Go server port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8153 -j ACCEPT -m comment --comment "GO Server"
+  when: iptablesrules.stdout.find("GO Server") == -1
+
+- name: Allow Go Server SSL port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8154 -j ACCEPT -m comment --comment "GO Server SSL"
+  when: iptablesrules.stdout.find("GO Server SSL") == -1
+
+- name: save iptables
+  command: service iptables save

@@ -1,0 +1,8 @@
+- name: Create directory to upload plugin
+  file: path=/opt/gh-release state=directory
+
+- name: Copy the github release upload plugin
+  copy:
+    src=git-hub-release-publish.sh
+    dest=/opt/gh-release/upload.sh
+    owner=root group=root mode=0644

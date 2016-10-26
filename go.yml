@@ -1,0 +1,19 @@
+- hosts: go-server
+  become_user: root
+  become: yes
+  roles:
+    - go-server
+  vars_files:
+    - vars/go.yml
+  tags:
+    - go-server
+
+- hosts: go-agent
+  become_user: root
+  become: yes
+  roles:
+    - go-agent
+  vars_files:
+    - vars/go.yml
+  tags:
+    - go-agent

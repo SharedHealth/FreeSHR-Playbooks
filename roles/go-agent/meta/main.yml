@@ -1,0 +1,4 @@
+dependencies:
+  - { role: shr-base }
+  - { role: oracle-java , java_runtime: jdk }
+

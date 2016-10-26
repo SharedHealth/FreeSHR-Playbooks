@@ -1,0 +1,40 @@
+- name: Install packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - wget
+    - curl
+    - ntp
+    - git
+    - python-pip
+    - unzip
+    - gcc-c++
+    - openssl-devel
+    - jq
+  tags: base
+
+- name: download go agent
+  command: "wget -q -O /tmp/go-agent-{{ go_server_version}}.noarch.rpm --no-check-certificate --no-cookies http://download.go.cd/binaries/{{ go_server_version}}/rpm/go-agent-{{ go_server_version}}.noarch.rpm"
+
+- name: install go agent
+  yum: name=/tmp/go-agent-{{ go_server_version}}.noarch.rpm state=present
+
+- name: Set MAVEN_OPTS environment variable
+  lineinfile: dest=/etc/default/go-agent regexp='^GO_SERVER_URL=.*' line='GO_SERVER_URL=https://{{ groups['go-server'][0] }}:8154/go'
+
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow Go server port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8153 -j ACCEPT -m comment --comment "GO Agent"
+  when: iptablesrules.stdout.find("GO Agent") == -1
+
+- name: Allow Go Server SSL port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8154 -j ACCEPT -m comment --comment "GO Agent SSL"
+  when: iptablesrules.stdout.find("GO Agent SSL") == -1
+
+- name: save iptables
+  command: service iptables save
+
+- name: start go agent
+  service: name=go-agent enabled=yes state=started
