@@ -41,7 +41,7 @@
 [identity-server]
 172.18.46.60 ansible_ssh_user=bdshr
 
-[patient-journal-server]
+[patient-journal]
 172.18.46.156 ansible_ssh_user=bdshr
 
 [haproxy]
