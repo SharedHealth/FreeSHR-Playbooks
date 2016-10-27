@@ -1,6 +1,7 @@
 
+#if this doesnot update ansible then reinstall absible
 - name: Ensure ansible is installed
-  yum: name=ansible1.9 state=latest
+  yum: name=ansible state=latest
 
 - name: Copy the ansible-deploy plugin
   copy:
