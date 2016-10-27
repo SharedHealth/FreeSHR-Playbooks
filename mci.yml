@@ -76,8 +76,6 @@
   hosts: mci-background-jobs
   become_user: root
   become: yes
-  vars_files:
-    - vars/all.yml
   roles:
     - mci-background-jobs
   tags:

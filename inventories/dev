@@ -8,7 +8,7 @@
 [opscenter-server]
 172.18.46.199
 
-[shr]
+[shr-server]
 172.18.46.156 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
@@ -26,11 +26,11 @@
 [mci-lr]
 172.18.46.108 ansible_ssh_user=bdshr
 
-[mci-background-jobs]
-172.18.46.108 ansible_ssh_user=bdshr
-
 [healthid-server]
 172.18.46.59 ansible_ssh_user=bdshr run_migrations=yes
+
+[mci-background-jobs]
+172.18.46.108 ansible_ssh_user=bdshr
 
 [tr-server]
 172.18.46.199 ansible_ssh_user=bdshr
@@ -54,21 +54,31 @@
 172.18.46.59 ansible_ssh_user=bdshr
 172.18.46.60 ansible_ssh_user=bdshr
 
-[dev:children]
-cassandra_seed_node
-cassandra_node
-opscenter-server
-shr
-freeshr-update-server
+[dhis]
+172.18.46.225 dhis_port=8080
+
+[mci:children]
 mci-server
-mci-ui
 mci-registry
+mci-ui
 mci-lr
 mci-background-jobs
+healthid-server
+
+[shr:children]
+shr-server
+freeshr-update-server
+
+[cassandra:children]
+cassandra_node
+cassandra_seed_node
+
+[dev:children]
+shr
+mci
+cassandra
 tr-server
 datasense
 identity-server
-patient-journal-server
 haproxy
-nagios_hosts
-shr-client
+freeshr-update-server
