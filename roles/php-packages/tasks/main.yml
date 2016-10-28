@@ -33,7 +33,7 @@
   lineinfile: dest=/etc/php.ini
               regexp='^date.timezone ='
               insertafter='^;date.timezone ='
-              line='date.timezone = Asia/Dhaka'
+              line='date.timezone = {{ freeshr_ntp_timezone }}'
               state=present
 
 - include: composer.yml

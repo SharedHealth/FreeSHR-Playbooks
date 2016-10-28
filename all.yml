@@ -1,4 +1,5 @@
-- hosts: all:!external-registries
+- name: Base box configuration
+  hosts: all:!external-registries
   become_user: root
   become: yes
   roles:
@@ -8,7 +9,8 @@
   tags:
     - setup
 
-- hosts: haproxy
+- name: Install Ha Proxy
+  hosts: haproxy
   become_user: root
   become: yes
   roles:
@@ -23,4 +25,3 @@
     - identity-server
   tags:
     - identity-server
-

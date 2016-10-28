@@ -30,9 +30,8 @@
     mode=755
 
 - name: Start Mysql Service
-  action: service name=mysqld state=started enabled=true
+  service: name=mysqld state=started enabled=yes
 
 - name: Update mysql root password
   command: /usr/bin/mysqladmin -u root password {{ mysql_root_password }}
   ignore_errors: yes
-

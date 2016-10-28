@@ -48,8 +48,28 @@
 192.168.33.35 dhis_port=8080
 
 [bahmni-app-active]
+192.168.33.40
 
 [bahmni-app-passive]
+192.168.33.40
+
+[bahmni-db-active]
+192.168.33.40
+
+[bahmni-db-passive]
+192.168.33.40
+
+[bahmni-event-log-active]
+192.168.33.40
+
+[go-server]
+192.168.33.37 ansible_ssh_user=vagrant ansible_ssh_port=22
+
+[go-agent]
+192.168.33.38 ansible_ssh_user=vagrant ansible_ssh_port=22
+
+[nagios_hosts]
+192.168.33.39 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [mci:children]
 mci-server
@@ -76,3 +96,4 @@ datasense
 identity-server
 haproxy
 freeshr-update-server
+nagios_hosts

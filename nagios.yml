@@ -1,0 +1,22 @@
+- name: Install nagios
+  hosts: nagios_hosts
+  become_user: root
+  become: yes  
+  vars_files:
+    - vars/nagios.yml
+    - group_vars/all
+  roles:
+   - role: nagios
+  tags:
+    - nagios-server
+
+- name : Install nagios agents
+  hosts: all:!dhis:!external-registries
+  become_user: root
+  become: yes
+  vars_files:
+    - vars/nrpe.yml
+  roles:
+   - role: nagios-agent
+  tags:
+    - nagios-agents
