@@ -23,36 +23,26 @@
     - { line: "* - nproc 32768" }
     - { line: "* - as unlimited" }
 
-- name: Register iptable rules
-  shell: iptables -L
-  register: iptablesrules
-
 - name: Allow cassandra rpc port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9160 -j ACCEPT -m comment --comment "CassandraRpc"
-  when: iptablesrules.stdout.find("CassandraRpc") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=9160 comment=CassandraRpc
 
 - name: Allow Cassandra inter-node cluster communication
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7000 -j ACCEPT -m comment --comment "CassandraInterNode"
-  when: iptablesrules.stdout.find("CassandraInterNode") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=7000 comment=CassandraInterNode
 
 - name: Allow Cassandra JMX monitoring
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7199 -j ACCEPT -m comment --comment "CassandraJMX"
-  when: iptablesrules.stdout.find("CassandraJMX") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=7199 comment=CassandraJMX
 
 - name: Allow Cassandra cql native transport
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9042 -j ACCEPT -m comment --comment "CassandraNative"
-  when: iptablesrules.stdout.find("CassandraNative") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=9042 comment=CassandraNative
 
 - name: Allow Opscenter monitoring
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61620 -j ACCEPT -m comment --comment "OpscenterMonitoring"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=61620 comment=OpscenterMonitoring
   when:
-    - iptablesrules.stdout.find("OpscenterMonitoring") == -1
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: Allow Opscenter agents
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61621 -j ACCEPT -m comment --comment "OpscenterAgents"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=61621 comment=OpscenterAgents
   when:
-    - iptablesrules.stdout.find("OpscenterAgents") == -1
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: save iptables
