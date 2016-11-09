@@ -31,7 +31,7 @@
     state=directory
     mode=0750
 
-  
+
 - name: Copy patient-journal properties
   template: src=patient-journal
     dest=/etc/default/patient-journal
@@ -61,9 +61,8 @@
   shell: iptables -L
   register: iptablesrules
 
-- name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ patient_journal_port }} -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
-  when: iptablesrules.stdout.find("PATIENT-JOURNAL") == -1
+- name: Allow pj port through firewall
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ patient_journal_port }} comment=PATIENT-JOURNAL
 
 - name: save iptables
   command: service iptables save
