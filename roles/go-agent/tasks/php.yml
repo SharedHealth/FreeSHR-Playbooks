@@ -1,7 +1,4 @@
 ---
-- name: Install EPEL
-  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
-
 - name: Check for remi repository
   command: rpm -q remi-release
   register: rpm_check_remi_release
