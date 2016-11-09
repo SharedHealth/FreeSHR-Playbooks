@@ -84,13 +84,8 @@
     state=link
     mode=0750
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
 - name: Allow mci-registry port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_registry_port }} -j ACCEPT -m comment --comment "MCI-Registry"
-  when: iptablesrules.stdout.find("MCI-Registry") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ mci_registry_port }} comment=MCI-Registry
 
 - name: save iptables
   command: service iptables save

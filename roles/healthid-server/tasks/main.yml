@@ -61,13 +61,8 @@
   shell: "{{ healthId_install_dir }}/bin/migrate.sh"
   when: run_migrations == "yes"
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
-- name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ healthId_port }} -j ACCEPT -m comment --comment "HEALTHID_SERVICE"
-  when: iptablesrules.stdout.find("HEALTHID_SERVICE") == -1
+- name: Allow healthId service port through firewall
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ healthId_port }} comment=HEALTHID_SERVICE
 
 - name: save iptables
   command: service iptables save

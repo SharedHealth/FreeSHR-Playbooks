@@ -13,17 +13,11 @@
       group=haproxy
       backup=yes
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
 - name: Allow listen access to haproxy http
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT -m comment --comment "HAPROXY HTTP"
-  when: iptablesrules.stdout.find("HAPROXY HTTP") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=80 comment="HAPROXY HTTP"
 
 - name: Allow listen access to haproxy https
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport 443 -j ACCEPT -m comment --comment "HAPROXY HTTPS"
-  when: iptablesrules.stdout.find("HAPROXY HTTPS") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=443 comment="HAPROXY HTTPS"
 
 - name: save iptables
   command: service iptables save

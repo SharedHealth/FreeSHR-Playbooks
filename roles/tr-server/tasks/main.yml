@@ -131,13 +131,8 @@
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted enabled=yes
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
 - name: Allow terminology server port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ tr_server_port }} -j ACCEPT -m comment --comment "TerminologyServer"
-  when: iptablesrules.stdout.find("TerminologyServer") == -1
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ tr_server_port }} comment=TerminologyServer
 
 - name: save iptables
   command: service iptables save

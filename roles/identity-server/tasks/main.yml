@@ -57,13 +57,8 @@
     state=link
     mode=0755
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
-- name: Allow bdshr port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ idp_port }} -j ACCEPT -m comment --comment "IDENTITY-SERVER"
-  when: iptablesrules.stdout.find("IDENTITY-SERVER") == -1
+- name: Allow idp port through firewall
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ idp_port }} comment=IDENTITY-SERVER
 
 - name: save iptables
   command: service iptables save
