@@ -170,9 +170,9 @@ idp_user_login_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/signin
 idp_login_url_path: /signin
 idp_user_info_url_path: /token
 idp_sso_base_url: http://{{groups['identity-server'][0]}}:{{idp_port}}
-facility_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/facilities
-location_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/locations
-provider_registry_url: http://{{groups['identity-server'][0]}}:{{idp_port}}/api/1.0/providers
+facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
+location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
+provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
 
 mysql_root_password: password
 
