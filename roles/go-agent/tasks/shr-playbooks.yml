@@ -5,7 +5,7 @@
   git: repo=https://github.com/sharedhealth/FreeSHR-Bahmni-Playbooks.git dest={{ freeshr_playbook_dir}}/FreeSHR-Bahmni-Playbooks/{{ branch }} version={{ branch }}
 
 - name: Clone aws-playbooks
-  git: repo=https://github.com/SharedHealth/SHR-AWS-Playbooks.git dest={{ freeshr_playbook_dir}}/SHR-AWS-Playbooks/{{ branch }} version={{ branch }}
+  git: repo=https://github.com/SharedHealth/SHR-AWS-Playbooks.git dest={{ freeshr_playbook_dir}}/SHR-AWS-Playbooks/master version=master
 
 - name: Give access to go user
   file: path={{ item }} owner=go group=go recurse=yes
