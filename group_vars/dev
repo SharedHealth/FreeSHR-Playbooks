@@ -174,3 +174,15 @@ nagios_openmrs_user: admin
 nagios_openmrs_user_password: test
 
 release_version: 2.5
+
+# haproxy vars
+enable_proxy_routing: true
+is_ssl_enabled: false
+pem_file_path: /etc/ssl/private/xip.io.pem
+shr_host_name: shr-dev.twhosted.com
+mci_host_name: mci-dev.twhosted.com
+mci_registry_host_name: mci-fhir-dev.twhosted.com
+tr_host_name: tr-dev.twhosted.com
+pj_host_name: pjournal-dev.twhosted.com
+mci_admin_host_name: mciadmin-dev.twhosted.com
+healthid_server_host_name: healthid-dev.twhosted.com

@@ -1,61 +1,55 @@
 [cassandra_node]
-172.18.46.156 ansible_ssh_user=bdshr repair_on="fri"
-172.18.46.199 ansible_ssh_user=bdshr repair_on="sat"
+172.21.5.51 ansible_ssh_user=bdshr repair_on="fri"
+172.21.5.145 ansible_ssh_user=bdshr repair_on="sat"
 
 [cassandra_seed_node]
-172.18.46.156
+172.21.5.51
 
 [opscenter-server]
-172.18.46.199
+172.21.5.222
 
 [shr-server]
-172.18.46.156 ansible_ssh_user=bdshr run_migrations=yes
+172.21.5.51 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.156 ansible_ssh_user=bdshr
+172.21.5.51 ansible_ssh_user=bdshr
 
 [mci-ui]
-172.18.46.199 ansible_ssh_user=bdshr
+172.21.5.130 ansible_ssh_user=bdshr
 
 [mci-registry]
-172.18.46.108 ansible_ssh_user=bdshr
+172.21.5.222 ansible_ssh_user=bdshr
 
 [mci-server]
-172.18.46.199 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
+172.21.5.145 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
 
 [mci-lr]
-172.18.46.108 ansible_ssh_user=bdshr
+172.21.5.222 ansible_ssh_user=bdshr
 
 [healthid-server]
-172.18.46.59 ansible_ssh_user=bdshr run_migrations=yes
+172.21.5.130 ansible_ssh_user=bdshr run_migrations=yes
 
 [mci-background-jobs]
-172.18.46.108 ansible_ssh_user=bdshr
+172.21.5.222 ansible_ssh_user=bdshr
 
 [tr-server]
-172.18.46.199 ansible_ssh_user=bdshr
+172.21.5.130 ansible_ssh_user=bdshr
 
 [datasense]
-172.18.46.156 ansible_ssh_user=bdshr
+172.21.5.145 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.60 ansible_ssh_user=bdshr
+172.21.5.51 ansible_ssh_user=bdshr
 
 [patient-journal]
-172.18.46.156 ansible_ssh_user=bdshr
+172.21.5.222 ansible_ssh_user=bdshr
 
 [haproxy]
-172.18.46.199 ansible_ssh_user=bdshr
+172.21.5.222 ansible_ssh_user=bdshr
 
 [nagios_hosts]
-172.18.46.2 ansible_ssh_user=bdshr
-
-[shr-client]
-172.18.46.59 ansible_ssh_user=bdshr
-172.18.46.60 ansible_ssh_user=bdshr
 
 [dhis]
-172.18.46.225 dhis_port=8080
 
 [mci:children]
 mci-server
