@@ -1,51 +1,51 @@
 [cassandra_node]
-172.21.5.51 ansible_ssh_user=bdshr repair_on="fri"
-172.21.5.145 ansible_ssh_user=bdshr repair_on="sat"
+172.21.2.184 ansible_ssh_user=hie repair_on="fri"
+172.21.2.234 ansible_ssh_user=hie repair_on="sat"
 
 [cassandra_seed_node]
-172.21.5.51
+172.21.2.184
 
 [opscenter-server]
-172.21.5.222
+172.21.2.88
 
 [shr-server]
-172.21.5.51 ansible_ssh_user=bdshr run_migrations=yes
+172.21.2.184 ansible_ssh_user=hie run_migrations=yes
 
 [freeshr-update-server]
-172.21.5.51 ansible_ssh_user=bdshr
+172.21.2.184 ansible_ssh_user=hie
 
 [mci-ui]
-172.21.5.130 ansible_ssh_user=bdshr
+172.21.2.114 ansible_ssh_user=hie
 
 [mci-registry]
-172.21.5.222 ansible_ssh_user=bdshr
+172.21.2.88 ansible_ssh_user=hie
 
 [mci-server]
-172.21.5.145 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
+172.21.2.234 ansible_ssh_user=hie run_migrations=yes mci_worker_id=1
 
 [mci-lr]
-172.21.5.222 ansible_ssh_user=bdshr
+172.21.2.88 ansible_ssh_user=hie
 
 [healthid-server]
-172.21.5.130 ansible_ssh_user=bdshr run_migrations=yes
+172.21.2.114 ansible_ssh_user=hie run_migrations=yes
 
 [mci-background-jobs]
-172.21.5.222 ansible_ssh_user=bdshr
+172.21.2.88 ansible_ssh_user=hie
 
 [tr-server]
-172.21.5.130 ansible_ssh_user=bdshr
+172.21.2.114 ansible_ssh_user=hie
 
 [datasense]
-172.21.5.145 ansible_ssh_user=bdshr
+172.21.2.234 ansible_ssh_user=hie
 
 [identity-server]
-172.21.5.51 ansible_ssh_user=bdshr
+172.21.2.184 ansible_ssh_user=hie
 
 [patient-journal]
-172.21.5.222 ansible_ssh_user=bdshr
+172.21.2.88 ansible_ssh_user=hie
 
 [haproxy]
-172.21.5.222 ansible_ssh_user=bdshr
+172.21.2.88 ansible_ssh_user=hie
 
 [nagios_hosts]
 
