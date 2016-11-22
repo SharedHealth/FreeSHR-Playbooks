@@ -50,7 +50,7 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/mci
+    path=/var/run/identity-server
     src=/opt/identity-server/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}

@@ -1,8 +1,5 @@
 - name : download go server rpm
-  command: >
-    wget -q -O https://download.go.cd/binaries/{{ go_server_version }}/rpm/go-server-{{ go_server_version }}.noarch.rpm 
-    chdir=/tmp
-    creates=/tmp/go-server-{{ go_server_version}}.noarch.rpm
+  command: "wget -q -O /tmp/go-server-{{ go_server_version}}.noarch.rpm --no-check-certificate --no-cookies https://download.go.cd/binaries/{{ go_server_version }}/rpm/go-server-{{ go_server_version }}.noarch.rpm"
 
 - name: install go server
   yum: name=/tmp/go-server-{{ go_server_version}}.noarch.rpm state=present
