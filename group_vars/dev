@@ -177,7 +177,7 @@ release_version: 2.5
 
 # haproxy vars
 enable_proxy_routing: true
-is_ssl_enabled: false
+is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/xip.io.pem
 shr_host_name: shr-dev.twhosted.com
 mci_host_name: mci-dev.twhosted.com
