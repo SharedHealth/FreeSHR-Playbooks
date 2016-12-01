@@ -58,10 +58,10 @@
     mode=0755
 
 - name: Allow idp port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ idp_port }} comment=IDENTITY-SERVER
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ idp_port }} match=comment comment=IDENTITY-SERVER
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Restart identity-server
   service: name=identity-server state=restarted enabled=yes

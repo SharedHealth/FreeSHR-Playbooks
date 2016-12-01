@@ -57,15 +57,11 @@
     state=link
     mode=0750
 
-- name: Get IpTable rules
-  shell: iptables -L
-  register: iptablesrules
-
 - name: Allow pj port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ patient_journal_port }} comment=PATIENT-JOURNAL
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ patient_journal_port }} match=comment comment=PATIENT-JOURNAL
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Restart patient-journal
   service: name=patient-journal state=restarted enabled=yes

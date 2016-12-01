@@ -63,10 +63,10 @@
   when: run_migrations == "yes"
 
 - name: Allow bdshr port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ shr_port }} comment=BDSHR
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ shr_port }} match=comment comment=BDSHR
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Start bdshr
   service: name=bdshr state=restarted enabled=yes

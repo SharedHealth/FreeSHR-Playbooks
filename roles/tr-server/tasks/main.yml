@@ -132,7 +132,7 @@
   service: name=bdshr-terminology-server state=restarted enabled=yes
 
 - name: Allow terminology server port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ tr_server_port }} comment=TerminologyServer
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ tr_server_port }} match=comment comment=TerminologyServer
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables

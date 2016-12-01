@@ -49,10 +49,10 @@
   notify: restart apache
 
 - name: Allow apache port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=80 comment=APACHE2
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp match=comment destination_port=80 comment=APACHE2
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Ensure Apache is started and enabled on boot.
   service:

@@ -24,29 +24,29 @@
     - { line: "* - as unlimited" }
 
 - name: Allow cassandra rpc port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=9160 comment=CassandraRpc
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=9160 match=comment comment=CassandraRpc
 
 - name: Allow Cassandra inter-node cluster communication
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=7000 comment=CassandraInterNode
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=7000 match=comment comment=CassandraInterNode
 
 - name: Allow Cassandra JMX monitoring
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=7199 comment=CassandraJMX
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=7199 match=comment comment=CassandraJMX
 
 - name: Allow Cassandra cql native transport
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=9042 comment=CassandraNative
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=9042 match=comment comment=CassandraNative
 
 - name: Allow Opscenter monitoring
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=61620 comment=OpscenterMonitoring
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=61620 match=comment comment=OpscenterMonitoring
   when:
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: Allow Opscenter agents
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=61621 comment=OpscenterAgents
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=61621 comment=OpscenterAgents
   when:
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: stop cassandra
   service: name=cassandra state=stopped

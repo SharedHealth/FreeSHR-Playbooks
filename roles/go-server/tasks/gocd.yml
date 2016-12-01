@@ -27,10 +27,10 @@
     - go-user
 
 - name: Allow Go server port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=8153 comment="GO Server"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8153 match=comment comment="GO Server"
 
 - name: Allow Go Server SSL port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=8154 comment="GO Server SSL"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8154 match=comment comment="GO Server SSL"
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables

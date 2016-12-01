@@ -8,10 +8,10 @@
   copy: src={{ rpm }} dest=/tmp/datasense.rpm mode=755
 
 - name: Allow datasense port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ datasense_port }} comment=datasense
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ datasense_port }} match=comment comment=datasense
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Create Datasense database
   mysql_db:

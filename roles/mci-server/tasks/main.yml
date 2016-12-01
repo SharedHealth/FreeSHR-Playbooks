@@ -82,10 +82,10 @@
   when: run_migrations == "yes"
 
 - name: Allow mci port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ mci_port }} comment=MCI
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ mci_port }} match=comment comment=MCI
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Restart
   service: name=mci state=restarted enabled=yes

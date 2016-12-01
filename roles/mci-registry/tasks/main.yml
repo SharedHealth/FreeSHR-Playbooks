@@ -85,10 +85,10 @@
     mode=0750
 
 - name: Allow mci-registry port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ mci_registry_port }} comment=MCI-Registry
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ mci_registry_port }} match=comment comment=MCI-Registry
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Restart
   service: name=mci-registry state=restarted enabled=yes

@@ -14,13 +14,13 @@
       backup=yes
 
 - name: Allow listen access to haproxy http
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=80 comment="HAPROXY HTTP"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=80 match=comment comment="HAPROXY HTTP"
 
 - name: Allow listen access to haproxy https
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=443 comment="HAPROXY HTTPS"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=443 match=comment comment="HAPROXY HTTPS"
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: copy rsyslog configuration
   template:

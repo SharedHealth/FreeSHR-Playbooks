@@ -22,13 +22,13 @@
   lineinfile: dest=/etc/default/go-agent regexp='^GO_SERVER_URL=.*' line='GO_SERVER_URL=https://{{ groups['go-server'][0] }}:8154/go'
 
 - name: Allow Go server port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=8153 comment="GO Agent"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8153 match=comment comment="GO Agent"
 
 - name: Allow Go Server SSL port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port=8154 comment="GO Agent SSL"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8154 match=comment comment="GO Agent SSL"
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: start go agent
   service: name=go-agent enabled=yes state=started

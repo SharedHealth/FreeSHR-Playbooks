@@ -62,10 +62,10 @@
   when: run_migrations == "yes"
 
 - name: Allow healthId service port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp  destination_port={{ healthId_port }} comment=HEALTHID_SERVICE
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ healthId_port }} match=comment comment=HEALTHID_SERVICE
 
 - name: save iptables
-  command: service iptables save
+  shell: iptables-save > /etc/sysconfig/iptables
 
 - name: Restart healthId
   service: name=healthId state=restarted enabled=yes

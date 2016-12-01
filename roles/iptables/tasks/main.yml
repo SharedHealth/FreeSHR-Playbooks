@@ -4,34 +4,25 @@
 - name: start iptables
   service: name=iptables state=started enabled=yes
 
-- name: get iptables rules
-  shell: iptables -L
-  register: iptablesrules
-  always_run: yes
-
-- name: Allow Input ACCEPT
-  command: /sbin/iptables -P INPUT ACCEPT
-
 - name: Allow localhost interface
-  command: /sbin/iptables -A INPUT -i lo -j ACCEPT -m comment --comment "lo"
-  when: iptablesrules.stdout.find("lo") == -1
+  iptables: chain=INPUT in_interface=lo jump=ACCEPT match=comment comment=lo
 
 - name:  Allow Established
-  command: /sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT --state "ESTABLISHED"
+  iptables: chain=INPUT jump=ACCEPT match=state ctstate=ESTABLISHED,RELATED comment=APACHE2
   when: iptablesrules.stdout.find("ESTABLISHED") == -1
 
 - name: Allow SSH
-  command: /sbin/iptables -A INPUT -p tcp --dport 22 -j ACCEPT -m comment --comment "SSH"
+  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=22 match=comment comment=SSH
   when: iptablesrules.stdout.find("SSH") == -1
 
 - name: DROP ALL Incoming connections except those which are marked as ACCEPT
-  command: /sbin/iptables -P INPUT DROP
+  iptables: chain=INPUT policy=DROP
 
 - name: DROP all Forwards
-  command: /sbin/iptables -P FORWARD DROP
+  iptables: chain=FORWARD policy=DROP
 
 - name: Allow all output
-  command: /sbin/iptables -P OUTPUT ACCEPT
+  iptables: chain=OUTPUT policy=ACCEPT
 
-- name: Save the changes
-  command: service iptables save
+- name: save iptables
+  shell: iptables-save > /etc/sysconfig/iptables
