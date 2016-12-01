@@ -17,20 +17,20 @@
 [mci-ui]
 172.21.2.114 ansible_ssh_user=hie
 
-[mci-registry]
-172.21.2.88 ansible_ssh_user=hie
-
 [mci-server]
 172.21.2.234 ansible_ssh_user=hie run_migrations=yes mci_worker_id=1
+
+[mci-registry]
+172.21.2.88 ansible_ssh_user=hie
 
 [mci-lr]
 172.21.2.88 ansible_ssh_user=hie
 
-[healthid-server]
-172.21.2.114 ansible_ssh_user=hie run_migrations=yes
-
 [mci-background-jobs]
 172.21.2.88 ansible_ssh_user=hie
+
+[healthid-server]
+172.21.2.114 ansible_ssh_user=hie run_migrations=yes
 
 [tr-server]
 172.21.2.114 ansible_ssh_user=hie
@@ -50,6 +50,14 @@
 [nagios_hosts]
 
 [dhis]
+
+[bahmni-app-active]
+172.21.2.206 ansible_ssh_user=hie
+172.21.2.148 ansible_ssh_user=hie
+
+[bahmni-db-active]
+172.21.2.206 ansible_ssh_user=hie
+172.21.2.148 ansible_ssh_user=hie
 
 [mci:children]
 mci-server

@@ -8,7 +8,7 @@
 [opscenter-server]
 172.18.46.55
 
-[shr]
+[shr-server]
 172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
@@ -41,49 +41,48 @@
 [identity-server]
 172.18.46.55 ansible_ssh_user=bdshr
 
-[patient-journal-server]
+[patient-journal]
 172.18.46.55 ansible_ssh_user=bdshr
-
-[logstash-server]
-172.18.46.2 ansible_ssh_user=bdshr
 
 [haproxy]
 172.18.46.56 ansible_ssh_user=bdshr
 
 [nagios_hosts]
-172.18.46.2 ansible_ssh_user=bdshr
 
 [dhis]
-172.18.46.225 ansible_ssh_user=bdshr
 
 [bahmni-app-active]
 172.18.46.149 ansible_ssh_user=bdshr
 172.18.46.57 ansible_ssh_user=bdshr
 172.18.46.151 ansible_ssh_user=bdshr
 
-
 [bahmni-db-active]
 172.18.46.149 ansible_ssh_user=bdshr
 172.18.46.57 ansible_ssh_user=bdshr
 172.18.46.151 ansible_ssh_user=bdshr
 
-[qa:children]
-cassandra_seed_node
-cassandra_node
-opscenter-server
-shr
-freeshr-update-server
+[mci:children]
 mci-server
-mci-ui
 mci-registry
+mci-ui
 mci-lr
 mci-background-jobs
+healthid-server
+
+[shr:children]
+shr-server
+freeshr-update-server
+
+[cassandra:children]
+cassandra_node
+cassandra_seed_node
+
+[dev:children]
+shr
+mci
+cassandra
 tr-server
 datasense
 identity-server
-patient-journal-server
-bahmni-app-active
-bahmni-db-active
 haproxy
-dhis
-nagios_hosts
+freeshr-update-server
