@@ -52,12 +52,16 @@
 [dhis]
 
 [bahmni-app-active]
-172.21.2.206 ansible_ssh_user=hie
-172.21.2.148 ansible_ssh_user=hie
+172.21.2.206 ansible_ssh_user=hie use_http=true openmrs_port=8050
+172.21.2.148 ansible_ssh_user=hie use_http=true openmrs_port=8050
 
 [bahmni-db-active]
 172.21.2.206 ansible_ssh_user=hie
 172.21.2.148 ansible_ssh_user=hie
+
+[bahmni-app-passive]
+
+[bahmni-db-passive]
 
 [mci:children]
 mci-server
