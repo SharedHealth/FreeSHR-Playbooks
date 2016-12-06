@@ -31,7 +31,6 @@
     state=directory
     mode=0750
 
-
 - name: Copy patient-journal properties
   template: src=patient-journal
     dest=/etc/default/patient-journal
@@ -57,11 +56,16 @@
     state=link
     mode=0750
 
-- name: Allow pj port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ patient_journal_port }} match=comment comment=PATIENT-JOURNAL
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
+- name: Allow PJ port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ patient_journal_port }} -j ACCEPT -m comment --comment "PATIENT-JOURNAL"
+  when: iptablesrules.stdout.find("PATIENT-JOURNAL") == -1
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
 
 - name: Restart patient-journal
   service: name=patient-journal state=restarted enabled=yes

@@ -48,11 +48,16 @@
   with_items: apache_ports_configuration_items
   notify: restart apache
 
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
 - name: Allow apache port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp match=comment destination_port=80 comment=APACHE2
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT -m comment --comment "APACHE2"
+  when: iptablesrules.stdout.find("APACHE2") == -1
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
 
 - name: Ensure Apache is started and enabled on boot.
   service:

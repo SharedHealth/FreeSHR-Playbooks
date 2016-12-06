@@ -23,30 +23,40 @@
     - { line: "* - nproc 32768" }
     - { line: "* - as unlimited" }
 
+- name: Register iptable rules
+  shell: iptables -L
+  register: iptablesrules
+
 - name: Allow cassandra rpc port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=9160 match=comment comment=CassandraRpc
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9160 -j ACCEPT -m comment --comment "CassandraRpc"
+  when: iptablesrules.stdout.find("CassandraRpc") == -1
 
 - name: Allow Cassandra inter-node cluster communication
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=7000 match=comment comment=CassandraInterNode
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7000 -j ACCEPT -m comment --comment "CassandraInterNode"
+  when: iptablesrules.stdout.find("CassandraInterNode") == -1
 
 - name: Allow Cassandra JMX monitoring
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=7199 match=comment comment=CassandraJMX
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 7199 -j ACCEPT -m comment --comment "CassandraJMX"
+  when: iptablesrules.stdout.find("CassandraJMX") == -1
 
 - name: Allow Cassandra cql native transport
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=9042 match=comment comment=CassandraNative
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 9042 -j ACCEPT -m comment --comment "CassandraNative"
+  when: iptablesrules.stdout.find("CassandraNative") == -1
 
 - name: Allow Opscenter monitoring
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=61620 match=comment comment=OpscenterMonitoring
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61620 -j ACCEPT -m comment --comment "OpscenterMonitoring"
   when:
+    - iptablesrules.stdout.find("OpscenterMonitoring") == -1
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: Allow Opscenter agents
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=61621 comment=OpscenterAgents
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 61621 -j ACCEPT -m comment --comment "OpscenterAgents"
   when:
+    - iptablesrules.stdout.find("OpscenterAgents") == -1
     - groups['opscenter_server'] is defined and groups['opscenter_server'] > 0
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
 
 - name: stop cassandra
   service: name=cassandra state=stopped

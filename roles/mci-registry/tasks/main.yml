@@ -84,11 +84,16 @@
     state=link
     mode=0750
 
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
 - name: Allow mci-registry port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ mci_registry_port }} match=comment comment=MCI-Registry
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_registry_port }} -j ACCEPT -m comment --comment "MCI-Registry"
+  when: iptablesrules.stdout.find("MCI-Registry") == -1
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
 
 - name: Restart
   service: name=mci-registry state=restarted enabled=yes

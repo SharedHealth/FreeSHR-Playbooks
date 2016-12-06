@@ -81,11 +81,16 @@
   shell: "{{ mci_install_dir }}/bin/migrate.sh"
   when: run_migrations == "yes"
 
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
 - name: Allow mci port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port={{ mci_port }} match=comment comment=MCI
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_port }} -j ACCEPT -m comment --comment "MCI"
+  when: iptablesrules.stdout.find("MCI") == -1
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
 
 - name: Restart
   service: name=mci state=restarted enabled=yes

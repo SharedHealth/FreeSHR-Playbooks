@@ -26,11 +26,17 @@
   tags:
     - go-user
 
+- name: Get IpTable rules
+  shell: iptables -L
+  register: iptablesrules
+
 - name: Allow Go server port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8153 match=comment comment="GO Server"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8153 -j ACCEPT -m comment --comment "GO Server"
+  when: iptablesrules.stdout.find("GO Server") == -1
 
 - name: Allow Go Server SSL port through firewall
-  iptables: chain=INPUT jump=ACCEPT protocol=tcp destination_port=8154 match=comment comment="GO Server SSL"
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport 8154 -j ACCEPT -m comment --comment "GO Server SSL"
+  when: iptablesrules.stdout.find("GO Server SSL") == -1
 
 - name: save iptables
-  shell: iptables-save > /etc/sysconfig/iptables
+  command: service iptables save
