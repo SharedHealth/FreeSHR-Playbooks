@@ -70,31 +70,25 @@ frontend http-in
 
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_shr_service !network_allowed{% endif %}
-
-        acl host_mci_service hdr(host) -i {{ mci_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_service !network_allowed{% endif %}
-
-        acl host_mci_registry hdr(host) -i {{ mci_registry_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_registry !network_allowed{% endif %}
-
-        acl host_tr_service  hdr(host) -i {{ tr_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_tr_service !network_allowed{% endif %}
-
-        acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_mci_admin !network_allowed{% endif %}
-
-        acl host_pj_service  hdr(host) -i {{ pj_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_pj_service !network_allowed{% endif %}
-
+        acl host_tr_service hdr(host) -i {{ tr_host_name }}
+        acl host_pj_service hdr(host) -i {{ pj_host_name }}
+        acl host_mci_admin hdr(host) -i {{ mci_admin_host_name }}
+        acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl host_mci_service path_beg /api/v1
+        acl host_mci_fhir path_beg /api/v2
+        acl host_healthId_service path_beg /healthIds
+        acl host_datasense hdr(host) -i {{ datasense_host_name }}
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 if host_shr_service or host_tr_service or host_mci_admin or host_pj_service or host_mci !network_allowed{% endif %}
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
-        use_backend mci-service-cluster if host_mci_service
-        use_backend mci-registry-cluster if host_mci_registry
-        use_backend tr-server-node if host_tr_service
+        use_backend mci-service-cluster if host_mci host_mci_service
+        use_backend mci-fhir-cluster if host_mci host_mci_fhir
+        use_backend healthId-service-cluster if host_mci host_healthId_service
         use_backend mci-admin-node if host_mci_admin
+        use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
+        use_backend datasense-node if host_datasense
 
 {% if is_ssl_enabled is defined and is_ssl_enabled != false %}
 frontend https-in
@@ -103,21 +97,26 @@ frontend https-in
 
         # Define hosts
         acl host_shr_service hdr(host) -i {{ shr_host_name }}
-        acl host_mci_service hdr(host) -i {{ mci_host_name }}
-        acl host_mci_registry hdr(host) -i {{ mci_registry_host_name }}
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
+        acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl host_mci_service path_beg /api/v1
+        acl host_mci_fhir path_beg /api/v2
+        acl host_healthId_service path_beg /healthIds
+        acl host_datasense hdr(host) -i {{ datasense_host_name }}
+
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
-        use_backend mci-service-cluster if host_mci_service
-        use_backend mci-registry-cluster if host_mci_registry
+        use_backend mci-service-cluster if host_mci host_mci_service
+        use_backend mci-fhir-cluster if host_mci host_mci_fhir
+        use_backend healthId-service-cluster if host_mci host_healthId_service
         use_backend mci-admin-node if host_mci_admin
         use_backend tr-server-node if host_tr_service
         use_backend pjournal-node if host_pj_service
+        use_backend datasense-node if host_datasense
 {% endif %}
-
 
 #---------------------------------------------------------------------
 # round robin balancing between the SHR Service backends
@@ -139,12 +138,21 @@ backend mci-service-cluster
     {% endfor %}
 
 #---------------------------------------------------------------------
-# round robin balancing between the MCI Registry backends
+# round robin balancing between the MCI fhir backends
 #---------------------------------------------------------------------
-backend mci-registry-cluster
+backend mci-fhir-cluster
     balance     roundrobin
-    {% for host in groups['mci-registry'] %}
-    server mci-registry{{ loop.index }} {{host}}:{{ hostvars[host]['mci_registry_port'] }} check
+    {% for host in groups['mci-fhir'] %}
+    server mci-fhir{{ loop.index }} {{host}}:{{ hostvars[host]['mci_fhir_port'] }} check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# round robin balancing between the MCI fhir backends
+#---------------------------------------------------------------------
+backend healthId-service-cluster
+    balance     roundrobin
+    {% for host in groups['healthid-server'] %}
+    server healthId-service{{ loop.index }} {{host}}:{{ hostvars[host]['healthId_port'] }} check
     {% endfor %}
 
 #---------------------------------------------------------------------
@@ -172,4 +180,13 @@ backend pjournal-node
     balance     source
     {% for host in groups['patient-journal'] %}
     server pj{{ loop.index }}  {{host}}:{{ hostvars[host]['patient_journal_port'] }} check
+    {% endfor %}
+
+#---------------------------------------------------------------------
+# source between the Datasense backends
+#---------------------------------------------------------------------
+backend datasense-node
+    balance     source
+    {% for host in groups['datasense'] %}
+    server datasense{{ loop.index }}  {{host}}:{{ hostvars[host]['datasense_port'] }} check
     {% endfor %}
