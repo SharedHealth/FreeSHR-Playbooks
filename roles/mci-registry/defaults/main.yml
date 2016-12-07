@@ -1,2 +1,0 @@
-release_build: 1
-rpm: "/tmp/mci-registry-{{release_version}}-{{release_build}}.noarch.rpm"

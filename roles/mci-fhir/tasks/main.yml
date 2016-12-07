@@ -1,19 +1,19 @@
 ---
 - name: Clean existing
-  file: path=/tmp/mci-registry.rpm state=absent
+  file: path=/tmp/mci-fhir.rpm state=absent
 
 - name: Copy rpm
-  copy: src='{{ rpm }}' dest=/tmp/mci-registry.rpm mode=0755
+  copy: src='{{ rpm }}' dest=/tmp/mci-fhir.rpm mode=0755
 
 - name: Remove existing installation if any
-  yum: name=mci-registry.noarch state=absent
+  yum: name=mci-fhir.noarch state=absent
 
-- name: Install mci-registry
-  yum: name=/tmp/mci-registry.rpm state=present
+- name: Install mci-fhir
+  yum: name=/tmp/mci-fhir.rpm state=present
 
 - name: Allow app dir access to run user
   file:
-    path={{ mci_registry_install_dir }}
+    path={{ mci_fhir_install_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -24,7 +24,7 @@
 
 - name: Allow log dir access to run user
   file:
-    path={{ mci_registry_log_dir }}
+    path={{ mci_fhir_log_dir }}
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     follow=yes
@@ -33,8 +33,8 @@
     mode=0750
 
 - name: Copy properties
-  template: src=mci-registry.j2
-    dest=/etc/default/mci-registry
+  template: src=mci-fhir.j2
+    dest=/etc/default/mci-fhir
     mode=0750
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
@@ -42,15 +42,15 @@
 - name: Copy profiles
   copy:
    src=profiles/
-   dest={{ mci_registry_profiles_folder }}
+   dest={{ mci_fhir_profiles_folder }}
    mode=0750
    owner={{ sharedhealth_user }}
    group={{ sharedhealth_group }}
 
-- name: Permissions to service mci-registry
+- name: Permissions to service mci-fhir
   file:
-    path=/etc/init.d/mci-registry
-    src={{ mci_registry_install_dir }}/bin/mci-registry
+    path=/etc/init.d/mci-fhir
+    src={{ mci_fhir_install_dir }}/bin/mci-fhir
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -68,7 +68,7 @@
 
 - name: Create health id file
   file:
-    path={{mci_health_id_file_directory_path}}/{{mci_registry_idp_client_id}}-available_hids.txt
+    path={{mci_health_id_file_directory_path}}/{{mci_fhir_idp_client_id}}-available_hids.txt
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     mode=0640
@@ -77,8 +77,8 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/mci-registry
-    src={{ mci_registry_install_dir }}/var
+    path=/var/run/mci-fhir
+    src={{ mci_fhir_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -88,14 +88,13 @@
   shell: iptables -L
   register: iptablesrules
 
-- name: Allow mci-registry port through firewall
-  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_registry_port }} -j ACCEPT -m comment --comment "MCI-Registry"
-  when: iptablesrules.stdout.find("MCI-Registry") == -1
+- name: Allow mci-fhir port through firewall
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{ mci_fhir_port }} -j ACCEPT -m comment --comment "MCI FHIR"
+  when: iptablesrules.stdout.find("MCI FHIR") == -1
 
 - name: save iptables
   command: service iptables save
 
 - name: Restart
-  service: name=mci-registry state=restarted enabled=yes
-  tags: run_mci_registry
+  service: name=mci-fhir state=restarted enabled=yes
 

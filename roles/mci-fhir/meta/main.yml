@@ -3,4 +3,4 @@ dependencies:
   - { role: shr-tools}
   - { role: oracle-java, jdk_update: 8u92, jdk_build: b14}
   - { role: sharedhealth-user }
-  - { role: host-entries, exclude: "mci-registry" }
+  - { role: host-entries, exclude: "mci_host_name" }

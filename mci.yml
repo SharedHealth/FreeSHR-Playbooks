@@ -52,14 +52,14 @@
   tags:
     - mci-lr
 
-- name: Install MCI Registry
-  hosts: mci-registry
+- name: Install MCI FHIR
+  hosts: mci-fhir
   become_user: root
   become: yes
   roles:
-    - mci-registry
+    - mci-fhir
   tags:
-    - mci-registry
+    - mci-fhir
 
 - name: Install MCI UI
   hosts: mci-ui

@@ -47,21 +47,21 @@ mci_failed_event_retry_limit: 5
 mci_org_code: 10019862
 mci_health_id_file_directory_path: /var/lib/mci
 
-#MCI-Registry
-mci_registry_install_dir: /opt/mci-registry
-mci_registry_log_dir: /var/log/mci-registry
-mci_registry_port: 8085
-mci_registry_log_level: DEBUG
-mci_registry_keyspace: mci
-mci_registry_cassandra_user: mci
-mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
-mci_registry_idp_client_id: 18545
-mci_registry_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
-mci_registry_idp_client_email: anjalyj@thoughtworks.com
-mci_registry_idp_client_password: thoughtworks
-mci_registry_healthId_replenish_block_size: 50
-mci_registry_healthId_replenish_threshold: 20
-mci_registry_hid_replenish_delay: 10000
+#MCI FHIR
+mci_fhir_install_dir: /opt/mci-fhir
+mci_fhir_log_dir: /var/log/mci-fhir
+mci_fhir_port: 8085
+mci_fhir_log_level: DEBUG
+mci_fhir_keyspace: mci
+mci_fhir_cassandra_user: mci
+mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
+mci_fhir_idp_client_id: 18545
+mci_fhir_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
+mci_fhir_idp_client_email: anjalyj@thoughtworks.com
+mci_fhir_idp_client_password: thoughtworks
+mci_fhir_healthId_replenish_block_size: 50
+mci_fhir_healthId_replenish_threshold: 20
+mci_fhir_hid_replenish_delay: 10000
 
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr
@@ -181,8 +181,7 @@ is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/tw_hie.pem
 shr_host_name: shr-dev.twhosted.com
 mci_host_name: mci-dev.twhosted.com
-mci_registry_host_name: mci-fhir-dev.twhosted.com
 tr_host_name: tr-dev.twhosted.com
 pj_host_name: pjournal-dev.twhosted.com
 mci_admin_host_name: mciadmin-dev.twhosted.com
-healthid_server_host_name: healthid-dev.twhosted.com
+datasense_host_name: datasense-dev.twhosted.com

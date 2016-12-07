@@ -43,17 +43,17 @@ mci_max_failed_events: 50
 mci_failed_event_retry_limit: 5
 mci_org_code: 10019862
 
-#MCI-Registry
-mci_registry_install_dir: /opt/mci-registry
-mci_registry_log_dir: /var/log/mci-registry
-mci_registry_port: 8085
-mci_registry_log_level: DEBUG
-mci_registry_keyspace: mci
-mci_registry_cassandra_user: mci
-mci_registry_profiles_folder: /opt/mci-registry/lib/profiles/
-mci_registry_healthId_replenish_block_size: 50
-mci_registry_healthId_replenish_threshold: 20
-mci_registry_hid_replenish_delay: 10000
+#MCI FHIR
+mci_fhir_install_dir: /opt/mci-fhir
+mci_fhir_log_dir: /var/log/mci-fhir
+mci_fhir_port: 8085
+mci_fhir_log_level: DEBUG
+mci_fhir_keyspace: mci
+mci_fhir_cassandra_user: mci
+mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
+mci_fhir_healthId_replenish_block_size: 50
+mci_fhir_healthId_replenish_threshold: 20
+mci_fhir_hid_replenish_delay: 10000
 
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr
@@ -144,12 +144,10 @@ is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/xip.io.pem
 shr_host_name: shr-showcase.twhosted.com
 mci_host_name: mci-showcase.twhosted.com
-mci_registry_host_name: mci-registry-showcase.twhosted.com
 tr_host_name: tr-showcase.twhosted.com
 pj_host_name: pjournal-showcase.twhosted.com
 mci_admin_host_name: mciadmin-showcase.twhosted.com
-healthid_server_host_name: healthid-showcase.twhosted.com
-
+datasense_host_name: datasense-showcase.twhosted.com
 
 idp_user_info_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/token
 idp_user_login_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/signin

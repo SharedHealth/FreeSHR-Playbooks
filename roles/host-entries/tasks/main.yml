@@ -6,10 +6,6 @@
   lineinfile: dest=/etc/hosts regexp='{{ shr_host_name }}' line="{{ groups['haproxy'][0] }} {{ shr_host_name }}" state=present
   when: exclude != "shr" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
 
-- name: "create hosts file entries for MCI registry lookup"
-  lineinfile: dest=/etc/hosts regexp='{{ mci_registry_host_name }}' line="{{ groups['haproxy'][0] }} {{ mci_registry_host_name }}" state=present
-  when: exclude != "mci-registry" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
-
 - name: "create hosts file entries for MCI server lookup"
   lineinfile: dest=/etc/hosts regexp='{{ mci_host_name }}' line="{{ groups['haproxy'][0] }} {{ mci_host_name }}" state=present
   when: exclude != "mci-server" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
@@ -25,10 +21,6 @@
 - name: "create hosts file entries for Patient Journal lookup"
   lineinfile: dest=/etc/hosts regexp='{{ pj_host_name }}' line="{{ groups['haproxy'][0] }} {{ pj_host_name }}" state=present
   when: exclude != "patient-journal" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
-
-- name: "create hosts file entries for HealthId Server lookup"
-  lineinfile: dest=/etc/hosts regexp='{{ healthid_server_host_name }}' line="{{ groups['haproxy'][0] }} {{ healthid_server_host_name }}" state=present
-  when: exclude != "healthid-server" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
 
 - name: "create hosts file entries for external registry lookup"
   lineinfile: dest=/etc/hosts regexp="{{ hostvars[groups['external-registries'][0]].host_alias }}" line="{{ groups['external-registries'][0] }} {{ hostvars[groups['external-registries'][0]].host_alias }}" state=present

@@ -20,7 +20,7 @@
 [mci-server]
 172.21.2.234 ansible_ssh_user=hie run_migrations=yes mci_worker_id=1
 
-[mci-registry]
+[mci-fhir]
 172.21.2.88 ansible_ssh_user=hie
 
 [mci-lr]
@@ -65,7 +65,7 @@
 
 [mci:children]
 mci-server
-mci-registry
+mci-fhir
 mci-ui
 mci-lr
 mci-background-jobs
