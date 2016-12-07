@@ -132,7 +132,6 @@ mci_fhir_log_dir: /var/log/mci-fhir
 mci_fhir_port: 8085
 mci_fhir_log_level: DEBUG
 mci_fhir_keyspace: mci
-mci_fhir_cassandra_user: mci
 mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
 mci_fhir_idp_client_id: 18545
 mci_fhir_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885

@@ -49,7 +49,6 @@ mci_fhir_log_dir: /var/log/mci-fhir
 mci_fhir_port: 8085
 mci_fhir_log_level: DEBUG
 mci_fhir_keyspace: mci
-mci_fhir_cassandra_user: mci
 mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
 mci_fhir_healthId_replenish_block_size: 50
 mci_fhir_healthId_replenish_threshold: 20
