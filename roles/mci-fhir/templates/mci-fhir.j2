@@ -21,7 +21,7 @@ export IDP_X_AUTH_TOKEN={{mci_fhir_idp_auth_token}}
 export IDP_EMAIL={{mci_fhir_idp_client_email}}
 export IDP_PASSWORD={{mci_fhir_idp_client_password}}
 
-export HID_SERVICE_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ healthid_server_host_name }}{% else %}http://{{groups['healthid-server'][0]}}:{{healthId_port}}{% endif %}
+export HID_SERVICE_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{groups['healthid-server'][0]}}:{{healthId_port}}{% endif %}
 
 export HID_SERVICE_NEXT_BLOCK_URL=/healthIds/nextBlock/mci/%s?blockSize=%s
 export HID_SERVICE_MARK_USED_URL=/healthIds/markUsed/%s
