@@ -7,7 +7,7 @@ export CASSANDRA_PORT=9042
 export CASSANDRA_USER={{ mci_cassandra_user }}
 export CASSANDRA_PASSWORD={{ mci_cassandra_pass }}
 export CASSANDRA_TIMEOUT=60000
-export MCI_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_fhir_host_name }}{% else %}http://{{ groups['mci-fhir'][0] }}:{{ mci_fhir_port }}{% endif %}
+export MCI_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-fhir'][0] }}:{{ mci_fhir_port }}{% endif %}
 
 export PATIENT_LINK_URI={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ mci_port }}{% endif %}/api/v1/patients/
 
