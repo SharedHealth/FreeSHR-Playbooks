@@ -74,12 +74,12 @@ frontend http-in
         acl host_pj_service hdr(host) -i {{ pj_host_name }}
         acl host_mci_admin hdr(host) -i {{ mci_admin_host_name }}
         acl host_mci hdr(host) -i {{ mci_host_name }}
-        acl host_mci_service path_beg /api/v1
         acl host_mci_service_default path_beg /api/default
+        acl host_mci_service path_beg /api/v1
         acl host_mci_fhir path_beg /api/v2
         acl host_healthId_service path_beg /healthIds
         acl host_datasense hdr(host) -i {{ datasense_host_name }}
-        {% if is_ssl_enabled is defined and is_ssl_enabled != false %}redirect scheme https code 302 !network_allowed{% endif %}
+        {% if is_ssl_enabled is defined and is_ssl_enabled != false %} redirect scheme https code 302 if !network_allowed {% endif %}
 
         ## figure out which one to use
         use_backend shr-service-cluster if host_shr_service
@@ -102,6 +102,7 @@ frontend https-in
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
         acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl host_mci_service_default path_beg /api/default
         acl host_mci_service path_beg /api/v1
         acl host_mci_fhir path_beg /api/v2
         acl host_healthId_service path_beg /healthIds
