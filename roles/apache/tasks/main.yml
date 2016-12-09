@@ -10,7 +10,7 @@
     name: "{{ item }}"
     state: installed
     enablerepo: "{{ apache_enablerepo }}"
-  with_items: apache_packages
+  with_items: "{{ apache_packages }}"
 
 # Figure out what version of Apache is installed.
 - name: Get installed version of Apache.
@@ -45,7 +45,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-  with_items: apache_ports_configuration_items
+  with_items: "{{ apache_ports_configuration_items }}"
   notify: restart apache
 
 - name: Get IpTable rules
