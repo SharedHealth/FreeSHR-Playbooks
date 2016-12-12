@@ -77,7 +77,7 @@ freeshr-update-server
 cassandra_node
 cassandra_seed_node
 
-[dev:children]
+[qa:children]
 shr
 mci
 cassandra
