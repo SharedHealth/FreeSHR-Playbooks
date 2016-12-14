@@ -1,4 +1,4 @@
-export MCI_PATIENT_PATH=/api/default/patients
+export MCI_PATIENT_PATH=/api/v2/patients
 export TR_USER={{tr_api_user_name}}
 export TR_PASSWORD={{tr_api_user_password}}
 export CASSANDRA_KEYSPACE={{ shr_keyspace }}
@@ -28,6 +28,6 @@ export SHR_VERSION=v1
 export IS_LATEST_SHR=true
 export LOCAL_CACHE_TTL={{ shr_local_cache_ttl }}
 export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
-export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ mci_host_name }},http://{{ mci_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ hostvars[groups['mci-server'][0]]['mci_port'] }}{% endif %}
+export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ mci_host_name }},http://{{ mci_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-fhir'][0] }}:{{ hostvars[groups['mci-fhir'][0]]['mci_fhir_port'] }}{% endif %}
 
 export IDENTITY_CACHE_TTL={{ shr_identity_cache_ttl }}
