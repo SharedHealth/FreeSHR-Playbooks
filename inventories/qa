@@ -45,7 +45,7 @@
 172.18.46.55 ansible_ssh_user=bdshr
 
 [haproxy]
-172.18.46.56 ansible_ssh_user=bdshr
+172.18.46.55 ansible_ssh_user=bdshr
 
 [nagios_hosts]
 

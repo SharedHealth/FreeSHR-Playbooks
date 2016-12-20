@@ -175,7 +175,7 @@ nagios_openmrs_user_password: test
 release_version: 2.5
 
 # haproxy vars
-enable_proxy_routing: false
+enable_proxy_routing: true
 is_ssl_enabled: false
 pem_file_path: /etc/ssl/private/tw_hie.pem
 shr_host_name: shr-qa.twhosted.com
