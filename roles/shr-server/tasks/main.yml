@@ -35,7 +35,6 @@
   template:
     src=bdshr.j2
     dest=/etc/default/bdshr
-    mode=644
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     mode=0750
