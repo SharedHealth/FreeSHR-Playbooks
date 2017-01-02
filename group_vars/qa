@@ -82,8 +82,8 @@ mci_bg_failed_event_process_block_size: 5
 mci_bg_failed_event_retry_limit: 5
 
 # healthId vars
-healthId_install_dir: /opt/healthId
-healthId_log_dir: /var/log/healthId
+healthId_install_dir: /opt/healthid
+healthId_log_dir: /var/log/healthid
 healthId_port: 8086
 healthId_idp_client_id: 18546
 healthId_idp_auth_token: 61aeaa45a711ac6b3e660e4abb2cb863f93ae90815f0edf40a134dffedf6d885
@@ -167,10 +167,13 @@ fhir_document_schema_version: v2
 
 #ntp
 freeshr_ntp_timezone: Asia/Calcutta
+
 #nagios - nrpe
-nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.2
+nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.59
 nagios_openmrs_user: admin
 nagios_openmrs_user_password: test
+nagios_bahmni_db_user: root
+nagios_bahmni_db_password: password
 
 release_version: 2.5
 

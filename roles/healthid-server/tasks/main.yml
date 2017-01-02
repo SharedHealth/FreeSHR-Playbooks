@@ -1,15 +1,15 @@
 ---
 - name: Clean existing
-  file: path=/tmp/healthId.rpm state=absent
+  file: path=/tmp/healthid.rpm state=absent
 
 - name: Remove healthid-service
-  yum: name=healthId.noarch state=absent
+  yum: name=healthid.noarch state=absent
 
 - name: Copy rpm
-  copy: src={{ rpm }} dest=/tmp/healthId.rpm mode=0755
+  copy: src={{ rpm }} dest=/tmp/healthid.rpm mode=0755
 
 - name: Install healthid-service
-  yum: name=/tmp/healthId.rpm state=present
+  yum: name=/tmp/healthid.rpm state=present
 
 - name: Allow app dir access to run user
   file:
@@ -32,16 +32,16 @@
     mode=0750
 
 - name: Copy healthid-service properties
-  template: src=healthId-service.j2
-    dest=/etc/default/healthId
+  template: src=healthid-service.j2
+    dest=/etc/default/healthid
     mode=0750
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
 
 - name: Permissions to service healthid-service
   file:
-    path=/etc/init.d/healthId
-    src={{ healthId_install_dir }}/bin/healthId
+    path=/etc/init.d/healthid
+    src={{ healthId_install_dir }}/bin/healthid
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
     state=link
@@ -50,7 +50,7 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/healthId
+    path=/var/run/healthid
     src={{ healthId_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
@@ -73,5 +73,5 @@
   command: service iptables save
 
 - name: Restart healthId
-  service: name=healthId state=restarted enabled=yes
+  service: name=healthid state=restarted enabled=yes
   tags: run_healthId_service

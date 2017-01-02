@@ -1,0 +1,29 @@
+export HID_LOG_LEVEL={{ healthId_log_level }}
+export HEALTH_ID_SERVICE_PORT={{ healthId_port }}
+export IDENTITY_SERVER_BASE_URL={{idp_user_info_url}}
+export IDP_CLIENT_ID={{ healthId_idp_client_id }}
+export IDP_AUTH_TOKEN={{ healthId_idp_auth_token }}
+
+export CASSANDRA_KEYSPACE={{ healthId_keyspace }}
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_USER={{ healthId_cassandra_user }}
+export CASSANDRA_PASSWORD={{ healthId_cassandra_pass }}
+export CASSANDRA_TIMEOUT=60000
+export CASSANDRA_MIGRATIONS_PATH=org/sharedhealth/healthId/cassandra/migrations
+export CASSANDRA_REPLICATION_STRATEGY={{ healthId_cassandra_replication_strategy }}
+export CASSANDRA_REPLICATION_FACTOR={{ healthId_cassandra_replication_factor }}
+
+export FR_URL={{ facility_registry_url }}
+
+export MCI_INVALID_HID_PATTERN="{{ mci_invalid_hid_pattern }}"
+export OTHER_ORG_INVALID_HID_PATTERN="{{ mci_other_org_invalid_hid_pattern }}"
+export HID_STORAGE_PATH={{ healthId_storage_path }}
+export MCI_ORG_CODE={{ mci_org_code }}
+export MCI_START_HID={{ mci_start_hid }}
+export MCI_END_HID={{ mci_end_hid }}
+export OTHER_ORG_START_HID={{ mci_other_org_start_hid }}
+export OTHER_ORG_END_HID={{ mci_other_org_end_hid }}
+export HEALTH_ID_BLOCK_SIZE={{ mci_health_id_block_size }}
+
+export REST_POOL_SIZE=20
