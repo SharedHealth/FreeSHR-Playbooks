@@ -48,7 +48,7 @@ nagios_contacts:
     - name: bdshr
       use: generic-contact
       alias: bdshr
-      email: nehashrl@thoughtworks.com
+      email: bdshr@thoughtworks.com
       
 nagios_contactgroups:
   - name: admins
@@ -59,47 +59,47 @@ nagios_contactgroups:
 
 nagios_services:
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: disk_space
       check_command:  check_nrpe!check_disk
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: tmp_disk_space
       check_command:  check_nrpe!check_disk_tmp
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: current_users
       check_command:  check_nrpe!check_users
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: total_processes
       check_command:  check_nrpe!check_total_procs
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: current_load
       check_command:  check_nrpe!check_load
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: swap_usage
       check_command:  check_nrpe!check_swap
       notifications_enabled: 1
     - use: freeshr-system-service
-      hostgroup_name: cassandra_node,shr,freeshr-update-server,mci-server,mci-ui,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
+      hostgroup_name: cassandra_node,shr-server,freeshr-update-server,mci-server,mci-ui,mci-lr,mci-background-jobs,mci-fhir,healthid-server,tr-server,datasense,patient-journal,haproxy,bahmni-app-active,bahmni-app-passive,bahmni-db-active,bahmni-db-passive
       service_description: ntpd_status
       check_command:  check_nrpe!check_ntpd
       notifications_enabled: 1
     - use: freeshr-app-service
-      hostgroup_name: shr
+      hostgroup_name: shr-server
       check_command: check_nrpe!check_freeshr
       service_description: shr_http
       notifications_enabled: 1
     - use: freeshr-app-service
-      hostgroup_name: shr
+      hostgroup_name: shr-server
       check_command: check_nrpe!check_freeshr_svc
       service_description: shr_proc
       notifications_enabled: 1
@@ -112,6 +112,36 @@ nagios_services:
       hostgroup_name: mci-server
       check_command: check_nrpe!check_mci_svc
       service_description: mci_proc
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: mci-fhir
+      check_command: check_nrpe!check_mci_fhir
+      service_description: mci_fhir_http
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: mci-fhir
+      check_command: check_nrpe!check_mci_fhir_svc
+      service_description: mci_fhir_proc
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: mci-lr
+      check_command: check_nrpe!check_mci_lr_svc
+      service_description: mci_lr_proc
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: mci-background-jobs
+      check_command: check_nrpe!check_mci_background_jobs_svc
+      service_description: mci_background_jobs_proc
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: healthid-server
+      check_command: check_nrpe!check_healthid
+      service_description: healthid_http
+      notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: healthid-server
+      check_command: check_nrpe!check_healthid_svc
+      service_description: healthid_proc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: patient-journal
@@ -168,6 +198,11 @@ nagios_services:
       check_command: check_nrpe!check_freeshr_update_svc
       service_description: freeshr_update_proc
       notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: cassandra_node
+      service_description: Cassandra service status
+      check_command: check_nrpe!check_cassandra_svc
+      notifications_enabled: 1
 # bahmni services
     - use: freeshr-app-service
       hostgroup_name: bahmni-app-active
@@ -188,6 +223,11 @@ nagios_services:
       hostgroup_name: bahmni-app-active
       service_description: Bahmni openmrs http
       check_command: check_nrpe!check_openmrs_http
+      notifications_enabled: 1
+    - use: emrhighlyavailableservice
+      hostgroup_name: bahmni-app-active
+      service_description: Bahmni openmrs service
+      check_command: check_nrpe!check_openrms_svc
       notifications_enabled: 1
     - use: freeshr-app-service
       hostgroup_name: bahmni-db-active
@@ -215,9 +255,9 @@ nagios_services:
       check_command: check_nrpe!check_event_log_http
       notifications_enabled: 1
     - use: freeshr-app-service
-      hostgroup_name: cassandra_node
-      service_description: Cassandra service status
-      check_command: check_nrpe!check_cassandra_svc
+      hostgroup_name: bahmni-event-log-active
+      service_description: Bahmni Event log service
+      check_command: check_nrpe!check_event_log_svc
       notifications_enabled: 1
 
       

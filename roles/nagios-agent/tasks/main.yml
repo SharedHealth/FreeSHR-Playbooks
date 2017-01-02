@@ -41,3 +41,26 @@
 
 - name: save iptables
   shell: iptables-save > /etc/sysconfig/iptables
+
+- name: set nagios_run_sudo for SELinux
+  seboolean:
+    name=nagios_run_sudo
+    state=yes
+    persistent=yes
+  ignore_errors: true
+
+- name: add nagios user to sharedhealth group
+  user:
+    name={{ nrpe_server_user }}
+    groups={{ sharedhealth_group }}
+    state=present
+    append=yes
+  when: "'hie' in group_names"
+
+- name: add nagios user to sharedhealth group
+  user:
+    name=nagios
+    groups={{ sharedhealth_group }}
+    state=present
+    append=yes
+  when: "'hie' in group_names"

@@ -48,18 +48,28 @@
 172.18.46.55 ansible_ssh_user=bdshr
 
 [nagios_hosts]
+172.18.46.59 ansible_ssh_user=bdshr
 
 [dhis]
 
 [bahmni-app-active]
-172.18.46.149 ansible_ssh_user=bdshr
-172.18.46.57 ansible_ssh_user=bdshr
-172.18.46.151 ansible_ssh_user=bdshr
+172.18.46.149 ansible_ssh_user=bdshr openmrs_port=8050
+172.18.46.57 ansible_ssh_user=bdshr openmrs_port=8050
+172.18.46.151 ansible_ssh_user=bdshr openmrs_port=8050
 
 [bahmni-db-active]
 172.18.46.149 ansible_ssh_user=bdshr
 172.18.46.57 ansible_ssh_user=bdshr
 172.18.46.151 ansible_ssh_user=bdshr
+
+[bahmni-event-log-active]
+172.18.46.151 ansible_ssh_user=bdshr bahmni_event_log_service_port=8057
+
+[bahmni-app-passive]
+172.18.46.149 ansible_ssh_user=bdshr
+
+[bahmni-db-passive]
+172.18.46.149 ansible_ssh_user=bdshr
 
 [mci:children]
 mci-server
@@ -77,7 +87,14 @@ freeshr-update-server
 cassandra_node
 cassandra_seed_node
 
-[qa:children]
+[bahmni:children]
+bahmni-app-active
+bahmni-db-active
+bahmni-event-log-active
+bahmni-app-passive
+bahmni-db-passive
+
+[hie:children]
 shr
 mci
 cassandra
@@ -85,4 +102,8 @@ tr-server
 datasense
 identity-server
 haproxy
-freeshr-update-server
+
+[qa:children]
+hie
+nagios_hosts
+bahmni
