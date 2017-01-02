@@ -74,7 +74,7 @@
     src={{ tr_server_install_dir }}/bin/bdshr-terminology-server
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
-    mode=0755
+    mode=0750
     state=link
 
 - name: Permissions to var run
