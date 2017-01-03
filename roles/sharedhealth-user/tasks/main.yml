@@ -11,4 +11,4 @@
     group={{ sharedhealth_group }}
     system=yes
     state=present
-    shell=/sbin/nologin
+    shell=/bin/bash
