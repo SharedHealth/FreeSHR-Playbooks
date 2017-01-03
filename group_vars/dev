@@ -61,6 +61,7 @@ mci_fhir_idp_client_password: thoughtworks
 mci_fhir_healthId_replenish_block_size: 50
 mci_fhir_healthId_replenish_threshold: 20
 mci_fhir_hid_replenish_delay: 10000
+is_mci_fhir_post_disabled: false
 
 #MCI-LR
 mci_lr_install_dir: /opt/mci-lr
