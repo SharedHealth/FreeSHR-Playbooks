@@ -66,10 +66,8 @@
 172.18.46.151 ansible_ssh_user=bdshr bahmni_event_log_service_port=8057
 
 [bahmni-app-passive]
-172.18.46.149 ansible_ssh_user=bdshr
 
 [bahmni-db-passive]
-172.18.46.149 ansible_ssh_user=bdshr
 
 [mci:children]
 mci-server
