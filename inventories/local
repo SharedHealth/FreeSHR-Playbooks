@@ -87,7 +87,14 @@ freeshr-update-server
 cassandra_node
 cassandra_seed_node
 
-[local:children]
+[bahmni:children]
+bahmni-app-active
+bahmni-db-active
+bahmni-event-log-active
+bahmni-app-passive
+bahmni-db-passive
+
+[hie:children]
 shr
 mci
 cassandra
@@ -95,5 +102,8 @@ tr-server
 datasense
 identity-server
 haproxy
-freeshr-update-server
+
+[local:children]
+hie
 nagios_hosts
+bahmni
