@@ -71,6 +71,8 @@
 [nagios_hosts]
 192.168.33.39 ansible_ssh_user=vagrant ansible_ssh_port=22
 
+[external-registries]
+
 [mci:children]
 mci-server
 mci-fhir
@@ -100,10 +102,10 @@ mci
 cassandra
 tr-server
 datasense
-identity-server
 haproxy
 
 [local:children]
+identity-server
 hie
 nagios_hosts
 bahmni

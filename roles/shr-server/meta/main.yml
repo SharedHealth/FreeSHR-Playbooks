@@ -3,4 +3,4 @@ dependencies:
   - { role: shr-base }
   - { role: sharedhealth-user }
   - { role: oracle-java }
-  - { role: host-entries, exclude: "shr" }
+  - { role: host-entries, exclude: ["shr"] }

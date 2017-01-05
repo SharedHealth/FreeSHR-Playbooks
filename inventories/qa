@@ -52,6 +52,8 @@
 
 [dhis]
 
+[external-registries]
+
 [bahmni-app-active]
 172.18.46.149 ansible_ssh_user=bdshr openmrs_port=8050
 172.18.46.57 ansible_ssh_user=bdshr openmrs_port=8050
@@ -98,10 +100,10 @@ mci
 cassandra
 tr-server
 datasense
-identity-server
 haproxy
 
 [qa:children]
+identity-server
 hie
 nagios_hosts
 bahmni

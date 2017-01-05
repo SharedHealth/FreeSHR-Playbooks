@@ -92,10 +92,10 @@ mci
 cassandra
 tr-server
 datasense
-identity-server
 haproxy
 
 [dev:children]
+identity-server
 hie
 nagios_hosts
 bahmni

@@ -1,24 +1,18 @@
 - name: "create hosts file entries for TR server lookup"
   lineinfile: dest=/etc/hosts regexp='{{ tr_host_name }}' line="{{ groups['haproxy'][0] }} {{ tr_host_name }}" state=present
-  when: exclude != "tr" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
+  when: "'tr' not in exclude and enable_proxy_routing is defined and enable_proxy_routing != false"
 
 - name: "create hosts file entries for SHR server lookup"
   lineinfile: dest=/etc/hosts regexp='{{ shr_host_name }}' line="{{ groups['haproxy'][0] }} {{ shr_host_name }}" state=present
-  when: exclude != "shr" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
+  when: "'shr' not in exclude and enable_proxy_routing is defined and enable_proxy_routing != false"
 
 - name: "create hosts file entries for MCI server lookup"
   lineinfile: dest=/etc/hosts regexp='{{ mci_host_name }}' line="{{ groups['haproxy'][0] }} {{ mci_host_name }}" state=present
-  when: exclude != "mci-server" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
-
-- name: "create hosts file entries for MCI admin lookup"
-  lineinfile: dest=/etc/hosts regexp='{{ mci_admin_host_name }}' line="{{ groups['haproxy'][0] }} {{ mci_admin_host_name }}" state=present
-  when: exclude != "mci-ui" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
-
-- name: "create hosts file entries for Patient Journal lookup"
-  lineinfile: dest=/etc/hosts regexp='{{ pj_host_name }}' line="{{ groups['haproxy'][0] }} {{ pj_host_name }}" state=present
-  when: exclude != "patient-journal" and exclude != "all" and enable_proxy_routing is defined and enable_proxy_routing != false
+  when: "'mci-server' not in exclude and enable_proxy_routing is defined and enable_proxy_routing != false"
 
 - name: "create hosts file entries for external registry lookup"
-  lineinfile: dest=/etc/hosts regexp="{{ hostvars[groups['external-registries'][0]].host_alias }}" line="{{ groups['external-registries'][0] }} {{ hostvars[groups['external-registries'][0]].host_alias }}" state=present
-  when: exclude != "all" and "'external-registries' in group_names" and hostvars[groups['external-registries'][0]].host_alias is defined
+  lineinfile: dest=/etc/hosts regexp="{{ hostvars[item].host_alias }}" line="{{ item }} {{ hostvars[item].host_alias }}" state=present
+  when: "hostvars[item].host_alias is defined"
+  with_items: "{{ groups['external-registries'] }}"
+  
 
