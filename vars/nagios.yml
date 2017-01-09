@@ -259,6 +259,11 @@ nagios_services:
       service_description: Bahmni Event log service
       check_command: check_nrpe!check_event_log_svc
       notifications_enabled: 1
+    - use: freeshr-app-service
+      hostgroup_name: bahmni-reports
+      service_description: Bahmni reports service
+      check_command: check_nrpe!check_bahmni_reports_svc
+      notifications_enabled: 1
 
       
 #variables for nagios.cfg
