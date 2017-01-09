@@ -1,21 +1,24 @@
+# Group and user definition
 sharedhealth_group: sharedhealth
 sharedhealth_user: sharedhealth
 
-bdshr_install_dir: /opt/bdshr
-bdshr_log_dir: /var/log/bdshr
-bdshr_port: 8083
-bdshr_local_cache_ttl: 86400
-bdshr_idp_client_id: 18550
-bdshr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
-bdshr_idp_client_email: mritunjd@thoughtworks.com
-bdshr_idp_client_password: thoughtworks
-bdshr_log_level: DEBUG
-bdshr_keyspace: freeshr
-bdshr_cassandra_replication_strategy: SimpleStrategy
-bdshr_cassandra_replication_factor: 1
-bdshr_cassandra_user: freeshr
-bdshr_identity_cache_ttl: 60
+# shr variables
+shr_install_dir: /opt/bdshr
+shr_log_dir: /var/log/bdshr
+shr_port: 8083
+shr_local_cache_ttl: 86400
+shr_idp_client_id: 18550
+shr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
+shr_idp_client_email: mritunjd@thoughtworks.com
+shr_idp_client_password: thoughtworks
+shr_log_level: DEBUG
+shr_keyspace: freeshr
+shr_cassandra_replication_strategy: SimpleStrategy
+shr_cassandra_replication_factor: 1
+shr_cassandra_user: freeshr
+shr_identity_cache_ttl: 60
 
+# MCI Server
 mci_seed_data_dir: /opt/mci/seed-data
 mci_install_dir: /opt/mci
 mci_log_dir: /var/log/mci
@@ -42,6 +45,7 @@ mci_search_mapping_task_block_size: 10
 mci_max_failed_events: 50
 mci_failed_event_retry_limit: 5
 mci_org_code: 10019862
+mci_health_id_file_directory_path: /var/lib/mci
 
 #MCI FHIR
 mci_fhir_install_dir: /opt/mci-fhir
@@ -50,6 +54,10 @@ mci_fhir_port: 8085
 mci_fhir_log_level: DEBUG
 mci_fhir_keyspace: mci
 mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
+mci_fhir_idp_client_id: 18545
+mci_fhir_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
+mci_fhir_idp_client_email: anjalyj@thoughtworks.com
+mci_fhir_idp_client_password: thoughtworks
 mci_fhir_healthId_replenish_block_size: 50
 mci_fhir_healthId_replenish_threshold: 20
 mci_fhir_hid_replenish_delay: 10000
@@ -71,21 +79,23 @@ mci_bg_hid_mark_used_block_size: 5
 mci_bg_hid_mark_used_delay: 60000
 mci_bg_hid_mark_used_initial_delay: 30000
 mci_bg_max_failed_event_limit: 10
+mci_bg_failed_event_process_block_size: 5
 mci_bg_failed_event_retry_limit: 5
 
 # healthId vars
 healthId_install_dir: /opt/healthid
 healthId_log_dir: /var/log/healthid
 healthId_port: 8086
-healthId_idp_client_id: 18554
-healthId_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+healthId_idp_client_id: 18546
+healthId_idp_auth_token: 61aeaa45a711ac6b3e660e4abb2cb863f93ae90815f0edf40a134dffedf6d885
 healthId_keyspace: healthId
 healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
-healthId_cassandra_user: mci
-healthid_storage_path: /lib/healthid/hids
+healthId_cassandra_user: healthId
+healthId_storage_path: /lib/healthId/hids
 
+# Datasense
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: DEBUG
@@ -95,7 +105,6 @@ datasense_idp_client_id: 18552
 datasense_idp_auth_token: b7aa1f4001ac4b922dabd6a02a0dabc44cf5af74a0d1b68003ce7ccdb897a1d2
 datasense_idp_client_email: rappasam@thoughtworks.com
 datasense_idp_client_password: thoughtworks
-datasense_cloud_hosted_facility_ids: 10019841
 datasense_mysql_user_password: datasense
 datasense_mysql_monitoring_user: dsmonitor
 datasense_mysql_monitoring_pass: monitorpass
@@ -109,17 +118,18 @@ datasense_dhis_base_url: http://172.18.46.154:8080/
 datasense_dhis_user: datasense
 datasense_dhis_password: Password678
 
+# freeshr update vars
 freeshr_update_install_dir: /opt/freeshr-update
 freeshr_update_log_dir: /var/log/freeshr-update
 freeshr_update_log_level: DEBUG
 freeshr_update_interval: 120000
 freeshr_retry_update_interval: 180000
-freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
 freeshr_update_mysql_monitoring_pass: monitorpass
 freeshr_update_failed_events_warn_threshold: 9
 freeshr_update_failed_events_error_threshold: 19
 
+#Patient Journal
 patient_journal_port: 8090
 patient_journal_install_dir: /opt/patient-journal
 patient_journal_log_dir: /var/log/patient-journal
@@ -128,15 +138,43 @@ patient_journal_idp_auth_token: 36007186ea16c1590af00cd94c0d63ddf891476a93d86963
 patient_journal_session_timeout_seconds: 300
 patient_journal_log_level: DEBUG
 
+#Terminology
 tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_server_port: 9080
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
-tr_mysql_user_password: terminologies
 tr_api_user_name: trapiuser
 tr_api_user_password: Trapiuser123
 tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
+
+idp_login_url_path: /signin
+idp_user_info_url_path: /token
+idp_user_info_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/token
+idp_user_login_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/signin
+idp_sso_base_url: http://hrmtest.dghs.gov.bd/api/1.0/sso
+facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
+location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
+provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
+
+#Cassandra
+cassandra_commit_log_dir: /var/lib/cassandra/commitlog
+cassandra_cluster_name: 'bdshr'
+
+#fhir vars
+fhir_document_schema_version: v2
+
+#ntp
+freeshr_ntp_timezone: Asia/Calcutta
+
+#nagios - nrpe
+nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.2
+nagios_openmrs_user: admin
+nagios_openmrs_user_password: test
+nagios_bahmni_db_user: root
+nagios_bahmni_db_password: password
+
+release_version: 2.5
 
 # haproxy vars
 enable_proxy_routing: true
@@ -148,30 +186,3 @@ tr_host_name: tr-showcase.twhosted.com
 pj_host_name: pjournal-showcase.twhosted.com
 mci_admin_host_name: mciadmin-showcase.twhosted.com
 datasense_host_name: datasense-showcase.twhosted.com
-
-idp_user_info_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/token
-idp_user_login_url: http://hrmtest.dghs.gov.bd/api/1.0/sso/signin
-idp_sso_base_url: http://hrmtest.dghs.gov.bd/api/1.0/sso
-idp_login_url_path: /signin
-idp_user_info_url_path: /token
-facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
-location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
-provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
-
-mysql_root_password: password
-
-cassandra_commit_log_dir: /var/lib/cassandra/commitlog
-cassandra_cluster_name: 'bdshr'
-
-#fhir vars
-fhir_document_schema_version: v2
-
-
-#ntp
-freeshr_ntp_timezone: Asia/Calcutta
-#nagios - nrpe
-nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.2
-nagios_openmrs_user: admin
-nagios_openmrs_user_password: test
-nagios_bahmni_db_user: root
-nagios_bahmni_db_password: password
