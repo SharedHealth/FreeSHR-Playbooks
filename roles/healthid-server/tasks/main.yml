@@ -1,7 +1,4 @@
 ---
-- name: Clean existing
-  file: path=/tmp/healthid.rpm state=absent
-
 - name: Remove healthid-service
   yum: name=healthid.noarch state=absent
 
@@ -75,3 +72,6 @@
 - name: Restart healthId
   service: name=healthid state=restarted enabled=yes
   tags: run_healthId_service
+
+- name: Clean existing
+  file: path=/tmp/healthid.rpm state=absent

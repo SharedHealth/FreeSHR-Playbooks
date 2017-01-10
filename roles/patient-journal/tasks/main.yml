@@ -1,7 +1,4 @@
 ---
-- name: Clean existing
-  file: path=/tmp/patient-journal.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/patient-journal.rpm mode=0755
 
@@ -70,3 +67,6 @@
 - name: Restart patient-journal
   service: name=patient-journal state=restarted enabled=yes
   tags: run_patient_journal
+
+- name: Clean existing
+  file: path=/tmp/patient-journal.rpm state=absent

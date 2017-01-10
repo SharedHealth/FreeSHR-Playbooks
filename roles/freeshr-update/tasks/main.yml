@@ -24,9 +24,6 @@
     priv=freeSHRUpdate.*:SELECT,GRANT
     state=present
 
-- name: Clean existing rpm
-  file: path=/tmp/freeshr-update.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/freeshr-update.rpm mode=755
 
@@ -83,3 +80,6 @@
 
 - name: Restart freeshr-update
   service: name=freeshr-update state=restarted enabled=yes
+
+- name: Clean existing rpm
+  file: path=/tmp/freeshr-update.rpm state=absent

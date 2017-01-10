@@ -1,7 +1,4 @@
 ---
-- name: Clean existing
-  file: path=/tmp/identity-server.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/identity-server.rpm mode=0755
 
@@ -70,3 +67,6 @@
 
 - name: Restart identity-server
   service: name=identity-server state=restarted enabled=yes
+
+- name: Clean existing
+  file: path=/tmp/identity-server.rpm state=absent
