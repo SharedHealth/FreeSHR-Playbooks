@@ -54,8 +54,8 @@ mci_fhir_port: 8085
 mci_fhir_log_level: DEBUG
 mci_fhir_keyspace: mci
 mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
-mci_fhir_idp_client_id: 18545
-mci_fhir_idp_auth_token: 51eeda45e711cc6b3e660e4abb2cb863f93ae90815f0edf4fa134fffeff6d885
+mci_fhir_idp_client_id: 18693
+mci_fhir_idp_auth_token: 60f19e3724778fa127ecea1e48e7a4341421ffaf5ea0a6f84544ca7060dd9845
 mci_fhir_idp_client_email: anjalyj@thoughtworks.com
 mci_fhir_idp_client_password: thoughtworks
 mci_fhir_healthId_replenish_block_size: 50
@@ -71,9 +71,9 @@ mci_lr_log_dir: /var/log/mci-lr
 mci_bg_install_dir: /opt/mci-background-jobs
 mci_bg_log_dir: /var/log/mci-background-jobs
 mci_bg_log_level: INFO
-mci_bg_idp_client_id: 18691
-mci_bg_idp_auth_token: cd778d4ec6561c89c0da05c01f6f365f6c4b470a7692e80a4640571c112a7567
-mci_bg_idp_client_email: anthony@thoughtworks.com
+mci_bg_idp_client_id: 18694
+mci_bg_idp_auth_token: 88b6e318b595f0aa291d9571b9ecb2db803f743f155ff0ad7105e6932bd504c6
+mci_bg_idp_client_email: mcibackground@shrshowcase.com
 mci_bg_idp_client_password: thoughtworks
 mci_bg_hid_mark_used_block_size: 5
 mci_bg_hid_mark_used_delay: 60000
@@ -86,14 +86,14 @@ mci_bg_failed_event_retry_limit: 5
 healthId_install_dir: /opt/healthid
 healthId_log_dir: /var/log/healthid
 healthId_port: 8086
-healthId_idp_client_id: 18546
-healthId_idp_auth_token: 61aeaa45a711ac6b3e660e4abb2cb863f93ae90815f0edf40a134dffedf6d885
+healthId_idp_client_id: 18695
+healthId_idp_auth_token: 4a423a4a4862c6cc3e0784b59b7efee72e5136f91418e17ca33d05ce9db9124b
 healthId_keyspace: healthId
 healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: healthId
-healthId_storage_path: /lib/healthId/hids
+healthId_storage_path: /lib/healthid/hids
 
 # Datasense
 datasense_install_dir: /opt/datasense
