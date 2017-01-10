@@ -1,8 +1,4 @@
 ---
-
-- name: Clean existing rpm
-  file: path=/tmp/mci-lr.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/mci-lr.rpm mode=755
 
@@ -59,6 +55,8 @@
     group={{ sharedhealth_group }}
     state=link
 
-
 - name: Restart mci-lr
   service: name=mci-lr state=restarted enabled=yes
+
+- name: Clean existing rpm
+  file: path=/tmp/mci-lr.rpm state=absent

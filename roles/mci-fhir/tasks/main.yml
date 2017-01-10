@@ -1,7 +1,4 @@
 ---
-- name: Clean existing
-  file: path=/tmp/mci-fhir.rpm state=absent
-
 - name: Copy rpm
   copy: src='{{ rpm }}' dest=/tmp/mci-fhir.rpm mode=0755
 
@@ -98,3 +95,5 @@
 - name: Restart
   service: name=mci-fhir state=restarted enabled=yes
 
+- name: Clean existing
+  file: path=/tmp/mci-fhir.rpm state=absent

@@ -1,7 +1,4 @@
 ---
-- name: Clean existing rpm
-  file: path=/tmp/shr.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/shr.rpm mode=755
 
@@ -74,3 +71,6 @@
 
 - name: Start bdshr
   service: name=bdshr state=restarted enabled=yes
+
+- name: Clean existing rpm
+  file: path=/tmp/shr.rpm state=absent

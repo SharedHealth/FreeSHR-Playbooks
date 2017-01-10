@@ -1,8 +1,4 @@
 ---
-
-- name: Clean existing rpm
-  file: path=/tmp/mci-background-jobs.rpm state=absent
-
 - name: Copy rpm
   copy: src={{ rpm }} dest=/tmp/mci-background-jobs.rpm mode=755
 
@@ -60,3 +56,6 @@
 
 - name: Restart mci-background-jobs
   service: name=mci-background-jobs state=restarted enabled=yes
+
+- name: Clean existing rpm
+  file: path=/tmp/mci-background-jobs.rpm state=absent

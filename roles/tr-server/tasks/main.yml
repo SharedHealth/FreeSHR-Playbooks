@@ -1,7 +1,4 @@
 ---
-- name: Clean existing rpm
-  file: path=/tmp/bdshr-terminology-server.rpm state=absent
-
 - name: Create mysql user
   mysql_user:
     login_user=root
@@ -141,3 +138,6 @@
 
 - name: save iptables
   command: service iptables save
+
+- name: Clean existing rpm
+  file: path=/tmp/bdshr-terminology-server.rpm state=absent

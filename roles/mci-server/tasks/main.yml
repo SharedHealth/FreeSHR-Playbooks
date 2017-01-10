@@ -1,7 +1,4 @@
 ---
-- name: Clean existing
-  file: path=/tmp/mci.rpm state=absent
-
 - name: Copy rpm
   copy: src='{{ rpm }}' dest=/tmp/mci.rpm mode=755
 
@@ -96,3 +93,5 @@
   service: name=mci state=restarted enabled=yes
   tags: run_mci
 
+- name: Clean existing
+  file: path=/tmp/mci.rpm state=absent
