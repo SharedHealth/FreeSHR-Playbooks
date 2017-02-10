@@ -8,7 +8,7 @@
 [opscenter-server]
 172.18.46.221
 
-[shr]
+[shr-server]
 172.18.46.167 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
@@ -38,7 +38,7 @@
 [datasense]
 172.18.46.221 ansible_ssh_user=bdshr
 
-[patient-journal-server]
+[patient-journal]
 172.18.46.166 ansible_ssh_user=bdshr
 
 [haproxy]
@@ -46,6 +46,8 @@
 
 [nagios_hosts]
 172.18.46.2 ansible_ssh_user=bdshr
+
+[dhis]
 
 [external-registries]
 103.247.238.96 host_alias=hrmtest.dghs.gov.bd
@@ -55,26 +57,28 @@
 172.18.46.169 ansible_ssh_user=bdshr openmrs_port=8050
 172.18.46.158 ansible_ssh_user=bdshr use_http=true openmrs_port=8050
 
+[bahmni-db-active]
+172.18.46.60 ansible_ssh_user=bdshr
+172.18.46.169 ansible_ssh_user=bdshr
+172.18.46.61 ansible_ssh_user=bdshr
+
 [bahmni-event-log-active]
 172.18.46.158 ansible_ssh_user=bdshr bahmni_event_log_service_port=8057
+
+[bahmni-reports]
+172.18.46.158 ansible_ssh_user=bdshr bahmni_reports_port=8051
 
 [bahmni-app-passive]
 172.18.46.157 ansible_ssh_user=bdshr use_http=true
 172.18.46.63 ansible_ssh_user=bdshr
 172.18.46.64 ansible_ssh_user=bdshr
 
-[bahmni-db-active]
-172.18.46.60 ansible_ssh_user=bdshr
-172.18.46.169 ansible_ssh_user=bdshr
-172.18.46.61 ansible_ssh_user=bdshr
 
 [bahmni-db-passive]
 172.18.46.62 ansible_ssh_user=bdshr
 172.18.46.63 ansible_ssh_user=bdshr
 172.18.46.64 ansible_ssh_user=bdshr
 
-[bahmni-reports]
-172.18.46.158 ansible_ssh_user=bdshr bahmni_reports_port=8051
 
 [mci:children]
 mci-server

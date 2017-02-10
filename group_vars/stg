@@ -18,7 +18,7 @@ shr_cassandra_replication_factor: 1
 shr_cassandra_user: freeshr
 shr_identity_cache_ttl: 60
 
-# mci vars
+# MCI Server
 mci_seed_data_dir: /opt/mci/seed-data
 mci_install_dir: /opt/mci
 mci_log_dir: /var/log/mci
@@ -30,7 +30,7 @@ mci_log_level: INFO
 mci_ui_secret: 8B6k5QU0fAH5pIKlwDSKdp9Aakz5K20Z
 mci_ui_idp_client_id: 18591
 mci_ui_idp_auth_token: aa9c82b74adcfe1fd644f2615fdd5f6810641ebdb9f04074628d6f2ab6c98d77
-mci_idp_client_email: sohamgh@thoughtworks.com
+mci_idp_client_email: mci-server@local.staging.com
 mci_idp_client_password: thoughtworks
 mci_cassandra_replication_strategy: SimpleStrategy
 mci_cassandra_replication_factor: 1
@@ -54,6 +54,10 @@ mci_fhir_port: 8085
 mci_fhir_log_level: DEBUG
 mci_fhir_keyspace: mci
 mci_fhir_profiles_folder: /opt/mci-fhir/lib/profiles/
+mci_fhir_idp_client_id: 18696
+mci_fhir_idp_auth_token: b9da2430977aa05c9905791bb64e8943ee3279d57219033925308330c625ccbb
+mci_fhir_idp_client_email: mci-fhir-server@local.staging.com
+mci_fhir_idp_client_password: thoughtworks
 mci_fhir_healthId_replenish_block_size: 50
 mci_fhir_healthId_replenish_threshold: 20
 mci_fhir_hid_replenish_delay: 10000
@@ -67,9 +71,9 @@ mci_lr_log_dir: /var/log/mci-lr
 mci_bg_install_dir: /opt/mci-background-jobs
 mci_bg_log_dir: /var/log/mci-background-jobs
 mci_bg_log_level: INFO
-mci_bg_idp_client_id: 18691
-mci_bg_idp_auth_token: cd778d4ec6561c89c0da05c01f6f365f6c4b470a7692e80a4640571c112a7567
-mci_bg_idp_client_email: anthony@thoughtworks.com
+mci_bg_idp_client_id: 18697
+mci_bg_idp_auth_token: 2e806de4839f8353ae362681a3b22f25864c60b14e8613588ce91a3e4ca5f6c7
+mci_bg_idp_client_email: mci-bg-server@local.staging.com
 mci_bg_idp_client_password: thoughtworks
 mci_bg_hid_mark_used_block_size: 5
 mci_bg_hid_mark_used_delay: 60000
@@ -81,8 +85,8 @@ mci_bg_failed_event_retry_limit: 5
 healthId_install_dir: /opt/healthid
 healthId_log_dir: /var/log/healthid
 healthId_port: 8086
-healthId_idp_client_id: 18554
-healthId_idp_auth_token: b43d2b284fa678fb8248b7cc3ab391f9c21e5d7f8e88f815a9ef4346e426bd33
+healthId_idp_client_id: 18698
+healthId_idp_auth_token: a8dfe8e1ded28742332c44dd788c795d3cbb2f30ceee8c6b9ec1a8abd5470d99
 healthId_keyspace: healthId
 healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
@@ -90,7 +94,7 @@ healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: healthId
 healthid_storage_path: /lib/healthid/hids
 
-# datasense vars
+# Datasense
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
 datasense_log_level: INFO
@@ -100,7 +104,6 @@ datasense_idp_client_id: 18605
 datasense_idp_auth_token: bbe6b0a547fefd9ddb5c5c2b66e6185a0d9305c4c41a346e49472d633cba2af1
 datasense_idp_client_email: datasense@chittagong.com
 datasense_idp_client_password: thoughtworks
-datasense_cloud_hosted_facility_ids: 10019856
 datasense_mysql_user_password: datasense
 datasense_mysql_monitoring_user: dsmonitor
 datasense_mysql_monitoring_pass: monitorpass
@@ -120,13 +123,12 @@ freeshr_update_log_dir: /var/log/freeshr-update
 freeshr_update_log_level: INFO
 freeshr_update_interval: 120000
 freeshr_retry_update_interval: 180000
-freeshr_update_mysql_user_password: password
 freeshr_update_mysql_monitoring_user: fsumonitor
 freeshr_update_mysql_monitoring_pass: monitorpass
 freeshr_update_failed_events_warn_threshold: 9
 freeshr_update_failed_events_error_threshold: 19
 
-# patient journal vars
+#Patient Journal
 patient_journal_port: 9083
 patient_journal_install_dir: /opt/patient-journal
 patient_journal_log_dir: /var/log/patient-journal
@@ -135,17 +137,15 @@ patient_journal_idp_auth_token: 06078120b0062e7e16f1599696341d415487429cd51770bc
 patient_journal_session_timeout_seconds: 300
 patient_journal_log_level: INFO
 
-# tr server vars
+#Terminology
 tr_server_install_dir: /opt/bdshr-terminology-server
 tr_server_log_dir: /var/log/bdshr-terminology-server
 tr_server_port: 9080
 tr_openmrs_runtime_properties_location: /etc/bdshr-terminology-server/openmrs-runtime.properties
 tr_config_location: /etc/bdshr-terminology-server/bdshr-terminology-server.conf
-tr_mysql_user_password: terminologies
 tr_api_user_name: trapiuser
 tr_api_user_password: Trapiuser123
 tr_seed_data_dest_dir: /opt/bdshr-terminology-server/seed-data
-
 
 # general 3rd party api definitions
 idp_login_url_path: /signin
@@ -156,8 +156,6 @@ idp_sso_base_url: http://hrmtest.dghs.gov.bd/api/1.0/sso
 facility_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/facilities
 location_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/locations
 provider_registry_url: http://hrmtest.dghs.gov.bd/api/1.0/providers
-
-mysql_root_password: password
 
 #Cassandra
 cassandra_commit_log_dir: /var/lib/cassandra/commitlog
