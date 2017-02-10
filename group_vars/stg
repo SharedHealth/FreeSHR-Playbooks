@@ -92,7 +92,7 @@ healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: healthId
-healthid_storage_path: /lib/healthid/hids
+healthId_storage_path: /var/lib/healthid/hids
 
 # Datasense
 datasense_install_dir: /opt/datasense
