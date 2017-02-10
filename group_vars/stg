@@ -165,7 +165,7 @@ cassandra_cluster_name: 'bdshr'
 fhir_document_schema_version: v2
 
 #ntp
-freeshr_ntp_timezone: Asia/Calcutta
+freeshr_ntp_timezone: Asia/Dhaka
 
 #nagios - nrpe
 nrpe_server_allowed_hosts: 127.0.0.1,172.18.46.2
