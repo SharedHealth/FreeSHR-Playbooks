@@ -54,6 +54,15 @@
     state=link
     mode=0750
 
+- name: Create healthIDStoragePath with respective permissions
+  file:
+    path={{ healthId_storage_path }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=directory
+    recurse=yes
+    mode=0770
+
 - name: Apply migrations to leader node
   shell: "{{ healthId_install_dir }}/bin/migrate.sh"
   when: run_migrations == "yes"
