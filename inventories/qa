@@ -1,74 +1,73 @@
 [cassandra_node]
-172.18.46.57 ansible_ssh_user=bdshr repair_on="fri"
-172.18.46.56 ansible_ssh_user=bdshr repair_on="thu"
+172.21.3.61 ansible_ssh_user=bdshr repair_on="fri"
+172.21.3.25 ansible_ssh_user=bdshr repair_on="thu"
 
 [cassandra_seed_node]
-172.18.46.57
+172.21.3.61
 
 [opscenter-server]
-172.18.46.55
+172.21.3.183
 
 [shr-server]
-172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
+172.21.3.61 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
-172.18.46.55 ansible_ssh_user=bdshr
+172.21.3.61 ansible_ssh_user=bdshr
 
 [mci-ui]
-172.18.46.56 ansible_ssh_user=bdshr
+172.21.3.202 ansible_ssh_user=bdshr
 
 [mci-server]
-172.18.46.56 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
+172.21.3.25 ansible_ssh_user=bdshr run_migrations=yes mci_worker_id=1
 
 [mci-fhir]
-172.18.46.109 ansible_ssh_user=bdshr
+172.21.3.183 ansible_ssh_user=bdshr
 
 [mci-lr]
-172.18.46.109 ansible_ssh_user=bdshr
+172.21.3.183 ansible_ssh_user=bdshr
 
 [mci-background-jobs]
-172.18.46.109 ansible_ssh_user=bdshr
+172.21.3.183 ansible_ssh_user=bdshr
 
 [healthid-server]
-172.18.46.55 ansible_ssh_user=bdshr run_migrations=yes
+172.21.3.202 ansible_ssh_user=bdshr run_migrations=yes
 
 [tr-server]
-172.18.46.56 ansible_ssh_user=bdshr
+172.21.3.202 ansible_ssh_user=bdshr
 
 [datasense]
-172.18.46.55 ansible_ssh_user=bdshr
+172.21.3.25 ansible_ssh_user=bdshr
 
 [identity-server]
-172.18.46.55 ansible_ssh_user=bdshr
+172.21.3.61 ansible_ssh_user=bdshr
 
 [patient-journal]
-172.18.46.55 ansible_ssh_user=bdshr
+172.21.3.183 ansible_ssh_user=bdshr
 
 [haproxy]
-172.18.46.55 ansible_ssh_user=bdshr
+172.21.3.183 ansible_ssh_user=bdshr
 
 [nagios_hosts]
-172.18.46.59 ansible_ssh_user=bdshr
 
 [dhis]
 
 [external-registries]
 
 [bahmni-app-active]
-172.18.46.149 ansible_ssh_user=bdshr openmrs_port=8050
-172.18.46.57 ansible_ssh_user=bdshr openmrs_port=8050
-172.18.46.151 ansible_ssh_user=bdshr openmrs_port=8050
+172.21.3.4 ansible_ssh_user=bdshr openmrs_port=8050
+172.21.3.211 ansible_ssh_user=bdshr openmrs_port=8050
+172.21.3.140 ansible_ssh_user=bdshr openmrs_port=8050
 
 [bahmni-db-active]
-172.18.46.149 ansible_ssh_user=bdshr
-172.18.46.57 ansible_ssh_user=bdshr
-172.18.46.151 ansible_ssh_user=bdshr
+172.21.3.4 ansible_ssh_user=bdshr
+172.21.3.211 ansible_ssh_user=bdshr
+172.21.3.140 ansible_ssh_user=bdshr
 
 [bahmni-event-log-active]
-172.18.46.151 ansible_ssh_user=bdshr bahmni_event_log_service_port=8057
+172.21.3.140 ansible_ssh_user=bdshr bahmni_event_log_service_port=8057
 
 [bahmni-reports]
-172.18.46.151 ansible_ssh_user=bdshr bahmni_reports_port=8051
+172.21.3.140 ansible_ssh_user=bdshr bahmni_reports_port=8051
 
 [bahmni-app-passive]
 
