@@ -4,8 +4,16 @@
     dest=/etc/yum.repos.d/datastax.repo
     owner=root group=root mode=0644
 
+- name: Uninstall cassandra20 if present
+  yum: name="cassandra20" state=absent
+  ignore_errors: true
+
+- name: Uninstall dsc20 if present
+  yum: name="dsc20" state=absent
+  ignore_errors: true
+
 - name: Install cassandra
-  yum: name=dsc20 state=present
+  yum: name=dsc21 state=present
 
 - name: Downlaod jna
   get_url:
