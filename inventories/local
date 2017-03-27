@@ -71,6 +71,9 @@
 [nagios_hosts]
 192.168.33.39 ansible_ssh_user=vagrant ansible_ssh_port=22
 
+[shr-migration-service]
+192.168.33.111 ansible_ssh_user=vagrant ansible_ssh_port=22
+
 [external-registries]
 
 [mci:children]
@@ -84,6 +87,7 @@ healthid-server
 [shr:children]
 shr-server
 freeshr-update-server
+shr-migration-service
 
 [cassandra:children]
 cassandra_node

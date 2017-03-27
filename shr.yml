@@ -28,3 +28,12 @@
     - freeshr-update
   tags:
     - freeshr-update-server
+
+- name: "Install SHR migration service"
+  hosts: shr-migration-service
+  become_user: root
+  become: yes
+  roles:
+    - shr-migration-service
+  tags:
+    - shr-migration-service

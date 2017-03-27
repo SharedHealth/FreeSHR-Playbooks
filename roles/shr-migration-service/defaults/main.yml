@@ -1,0 +1,2 @@
+release_build: 1
+rpm: /tmp/shr-migration-service-1.0-{{release_build}}.noarch.rpm

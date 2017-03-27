@@ -1,0 +1,64 @@
+---
+
+- name: Clean existing rpm
+  file: path=/tmp/shr-migration-service.rpm state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/shr-migration-service.rpm mode=755
+
+- name: Remove shr-migration-service
+  yum: name=shr-migration-service.noarch state=absent
+
+- name: Install shr-migration-service
+  yum: name=/tmp/shr-migration-service.rpm state=present
+
+- name: Allow app dir access to run user
+  file:
+    path={{ shr_migration_service_install_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+
+- name: Allow log dir access to run user
+  file:
+    path={{ shr_migration_service_log_dir }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    follow=yes
+    recurse=yes
+    state=directory
+    mode=0750
+
+- name: Copy shr-migration-service properties
+  template: src=shr-migration-service
+    dest=/etc/default/shr-migration-service
+    mode=0750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
+
+- name: Permissions to service shr-migration-service
+  file:
+    path=/etc/init.d/shr-migration-service
+    src={{ shr_migration_service_install_dir }}/bin/shr-migration-service
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+    mode=0755
+
+
+- name: Permissions to var run
+  file:
+    path=/var/run/shr-migration-service
+    src={{ shr_migration_service_install_dir }}/var
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=link
+
+
+- name: Restart shr-migration-service
+  service: name=shr-migration-service state=restarted enabled=yes

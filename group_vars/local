@@ -61,6 +61,10 @@ freeshr_update_mysql_monitoring_pass: monitorpass
 freeshr_update_failed_events_warn_threshold: 9
 freeshr_update_failed_events_error_threshold: 19
 
+#shr migration service vars
+shr_migration_service_install_dir: /opt/shr-migration-service
+shr_migration_service_log_dir: /var/log/shr-migration-service
+
 # Datasense
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense

@@ -1,0 +1,2 @@
+export LOG_LEVEL=INFO
+export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ shr_port }}{% endif %}
