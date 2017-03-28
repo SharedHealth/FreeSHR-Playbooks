@@ -49,7 +49,7 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/bdshr
+    path=/var/run/mci-lr
     src={{ mci_lr_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}

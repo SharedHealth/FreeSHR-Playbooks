@@ -47,7 +47,7 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/bdshr
+    path=/var/run/mci-background-jobs
     src={{ mci_bg_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}

@@ -71,7 +71,7 @@
 
 - name: Permissions to var run
   file:
-    path=/var/run/bdshr
+    path=/var/run/freeshr-update
     src={{ freeshr_update_install_dir }}/var
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
