@@ -185,3 +185,7 @@ tr_host_name: tr-dev.twhosted.com
 pj_host_name: pjournal-dev.twhosted.com
 mci_admin_host_name: mciadmin-dev.twhosted.com
 datasense_host_name: datasense-dev.twhosted.com
+
+#shr migration service vars
+shr_migration_service_install_dir: /opt/shr-migration-service
+shr_migration_service_log_dir: /var/log/shr-migration-service

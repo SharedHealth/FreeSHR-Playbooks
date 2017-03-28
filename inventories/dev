@@ -14,6 +14,9 @@
 [freeshr-update-server]
 172.21.2.184 ansible_ssh_user=hie
 
+[shr-migration-service]
+172.21.2.88 ansible_ssh_user=hie
+
 [mci-ui]
 172.21.2.114 ansible_ssh_user=hie
 
@@ -78,6 +81,7 @@ healthid-server
 [shr:children]
 shr-server
 freeshr-update-server
+shr-migration-service
 
 [cassandra:children]
 cassandra_node
