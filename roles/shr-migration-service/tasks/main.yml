@@ -1,4 +1,19 @@
 ---
+- name: Create SHRMigration database
+  mysql_db:
+    name=SHRMigration
+    state=present
+    login_user=root
+    login_password={{ mysql_root_password }}
+
+- name: Create mysql user
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name=SHRMigration
+    password={{ shr_migration_mysql_user_password }}
+    priv=SHRMigration.*:ALL,GRANT
+    state=present
 
 - name: Clean existing rpm
   file: path=/tmp/shr-migration-service.rpm state=absent

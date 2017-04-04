@@ -1,2 +1,19 @@
 export LOG_LEVEL=INFO
 export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ shr_port }}{% endif %}
+
+export IDP_CLIENT_EMAIL={{shr_migration_idp_client_email}}
+export IDP_CLIENT_PASSWORD={{shr_migration_idp_password}}
+export IDP_SERVER_LOGIN_URL={{idp_user_login_url}}
+export IDP_AUTH_TOKEN={{shr_migration_idp_auth_token}}
+export IDP_CLIENT_ID={{shr_migration_idp_client_id}}
+
+export DATABASE_URL=jdbc:mysql://localhost:3306/SHRMigration
+export DATABASE_USER=SHRMigration
+export DATABASE_PASSWORD={{shr_migration_mysql_user_password}}
+
+export DATABASE_CHANGELOG_FILE=classpath:/db/db-changelog.xml
+export DATABASE_DRIVER=com.mysql.jdbc.Driver
+export DATABASE_CON_POOL_SIZE=10
+
+export ENCOUNTER_SYNC_JOB_INTERVAL={{shr_migration_encounter_sync_interval}}
+export CATCHMENT_LIST={{shr_migration_catchment_list}}
