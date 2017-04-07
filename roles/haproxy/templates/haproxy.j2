@@ -69,7 +69,9 @@ frontend http-in
         {% if is_ssl_enabled is defined and is_ssl_enabled != false %}acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['bahmni-app-active'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %} {% for host in groups['bahmni-app-passive'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %}{% endif %}
 
         # Define hosts
-        acl host_shr_service hdr(host) -i {{ shr_host_name }}
+        acl host_shr hdr(host) -i {{ shr_host_name }}
+        acl host_shr_dstu2_service path_beg /v1
+        acl host_shr_stu3_service path_beg /v2
         acl host_tr_service hdr(host) -i {{ tr_host_name }}
         acl host_pj_service hdr(host) -i {{ pj_host_name }}
         acl host_mci_admin hdr(host) -i {{ mci_admin_host_name }}
@@ -82,7 +84,9 @@ frontend http-in
         {% if is_ssl_enabled is defined and is_ssl_enabled != false %} redirect scheme https code 302 if !network_allowed {% endif %}
 
         ## figure out which one to use
-        use_backend shr-service-cluster if host_shr_service
+        use_backend shr-dstu2-service-cluster if host_shr host_shr_dstu2_service
+        use_backend shr-stu3-service-cluster if host_shr host_shr_stu3_service
+        default_backend shr-dstu2-service-cluster if host_shr
         use_backend mci-service-cluster if host_mci host_mci_service or host_mci_service_default
         use_backend mci-fhir-cluster if host_mci host_mci_fhir
         use_backend healthId-service-cluster if host_mci host_healthId_service
@@ -97,7 +101,9 @@ frontend https-in
         reqadd X-Forwarded-Proto:\ https
 
         # Define hosts
-        acl host_shr_service hdr(host) -i {{ shr_host_name }}
+        acl host_shr hdr(host) -i {{ shr_host_name }}
+        acl host_shr_dstu2_service path_beg /api/v1
+        acl host_shr_stu3_service path_beg /api/v2
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}
@@ -110,7 +116,9 @@ frontend https-in
 
 
         ## figure out which one to use
-        use_backend shr-service-cluster if host_shr_service
+        use_backend shr-dstu2-service-cluster if host_shr host_shr_dstu2_service
+        use_backend shr-stu3-service-cluster if host_shr host_shr_stu3_service
+        default_backend shr-dstu2-service-cluster if host_shr
         use_backend mci-service-cluster if host_mci host_mci_service or host_mci_service_default
         use_backend mci-fhir-cluster if host_mci host_mci_fhir
         use_backend healthId-service-cluster if host_mci host_healthId_service
@@ -123,12 +131,18 @@ frontend https-in
 #---------------------------------------------------------------------
 # round robin balancing between the SHR Service backends
 #---------------------------------------------------------------------
-backend shr-service-cluster
+backend shr-dstu2-service-cluster
     balance     roundrobin
     {% for host in groups['shr-server'] %}
     server shr{{ loop.index }} {{host}}:{{ hostvars[host]['shr_port'] }} check
     {% endfor %}
-    
+
+backend shr-stu3-service-cluster
+    balance     roundrobin
+    {% for host in groups['shr-server-stu3'] %}
+    server shr{{ loop.index }} {{host}}:{{ hostvars[host]['shr_port'] }} check
+    {% endfor %}
+
 
 #---------------------------------------------------------------------
 # round robin balancing between the MCI Service backends
@@ -149,7 +163,7 @@ backend mci-fhir-cluster
     {% endfor %}
 
 #---------------------------------------------------------------------
-# round robin balancing between the MCI fhir backends
+# round robin balancing between the HealthId server backends
 #---------------------------------------------------------------------
 backend healthId-service-cluster
     balance     roundrobin
@@ -181,7 +195,7 @@ backend tr-server-node
 backend pjournal-node
     balance     source
     {% for host in groups['patient-journal'] %}
-    server pj{{ loop.index }}  {{host}}:{{ hostvars[host]['patient_journal_port'] }} check
+    server pj{{ loop.index }}  {{host}}:8091 check
     {% endfor %}
 
 #---------------------------------------------------------------------

@@ -15,6 +15,7 @@ bdshr_cassandra_replication_strategy: SimpleStrategy
 bdshr_cassandra_replication_factor: 1
 bdshr_cassandra_user: freeshr
 bdshr_identity_cache_ttl: 60
+shr_version: v1
 
 mci_seed_data_dir: /opt/mci/seed-data
 mci_install_dir: /opt/mci

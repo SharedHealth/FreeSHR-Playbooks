@@ -10,6 +10,7 @@
         cassandra_keyspace_replication_factor: "{{ hostvars[groups['shr-server'][0]]['shr_cassandra_replication_factor'] }}" }
   tags:
     - shr
+    - shr-stu3
 
 - name: "Install FreeSHR"
   hosts: shr-server
@@ -19,6 +20,18 @@
     - shr-server
   tags:
     - shr
+
+- name: "Install FreeSHR STU3"
+  hosts: shr-server-stu3
+  become_user: root
+  become: yes
+  roles:
+    - shr-server
+  tags:
+    - shr-stu3
+  vars:
+    shr_version: v2
+    fhir_document_schema_version: v3
 
 - name: "Install FreeSHR-Update-Server"
   hosts: freeshr-update-server

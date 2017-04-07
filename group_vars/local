@@ -29,7 +29,7 @@ tr_server_port: 9080
 cassandra_commit_log_dir: /var/lib/cassandra/commitlog
 cassandra_cluster_name: 'bdshr'
 
-release_version: 2.5
+release_version: 2.6
 
 #fhir vars
 fhir_document_schema_version: v2
@@ -49,6 +49,7 @@ shr_cassandra_replication_strategy: SimpleStrategy
 shr_cassandra_replication_factor: 1
 shr_cassandra_user: freeshr
 shr_identity_cache_ttl: 60
+shr_version: v1
 
 # freeshr update vars
 freeshr_update_install_dir: /opt/freeshr-update
@@ -220,3 +221,11 @@ patient_journal_log_level: DEBUG
 nrpe_server_allowed_hosts: 127.0.0.1,{{groups['nagios_hosts'][0]}}
 nagios_openmrs_user: admin
 nagios_openmrs_user_password: test
+
+#haproxy_vars
+shr_host_name: shr-local.twhosted.com
+mci_host_name: mci-local.twhosted.com
+tr_host_name: tr-local.twhosted.com
+pj_host_name: pjournal-local.twhosted.com
+mci_admin_host_name: mciadmin-local.twhosted.com
+datasense_host_name: datasense-local.twhosted.com
