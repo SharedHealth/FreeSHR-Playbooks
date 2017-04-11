@@ -190,3 +190,10 @@ datasense_host_name: datasense-dev.twhosted.com
 #shr migration service vars
 shr_migration_service_install_dir: /opt/shr-migration-service
 shr_migration_service_log_dir: /var/log/shr-migration-service
+shr_migration_idp_client_email: mritunjd@thoughtworks.com
+shr_migration_idp_password: thoughtworks
+shr_migration_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
+shr_migration_idp_client_id: 18550
+shr_migration_mysql_user_password: password
+shr_migration_encounter_sync_interval: 10000
+shr_migration_catchment_list: 3026,3033
