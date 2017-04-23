@@ -1,27 +1,26 @@
 [cassandra_node]
 192.168.33.19 repair_on="thu" ansible_ssh_user=vagrant ansible_ssh_port=22
-192.168.33.20 repair_on="fri" ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [datasense]
-192.168.33.21 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [patient-journal]
-192.168.33.22 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [shr-server]
-192.168.33.19 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
-
-[shr-server-stu3]
 192.168.33.20 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
+[shr-server-stu3]
+192.168.33.21 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
+
 [freeshr-update-server]
-192.168.33.24 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22 
+192.168.33.21 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [mci-server]
-192.168.33.25 mci_worker_id=0 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.221mci_worker_id=0 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [healthid-server]
-192.168.33.26 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.19 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [mci-ui]
 192.168.33.27 ansible_ssh_user=vagrant ansible_ssh_port=22
@@ -39,7 +38,7 @@
 192.168.33.31 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [identity-server]
-192.168.33.32 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [cassandra_seed_node]
 192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_port=22

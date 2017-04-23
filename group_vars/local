@@ -28,6 +28,10 @@ tr_server_port: 9080
 #Cassandra
 cassandra_commit_log_dir: /var/lib/cassandra/commitlog
 cassandra_cluster_name: 'bdshr'
+cassandra_admin_pass: password
+shr_cassandra_pass: password
+mci_cassandra_pass: password
+healthId_cassandra_pass: password
 
 release_version: 2.6
 
@@ -172,7 +176,7 @@ healthId_log_level: DEBUG
 healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: mci
-healthid_storage_path: /var/lib/healthid/hids
+healthId_storage_path: /var/lib/healthid/hids
 
 datasense_install_dir: /opt/datasense
 datasense_log_dir: /var/log/datasense
