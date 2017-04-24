@@ -18,6 +18,7 @@ shr_cassandra_replication_factor: 1
 shr_cassandra_user: freeshr
 shr_identity_cache_ttl: 60
 shr_version: v1
+is_latest_shr: true
 
 # MCI Server
 mci_seed_data_dir: /opt/mci/seed-data

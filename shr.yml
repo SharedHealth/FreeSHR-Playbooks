@@ -32,6 +32,7 @@
   vars:
     shr_version: v2
     fhir_document_schema_version: v3
+    is_latest_shr: false
 
 - name: "Install FreeSHR-Update-Server"
   hosts: freeshr-update-server

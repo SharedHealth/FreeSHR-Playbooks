@@ -25,7 +25,7 @@ export FACILITY_CACHE_TTL_SECONDS=864000
 export IDP_CLIENT_ID={{ shr_idp_client_id }}
 export IDP_AUTH_TOKEN={{ shr_idp_auth_token }}
 export SHR_VERSION={{ shr_version }}
-export IS_LATEST_SHR=true
+export IS_LATEST_SHR={{is_latest_shr}}
 export LOCAL_CACHE_TTL={{ shr_local_cache_ttl }}
 export FHIR_DOCUMENT_SCHEMA_VERSION={{ fhir_document_schema_version }}
 export MCI_SERVER_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ mci_host_name }},http://{{ mci_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ mci_host_name }}{% else %}http://{{ groups['mci-server'][0] }}:{{ hostvars[groups['mci-server'][0]]['mci_port'] }}{% endif %}
