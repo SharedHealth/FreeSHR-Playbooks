@@ -74,7 +74,7 @@
 192.168.33.39 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [shr-migration-service]
-192.168.33.41 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [external-registries]
 

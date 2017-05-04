@@ -55,6 +55,14 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
 
+- name: Create directory for failed bundles with respective permissions
+  file:
+    path={{ failed_bundle_storage_dir_path }}
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+    state=directory
+    recurse=yes
+    mode=0770
 
 - name: Permissions to service shr-migration-service
   file:

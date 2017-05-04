@@ -33,7 +33,7 @@ shr_cassandra_pass: password
 mci_cassandra_pass: password
 healthId_cassandra_pass: password
 
-release_version: 2.6
+release_version: 2.7
 
 #fhir vars
 fhir_document_schema_version: v2
@@ -77,6 +77,7 @@ shr_migration_idp_client_id: 18550
 shr_migration_mysql_user_password: password
 shr_migration_encounter_sync_interval: 10000
 shr_migration_catchment_list: 3026,3033
+failed_bundle_storage_dir_path: /var/lib/shr-migration-bundles/
 
 
 # Datasense

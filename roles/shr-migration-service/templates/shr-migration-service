@@ -7,13 +7,28 @@ export IDP_SERVER_LOGIN_URL={{idp_user_login_url}}
 export IDP_AUTH_TOKEN={{shr_migration_idp_auth_token}}
 export IDP_CLIENT_ID={{shr_migration_idp_client_id}}
 
-export DATABASE_URL=jdbc:mysql://localhost:3306/SHRMigration
-export DATABASE_USER=SHRMigration
-export DATABASE_PASSWORD={{shr_migration_mysql_user_password}}
+export SHR_MIGRATION_DATABASE_URL=jdbc:mysql://localhost:3306/shrMigration?createDatabaseIfNotExist=true
+export SHR_MIGRATION_DATABASE_USER=shrMigration
+export SHR_MIGRATION_DATABASE_PASSWORD={{shr_migration_mysql_user_password}}
+export SHR_MIGRATION_DATABASE_CHANGELOG_FILE=classpath:/db/db-changelog.xml
+export SHR_MIGRATION_DATABASE_DRIVER=com.mysql.jdbc.Driver
+export SHR_MIGRATION_DATABASE_CON_POOL_SIZE=10
 
-export DATABASE_CHANGELOG_FILE=classpath:/db/db-changelog.xml
-export DATABASE_DRIVER=com.mysql.jdbc.Driver
-export DATABASE_CON_POOL_SIZE=10
+export CASSANDRA_KEYSPACE={{ shr_keyspace }}
+export CASSANDRA_VERSION=2
+export CASSANDRA_HOST={{ groups['cassandra_seed_node'][0] }}
+export CASSANDRA_PORT=9042
+export CASSANDRA_USER={{ shr_cassandra_user }}
+export CASSANDRA_PASSWORD={{ shr_cassandra_pass }}
+export CASSANDRA_TIMEOUT=60000
+export CASSANDRA_MIGRATIONS_PATH=
 
+export ENABLE_SCHEDULING=TRUE
 export ENCOUNTER_SYNC_JOB_INTERVAL={{shr_migration_encounter_sync_interval}}
 export CATCHMENT_LIST={{shr_migration_catchment_list}}
+export FHIR_DOCUMENT_OLD_SCHEMA_VERSION=v2
+export FHIR_DOCUMENT_NEW_SCHEMA_VERSION=v3
+
+export FAILED_BUNDLE_STORAGE_DIR_PATH={{failed_bundle_storage_dir_path}}
+export TR_VALUESET_URI={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ tr_host_name }},http://{{ tr_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ hostvars[groups['tr-server'][0]]['tr_server_port'] }}{% endif %}/openmrs/ws/rest/v1/tr/vs/
+
