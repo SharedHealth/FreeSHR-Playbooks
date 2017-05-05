@@ -23,7 +23,6 @@ export CASSANDRA_PASSWORD={{ shr_cassandra_pass }}
 export CASSANDRA_TIMEOUT=60000
 export CASSANDRA_MIGRATIONS_PATH=
 
-export ENABLE_SCHEDULING=TRUE
 export ENCOUNTER_SYNC_JOB_INTERVAL={{shr_migration_encounter_sync_interval}}
 export CATCHMENT_LIST={{shr_migration_catchment_list}}
 export FHIR_DOCUMENT_OLD_SCHEMA_VERSION=v2

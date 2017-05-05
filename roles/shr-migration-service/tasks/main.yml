@@ -1,7 +1,13 @@
 ---
+- name: Clean existing rpm
+  file: path=/tmp/shr-migration-service.rpm state=absent
+
+- name: Copy rpm
+  copy: src={{ rpm }} dest=/tmp/shr-migration-service.rpm mode=755
+
 - name: Create SHRMigration database
   mysql_db:
-    name=SHRMigration
+    name=shrMigration
     state=present
     login_user=root
     login_password={{ mysql_root_password }}
@@ -10,16 +16,20 @@
   mysql_user:
     login_user=root
     login_password={{ mysql_root_password }}
-    name=SHRMigration
-    password={{ shr_migration_mysql_user_password }}
-    priv=SHRMigration.*:ALL,GRANT
+    name=shrMigration
+    password={{shr_migration_mysql_user_password}}
+    priv=shrMigration.*:ALL,GRANT
     state=present
 
-- name: Clean existing rpm
-  file: path=/tmp/shr-migration-service.rpm state=absent
+- name: Create mysql user for nagios monitoring
+  mysql_user:
+    login_user=root
+    login_password={{ mysql_root_password }}
+    name={{ shr_migration_mysql_monitoring_user }}
+    password={{ shr_migration_mysql_monitoring_pass }}
+    priv=shrMigration.*:SELECT,GRANT
+    state=present
 
-- name: Copy rpm
-  copy: src={{ rpm }} dest=/tmp/shr-migration-service.rpm mode=755
 
 - name: Remove shr-migration-service
   yum: name=shr-migration-service.noarch state=absent
