@@ -70,8 +70,8 @@ frontend http-in
 
         # Define hosts
         acl host_shr hdr(host) -i {{ shr_host_name }}
-        acl host_shr_dstu2_service path_beg /api/v1
-        acl host_shr_stu3_service path_beg /api/v2
+        acl host_shr_dstu2_service path_beg /v1
+        acl host_shr_stu3_service path_beg /v2
         acl host_tr_service hdr(host) -i {{ tr_host_name }}
         acl host_pj_service hdr(host) -i {{ pj_host_name }}
         acl host_mci_admin hdr(host) -i {{ mci_admin_host_name }}
@@ -102,8 +102,8 @@ frontend https-in
 
         # Define hosts
         acl host_shr hdr(host) -i {{ shr_host_name }}
-        acl host_shr_dstu2_service path_beg /api/v1
-        acl host_shr_stu3_service path_beg /api/v2
+        acl host_shr_dstu2_service path_beg /v1
+        acl host_shr_stu3_service path_beg /v2
         acl host_mci_admin   hdr(host) -i {{ mci_admin_host_name }}
         acl host_tr_service  hdr(host) -i {{ tr_host_name }}
         acl host_pj_service  hdr(host) -i {{ pj_host_name }}

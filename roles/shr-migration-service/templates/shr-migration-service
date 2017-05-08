@@ -1,4 +1,4 @@
-export LOG_LEVEL=INFO
+export LOG_LEVEL={{shr_migration_service_log_level}}
 export SHR_SERVER_BASE_URL={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ shr_host_name }}{% else %}http://{{ groups['shr'][0] }}:{{ shr_port }}{% endif %}
 
 export IDP_CLIENT_EMAIL={{shr_migration_idp_client_email}}

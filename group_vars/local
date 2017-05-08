@@ -68,6 +68,7 @@ freeshr_update_failed_events_warn_threshold: 9
 freeshr_update_failed_events_error_threshold: 19
 
 #shr migration service vars
+shr_migration_service_log_level: DEBUG
 shr_migration_service_install_dir: /opt/shr-migration-service
 shr_migration_service_log_dir: /var/log/shr-migration-service
 shr_migration_idp_client_email: mritunjd@thoughtworks.com

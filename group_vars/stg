@@ -191,6 +191,7 @@ mci_admin_host_name: mciadmin-staging.twhosted.com
 datasense_host_name: datasense-staging.twhosted.com
 
 #shr migration service vars
+shr_migration_service_log_level: INFO
 shr_migration_service_install_dir: /opt/shr-migration-service
 shr_migration_service_log_dir: /var/log/shr-migration-service
 shr_migration_idp_client_email: mritunjd@thoughtworks.com
