@@ -5,7 +5,7 @@ sharedhealth_user: sharedhealth
 # shr variables
 shr_install_dir: /opt/bdshr
 shr_log_dir: /var/log/bdshr
-shr_port: 8081
+shr_port: 8083
 shr_local_cache_ttl: 86400
 shr_idp_client_id: 18550
 shr_idp_auth_token: c6e6fd3a26313eb250e1019519af33e743808f5bb50428ae5423b8ee278e6fa5
