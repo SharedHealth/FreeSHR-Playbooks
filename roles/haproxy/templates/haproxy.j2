@@ -133,13 +133,13 @@ frontend https-in
 #---------------------------------------------------------------------
 backend shr-dstu2-service-cluster
     balance     roundrobin
-    {% for host in groups['shr-server'] %}
+    {% for host in groups['shr-server-dstu2'] %}
     server shr{{ loop.index }} {{host}}:{{ hostvars[host]['shr_port'] }} check
     {% endfor %}
 
 backend shr-stu3-service-cluster
     balance     roundrobin
-    {% for host in groups['shr-server-stu3'] %}
+    {% for host in groups['shr-server'] %}
     server shr{{ loop.index }} {{host}}:{{ hostvars[host]['shr_port'] }} check
     {% endfor %}
 

@@ -7,10 +7,10 @@
 [patient-journal]
 192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
 
-[shr-server]
+[shr-server-dstu2]
 192.168.33.20 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
-[shr-server-stu3]
+[shr-server]
 192.168.33.19 run_migrations=yes ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [freeshr-update-server]
@@ -87,8 +87,8 @@ mci-background-jobs
 healthid-server
 
 [shr:children]
+shr-server-dstu2
 shr-server
-shr-server-stu3
 freeshr-update-server
 shr-migration-service
 
