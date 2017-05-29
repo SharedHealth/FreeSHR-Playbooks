@@ -12,7 +12,7 @@
 172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
 
 [shr-server]
-172.18.46.57 ansible_ssh_user=bdshr run_migrations=yes
+172.18.46.55 ansible_ssh_user=bdshr run_migrations=yes
 
 [freeshr-update-server]
 172.18.46.55 ansible_ssh_user=bdshr
