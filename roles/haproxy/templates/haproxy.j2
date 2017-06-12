@@ -195,7 +195,7 @@ backend tr-server-node
 backend pjournal-node
     balance     source
     {% for host in groups['patient-journal'] %}
-    server pj{{ loop.index }}  {{host}}:8091 check
+    server pj{{ loop.index }}  {{host}}:{{ hostvars[host]['patient_journal_port'] }} check
     {% endfor %}
 
 #---------------------------------------------------------------------
