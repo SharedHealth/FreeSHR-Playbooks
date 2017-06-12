@@ -86,7 +86,7 @@ frontend http-in
         ## figure out which one to use
         use_backend shr-dstu2-service-cluster if host_shr host_shr_dstu2_service
         use_backend shr-stu3-service-cluster if host_shr host_shr_stu3_service
-        default_backend shr-stu3-service-clusterr if host_shr
+        default_backend shr-stu3-service-cluster if host_shr
         use_backend mci-service-cluster if host_mci host_mci_service or host_mci_service_default
         use_backend mci-fhir-cluster if host_mci host_mci_fhir
         use_backend healthId-service-cluster if host_mci host_healthId_service
