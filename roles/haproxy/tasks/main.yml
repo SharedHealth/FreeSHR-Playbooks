@@ -4,8 +4,18 @@
   with_items:
     - haproxy
 
+- name: Copy error files
+  copy:
+      src={{ item }}
+      dest=/etc/haproxy/error_files/
+      mode=640
+      owner=haproxy
+      group=haproxy
+  with_items:
+    - shr-deprecated.http
+
 - name: define proxy config
-  template: 
+  template:
       src=haproxy.j2
       dest=/etc/haproxy/haproxy.cfg
       mode=640

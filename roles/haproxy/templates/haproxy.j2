@@ -132,10 +132,7 @@ frontend https-in
 # round robin balancing between the SHR Service backends
 #---------------------------------------------------------------------
 backend shr-dstu2-service-cluster
-    balance     roundrobin
-    {% for host in groups['shr-server-dstu2'] %}
-    server shr{{ loop.index }} {{host}}:{{ hostvars[host]['shr_port'] }} check
-    {% endfor %}
+    errorfile 503 /etc/haproxy/error_files/shr-deprecated.http
 
 backend shr-stu3-service-cluster
     balance     roundrobin
