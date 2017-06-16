@@ -66,6 +66,32 @@ frontend http-in
         bind :80
         reqadd X-Forwarded-Proto:\ http
 
+        #Restrict APIs to HIE Subnet
+        acl hie_subnet src {{hie_network_subnet}}
+        acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl restricted_page_to_hie_subnet path_beg /healthIds/nextBlock
+        acl restricted_page_to_hie_subnet path_beg /healthIds/markUsed
+        acl restricted_page_to_hie_subnet path_beg /healthIds/checkAvailability
+        acl restricted_page_to_hie_subnet path_reg ^/api/(v1|defaults)/patients/duplicates
+        acl restricted_page_to_hie_subnet path_reg ^/api/(v1|defaults)/feed/patients
+        acl restricted_page_to_hie_subnet path_reg ^/api/(v1|defaults)/locations
+        acl restricted_page_to_hie_subnet path_reg ^/api/(v1|defaults)/mergerequest/*
+        acl restricted_page_to_hie_subnet path_reg ^/api/(v1|defaults)/catchments/(\\d)+/approvals.*
+        block if restricted_page_to_hie_subnet !hie_subnet
+
+        #Generate APIs should be accessed from Administrative network
+        acl administer_subnet src {{hie_network_subnet}} {{administer_network_subnet}}
+        acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl restricted_page_to_administer_subnet path_reg ^/healthIds/generate*
+        block if restricted_page_to_administer_subnet !administer_subnet
+
+        #remainingHIds API should not be accessed from anywhere
+        #NRPE agents should hit 127.0.0.1 and tell the status
+        acl no_access src --
+        acl host_mci hdr(host) -i {{ mci_host_name }}
+        acl no_access_page path_beg /healthIds/checkRemaining
+        block if no_access_page !no_access
+
         {% if is_ssl_enabled is defined and is_ssl_enabled != false %}acl network_allowed src {% for host in groups['shr'] %} {{host}} {% endfor %} {% for host in groups['mci'] %} {{host}} {% endfor %} {% for host in groups['tr-server'] %} {{host}} {% endfor %} {% for host in groups['patient-journal'] %} {{host}} {% endfor %} {% for host in groups['datasense'] %} {{host}} {% endfor %} {% for host in groups['bahmni-app-active'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %} {% for host in groups['bahmni-app-passive'] %}{% if hostvars[host].use_http is defined and hostvars[host].use_http != false %} {{host}} {% endif %}{% endfor %}{% endif %}
 
         # Define hosts
