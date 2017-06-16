@@ -144,6 +144,11 @@ nagios_services:
       service_description: healthid_proc
       notifications_enabled: 1
     - use: freeshr-app-service
+      hostgroup_name: healthid-server
+      check_command: check_nrpe!check_remaining_healthids
+      service_description: remaining_healthids
+      notifications_enabled: 1
+    - use: freeshr-app-service
       hostgroup_name: patient-journal
       check_command: check_nrpe!check_pj
       service_description: pj_http

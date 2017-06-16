@@ -96,6 +96,7 @@ healthId_cassandra_replication_strategy: SimpleStrategy
 healthId_cassandra_replication_factor: 1
 healthId_cassandra_user: healthId
 healthId_storage_path: /var/lib/healthid/hids
+healthId_warning_threshold: 15000
 
 # Datasense
 datasense_install_dir: /opt/datasense

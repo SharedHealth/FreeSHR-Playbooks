@@ -52,6 +52,9 @@
 [bahmni-app-active]
 192.168.33.40
 
+[bahmni-reports]
+192.168.33.40
+
 [bahmni-app-passive]
 192.168.33.40
 
@@ -71,7 +74,7 @@
 192.168.33.38 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [nagios_hosts]
-192.168.33.39 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [shr-migration-service]
 192.168.33.20 ansible_ssh_user=vagrant ansible_ssh_port=22
@@ -97,6 +100,7 @@ cassandra_node
 cassandra_seed_node
 
 [bahmni:children]
+bahmni-reports
 bahmni-app-active
 bahmni-db-active
 bahmni-event-log-active
