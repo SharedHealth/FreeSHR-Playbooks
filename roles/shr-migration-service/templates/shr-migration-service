@@ -29,5 +29,5 @@ export FHIR_DOCUMENT_OLD_SCHEMA_VERSION=v2
 export FHIR_DOCUMENT_NEW_SCHEMA_VERSION=v3
 
 export FAILED_BUNDLE_STORAGE_DIR_PATH={{failed_bundle_storage_dir_path}}
-export TR_VALUESET_URI={% if enable_proxy_routing is defined and enable_proxy_routing != false and is_ssl_enabled is defined and is_ssl_enabled != false %}https://{{ tr_host_name }},http://{{ tr_host_name }}{% elif enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ hostvars[groups['tr-server'][0]]['tr_server_port'] }}{% endif %}/openmrs/ws/rest/v1/tr/vs/
+export TR_VALUESET_URI={% if enable_proxy_routing is defined and enable_proxy_routing != false %}http://{{ tr_host_name }}{% else %}http://{{ groups['tr-server'][0] }}:{{ hostvars[groups['tr-server'][0]]['tr_server_port'] }}{% endif %}/openmrs/ws/rest/v1/tr/vs/
 
