@@ -35,3 +35,4 @@
 - name: Update mysql root password
   command: /usr/bin/mysqladmin -u root password {{ mysql_root_password }}
   ignore_errors: yes
+  no_log: True

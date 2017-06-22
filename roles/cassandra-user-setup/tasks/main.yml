@@ -7,3 +7,4 @@
   shell: "cqlsh {{ inventory_hostname }} -u cassandra -p {{ cassandra_old_admin_pass }} -f /tmp/cassandra_users.cql"
   register: command_result
   failed_when: "'Connection error' in command_result.stderr"
+  no_log: True
