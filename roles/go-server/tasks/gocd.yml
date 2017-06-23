@@ -9,6 +9,7 @@
   register: passfile_contents
   tags:
     - go-user
+  no_log: True
 
 - name: save go user
   lineinfile:
