@@ -188,6 +188,8 @@ tr_host_name: tr-dev.twhosted.com
 pj_host_name: pjournal-dev.twhosted.com
 mci_admin_host_name: mciadmin-dev.twhosted.com
 datasense_host_name: datasense-dev.twhosted.com
+hie_network_subnet: 172.21.2.0/24
+administer_network_subnet: 172.21.2.0/24
 
 #shr migration service vars
 shr_migration_service_log_level: DEBUG
