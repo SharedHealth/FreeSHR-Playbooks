@@ -17,7 +17,7 @@ shr_cassandra_replication_strategy: SimpleStrategy
 shr_cassandra_replication_factor: 1
 shr_cassandra_user: freeshr
 shr_identity_cache_ttl: 60
-shr_version: v1
+shr_version: v2
 is_latest_shr: true
 
 # MCI Server
@@ -166,7 +166,7 @@ cassandra_commit_log_dir: /var/lib/cassandra/commitlog
 cassandra_cluster_name: 'bdshr'
 
 #fhir vars
-fhir_document_schema_version: v2
+fhir_document_schema_version: v3
 
 #ntp
 freeshr_ntp_timezone: Asia/Dhaka

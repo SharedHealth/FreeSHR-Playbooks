@@ -8,11 +8,8 @@
 [opscenter-server]
 172.21.2.88
 
-[shr-server-dstu2]
-172.21.2.184 ansible_ssh_user=hie run_migrations=yes
-
 [shr-server]
-172.21.2.234 ansible_ssh_user=hie run_migrations=yes
+172.21.2.184 ansible_ssh_user=hie run_migrations=yes
 
 [freeshr-update-server]
 172.21.2.184 ansible_ssh_user=hie
@@ -82,7 +79,6 @@ mci-background-jobs
 healthid-server
 
 [shr:children]
-shr-server-dstu2
 shr-server
 freeshr-update-server
 shr-migration-service
