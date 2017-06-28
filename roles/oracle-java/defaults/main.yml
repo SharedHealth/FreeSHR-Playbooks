@@ -1,8 +1,8 @@
 open_jdk_package: java-1.7.0-openjdk
 download_folder: /opt
 java_runtime: jre
-jdk_update: 7u75
-jdk_build: b13
+jdk_update: 8u131
+jdk_build: b11
 java_rpm_name: "{{ java_runtime }}-{{jdk_update}}-linux-x64.rpm"
-java_download_url: "http://download.oracle.com/otn-pub/java/jdk/{{jdk_update}}-{{jdk_build}}/{{ java_rpm_name }}"
+java_download_url: "http://download.oracle.com/otn-pub/java/jdk/{{jdk_update}}-{{jdk_build}}/d54c1d3a095b4ff2b6607d096fa80163/{{ java_rpm_name }}"
 java_rpm_location: "{{download_folder}}/{{ java_rpm_name}}"

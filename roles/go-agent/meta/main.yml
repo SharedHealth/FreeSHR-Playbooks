@@ -1,5 +1,4 @@
 dependencies:
   - { role: shr-base }
-  - { role: oracle-java , java_runtime: jdk, jdk_update: 8u92, jdk_build: b14 }
   - { role: oracle-java , java_runtime: jdk }
 
