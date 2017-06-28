@@ -125,6 +125,14 @@
     owner={{ sharedhealth_user }}
     group={{ sharedhealth_group }}
 
+- name: Copy legacyui omod
+  copy:
+    src='{{ uiomod }}'
+    dest={{ tr_server_install_dir}}/modules/
+    mode=0750
+    owner={{ sharedhealth_user }}
+    group={{ sharedhealth_group }}
+
 - name: Restart terminology-server
   service: name=bdshr-terminology-server state=restarted enabled=yes
 
