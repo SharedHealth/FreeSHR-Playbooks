@@ -32,7 +32,7 @@
 192.168.33.30 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [tr-server]
-192.168.33.31 ansible_ssh_user=vagrant ansible_ssh_port=22
+192.168.33.21 ansible_ssh_user=vagrant ansible_ssh_port=22
 
 [identity-server]
 192.168.33.19 ansible_ssh_user=vagrant ansible_ssh_port=22
