@@ -6,7 +6,7 @@
 172.21.2.184
 
 [opscenter-server]
-172.21.2.88
+172.21.2.213
 
 [shr-server]
 172.21.2.184 ansible_ssh_user=hie run_migrations=yes
@@ -15,7 +15,7 @@
 172.21.2.184 ansible_ssh_user=hie
 
 [shr-migration-service]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [mci-ui]
 172.21.2.114 ansible_ssh_user=hie
@@ -24,13 +24,13 @@
 172.21.2.234 ansible_ssh_user=hie run_migrations=yes is_mci_master_node=true mci_worker_id=1
 
 [mci-fhir]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [mci-lr]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [mci-background-jobs]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [healthid-server]
 172.21.2.114 ansible_ssh_user=hie run_migrations=yes
@@ -45,10 +45,10 @@
 172.21.2.184 ansible_ssh_user=hie
 
 [patient-journal]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [haproxy]
-172.21.2.88 ansible_ssh_user=hie
+172.21.2.213 ansible_ssh_user=hie
 
 [nagios_hosts]
 
