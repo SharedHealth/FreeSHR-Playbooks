@@ -190,6 +190,8 @@ tr_host_name: tr-staging.twhosted.com
 pj_host_name: pjournal-staging.twhosted.com
 mci_admin_host_name: mciadmin-staging.twhosted.com
 datasense_host_name: datasense-staging.twhosted.com
+hie_network_subnet: 172.21.5.0/24
+administer_network_subnet: 172.21.5.0/24
 
 #shr migration service vars
 shr_migration_service_log_level: INFO
