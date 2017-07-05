@@ -44,7 +44,7 @@
 172.21.5.150 ansible_ssh_user=hie
 
 [haproxy]
-172.18.46.221 ansible_ssh_user=hie
+172.21.5.85 ansible_ssh_user=hie
 
 [nagios_hosts]
 172.21.5.150 ansible_ssh_user=hie
