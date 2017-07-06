@@ -184,12 +184,12 @@ release_version: 2.6
 enable_proxy_routing: true
 is_ssl_enabled: true
 pem_file_path: /etc/ssl/private/xip.io.pem
-shr_host_name: shr-staging.twhosted.com
-mci_host_name: mci-staging.twhosted.com
-tr_host_name: tr-staging.twhosted.com
-pj_host_name: pjournal-staging.twhosted.com
-mci_admin_host_name: mciadmin-staging.twhosted.com
-datasense_host_name: datasense-staging.twhosted.com
+shr_host_name: shr-aws-staging.twhosted.com
+mci_host_name: mci-aws-staging.twhosted.com
+tr_host_name: tr-aws-staging.twhosted.com
+pj_host_name: pjournal-aws-staging.twhosted.com
+mci_admin_host_name: mciadmin-aws-staging.twhosted.com
+datasense_host_name: datasense-aws-staging.twhosted.com
 hie_network_subnet: 172.21.5.0/24
 administer_network_subnet: 172.21.5.0/24
 
