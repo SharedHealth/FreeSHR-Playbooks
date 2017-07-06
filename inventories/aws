@@ -1,0 +1,6 @@
+[go-server]
+172.21.1.135
+
+[go-agent]
+172.21.1.88  ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p centos@bastion.twhie.org"'
+172.21.1.135  ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p centos@bastion.twhie.org"'
